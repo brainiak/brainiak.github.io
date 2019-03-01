@@ -52,14 +52,12 @@ var jqueryVersionCheck = '+function ($) {\n' +
   '  }\n' +
   '}(jQuery);\n\n'
 
-gulp.task('default', ['jekyll', 'watch'])
-
-gulp.task('jekyll', () => {
+gulp.task('jekyll', (cb) => {
 	  const jekyll = child.spawn('bundle', ['exec', 'jekyll', 'serve',
 			'--watch',
 			'--incremental',
 			'--drafts',
-      '--livereload',
+      //'--livereload',
       '--host',
       '0.0.0.0'
 	])
@@ -72,6 +70,7 @@ gulp.task('jekyll', () => {
 
 	jekyll.stdout.on('data', jekyllLogger)
 	jekyll.stderr.on('data', jekyllLogger)
+  cb()
 })
 
 function copy(glob) {
@@ -219,3 +218,5 @@ gulp.task('build', function() {
 //     livereload: true
 //   })
 // })
+gulp.task('default', gulp.series('jekyll', 'watch'))
+
