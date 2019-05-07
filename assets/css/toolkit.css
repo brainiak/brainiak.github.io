@@ -8089,6 +8089,17 @@ textarea {
   background-size: cover;
   background-repeat: no-repeat; }
 
+.block-narrow {
+  position: relative;
+  width: 100%;
+  padding: 25px 30px;
+  color: inherit;
+  background-color: #fff;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .block-overflow-hidden {
   overflow: hidden; }
 
@@ -8306,6 +8317,9 @@ h1.block-title {
 @media (min-width: 576px) {
   .block {
     padding: 50px 1rem; }
+    .block-narrow {
+        padding: 25px 1rem;
+    }
     .block:not(.block-secondary) .lead {
       font-size: 21px; } }
 
