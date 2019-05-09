@@ -1,5 +1,0 @@
-networkx
-nxviz
-seaborn
-watchdog
-deepdish
