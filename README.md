@@ -4,7 +4,7 @@
 Instructions for other operating systems should be straightforward. Dependencies on ```node``` and ```bundler```.
 ```bash
 # Install dependencies
-./bin/install
+./bin/install.sh
 
 # Start live-reload server
 gulp
