@@ -12,6 +12,6 @@ title: 08 - Connectivity
   }
 </script>
 
-<iframe src="/notebooks/tutorials/08-connectivity" id="Test" scrolling="no" frameborder="0"
+<iframe src="/notebooks/tutorials/html/08-connectivity.html" id="Test" scrolling="no" frameborder="0"
     style="position: relative; height: 100%; width: 100%;"
     onload="this.style.height=this.contentDocument.body.scrollHeight + 20 +'px';">

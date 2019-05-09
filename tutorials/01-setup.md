@@ -12,6 +12,6 @@ title: 01 - Setup
   }
 </script>
 
-<iframe src="/notebooks/tutorials/01-setup" id="Test" scrolling="no" frameborder="0"
+<iframe src="/notebooks/tutorials/html/01-setup.html" id="Test" scrolling="no" frameborder="0"
     style="position: relative; height: 100%; width: 100%;"
     onload="this.style.height=this.contentDocument.body.scrollHeight + 20 +'px';">

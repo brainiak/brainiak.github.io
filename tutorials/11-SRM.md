@@ -12,6 +12,6 @@ title: 11 - SRM
   }
 </script>
 
-<iframe src="/notebooks/tutorials/11-srm" id="Test" scrolling="no" frameborder="0"
+<iframe src="/notebooks/tutorials/html/11-srm.html" id="Test" scrolling="no" frameborder="0"
     style="position: relative; height: 100%; width: 100%;"
     onload="this.style.height=this.contentDocument.body.scrollHeight + 20 +'px';">

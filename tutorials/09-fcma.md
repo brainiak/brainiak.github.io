@@ -12,6 +12,6 @@ title: 09 - FCMA
   }
 </script>
 
-<iframe src="/notebooks/tutorials/09-fcma" id="Test" scrolling="no" frameborder="0"
+<iframe src="/notebooks/tutorials/html/09-fcma.html" id="Test" scrolling="no" frameborder="0"
     style="position: relative; height: 100%; width: 100%;"
     onload="this.style.height=this.contentDocument.body.scrollHeight + 20 +'px';">

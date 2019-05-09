@@ -12,6 +12,6 @@ title: 06 - RSA
   }
 </script>
 
-<iframe src="/notebooks/tutorials/06-rsa" id="Test" scrolling="no" frameborder="0"
+<iframe src="/notebooks/tutorials/html/06-rsa.html" id="Test" scrolling="no" frameborder="0"
     style="position: relative; height: 100%; width: 100%;"
     onload="this.style.height=this.contentDocument.body.scrollHeight + 20 +'px';">

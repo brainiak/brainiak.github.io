@@ -12,6 +12,6 @@ title: 10 - ISC
   }
 </script>
 
-<iframe src="/notebooks/tutorials/10-isc" id="Test" scrolling="no" frameborder="0"
+<iframe src="/notebooks/tutorials/html/10-isc.html" id="Test" scrolling="no" frameborder="0"
     style="position: relative; height: 100%; width: 100%;"
     onload="this.style.height=this.contentDocument.body.scrollHeight + 20 +'px';">

@@ -12,6 +12,6 @@ title: 12 - HMM
   }
 </script>
 
-<iframe src="/notebooks/tutorials/12-hmm" id="Test" scrolling="no" frameborder="0"
+<iframe src="/notebooks/tutorials/html/12-hmm.html" id="Test" scrolling="no" frameborder="0"
     style="position: relative; height: 100%; width: 100%;"
     onload="this.style.height=this.contentDocument.body.scrollHeight + 20 +'px';">

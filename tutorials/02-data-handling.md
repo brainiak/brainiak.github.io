@@ -12,6 +12,6 @@ title: 02 - Data Handling
   }
 </script>
 
-<iframe src="/notebooks/tutorials/02-data-handling" id="Test" scrolling="no" frameborder="0"
+<iframe src="/notebooks/tutorials/html/02-data-handling.html" id="Test" scrolling="no" frameborder="0"
     style="position: relative; height: 100%; width: 100%;"
     onload="this.style.height=this.contentDocument.body.scrollHeight + 20 +'px';">

@@ -12,6 +12,6 @@ title: 05 - Classifier Optimization
   }
 </script>
 
-<iframe src="/notebooks/tutorials/05-classifier-optimization" id="Test" scrolling="no" frameborder="0"
+<iframe src="/notebooks/tutorials/html/05-classifier-optimization.html" id="Test" scrolling="no" frameborder="0"
     style="position: relative; height: 100%; width: 100%;"
     onload="this.style.height=this.contentDocument.body.scrollHeight + 20 +'px';">
