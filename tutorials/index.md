@@ -8,7 +8,7 @@ title: Tutorials
 # {{ page.title }}
 <hr class="section-heading-spacer">
 <div class="clearfix"></div>
-Advanced fMRI analyses have the potential to answer questions that mainstream methods cannot. BrainIAK aims to integrate these cutting-edge techniques into one a single, accessible Python environment. To help users get started, we have created the following set of tutorials based on courses taught at Princeton and Yale Universities.
+Advanced fMRI analyses have the potential to answer questions that mainstream methods cannot. BrainIAK aims to integrate these cutting-edge techniques into a single, accessible Python environment. To help users get started, we have created the following set of tutorials based on courses taught at Princeton and Yale Universities.
 
 - [Preview](#preview): browse the tutorials from your web browser
 - [Get started](#getting-started): install and run the tutorials from your own machine
