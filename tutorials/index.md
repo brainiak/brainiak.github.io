@@ -11,7 +11,7 @@ title: Tutorials
 Advanced fMRI analyses have the potential to answer questions that mainstream methods cannot. BrainIAK aims to integrate these cutting-edge techniques into a single, accessible Python environment. To help users get started, we have created the following set of tutorials based on courses taught at Princeton and Yale Universities.
 
 - [Preview](#preview): browse the tutorials from your web browser
-- [Get started](#getting-started): install and run the tutorials from your own machine
+- [Getting started](#getting-started): install and run the tutorials from your own machine
 </div>
 </div>
 
@@ -76,7 +76,10 @@ Some guidance for how to access / install the tutorials:
 
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   <li class="nav-item">
-    <a class="nav-link active" id="pills-docker-macos-tab" data-toggle="pill" data-target="#pills-docker-macos" role="tab" aria-controls="pills-docker-macos" aria-selected="true">Docker (MacOS)</a>
+    <a class="nav-link active" id="pills-google-colab-tab" data-toggle="pill" data-target="#pills-google-colab" role="tab" aria-controls="pills-google-colab" aria-selected="true">Google Colaboratory</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-docker-macos-tab" data-toggle="pill" data-target="#pills-docker-macos" role="tab" aria-controls="pills-docker-macos" aria-selected="false">Docker (MacOS)</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" id="pills-docker-windows-tab" data-toggle="pill" data-target="#pills-docker-windows" role="tab" aria-controls="pills-docker-windows" aria-selected="false">Docker (Windows)</a>
@@ -91,14 +94,50 @@ Some guidance for how to access / install the tutorials:
     <a class="nav-link" id="pills-cluster-spock-tab" data-toggle="pill" data-target="#pills-cluster-spock" role="tab" aria-controls="pills-cluster-spock" aria-selected="false">Cluster</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="pills-google-colab-tab" data-toggle="pill" data-target="#pills-google-colab" role="tab" aria-controls="pills-google-colab" aria-selected="false">Google Colaboratory</a>
-  </li>
-  <li class="nav-item">
     <a class="nav-link" id="pills-data-download-tab" data-toggle="pill" data-target="#pills-data-download" role="tab" aria-controls="pills-data-download" aria-selected="false">Data Download</a>
   </li>
 </ul>
 <div class="tab-content" id="pills-tabContent">
-  <div class="tab-pane fade show active" id="pills-docker-macos" role="tabpanel" aria-labelledby="pills-docker-macos-tab" markdown="1">
+  <div class="tab-pane fade show active" id="pills-google-colab" role="tabpanel" aria-labelledby="pills-google-colab-tab" markdown="1">
+
+  <h4>Google Colaboratory</h4>
+  To only run the tutorials, you can use Google Colaboratory. You only need a web browser. No other installation is necessary. Follow the Colab instructions below. A few notes:
+
+  1. There is a setup that needs to be completed (install brainiak and dependencies, and download data). This can take between 5-15 minutes depending on the size of the dataset you download.
+  2. Google Colab, has a session timeout of 12 hours (with browser kept open). After 12 hours, you will need to redo the setup to run a tutorial. If the browser window is closed it will reset in 90 minutes.
+  3. When running tutorials that cover the advanced methods (Inter Subject Correlations and Shared Response Model, that use the Pieman dataset), you may want to reduce the number of subjects to 5. This will ensure that the data does not exceed the available memory.
+
+  **Instructions**
+  - In Google Chrome go to: colab.research.google.com
+  - In the window Click on the Github tab (May need to select File->Open_Notebook for window to appear)
+
+    ![alt](/tutorials/img/colab-01.jpeg){:width="800px"}
+
+  - Enter brainiak/tutorials
+  - Choose branch master (should be already selected by default)
+  - Click on notebook tutorials/colab-env-setup.ipynb
+
+    ![alt](/tutorials/img/colab-02.jpeg){:width="800px"}
+
+  - Run cell “Install Brainiak and code dependencies”
+  - A window will pop-up. Uncheck “Reset all runtimes before running”
+
+    ![alt](/tutorials/img/colab-03.jpeg){:width="800px"}
+
+  - After the installation is complete run cell “Git-clone helper files for tutorials”
+  - There are many download data cells. Pick only  the data cell for your tutorial and run that cell. This may take a few minutes depending on the size of the data.
+  - You are now ready to execute your notebook.
+  - Open a new tab in Chrome
+  - Click on File->Open Notebook
+  - In the window Click on the Github tab
+  - Enter brainiak/tutorials
+  - Pick the notebook that you need to run
+  - Execute cell
+  - A window will pop-up. Uncheck “Reset all runtimes before running”
+  - Continue running notebook
+
+  </div>
+  <div class="tab-pane fade" id="pills-docker-macos" role="tabpanel" aria-labelledby="pills-docker-macos-tab" markdown="1">
 
   <h4>Docker on laptop/desktop (MacOS)</h4>
   - Install [Docker](https://docs.docker.com/docker-for-mac/install/).
@@ -115,7 +154,7 @@ Some guidance for how to access / install the tutorials:
   - Shutdown all running Jupyter terminals on your machine to avoid port conflicts
   - Open Terminal
   - Install the BrainIAK Docker by running this command
-  - `docker run -it -p 8899:8899 -v ~/Downloads/brainiak_datasets:/root/brainiak_datasets --name tutorials brainiak/tutorials
+  - `docker run -it -p 8899:8899 -v ~/Downloads/brainiak_datasets:/root/brainiak_datasets --name tutorials brainiak/tutorials`
   - Installation Completed 😊
 
   Note the port that you need to connect to the browser: 8899
@@ -143,7 +182,8 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
     - Unzip data and move it to Downloads/brainiak_datasets
   - Share C drive in Docker (instructions [here](https://docs.docker.com/docker-for-windows/#shared-drives))
   - Run Docker after replacing `USERNAME` with your Windows user name:
-    `docker run -it -p 8899:8899 -v C:/Users/USERNAME/downloads/brainiak_datasets:/root/brainiak_datasets --name tutorials brainiak/tutorials
+
+    `docker run -it -p 8899:8899 -v C:/Users/USERNAME/downloads/brainiak_datasets:/root/brainiak_datasets --name tutorials brainiak/tutorials`
 
   <b>Running Tutorials</b>
   - Open a browser on your machine
@@ -268,45 +308,6 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
     `cd ~/tutorials/tutorials`
 
     `./run_jupyter_remote_server.sh` (Verify all SLURM parameters for your cluster)
-
-  </div>
-  <div class="tab-pane fade" id="pills-google-colab" role="tabpanel" aria-labelledby="pills-google-colab-tab" markdown="1">
-
-  <h4>Google Colaboratory</h4>
-  To only run the tutorials, you can use Google Colaboratory. You only need a web browser. No other installation is necessary. Follow the Colab instructions below. A few notes:
-
-  1. There is a setup that needs to be completed (install brainiak and dependencies, and download data). This can take between 5-15 minutes depending on the size of the dataset you download.
-  2. Google Colab, has a session timeout of 12 hours (with browser kept open). After 12 hours, you will need to redo the setup to run a tutorial. If the browser window is closed it will reset in 90 minutes.
-  3. When running tutorials that cover the advanced methods (Inter Subject Correlations and Shared Response Model, that use the Pieman dataset), you may want to reduce the number of subjects to 5. This will ensure that the data does not exceed the available memory.
-
-  **Instructions**
-  - In Google Chrome go to: colab.research.google.com
-  - In the window Click on the Github tab (May need to select File->Open_Notebook for window to appear)
-
-    ![alt](/tutorials/img/colab-01.jpeg){:width="800px"}
-
-  - Enter brainiak/tutorials
-  - Choose branch master (should be already selected by default)
-  - Click on notebook tutorials/colab-env-setup.ipynb
-
-    ![alt](/tutorials/img/colab-02.jpeg){:width="800px"}
-
-  - Run cell “Install Brainiak and code dependencies”
-  - A window will pop-up. Uncheck “Reset all runtimes before running”
-
-    ![alt](/tutorials/img/colab-03.jpeg){:width="800px"}
-
-  - After the installation is complete run cell “Git-clone helper files for tutorials”
-  - There are many download data cells. Pick only  the data cell for your tutorial and run that cell. This may take a few minutes depending on the size of the data.
-  - You are now ready to execute your notebook.
-  - Open a new tab in Chrome
-  - Click on File->Open Notebook
-  - In the window Click on the Github tab
-  - Enter brainiak/tutorials
-  - Pick the notebook that you need to run
-  - Execute cell
-  - A window will pop-up. Uncheck “Reset all runtimes before running”
-  - Continue running notebook
 
   </div>
   <div class="tab-pane fade" id="pills-data-download" role="tabpanel" aria-labelledby="pills-data-download-tab" markdown="1">
