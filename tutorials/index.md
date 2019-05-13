@@ -103,9 +103,11 @@ Some guidance for how to access / install the tutorials:
   <h4>Google Colaboratory</h4>
   To only run the tutorials, you can use Google Colaboratory. You only need a web browser. No other installation is necessary. Follow the Colab instructions below. A few notes:
 
-  1. There is a setup that needs to be completed (install brainiak and dependencies, and [download data](#data-downloads)) each time you run the tutorials. This can take between 5-15 minutes depending on the size of the dataset you download.
+  1. There is a setup that needs to be completed (install brainiak and dependencies, and download data each time you run the tutorials. This can take between 5-15 minutes depending on the size of the dataset you download.
   2. Google Colab has a session timeout of 12 hours (with browser kept open). After 12 hours, you will need to redo the setup to run a tutorial. If the browser window is closed it will reset in 90 minutes.
   3. When running tutorials that cover Inter-Subject Correlations and the Shared Response Model (which use the Pieman dataset), you should reduce the number of subjects to 5. This will ensure that the data do not exceed the available memory.
+
+  If you want to save your code, you can save a copy of the notebook to Google Drive (accessible from the File menu in Colab).
 
   **Instructions**
   - In Google Chrome go to: colab.research.google.com
@@ -113,9 +115,9 @@ Some guidance for how to access / install the tutorials:
 
     ![alt](/tutorials/img/colab-01.jpeg){:width="800px"}
 
-  - Enter brainiak/tutorials
+  - Enter ‘brainiak tutorials’ in the search box
   - Choose branch master (should be already selected by default)
-  - Click on notebook tutorials/colab-env-setup.ipynb
+  - Click on notebook `tutorials/colab-env-setup.ipynb` (you may need to scroll down)
 
     ![alt](/tutorials/img/colab-02.jpeg){:width="800px"}
 
@@ -127,7 +129,7 @@ Some guidance for how to access / install the tutorials:
   - After the installation is complete run cell “Git-clone helper files for tutorials”
   - There are many download data cells. Pick only the data cell for your tutorial and run that cell. This may take a few minutes depending on the size of the data.
   - You are now ready to execute your notebook.
-  - Open a new tab in Chrome
+  - Open a new tab in Chrome and go to colab.research.google.com
   - Click on File->Open Notebook
   - In the window click on the Github tab
   - Enter brainiak/tutorials
@@ -148,7 +150,7 @@ Some guidance for how to access / install the tutorials:
     The more memory and swap space you can assign, the better. We have tested with 5GB of memory. The default setting of 2GB is too little to load large datasets. Also, increase the swap space to approximately 4-5GB. If your available space is less than 4GB, set the swap space to whatever you have available.
 
 
-  - [Download data] for your tutorial to the Downloads folde](#data-downloads)
+  - [Download data](#data-downloads) for the tutorial
     - Create a folder under Downloads: `brainiak_datasets`
     - Unzip the data file and move it to this folder `brainiak_datasets`
   - Shutdown all running Jupyter terminals on your machine to avoid port conflicts
@@ -178,7 +180,7 @@ Some guidance for how to access / install the tutorials:
   - Install [Docker](https://docs.docker.com/docker-for-windows/) using Linux containers
   - Resize memory for Docker use. We have tested with 5-7GB of memory on Windows. The default setting of 2GB is too small to load large datasets.
 Increase the swap space to approximately 4-5GB. If your available space is less than 4GB, set the swap space to whatever you have available.
-  - [Download data] for your tutorial](#data-downloads)
+  - [Download data](#data-downloads) for the tutorial
     - Unzip data and move it to Downloads/brainiak_datasets
   - Share C drive in Docker (instructions [here](https://docs.docker.com/docker-for-windows/#shared-drives))
   - Run Docker after replacing `USERNAME` with your Windows user name:
@@ -202,10 +204,11 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
   <h4>Conda on laptop (MacOS)</h4>
   This option is supported for OSX and Linux. For Windows, please use Colab or Docker.
   - Check if you have conda installed already. Run `conda` in your terminal
-  - If you have conda installed, proceed to the next step. Only do this step if you do not have conda installed: Install  [Miniconda with Python 3](https://docs.conda.io/en/latest/miniconda.html)
-  - Open Terminal
-  - Close this terminal.
-  - Open a new terminal.
+  - If you have conda installed, proceed to the next step. Only do these steps if you do not have conda installed.
+    - Open Terminal
+    - Install [Miniconda with Python 3](https://docs.conda.io/en/latest/miniconda.html)
+    - Close this terminal.
+    - Open a new terminal.
   - Install brainiak-tutorial conda package:
 
     `conda create --name mybrainiak python=3.6`
@@ -218,9 +221,9 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
 
   - In any folder that you would like to store the tutorials run:
 
-      `git clone https://github.com/brainiak/tutorials.git`
+      `git clone https://github.com/brainiak-tutorials/tutorials.git`
 
-  - [Download data] for your tutoria](#data-downloads)
+  - [Download data](#data-downloads) for the tutorial
     - Unzip the data file and move it into this folder `~/Downloads/brainiak_datasets`
 
   <b>Running Tutorials</b>
@@ -235,9 +238,9 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
   - Update variable `data_path`  to `~/Downloads/brainiak_datasets/`
   - Change
 
-    `data_path = os.path.expanduser('~') + '/brainiak_datasets/'` to
+    `data_path = os.path.join(os.path.expanduser('~'), 'brainiak_datasets')` to
 
-    `data_path = os.path.expanduser('~') + '/Downloads/brainiak_datasets/'`
+    `data_path = os.path.join(os.path.expanduser('~'), 'Downloads', 'brainiak_datasets')`
   - If you move the dataset to any other path, you will need to modify the data_path to reflect the new location of the dataset.
   - Go back to the “Home” tab with the list of files
   - Open assigned tutorial.
@@ -254,6 +257,7 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
   - Create a Conda environment
 
     `conda create -n mybrainiak`
+
     `source activate mybrainiak`
 
   - Ensure that your .condarc is not interfering:
@@ -264,13 +268,13 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
 
     `conda install -c pni -c defaults -c conda-forge brainiak_tutorials`
 
-  - [Download data] for the tutorial](#data-downloads)
+  - [Download data](#data-downloads) for the tutorial
   - Change data directory path
   - Move data to `~/brainiak_datasets/`
 
   - In the terminal clone the tutorial repo:
 
-    `git clone https://github.com/brainiak/tutorials.git`
+    `git clone https://github.com/brainiak-tutorials/tutorials.git`
 
   <b>Running Tutorials</b>
   - Check your environment
@@ -291,8 +295,10 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
 
     `conda install -c pni -c defaults -c conda-forge brainiak_tutorials`
 
-  - [Download data](#data-downloads)
+  - [Download data](#data-downloads) for the tutorial
   - Move data to `~/brainiak_datasets/`
+  - In terminal, clone the tutorial repository
+    - `git clone https://github.com/brainiak-tutorials/tutorials.git`
   - Check directory path in `utils.py`
     - If you change the download location, you will have to update `data_path` in `utils.py`
   - Check your environment
@@ -313,40 +319,50 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
   <div class="tab-pane fade" id="pills-cluster-admin" role="tabpanel" aria-labelledby="pills-cluster-admin-tab" markdown="1">
 
   <h4>Conda on cluster (admin)</h4>
-  This is typically performed by a cluster administrator to provide the tutorials for a number of users.
+  This installation is typically performed by cluster administrators. As a user, you only need to update the modules used, and the path to the data directory. You are expected to have knowledge of SLURM parameters, for your cluster, to launch the Jupyter notebooks and run batch jobs. Your cluster administrator can help you with setting the SLURM parameters.
 
+  **Administrator tasks**
+  - Open Terminal
+  - Login to the cluster
   - Install brainiak-tutorial conda package
 
     `conda install -c pni -c defaults -c conda-forge brainiak_tutorials`
 
-  **What you need to do as a user?**
-  The administrator has installed the brainiak-tutorial software for everyone to use and most likely created a module. You will only need the module names to load the packages. You will also download data for the tutorials.
+  - Download tutorial data [brainiak_datasets.zip](https://drive.google.com/open?id=1ZglrmkYw8isBAfsL53n9JgHEucmrnm4E)
+  - Unzip brainiak_datasets.zip
+  - Move data to a central location where everyone can access.
+  - Provide this data path location to all users.
 
+  **User tasks**
+  - Get directory path to data from administrator.
+  - Verify SLURM parameters with administrator.
+  - Open Terminal
+  - Login to the cluster
+  - Check access to the repo online:
+    `https://github.com/brainiak-tutorials/tutorials.git`
+  - In the terminal, clone the tutorial repo:
+    `git clone https://github.com/brainiak-tutorials/tutorials.git`
 
-  Knowledge of SLURM parameters is expected for you to launch the Jupyter notebooks.
+    `cd brainiak-tutorials/tutorials/`
 
-  - Install [Miniconda with Python 3](https://docs.conda.io/en/latest/miniconda.html)
-  - Install brainiak-tutorial conda package
+  **Run tutorials**
+  Edit file `setup_environment.sh` and add the correct module. Your cluster administrator should provide the names of the module(s) (e.g., module load pyger/0.8) to load.
 
-    `conda install -c pni -c defaults -c conda-forge brainiak_tutorials`
+  - Comment out `CONDA_NAME=mybrainiak`
+  - Set `configuration='cluster’`
+  - Make the `run_jupyter_remote_server.sh` script executable
 
-  - [Download data](#data-downloads)
-  - Move data to `~/brainiak_datasets/`
-  - Check directory path in `utils.py`
-    - If you change the download location, you will have to update `data_path` in `utils.py`
-  - Check your environment
-    - Check file `setup_environment.sh` for  `CONDA_ENV=mybrainiak`
-    - Set `configuration='cluster'`
+    `chmod 711 run_jupyter_remote_server.sh`
 
-  <b>Running Tutorials</b>
-  - Check your environment
-    - Check file `setup_environment.sh` for  `CONDA_ENV=mybrainiak`
-    - Check `configuration='cluster'`
-  - Launch Jupyter on cluster (steps and screen shots [here](https://github.com/brainiak/tutorials/wiki/Launching-notebooks-from-a-cluster) for Jupyter on server)
+  - Initiate a remote Jupyter connection to the server - screenshots here: [Jupyter on server](https://github.com/brainiak/tutorials/wiki/Launching-notebooks-from-a-cluster)
+  - Run the script: `./run_jupyter_remote_server.sh`
+  - Open `utils.py`
+  - Update `data_path` in `utils.py` to the path location of the `brainiak_datasets` folder.
+  - You will need to update this line:
 
-    `cd ~/tutorials/tutorials`
+    `data_path = os.path.join(os.path.expanduser('~'), 'brainiak_datasets')` with the correct path.
 
-    `./run_jupyter_remote_server.sh` (Verify all SLURM parameters for your cluster)
+  - Run tutorials
 
   </div>
 
@@ -358,7 +374,7 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
 <div class="container" markdown="1">
 ## Data downloads<a name="data-downloads"></a>
 
-These datasets are pre-processed and ready to use. They have been condensed to keep the file size small, by reducing the number of subjects from the original studies. Each tutorial is paired with a dataset as listed below. The file brainiak_datasets.zip contains the data for all the tutorials, and in unzipped form uses 18GB of space. If you wish to download data for specific tutorials, use the list below to find the correct dataset to download and use. <b>For Colab use, we strongly recommend, downloading data only for the tutorials you need.</b>
+These datasets are pre-processed and ready to use. They have been condensed to keep the file size small, by reducing the number of subjects from the original studies. Each tutorial is paired with a dataset as listed below. The file [brainiak_datasets.zip](https://drive.google.com/open?id=1ZglrmkYw8isBAfsL53n9JgHEucmrnm4E) contains the data for all the tutorials, and in unzipped form uses 18GB of space. If you wish to download data for specific tutorials, use the list below to find the correct dataset to download and use. <b>Note that Colab has its own data download mechanism (see Colab install instructions).</b>
 
 - Tutorial 1: No data download needed
 - Tutorial 2:  [vdc](https://drive.google.com/open?id=1PrnucQ4hXqUY8gl6ysGJJiTreYu7KOLz)  (Kim et al., 2017) and [02-data-handling-simulated-dataset](https://drive.google.com/open?id=1tiEjtp96zwIdnl3p726llj5KMETnNJ4A) (this is a simulated dataset)
@@ -371,7 +387,7 @@ These datasets are pre-processed and ready to use. They have been condensed to k
 - Tutorial 12: [Sherlock_processed](https://drive.google.com/open?id=11y9iQUoNVyVLANllKebFUrqdvQt-vsXm) (Chen et al., 2017)
 - Tutorial 13: No data download needed
 
-The doi reference for these tutorial datasets is [https://doi.org/10.5281/zenodo.2598755](https://doi.org/10.5281/zenodo.2598755).
+The above data urls point to google drive for faster downloads. The doi reference for these tutorial datasets is [https://doi.org/10.5281/zenodo.2598755](https://doi.org/10.5281/zenodo.2598755).
 
 </div>
 </div>
