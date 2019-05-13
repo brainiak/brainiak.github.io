@@ -2620,6 +2620,7 @@ tbody.collapse.show {
 
 .nav-link {
   display: block;
+  cursor: pointer;
   padding: 0.5rem 1rem; }
   .nav-link:focus, .nav-link:hover {
     text-decoration: none; }
