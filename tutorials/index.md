@@ -213,7 +213,7 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
 
     `conda create --name mybrainiak python=3.6`
 
-    `conda activate mybrainiak`
+    `conda activate mybrainiak` or `source activate mybrainiak`
 
     `mv ~/.condarc ~/.condarc.bak`
 
@@ -227,10 +227,10 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
     - Unzip the data file and move it into this folder `~/Downloads/brainiak_datasets`
 
   <b>Running Tutorials</b>
+  - In Terminal, `cd brainiak_tutorials/tutorials`
   - Check your environment
     - Check file `setup_environment.sh` for `CONDA_ENV=mybrainiak`
-    - Check `configuration='local'`
-  - In Terminal, `cd brainiak_tutorials/tutorials` 
+    - Set `configuration='local'`
   - In Terminal execute:  `run_jupyter.sh`
   - In the browser, you will see a Jupyter window with a list of files
   - Open (double click) `utils.py`
@@ -251,14 +251,23 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
 
   <h4>Conda on server</h4>
   - Connect to server using Terminal
-  - Install [Miniconda with Python 3](https://docs.conda.io/en/latest/miniconda.html), or, run the following command to load pre-installed anaconda:
+  - Install [Miniconda with Python 3](https://docs.conda.io/en/latest/miniconda.html)
+
+    **Example** install commands:
+
+    `wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh`
+
+    `bash Miniconda3-latest-Linux-x86_64.sh`
+
+    or run the following command to load pre-installed anaconda:
 
     Here is an **example**: `module load anacondapy/5.3.1`
+
   - Create a Conda environment
 
     `conda create -n mybrainiak`
 
-    `source activate mybrainiak`
+    `source activate mybrainiak` or `conda activate mybrainiak`
 
   - Ensure that your .condarc is not interfering:
 
@@ -269,6 +278,10 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
     `conda install -c pni -c defaults -c conda-forge brainiak_tutorials`
 
   - [Download data](#data-downloads) for the tutorial
+
+    `wget --no-check-certificate -r -O 'datasets.zip' 'https://docs.google.com/uc?export=download&id=1ZglrmkYw8isBAfsL53n9JgHEucmrnm4E'`
+
+    `unzip datasets.zip`
   - Change data directory path
   - Move data to `~/brainiak_datasets/`
 
@@ -277,14 +290,16 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
     `git clone https://github.com/brainiak/brainiak-tutorials.git`
 
   <b>Running Tutorials</b>
+
+  `cd brainiak_tutorials/tutorials`
   - Check your environment
     - Check file `setup_environment.sh` for  `CONDA_ENV=mybrainiak`
     - Check `configuration='server'`
   - Launch Jupyter on server (steps and screen shots [here](https://github.com/brainiak/tutorials/wiki/Launching-notebooks-from-a-cluster) for Jupyter on server)
 
-    `cd brainiak_tutorials/tutorials`
-
     `./run_jupyter_remote_server.sh`
+
+    Enter token printed by script when asked for token/password on the jupyter web page
   </div>
   <div class="tab-pane fade" id="pills-cluster-spock" role="tabpanel" aria-labelledby="pills-cluster-spock-tab" markdown="1">
 
@@ -329,7 +344,11 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
     `conda install -c pni -c defaults -c conda-forge brainiak_tutorials`
 
   - Download tutorial data [brainiak_datasets.zip](https://drive.google.com/open?id=1ZglrmkYw8isBAfsL53n9JgHEucmrnm4E)
-  - Unzip brainiak_datasets.zip
+
+    `wget --no-check-certificate -r -O 'datasets.zip' 'https://docs.google.com/uc?export=download&id=1ZglrmkYw8isBAfsL53n9JgHEucmrnm4E'`
+
+    `unzip datasets.zip`
+
   - Move data to a central location where everyone can access.
   - Provide this data path location to all users.
 
