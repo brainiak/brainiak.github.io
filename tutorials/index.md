@@ -229,7 +229,7 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
   <b>Running Tutorials</b>
   - Check your environment
     - Check file `setup_environment.sh` for `CONDA_ENV=mybrainiak`
-    - Check `configuration='server'`
+    - Check `configuration='local'`
   - In Terminal, `cd tutorials` # assuming in same dir as (6) above
   - In Terminal execute:  `run_jupyter.sh`
   - In the browser, you will see a Jupyter window with a list of files
