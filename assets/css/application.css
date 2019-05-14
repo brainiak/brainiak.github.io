@@ -19,6 +19,10 @@ html, body {
 
 }
 
+.nav-link {
+  cursor: pointer
+}
+
 .block-default {
    margin-top: 64.75px;
 }
