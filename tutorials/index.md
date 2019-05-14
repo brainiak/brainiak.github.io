@@ -221,7 +221,7 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
 
   - In any folder that you would like to store the tutorials run:
 
-      `git clone https://github.com/brainiak-tutorials/tutorials.git`
+      `git clone https://github.com/brainiak/brainiak-tutorials.git`
 
   - [Download data](#data-downloads) for the tutorial
     - Unzip the data file and move it into this folder `~/Downloads/brainiak_datasets`
@@ -274,7 +274,7 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
 
   - In the terminal clone the tutorial repo:
 
-    `git clone https://github.com/brainiak-tutorials/tutorials.git`
+    `git clone https://github.com/brainiak/brainiak-tutorials.git`
 
   <b>Running Tutorials</b>
   - Check your environment
@@ -298,7 +298,7 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
   - [Download data](#data-downloads) for the tutorial
   - Move data to `~/brainiak_datasets/`
   - In terminal, clone the tutorial repository
-    - `git clone https://github.com/brainiak-tutorials/tutorials.git`
+    - `git clone https://github.com/brainiak/brainiak-tutorials.git`
   - Check directory path in `utils.py`
     - If you change the download location, you will have to update `data_path` in `utils.py`
   - Check your environment
@@ -311,7 +311,7 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
     - Check `configuration='cluster'`
   - Launch Jupyter on cluster (steps and screen shots [here](https://github.com/brainiak/tutorials/wiki/Launching-notebooks-from-a-cluster) for Jupyter on server)
 
-    `cd ~/tutorials/tutorials`
+    `cd ~/brainiak-tutorials/tutorials`
 
     `./run_jupyter_remote_server.sh` (Verify all SLURM parameters for your cluster)
 
@@ -339,9 +339,9 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
   - Open Terminal
   - Login to the cluster
   - Check access to the repo online:
-    `https://github.com/brainiak-tutorials/tutorials.git`
+    `https://github.com/brainiak/brainiak-tutorials.git`
   - In the terminal, clone the tutorial repo:
-    `git clone https://github.com/brainiak-tutorials/tutorials.git`
+    `git clone https://github.com/brainiak/brainiak-tutorials.git`
 
     `cd brainiak-tutorials/tutorials/`
 
