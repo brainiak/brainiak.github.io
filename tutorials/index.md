@@ -23,7 +23,7 @@ The tutorials below are designed to be consumed in sequence, but are modular and
 </div>
 
 <div style="padding-top: 1rem;"></div>
-#### Getting started
+#### First steps
 <div class="text-muted">
 If you are new to fMRI analysis, Python and/or machine learning:
 <ol start="1">
@@ -132,7 +132,7 @@ Some guidance for how to access / install the tutorials:
   - Open a new tab in Chrome and go to colab.research.google.com
   - Click on File->Open Notebook
   - In the window click on the Github tab
-  - Enter brainiak/tutorials
+  - Enter "brainiak tutorials" in the search box
   - Pick the notebook that you need to run
   - Execute cell
   - A window will pop-up. Uncheck “Reset all runtimes before running”
