@@ -230,7 +230,7 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
   - Check your environment
     - Check file `setup_environment.sh` for `CONDA_ENV=mybrainiak`
     - Check `configuration='local'`
-  - In Terminal, `cd tutorials` # assuming in same dir as (6) above
+  - In Terminal, `cd brainiak_tutorials/tutorials` 
   - In Terminal execute:  `run_jupyter.sh`
   - In the browser, you will see a Jupyter window with a list of files
   - Open (double click) `utils.py`
@@ -282,7 +282,7 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
     - Check `configuration='server'`
   - Launch Jupyter on server (steps and screen shots [here](https://github.com/brainiak/tutorials/wiki/Launching-notebooks-from-a-cluster) for Jupyter on server)
 
-    `cd ~/tutorials/tutorials`
+    `cd brainiak_tutorials/tutorials`
 
     `./run_jupyter_remote_server.sh`
   </div>
@@ -311,7 +311,7 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
     - Check `configuration='cluster'`
   - Launch Jupyter on cluster (steps and screen shots [here](https://github.com/brainiak/tutorials/wiki/Launching-notebooks-from-a-cluster) for Jupyter on server)
 
-    `cd ~/brainiak-tutorials/tutorials`
+    `cd brainiak-tutorials/tutorials`
 
     `./run_jupyter_remote_server.sh` (Verify all SLURM parameters for your cluster)
 
