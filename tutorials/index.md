@@ -232,13 +232,13 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
     ![alt](/tutorials/img/tutorial-directory.png){:width="800px"}
 
   <b>Running Tutorials</b>
-  - In Terminal, `cd brainiak_tutorials/tutorials`
+  - In Terminal, `cd my_code/brainiak_tutorials/tutorials`
   - Check your environment
-    - Check file `setup_environment.sh` for `CONDA_ENV=mybrainiak`
+    - Using a text editor, check file `setup_environment.sh` for `CONDA_ENV=mybrainiak`
     - Set `configuration='local'`
-  - In Terminal execute:  `run_jupyter.sh`
+  - In Terminal execute:  `. run_jupyter.sh`
   - In the browser, you will see a Jupyter window with a list of files
-  - Open (double click) `utils.py`
+  - Open (click) `utils.py`
   - A new tab opens up with this file.
   - Update variable `data_path`  to `~/Downloads/brainiak_datasets/`
   - Change
