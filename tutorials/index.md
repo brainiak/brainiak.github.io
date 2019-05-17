@@ -236,7 +236,7 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
   - Check your environment
     - Using a text editor, check file `setup_environment.sh` for `CONDA_ENV=mybrainiak`
     - Set `configuration='local'`
-  - In Terminal execute:  `. run_jupyter.sh`
+  - In Terminal execute:  `./run_jupyter.sh`
   - In the browser, you will see a Jupyter window with a list of files
   - Open (click) `utils.py`
   - A new tab opens up with this file.
