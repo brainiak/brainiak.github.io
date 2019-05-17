@@ -74,6 +74,8 @@ Some guidance for how to access / install the tutorials:
 <div class="container" markdown="1">
 ## Detailed installation instructions
 
+If you have any questions or problems, you can ask the folks in our [Gitter](https://gitter.im/brainiak/brainiak) chat or file an issue on [GitHub](https://github.com/brainiak/tutorials/issues).
+
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="pills-google-colab-tab" data-toggle="pill" data-target="#pills-google-colab" role="tab" aria-controls="pills-google-colab" aria-selected="true">Google Colaboratory</a>
@@ -219,21 +221,24 @@ Increase the swap space to approximately 4-5GB. If your available space is less 
 
     `conda install -c pni -c defaults -c conda-forge brainiak_tutorials`
 
-  - In any folder that you would like to store the tutorials run:
+  - In any folder (e.g., `cd my_code`) that you would like to store the tutorials run:
 
       `git clone https://github.com/brainiak/brainiak-tutorials.git`
 
   - [Download data](#data-downloads) for the tutorial
-    - Unzip the data file and move it into this folder `~/Downloads/brainiak_datasets`
+  - Unzip the data file and move it into this folder `~/Downloads/brainiak_datasets`
+  - The screen shot shows a sample of the data directories for different tutorials
+
+    ![alt](/tutorials/img/tutorial-directory.png){:width="800px"}
 
   <b>Running Tutorials</b>
-  - In Terminal, `cd brainiak_tutorials/tutorials`
+  - In Terminal, `cd my_code/brainiak_tutorials/tutorials`
   - Check your environment
-    - Check file `setup_environment.sh` for `CONDA_ENV=mybrainiak`
+    - Using a text editor, check file `setup_environment.sh` for `CONDA_ENV=mybrainiak`
     - Set `configuration='local'`
-  - In Terminal execute:  `run_jupyter.sh`
+  - In Terminal execute:  `./run_jupyter.sh`
   - In the browser, you will see a Jupyter window with a list of files
-  - Open (double click) `utils.py`
+  - Open (click) `utils.py`
   - A new tab opens up with this file.
   - Update variable `data_path`  to `~/Downloads/brainiak_datasets/`
   - Change
