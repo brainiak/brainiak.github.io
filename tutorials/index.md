@@ -19,7 +19,7 @@ Advanced fMRI analyses have the potential to answer questions that mainstream me
 <div class="container" markdown="1">
 ## Preview<a name="preview"></a>
 <div class="text-muted" markdown="1">
-The tutorials below are designed to be consumed in sequence, but are modular and can be approached in any order. We provide recommendations to scaffold on users’ knowledge and skills, though even advanced users have reported benefiting from the full sequence. All of the notebooks are paired with [data](#data-downloads) that have been preprocessed and are ready for use. Our [resources](#resources) page has helpful links on learning the basics of fMRI preprocessing.
+The tutorials below are designed to be consumed in sequence, but are modular and can be approached in any order (for more details, see the tutorials [preprint](https://osf.io/j4sbc/)). We provide recommendations to scaffold on users’ knowledge and skills, though even advanced users have reported benefiting from the full sequence. All of the notebooks are paired with [data](#data-downloads) that have been preprocessed and are ready for use. Our [resources](#resources) page has helpful links on learning the basics of fMRI preprocessing.
 </div>
 
 <div style="padding-top: 1rem;"></div>
@@ -420,5 +420,11 @@ The above data urls point to google drive for faster downloads. The doi referenc
 <div class="container" markdown="1">
 ## Resources<a name="resources"></a>
 We have compiled a list of useful resources that cover the basics of GitHUB, Python, fMRI, and Machine Learning [here](https://github.com/brainiak/brainiak-tutorials/wiki/Resources).
+
+### Open Source License
+
+Like BrainIAK itself, these tutorials are provided as a service to the field and can be freely used, modified, and shared. If you find them helpful in your research and/or re-use code they contain, you might optionally consider citing:
+
+Kumar, M., Ellis, C. T., Lu, Q., Zhang, H., Capota, M., Willke, T. L., Ramadge, P. J., Turk-Browne, N.B., Norman, K. (2019). BrainIAK tutorials: user-friendly learning materials for advanced fMRI analysis. Retrieved from [osf.io/j4sbc](osf.io/j4sbc).
 </div>
 </div>
