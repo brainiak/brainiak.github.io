@@ -1,5 +1,5 @@
-brainiak\.eventseg package
-==========================
+brainiak.eventseg package
+=========================
 
 .. automodule:: brainiak.eventseg
     :members:
@@ -9,8 +9,8 @@ brainiak\.eventseg package
 Submodules
 ----------
 
-brainiak\.eventseg\.event module
---------------------------------
+brainiak.eventseg.event module
+------------------------------
 
 .. automodule:: brainiak.eventseg.event
     :members:

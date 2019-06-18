@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>brainiak.searchlight package &mdash; brainiak 0.8 documentation</title>
+  <title>brainiak.searchlight package &mdash; brainiak 0.9 documentation</title>
   
 
   
@@ -17,43 +17,37 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="brainiak 0.8 documentation" href="index.html"/>
-        <link rel="up" title="brainiak package" href="brainiak.html"/>
-        <link rel="next" title="brainiak.utils package" href="brainiak.utils.html"/>
-        <link rel="prev" title="brainiak.reprsimil package" href="brainiak.reprsimil.html"/> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="brainiak.utils package" href="brainiak.utils.html" />
+    <link rel="prev" title="brainiak.reprsimil package" href="brainiak.reprsimil.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -67,7 +61,7 @@
             
             
               <div class="version">
-                0.8
+                0.9
               </div>
             
           
@@ -91,23 +85,10 @@
               
             
             
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release notes</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="api.html">API</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="api.html#brainiak">brainiak</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="brainiak.html">brainiak package</a><ul class="current">
-<li class="toctree-l4 current"><a class="reference internal" href="brainiak.html#subpackages">Subpackages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="brainiak.html#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="brainiak.html#module-brainiak.image">brainiak.image module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="brainiak.html#module-brainiak.io">brainiak.io module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="brainiak.html#module-brainiak.isfc">brainiak.isfc module</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 </ul>
 
@@ -120,7 +101,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">brainiak</a>
@@ -128,9 +109,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -185,58 +167,91 @@
 <div class="section" id="module-brainiak.searchlight.searchlight">
 <span id="brainiak-searchlight-searchlight-module"></span><h2>brainiak.searchlight.searchlight module<a class="headerlink" href="#module-brainiak.searchlight.searchlight" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
+<dt id="brainiak.searchlight.searchlight.Ball">
+<em class="property">class </em><code class="descclassname">brainiak.searchlight.searchlight.</code><code class="descname">Ball</code><span class="sig-paren">(</span><em>rad</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Ball" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#brainiak.searchlight.searchlight.Shape" title="brainiak.searchlight.searchlight.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.searchlight.searchlight.Shape</span></code></a></p>
+<p>Searchlight shape which is a ball
+inscribed in a cube of size (2*rad+1,2*rad+1,2*rad+1).
+Any location in the cube which has a Euclidean distance of equal to or
+less than rad from the center point is set to True.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rad</strong> (<em>radius</em><em>, </em><em>in voxels</em><em>, </em><em>of the sphere inscribed in the</em>) – searchlight cube, not counting the center voxel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="brainiak.searchlight.searchlight.Cube">
+<em class="property">class </em><code class="descclassname">brainiak.searchlight.searchlight.</code><code class="descname">Cube</code><span class="sig-paren">(</span><em>rad</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Cube" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#brainiak.searchlight.searchlight.Shape" title="brainiak.searchlight.searchlight.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.searchlight.searchlight.Shape</span></code></a></p>
+<p>Searchlight shape which is a cube of size (2*rad+1,2*rad+1,2*rad+1)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rad</strong> (<em>radius</em><em>, </em><em>in voxels</em><em>, </em><em>of the sphere inscribed in the</em>) – searchlight cube, not counting the center voxel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="brainiak.searchlight.searchlight.Diamond">
+<em class="property">class </em><code class="descclassname">brainiak.searchlight.searchlight.</code><code class="descname">Diamond</code><span class="sig-paren">(</span><em>rad</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Diamond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#brainiak.searchlight.searchlight.Shape" title="brainiak.searchlight.searchlight.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.searchlight.searchlight.Shape</span></code></a></p>
+<p>Searchlight shape which is a diamond
+inscribed in a cube of size (2*rad+1,2*rad+1,2*rad+1).
+Any location in the cube which has a Manhattan distance of equal to or
+less than rad from the center point is set to True.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rad</strong> (<em>radius</em><em>, </em><em>in voxels</em><em>, </em><em>of the sphere inscribed in the</em>) – searchlight cube, not counting the center voxel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
 <dt id="brainiak.searchlight.searchlight.Searchlight">
 <em class="property">class </em><code class="descclassname">brainiak.searchlight.searchlight.</code><code class="descname">Searchlight</code><span class="sig-paren">(</span><em>sl_rad=1</em>, <em>max_blk_edge=10</em>, <em>shape=&lt;class 'brainiak.searchlight.searchlight.Cube'&gt;</em>, <em>min_active_voxels_proportion=0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Distributed Searchlight</p>
 <p>Run a user-defined function over each voxel in a multi-subject
 dataset.</p>
 <p>Optionally, users can define a block function which runs over
 larger portions of the volume called blocks.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sl_rad</strong> (<em>radius</em><em>, </em><em>in voxels</em><em>, </em><em>of the sphere inscribed in the</em>) – searchlight cube, not counting the center voxel</li>
-<li><strong>max_blk_edge</strong> (<em>max edge length</em><em>, </em><em>in voxels</em><em>, </em><em>of the 3D block</em>) – </li>
-<li><strong>shape</strong> (<em>brainiak.searchlight.searchlight.Shape indicating the</em>) – </li>
-<li><strong>in voxels of the searchlight region</strong> (<em>shape</em>) – </li>
-<li><strong>min_active_voxels_proportion</strong> (<em>float</em>) – If a searchlight region does not have more than this minimum
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sl_rad</strong> (<em>radius</em><em>, </em><em>in voxels</em><em>, </em><em>of the sphere inscribed in the</em>) – searchlight cube, not counting the center voxel</p></li>
+<li><p><strong>max_blk_edge</strong> (<em>max edge length</em><em>, </em><em>in voxels</em><em>, </em><em>of the 3D block</em>) – </p></li>
+<li><p><strong>shape</strong> (<em>brainiak.searchlight.searchlight.Shape indicating the</em>) – </p></li>
+<li><p><strong>in voxels of the searchlight region</strong> (<em>shape</em>) – </p></li>
+<li><p><strong>min_active_voxels_proportion</strong> (<em>float</em>) – If a searchlight region does not have more than this minimum
 proportion of active voxels in the mask, it is not processed by the
 searchlight function. The mask used for the test is the
-intersection of the global (brain) mask and the <a class="reference internal" href="#brainiak.searchlight.searchlight.Shape" title="brainiak.searchlight.searchlight.Shape"><code class="xref py py-obj docutils literal"><span class="pre">Shape</span></code></a> mask. The
+intersection of the global (brain) mask and the <a class="reference internal" href="#brainiak.searchlight.searchlight.Shape" title="brainiak.searchlight.searchlight.Shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Shape</span></code></a> mask. The
 seed (central) voxel of the searchlight region is taken into
-consideration.</li>
+consideration.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <dl class="method">
 <dt id="brainiak.searchlight.searchlight.Searchlight.broadcast">
 <code class="descname">broadcast</code><span class="sig-paren">(</span><em>bcast_var</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight.broadcast" title="Permalink to this definition">¶</a></dt>
 <dd><p>Distribute data to processes</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>bcast_var</strong> (<em>shared data which is broadcast to all processes</em>) – </td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>bcast_var</strong> (<em>shared data which is broadcast to all processes</em>) – </p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="brainiak.searchlight.searchlight.Searchlight.distribute">
 <code class="descname">distribute</code><span class="sig-paren">(</span><em>subjects</em>, <em>mask</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight.distribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Distribute data to MPI ranks</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>subjects</strong> (<em>list of 4D arrays containing data for one</em><em> or </em><em>more subjects.</em>) – <p>Each entry of the list must be present on at most one rank,
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subjects</strong> (<em>list of 4D arrays containing data for one</em><em> or </em><em>more subjects.</em>) – <p>Each entry of the list must be present on at most one rank,
 and the other ranks contain a “None” at this list location.</p>
 <p>For example, for 3 ranks you may lay out the data in the
 following manner:</p>
@@ -247,44 +262,39 @@ Rank 2: [None, None, Subj2]</p>
 <p>Rank 0: [Subj0, Subj1, Subj2]
 Rank 1: [None, None, None]
 Rank 2: [None, None, None]</p>
-</li>
-<li><strong>mask</strong> (<em>3D array with &quot;True&quot; entries at active vertices</em>) – </li>
+</p></li>
+<li><p><strong>mask</strong> (<em>3D array with &quot;True&quot; entries at active vertices</em>) – </p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="brainiak.searchlight.searchlight.Searchlight.run_block_function">
 <code class="descname">run_block_function</code><span class="sig-paren">(</span><em>block_fn</em>, <em>extra_block_fn_params=None</em>, <em>pool_size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight.run_block_function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform a function for each block in a volume.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>block_fn</strong> – <p>Parameters</p>
-<dl class="docutils">
-<dt>data: list of 4D arrays containing subset of subject data,</dt>
-<dd>which is padded with sl_rad voxels.</dd>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>block_fn</strong> – <p>Parameters</p>
+<dl class="simple">
+<dt>data: list of 4D arrays containing subset of subject data,</dt><dd><p>which is padded with sl_rad voxels.</p>
+</dd>
 </dl>
 <p>mask: 3D array containing subset of mask data</p>
 <p>sl_rad: radius, in voxels, of the sphere inscribed in the
 cube</p>
 <p>bcast_var: shared data which is broadcast to all processes</p>
 <p>extra_params: extra parameters</p>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="docutils">
-<dt>extra_block_fn_params: tuple</dt>
-<dd>Extra parameters to pass to the block function</dd>
-<dt>pool_size: int</dt>
-<dd>Maximum number of processes running the block function in parallel.
+</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>extra_block_fn_params: tuple</dt><dd><p>Extra parameters to pass to the block function</p>
+</dd>
+<dt>pool_size: int</dt><dd><p>Maximum number of processes running the block function in parallel.
 If None, number of available hardware threads, considering cpusets
-restrictions.</dd>
+restrictions.</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -294,31 +304,30 @@ restrictions.</dd>
 <dd><p>Perform a function at each voxel which is set to True in the
 user-provided mask. The mask passed to the searchlight function will be
 further masked by the user-provided searchlight shape.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>voxel_fn</strong> – <p>Must be <a class="reference external" href="https://docs.python.org/3/library/pickle.html#what-can-be-pickled-and-unpickled">serializeable using pickle</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>voxel_fn</strong> – <p>Must be <a class="reference external" href="https://docs.python.org/3/library/pickle.html#what-can-be-pickled-and-unpickled">serializeable using pickle</a>.</p>
 <blockquote>
-<div>Parameters<p>subj: list of 4D arrays containing subset of subject data</p>
+<div><p>Parameters</p>
+<p>subj: list of 4D arrays containing subset of subject data</p>
 <p>mask: 3D array containing subset of mask data</p>
 <p>sl_rad: radius, in voxels, of the sphere inscribed in the
 cube</p>
 <p>bcast_var: shared data which is broadcast to all processes</p>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>A volume which is the same size as the mask, however a number of voxels</em></li>
-<li><em>equal to the searchlight radius has been removed from each border of</em></li>
-<li><em>the volume. This volume contains the values returned from the</em></li>
-<li><em>searchlight function at each voxel which was set to True in the mask,</em></li>
-<li><em>and None elsewhere.</em></li>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>A volume which is the same size as the mask, however a number of voxels</em></p></li>
+<li><p><em>equal to the searchlight radius has been removed from each border of</em></p></li>
+<li><p><em>the volume. This volume contains the values returned from the</em></p></li>
+<li><p><em>searchlight function at each voxel which was set to True in the mask,</em></p></li>
+<li><p><em>and None elsewhere.</em></p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -326,74 +335,25 @@ cube</p>
 <dl class="class">
 <dt id="brainiak.searchlight.searchlight.Shape">
 <em class="property">class </em><code class="descclassname">brainiak.searchlight.searchlight.</code><code class="descname">Shape</code><span class="sig-paren">(</span><em>rad</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Shape" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Searchlight shape which is contained in a cube sized
 (2*rad+1,2*rad+1,2*rad+1)</p>
 <dl class="attribute">
 <dt id="brainiak.searchlight.searchlight.Shape.mask_">
 <code class="descname">mask_</code><a class="headerlink" href="#brainiak.searchlight.searchlight.Shape.mask_" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>a 3D boolean numpy array of size (2*rad+1,2*rad+1,2*rad+1)</em> – which is set to True within the boundaries of the desired shape</p>
+<dd><p>which is set to True within the boundaries of the desired shape</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>a 3D boolean numpy array of size (2*rad+1,2*rad+1,2*rad+1)</p>
+</dd>
+</dl>
 </dd></dl>
 
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rad</strong> (<em>radius</em><em>, </em><em>in voxels</em><em>, </em><em>of the sphere inscribed in the</em>) – searchlight cube, not counting the center voxel</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="class">
-<dt id="brainiak.searchlight.searchlight.Cube">
-<em class="property">class </em><code class="descclassname">brainiak.searchlight.searchlight.</code><code class="descname">Cube</code><span class="sig-paren">(</span><em>rad</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Cube" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#brainiak.searchlight.searchlight.Shape" title="brainiak.searchlight.searchlight.Shape"><code class="xref py py-class docutils literal"><span class="pre">brainiak.searchlight.searchlight.Shape</span></code></a></p>
-<p>Searchlight shape which is a cube of size (2*rad+1,2*rad+1,2*rad+1)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rad</strong> (<em>radius</em><em>, </em><em>in voxels</em><em>, </em><em>of the sphere inscribed in the</em>) – searchlight cube, not counting the center voxel</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="class">
-<dt id="brainiak.searchlight.searchlight.Diamond">
-<em class="property">class </em><code class="descclassname">brainiak.searchlight.searchlight.</code><code class="descname">Diamond</code><span class="sig-paren">(</span><em>rad</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Diamond" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#brainiak.searchlight.searchlight.Shape" title="brainiak.searchlight.searchlight.Shape"><code class="xref py py-class docutils literal"><span class="pre">brainiak.searchlight.searchlight.Shape</span></code></a></p>
-<p>Searchlight shape which is a diamond
-inscribed in a cube of size (2*rad+1,2*rad+1,2*rad+1).
-Any location in the cube which has a Manhattan distance of equal to or
-less than rad from the center point is set to True.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rad</strong> (<em>radius</em><em>, </em><em>in voxels</em><em>, </em><em>of the sphere inscribed in the</em>) – searchlight cube, not counting the center voxel</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="class">
-<dt id="brainiak.searchlight.searchlight.Ball">
-<em class="property">class </em><code class="descclassname">brainiak.searchlight.searchlight.</code><code class="descname">Ball</code><span class="sig-paren">(</span><em>rad</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Ball" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#brainiak.searchlight.searchlight.Shape" title="brainiak.searchlight.searchlight.Shape"><code class="xref py py-class docutils literal"><span class="pre">brainiak.searchlight.searchlight.Shape</span></code></a></p>
-<p>Searchlight shape which is a ball
-inscribed in a cube of size (2*rad+1,2*rad+1,2*rad+1).
-Any location in the cube which has a Euclidean distance of equal to or
-less than rad from the center point is set to True.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>rad</strong> (<em>radius</em><em>, </em><em>in voxels</em><em>, </em><em>of the sphere inscribed in the</em>) – searchlight cube, not counting the center voxel</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rad</strong> (<em>radius</em><em>, </em><em>in voxels</em><em>, </em><em>of the sphere inscribed in the</em>) – searchlight cube, not counting the center voxel</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -401,9 +361,7 @@ less than rad from the center point is set to True.</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -412,7 +370,7 @@ less than rad from the center point is set to True.</p>
         <a href="brainiak.utils.html" class="btn btn-neutral float-right" title="brainiak.utils package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="brainiak.reprsimil.html" class="btn btn-neutral" title="brainiak.reprsimil package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="brainiak.reprsimil.html" class="btn btn-neutral float-left" title="brainiak.reprsimil package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -421,11 +379,11 @@ less than rad from the center point is set to True.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation.
+        &copy; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -438,37 +396,15 @@ less than rad from the center point is set to True.</p>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'0.8',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

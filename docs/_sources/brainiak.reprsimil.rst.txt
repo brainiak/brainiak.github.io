@@ -1,5 +1,5 @@
-brainiak\.reprsimil package
-===========================
+brainiak.reprsimil package
+==========================
 
 .. automodule:: brainiak.reprsimil
     :members:
@@ -9,8 +9,8 @@ brainiak\.reprsimil package
 Submodules
 ----------
 
-brainiak\.reprsimil\.brsa module
---------------------------------
+brainiak.reprsimil.brsa module
+------------------------------
 
 .. automodule:: brainiak.reprsimil.brsa
     :members:

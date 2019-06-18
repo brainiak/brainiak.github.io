@@ -1,5 +1,5 @@
-brainiak\.searchlight package
-=============================
+brainiak.searchlight package
+============================
 
 .. automodule:: brainiak.searchlight
     :members:
@@ -9,8 +9,8 @@ brainiak\.searchlight package
 Submodules
 ----------
 
-brainiak\.searchlight\.searchlight module
------------------------------------------
+brainiak.searchlight.searchlight module
+---------------------------------------
 
 .. automodule:: brainiak.searchlight.searchlight
     :members:

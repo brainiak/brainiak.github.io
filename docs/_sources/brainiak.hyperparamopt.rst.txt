@@ -1,5 +1,5 @@
-brainiak\.hyperparamopt package
-===============================
+brainiak.hyperparamopt package
+==============================
 
 .. automodule:: brainiak.hyperparamopt
     :members:
@@ -9,8 +9,8 @@ brainiak\.hyperparamopt package
 Submodules
 ----------
 
-brainiak\.hyperparamopt\.hpo module
------------------------------------
+brainiak.hyperparamopt.hpo module
+---------------------------------
 
 .. automodule:: brainiak.hyperparamopt.hpo
     :members:

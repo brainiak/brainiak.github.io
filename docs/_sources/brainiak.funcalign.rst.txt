@@ -1,5 +1,5 @@
-brainiak\.funcalign package
-===========================
+brainiak.funcalign package
+==========================
 
 .. automodule:: brainiak.funcalign
     :members:
@@ -9,24 +9,24 @@ brainiak\.funcalign package
 Submodules
 ----------
 
-brainiak\.funcalign\.rsrm module
---------------------------------
+brainiak.funcalign.rsrm module
+------------------------------
 
 .. automodule:: brainiak.funcalign.rsrm
     :members:
     :undoc-members:
     :show-inheritance:
 
-brainiak\.funcalign\.srm module
--------------------------------
+brainiak.funcalign.srm module
+-----------------------------
 
 .. automodule:: brainiak.funcalign.srm
     :members:
     :undoc-members:
     :show-inheritance:
 
-brainiak\.funcalign\.sssrm module
----------------------------------
+brainiak.funcalign.sssrm module
+-------------------------------
 
 .. automodule:: brainiak.funcalign.sssrm
     :members:
