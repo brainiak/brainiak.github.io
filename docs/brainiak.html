@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>brainiak package &mdash; brainiak 0.8 documentation</title>
+  <title>brainiak package &mdash; brainiak 0.9 documentation</title>
   
 
   
@@ -17,43 +17,37 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="brainiak 0.8 documentation" href="index.html"/>
-        <link rel="up" title="API" href="api.html"/>
-        <link rel="next" title="brainiak.eventseg package" href="brainiak.eventseg.html"/>
-        <link rel="prev" title="API" href="api.html"/> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="brainiak.eventseg package" href="brainiak.eventseg.html" />
+    <link rel="prev" title="API" href="api.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -67,7 +61,7 @@
             
             
               <div class="version">
-                0.8
+                0.9
               </div>
             
           
@@ -91,23 +85,10 @@
               
             
             
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release notes</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="api.html">API</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="api.html#brainiak">brainiak</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">brainiak package</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#subpackages">Subpackages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-brainiak.image">brainiak.image module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-brainiak.io">brainiak.io module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-brainiak.isfc">brainiak.isfc module</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 </ul>
 
@@ -120,7 +101,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">brainiak</a>
@@ -128,9 +109,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -242,30 +224,39 @@
 <dl class="class">
 <dt id="brainiak.image.ConditionSpec">
 <em class="property">class </em><code class="descclassname">brainiak.image.</code><code class="descname">ConditionSpec</code><a class="headerlink" href="#brainiak.image.ConditionSpec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 <p>One-hot representation of conditions across epochs and TRs.</p>
 <p>The shape is (n_conditions, n_epochs, n_trs).</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="brainiak.image.SingleConditionSpec">
-<em class="property">class </em><code class="descclassname">brainiak.image.</code><code class="descname">SingleConditionSpec</code><a class="headerlink" href="#brainiak.image.SingleConditionSpec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#brainiak.image.ConditionSpec" title="brainiak.image.ConditionSpec"><code class="xref py py-class docutils literal"><span class="pre">brainiak.image.ConditionSpec</span></code></a></p>
-<p>ConditionSpec with a single condition applicable to an epoch.</p>
-<dl class="method">
-<dt id="brainiak.image.SingleConditionSpec.extract_labels">
-<code class="descname">extract_labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#brainiak.image.SingleConditionSpec.extract_labels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Extract condition labels.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The condition label of each epoch.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">np.ndarray</td>
-</tr>
-</tbody>
-</table>
+<dt id="brainiak.image.MaskedMultiSubjectData">
+<em class="property">class </em><code class="descclassname">brainiak.image.</code><code class="descname">MaskedMultiSubjectData</code><a class="headerlink" href="#brainiak.image.MaskedMultiSubjectData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+<p>Array with shape n_TRs, n_voxels, n_subjects.</p>
+<dl class="classmethod">
+<dt id="brainiak.image.MaskedMultiSubjectData.from_masked_images">
+<em class="property">classmethod </em><code class="descname">from_masked_images</code><span class="sig-paren">(</span><em>masked_images: Iterable[numpy.ndarray], n_subjects: int</em><span class="sig-paren">)</span> &#x2192; T<a class="headerlink" href="#brainiak.image.MaskedMultiSubjectData.from_masked_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new instance of MaskedMultiSubjecData from masked images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>masked_images</strong> (<em>iterator</em>) – Images from multiple subjects to stack along 3rd dimension</p></li>
+<li><p><strong>n_subjects</strong> (<em>int</em>) – Number of subjects; must match the number of images</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A new instance of MaskedMultiSubjectData</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>T</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Images have different shapes.
+    
+    The number of images differs from n_subjects.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -274,85 +265,81 @@
 <dt id="brainiak.image.mask_image">
 <code class="descclassname">brainiak.image.</code><code class="descname">mask_image</code><span class="sig-paren">(</span><em>image: nibabel.spatialimages.SpatialImage</em>, <em>mask: numpy.ndarray</em>, <em>data_type: type = None</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#brainiak.image.mask_image" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mask image after optionally casting its type.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>image</strong> – Image to mask. Can include time as the last dimension.</li>
-<li><strong>mask</strong> – Mask to apply. Must have the same shape as the image data.</li>
-<li><strong>data_type</strong> – Type to cast image to.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – Image to mask. Can include time as the last dimension.</p></li>
+<li><p><strong>mask</strong> – Mask to apply. Must have the same shape as the image data.</p></li>
+<li><p><strong>data_type</strong> – Type to cast image to.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Masked image.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">np.ndarray</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – Image data and masks have different shapes.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Masked image.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Image data and masks have different shapes.</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="class">
-<dt id="brainiak.image.MaskedMultiSubjectData">
-<em class="property">class </em><code class="descclassname">brainiak.image.</code><code class="descname">MaskedMultiSubjectData</code><a class="headerlink" href="#brainiak.image.MaskedMultiSubjectData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></p>
-<p>Array in shape n_voxels, n_trs, n_subjects.</p>
-<dl class="classmethod">
-<dt id="brainiak.image.MaskedMultiSubjectData.from_masked_images">
-<em class="property">classmethod </em><code class="descname">from_masked_images</code><span class="sig-paren">(</span><em>masked_images: typing.Iterable[numpy.ndarray], n_sub: int</em><span class="sig-paren">)</span> &#x2192; T<a class="headerlink" href="#brainiak.image.MaskedMultiSubjectData.from_masked_images" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a new instance from masked images.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>masked_images</strong> – Images to concatenate.</li>
-<li><strong>n_sub</strong> – Number of subjects. Must match the number of images.</li>
+<dl class="function">
+<dt id="brainiak.image.mask_images">
+<code class="descclassname">brainiak.image.</code><code class="descname">mask_images</code><span class="sig-paren">(</span><em>images: Iterable[nibabel.spatialimages.SpatialImage], mask: numpy.ndarray, image_type: type = None</em><span class="sig-paren">)</span> &#x2192; Iterable[numpy.ndarray]<a class="headerlink" href="#brainiak.image.mask_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mask images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>images</strong> – Images to mask.</p></li>
+<li><p><strong>mask</strong> – Mask to apply.</p></li>
+<li><p><strong>image_type</strong> – Type to cast images to.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A new instance.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">T</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – Images have different shapes.</p>
-<p class="last">The number of images differs from n_sub.</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>np.ndarray</em> – Masked image.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="brainiak.image.multimask_images">
-<code class="descclassname">brainiak.image.</code><code class="descname">multimask_images</code><span class="sig-paren">(</span><em>images: typing.Iterable[nibabel.spatialimages.SpatialImage], masks: typing.Sequence[numpy.ndarray], image_type: type = None</em><span class="sig-paren">)</span> &#x2192; typing.Iterable[typing.Sequence[numpy.ndarray]]<a class="headerlink" href="#brainiak.image.multimask_images" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">brainiak.image.</code><code class="descname">multimask_images</code><span class="sig-paren">(</span><em>images: Iterable[nibabel.spatialimages.SpatialImage], masks: Sequence[numpy.ndarray], image_type: type = None</em><span class="sig-paren">)</span> &#x2192; Iterable[Sequence[numpy.ndarray]]<a class="headerlink" href="#brainiak.image.multimask_images" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mask images with multiple masks.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>images</strong> – Images to mask.</li>
-<li><strong>masks</strong> – Masks to apply.</li>
-<li><strong>image_type</strong> – Type to cast images to.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>images</strong> – Images to mask.</p></li>
+<li><p><strong>masks</strong> – Masks to apply.</p></li>
+<li><p><strong>image_type</strong> – Type to cast images to.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first last"><em>Sequence[np.ndarray]</em> – For each mask, a masked image.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>Sequence[np.ndarray]</em> – For each mask, a masked image.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="brainiak.image.SingleConditionSpec">
+<em class="property">class </em><code class="descclassname">brainiak.image.</code><code class="descname">SingleConditionSpec</code><a class="headerlink" href="#brainiak.image.SingleConditionSpec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#brainiak.image.ConditionSpec" title="brainiak.image.ConditionSpec"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.image.ConditionSpec</span></code></a></p>
+<p>ConditionSpec with a single condition applicable to an epoch.</p>
+<dl class="method">
+<dt id="brainiak.image.SingleConditionSpec.extract_labels">
+<code class="descname">extract_labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#brainiak.image.SingleConditionSpec.extract_labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract condition labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The condition label of each epoch.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -361,187 +348,546 @@
 <p>I/O functionality.</p>
 <dl class="function">
 <dt id="brainiak.io.load_boolean_mask">
-<code class="descclassname">brainiak.io.</code><code class="descname">load_boolean_mask</code><span class="sig-paren">(</span><em>path: typing.Union[str, pathlib.Path], predicate: typing.Callable[[numpy.ndarray], numpy.ndarray] = None</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#brainiak.io.load_boolean_mask" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">brainiak.io.</code><code class="descname">load_boolean_mask</code><span class="sig-paren">(</span><em>path: Union[str, pathlib.Path], predicate: Callable[numpy.ndarray, numpy.ndarray] = None</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#brainiak.io.load_boolean_mask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load boolean nibabel.SpatialImage mask.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>path</strong> – Mask path.</li>
-<li><strong>predicate</strong> – Callable used to create boolean values, e.g. a threshold function
-<code class="docutils literal"><span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">50</span></code>.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – Mask path.</p></li>
+<li><p><strong>predicate</strong> – Callable used to create boolean values, e.g. a threshold function
+<code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">50</span></code>.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Boolean array corresponding to mask.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">np.ndarray</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Boolean array corresponding to mask.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="brainiak.io.load_images">
+<code class="descclassname">brainiak.io.</code><code class="descname">load_images</code><span class="sig-paren">(</span><em>image_paths: Iterable[Union[str, pathlib.Path]]</em><span class="sig-paren">)</span> &#x2192; Iterable[nibabel.spatialimages.SpatialImage]<a class="headerlink" href="#brainiak.io.load_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load images from paths.</p>
+<p>For efficiency, returns an iterator, not a sequence, so the results cannot
+be accessed by indexing.</p>
+<p>For every new iteration through the images, load_images must be called
+again.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image_paths</strong> – Paths to images.</p>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>SpatialImage</em> – Image.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="brainiak.io.load_images_from_dir">
-<code class="descclassname">brainiak.io.</code><code class="descname">load_images_from_dir</code><span class="sig-paren">(</span><em>in_dir: typing.Union[str, pathlib.Path], suffix: str = 'nii.gz'</em><span class="sig-paren">)</span> &#x2192; typing.Iterable[nibabel.spatialimages.SpatialImage]<a class="headerlink" href="#brainiak.io.load_images_from_dir" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">brainiak.io.</code><code class="descname">load_images_from_dir</code><span class="sig-paren">(</span><em>in_dir: Union[str, pathlib.Path], suffix: str = 'nii.gz'</em><span class="sig-paren">)</span> &#x2192; Iterable[nibabel.spatialimages.SpatialImage]<a class="headerlink" href="#brainiak.io.load_images_from_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load images from directory.</p>
 <p>For efficiency, returns an iterator, not a sequence, so the results cannot
 be accessed by indexing.</p>
 <p>For every new iteration through the images, load_images_from_dir must be
 called again.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>in_dir</strong> – Path to directory.</li>
-<li><strong>suffix</strong> – Only load images with names that end like this.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_dir</strong> – Path to directory.</p></li>
+<li><p><strong>suffix</strong> – Only load images with names that end like this.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first last"><em>SpatialImage</em> – Image.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>SpatialImage</em> – Image.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="brainiak.io.load_labels">
-<code class="descclassname">brainiak.io.</code><code class="descname">load_labels</code><span class="sig-paren">(</span><em>path: typing.Union[str, pathlib.Path]</em><span class="sig-paren">)</span> &#x2192; typing.List[brainiak.image.SingleConditionSpec]<a class="headerlink" href="#brainiak.io.load_labels" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">brainiak.io.</code><code class="descname">load_labels</code><span class="sig-paren">(</span><em>path: Union[str, pathlib.Path]</em><span class="sig-paren">)</span> &#x2192; List[brainiak.image.SingleConditionSpec]<a class="headerlink" href="#brainiak.io.load_labels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load labels files.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> – Path of labels file.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of SingleConditionSpec stored in labels file.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List[<a class="reference internal" href="#brainiak.image.SingleConditionSpec" title="brainiak.image.SingleConditionSpec">SingleConditionSpec</a>]</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> – Path of labels file.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of SingleConditionSpec stored in labels file.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#brainiak.image.SingleConditionSpec" title="brainiak.image.SingleConditionSpec">SingleConditionSpec</a>]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="brainiak.io.save_as_nifti_file">
-<code class="descclassname">brainiak.io.</code><code class="descname">save_as_nifti_file</code><span class="sig-paren">(</span><em>data: numpy.ndarray, affine: numpy.ndarray, path: typing.Union[str, pathlib.Path]</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#brainiak.io.save_as_nifti_file" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">brainiak.io.</code><code class="descname">save_as_nifti_file</code><span class="sig-paren">(</span><em>data: numpy.ndarray, affine: numpy.ndarray, path: Union[str, pathlib.Path]</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#brainiak.io.save_as_nifti_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a Nifti file and save it.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>data</strong> – Brain data.</li>
-<li><strong>affine</strong> – Affine of the image, usually inherited from an existing image.</li>
-<li><strong>path</strong> – Output filename.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – Brain data.</p></li>
+<li><p><strong>affine</strong> – Affine of the image, usually inherited from an existing image.</p></li>
+<li><p><strong>path</strong> – Output filename.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
-<div class="section" id="module-brainiak.isfc">
-<span id="brainiak-isfc-module"></span><h2>brainiak.isfc module<a class="headerlink" href="#module-brainiak.isfc" title="Permalink to this headline">¶</a></h2>
-<p>Intersubject analyses (ISC/ISFC)</p>
-<p>Functions for computing intersubject correlation (ISC) and intersubject
-functional correlation (ISFC)</p>
-<p>Paper references:
-ISC: Hasson, U., Nir, Y., Levy, I., Fuhrmann, G. &amp; Malach, R. Intersubject
-synchronization of cortical activity during natural vision. Science 303,
-1634–1640 (2004).</p>
-<p>ISFC: Simony E, Honey CJ, Chen J, Lositsky O, Yeshurun Y, Wiesel A, Hasson U
-(2016) Dynamic reconfiguration of the default mode network during narrative
-comprehension. Nat Commun 7.</p>
+<div class="section" id="module-brainiak.isc">
+<span id="brainiak-isc-module"></span><h2>brainiak.isc module<a class="headerlink" href="#module-brainiak.isc" title="Permalink to this headline">¶</a></h2>
+<p>Intersubject correlation (ISC) analysis</p>
+<p>Functions for computing intersubject correlation (ISC) and related
+analyses (e.g., intersubject funtional correlations; ISFC), as well
+as statistical tests designed specifically for ISC analyses.</p>
+<p>The implementation is based on the work in <a class="reference internal" href="#hasson2004" id="id1"><span>[Hasson2004]</span></a>, <a class="reference internal" href="#kauppi2014" id="id2"><span>[Kauppi2014]</span></a>,
+<a class="reference internal" href="#simony2016" id="id3"><span>[Simony2016]</span></a>, and <a class="reference internal" href="#chen2016" id="id4"><span>[Chen2016]</span></a>.</p>
+<dl class="citation">
+<dt class="label" id="chen2016"><span class="brackets">Chen2016</span><span class="fn-backref">(<a href="#id4">1</a>,<a href="#id5">2</a>,<a href="#id10">3</a>)</span></dt>
+<dd><p>“Untangling the relatedness among correlations, part I:
+nonparametric approaches to inter-subject correlation analysis at the
+group level.”, G. Chen, Y. W. Shin, P. A. Taylor, D. R. Glen, R. C.
+Reynolds, R. B. Israel, R. W. Cox, 2016, NeuroImage, 142, 248-259.
+<a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2016.05.023">https://doi.org/10.1016/j.neuroimage.2016.05.023</a></p>
+</dd>
+<dt class="label" id="hasson2004"><span class="brackets">Hasson2004</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id9">2</a>)</span></dt>
+<dd><p>“Intersubject synchronization of cortical activity
+during natural vision.”, U. Hasson, Y. Nir, I. Levy, G. Fuhrmann,
+R. Malach, 2004, Science, 303, 1634-1640.
+<a class="reference external" href="https://doi.org/10.1126/science.1089506">https://doi.org/10.1126/science.1089506</a></p>
+</dd>
+<dt class="label" id="kauppi2014"><span class="brackets">Kauppi2014</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id14">2</a>)</span></dt>
+<dd><p>“A versatile software package for inter-subject
+correlation based analyses of fMRI.”, J. P. Kauppi, J. Pajula,
+J. Tohka, 2014, Frontiers in Neuroinformatics, 8, 2.
+<a class="reference external" href="https://doi.org/10.3389/fninf.2014.00002">https://doi.org/10.3389/fninf.2014.00002</a></p>
+</dd>
+<dt class="label" id="simony2016"><span class="brackets">Simony2016</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id8">2</a>,<a href="#id12">3</a>)</span></dt>
+<dd><p>“Dynamic reconfiguration of the default mode network
+during narrative comprehension.”, E. Simony, C. J. Honey, J. Chen, O.
+Lositsky, Y. Yeshurun, A. Wiesel, U. Hasson, 2016, Nature Communications,
+7, 12141. <a class="reference external" href="https://doi.org/10.1038/ncomms12141">https://doi.org/10.1038/ncomms12141</a></p>
+</dd>
+</dl>
 <dl class="function">
-<dt id="brainiak.isfc.isc">
-<code class="descclassname">brainiak.isfc.</code><code class="descname">isc</code><span class="sig-paren">(</span><em>D</em>, <em>collapse_subj=True</em>, <em>return_p=False</em>, <em>num_perm=1000</em>, <em>two_sided=False</em>, <em>random_state=0</em>, <em>float_type=&lt;class 'numpy.float64'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isfc.isc" title="Permalink to this definition">¶</a></dt>
+<dt id="brainiak.isc.bootstrap_isc">
+<code class="descclassname">brainiak.isc.</code><code class="descname">bootstrap_isc</code><span class="sig-paren">(</span><em>iscs</em>, <em>pairwise=False</em>, <em>summary_statistic='median'</em>, <em>n_bootstraps=1000</em>, <em>ci_percentile=95</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.bootstrap_isc" title="Permalink to this definition">¶</a></dt>
+<dd><p>One-sample group-level bootstrap hypothesis test for ISCs</p>
+<p>For ISCs from one more voxels or ROIs, resample subjects with replacement
+to construct a bootstrap distribution. Input is a list or ndarray of
+ISCs for a single voxel/ROI, or an ISCs-by-voxels ndarray. ISC values
+should be either N ISC values for N subjects in the leave-one-out appraoch
+(pairwise=False), N(N-1)/2 ISC values for N subjects in the pairwise
+approach (pairwise=True). In the pairwise approach, ISC values should
+correspond to the vectorized upper triangle of a square corrlation matrix
+(see scipy.stats.distance.squareform). Shifts bootstrap distribution by
+actual summary statistic (effectively to zero) for two-tailed null
+hypothesis test (Hall &amp; Wilson, 1991). Uses subject-wise (not pair-wise)
+resampling in the pairwise approach. Returns the observed ISC, the
+confidence interval, and a p-value for the bootstrap hypothesis test, as
+well as the bootstrap distribution of summary statistics. According to
+Chen et al., 2016, this is the preferred nonparametric approach for
+controlling false positive rates (FPR) for one-sample tests in the pairwise
+approach.</p>
+<p>The implementation is based on the work in <a class="reference internal" href="#chen2016" id="id5"><span>[Chen2016]</span></a> and
+<a class="reference internal" href="#hallwilson1991" id="id6"><span>[HallWilson1991]</span></a>.</p>
+<dl class="citation">
+<dt class="label" id="hallwilson1991"><span class="brackets"><a class="fn-backref" href="#id6">HallWilson1991</a></span></dt>
+<dd><p>“Two guidelines for bootstrap hypothesis testing.”,
+P. Hall, S. R., Wilson, 1991, Biometrics, 757-762.
+<a class="reference external" href="https://doi.org/10.2307/2532163">https://doi.org/10.2307/2532163</a></p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>iscs</strong> (<em>list</em><em> or </em><em>ndarray</em><em>, </em><em>ISCs by voxels array</em>) – ISC values for one or more voxels</p></li>
+<li><p><strong>pairwise</strong> (<em>bool</em><em>, </em><em>default: False</em>) – Indicator of pairwise or leave-one-out, should match ISCs structure</p></li>
+<li><p><strong>summary_statistic</strong> (<em>str</em><em>, </em><em>default: 'median'</em>) – Summary statistic, either ‘median’ (default) or ‘mean’</p></li>
+<li><p><strong>n_bootstraps</strong> (<em>int</em><em>, </em><em>default: 1000</em>) – Number of bootstrap samples (subject-level with replacement)</p></li>
+<li><p><strong>ci_percentile</strong> (<em>int</em><em>, </em><em>default: 95</em>) – Percentile for computing confidence intervals</p></li>
+<li><p><strong>= int</strong><strong> or </strong><strong>None</strong><strong>, </strong><strong>default</strong> (<em>random_state</em>) – Initial random seed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>observed</strong> (<em>float, median (or mean) ISC value</em>) – Summary statistic for actual ISCs</p></li>
+<li><p><strong>ci</strong> (<em>tuple, bootstrap confidence intervals</em>) – Confidence intervals generated from bootstrap distribution</p></li>
+<li><p><strong>p</strong> (<em>float, p-value</em>) – p-value based on bootstrap hypothesis test</p></li>
+<li><p><strong>distribution</strong> (<em>ndarray, bootstraps by voxels (optional)</em>) – Bootstrap distribution if return_bootstrap=True</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="brainiak.isc.compute_summary_statistic">
+<code class="descclassname">brainiak.isc.</code><code class="descname">compute_summary_statistic</code><span class="sig-paren">(</span><em>iscs</em>, <em>summary_statistic='mean'</em>, <em>axis=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.compute_summary_statistic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes summary statistics for ISCs</p>
+<p>Computes either the ‘mean’ or ‘median’ across a set of ISCs. In the
+case of the mean, ISC values are first Fisher Z transformed (arctanh),
+averaged, then inverse Fisher Z transformed (tanh).</p>
+<p>The implementation is based on the work in <a class="reference internal" href="#silverdunlap1987" id="id7"><span>[SilverDunlap1987]</span></a>.</p>
+<dl class="citation">
+<dt class="label" id="silverdunlap1987"><span class="brackets"><a class="fn-backref" href="#id7">SilverDunlap1987</a></span></dt>
+<dd><p>“Averaging corrlelation coefficients: should
+Fisher’s z transformation be used?”, N. C. Silver, W. P. Dunlap, 1987,
+Journal of Applied Psychology, 72, 146-148.
+<a class="reference external" href="https://doi.org/10.1037/0021-9010.72.1.146">https://doi.org/10.1037/0021-9010.72.1.146</a></p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>iscs</strong> (<em>list</em><em> or </em><em>ndarray</em>) – ISC values</p></li>
+<li><p><strong>summary_statistic</strong> (<em>str</em><em>, </em><em>default: 'mean'</em>) – Summary statistic, ‘mean’ or ‘median’</p></li>
+<li><p><strong>axis</strong> (<em>None</em><em> or </em><em>int</em><em> or </em><em>tuple of ints</em><em>, </em><em>optional</em>) – Axis or axes along which the means are computed. The default is to
+compute the mean of the flattened array.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>statistic</strong> – Summary statistic of ISC values</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float or ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="brainiak.isc.isfc">
+<code class="descclassname">brainiak.isc.</code><code class="descname">isfc</code><span class="sig-paren">(</span><em>data</em>, <em>targets=None</em>, <em>pairwise=False</em>, <em>summary_statistic=None</em>, <em>vectorize_isfcs=True</em>, <em>tolerate_nans=True</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.isfc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Intersubject functional correlation (ISFC)</p>
+<p>For each input voxel or ROI, compute the Pearson correlation between each
+subject’s response time series and all input voxels or ROIs in other
+subjects. If a targets array is provided, instead compute ISFCs between
+each input voxel time series and each voxel time series in targets across
+subjects (resulting in asymmetric ISFC values). The targets array must have
+the same number TRs and subjects as the input data. If pairwise is False
+(default), use the leave-one-out approach, where correlation is computed
+between each subject and the average of the other subjects. If pairwise is
+True, compute correlations between all pairs of subjects. If a targets
+array is provided, only the leave-one-out approach is supported. If
+summary_statistic is None, return N ISFC values for N subjects (leave-one-
+out) or N(N-1)/2 ISFC values for each pair of N subjects, corresponding to
+the triangle of the correlation matrix (scipy.spatial.distance.squareform).
+Alternatively, use either ‘mean’ or ‘median’ to compute summary statistic
+of ISFCs (Fisher Z is applied if using mean). Input should be n_TRs by
+n_voxels by n_subjects array (e.g., brainiak.image.MaskedMultiSubjectData)
+or a list where each item is a n_TRs by n_voxels ndarray per subject.
+Multiple input ndarrays must be the same shape. If a 2D array is supplied,
+the last dimension is assumed to correspond to subjects. If only two
+subjects are supplied, simply compute ISFC between these two subjects
+(precludes averaging in leave-one-out approach, and does not apply summary
+statistic). Returns vectorized upper triangle of ISFC matrices for each
+subject or pair when vectorized_isfcs=True, or full (redundant) 2D ISFC
+matrices when vectorized_isfcs=False. When using leave-one-out approach,
+NaNs are ignored when computing mean time series of N-1 subjects (default:
+tolerate_nans=True). Alternatively, you may supply a float between 0 and
+1 indicating a threshold proportion of N subjects with non-NaN values
+required when computing the average time series for a given voxel. For
+example, if tolerate_nans=.8, ISCs will be computed for any voxel where
+&gt;= 80% of subjects have non-NaN values, while voxels with &lt; 80% non-NaN
+values will be assigned NaNs. If set to False, NaNs are not tolerated
+and voxels with one or more NaNs among the N-1 subjects will be assigned
+NaN. Setting tolerate_nans to True or False will not affect the pairwise
+approach; however, if a threshold float is provided, voxels that do not
+reach this threshold will be excluded. Note that accommodating NaNs may
+be notably slower than setting tolerate_nans to False. Output is either
+a tuple comprising condensed off-diagonal ISFC values and the diagonal
+ISC values if vectorize_isfcs=True, or a single ndarray with shape
+n_subjects (or n_pairs) by n_voxels by n_voxels 3D array if
+vectorize_isfcs=False (see brainiak.isc.squareform_isfc). If targets array
+is provided (yielding asymmetric ISFCs), output ISFCs are not vectorized,
+resulting in an n_subjects by n_voxels by n_targets ISFC array. If
+summary_statistic is supplied, output is collapsed along first dimension.</p>
+<p>The implementation is based on the work in <a class="reference internal" href="#simony2016" id="id8"><span>[Simony2016]</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>list</em><em> or </em><em>ndarray</em><em> (</em><em>n_TRs x n_voxels x n_subjects</em><em>)</em>) – fMRI data for which to compute ISFC</p></li>
+<li><p><strong>targets</strong> (<em>list</em><em> or </em><em>ndarray</em><em> (</em><em>n_TRs x n_voxels x n_subjects</em><em>)</em><em>, </em><em>optional</em>) – fMRI data to use as targets for ISFC</p></li>
+<li><p><strong>pairwise</strong> (<em>bool</em><em>, </em><em>default: False</em>) – Whether to use pairwise (True) or leave-one-out (False) approach</p></li>
+<li><p><strong>summary_statistic</strong> (<em>None</em><em> or </em><em>str</em><em>, </em><em>default: None</em>) – Return all ISFCs or collapse using ‘mean’ or ‘median’</p></li>
+<li><p><strong>vectorize_isfcs</strong> (<em>bool</em><em>, </em><em>default: True</em>) – Return tuple of condensed ISFCs and ISCs (True) or square (redundant)
+ISFCs (False)</p></li>
+<li><p><strong>tolerate_nans</strong> (<em>bool</em><em> or </em><em>float</em><em>, </em><em>default: True</em>) – Accommodate NaNs (when averaging in leave-one-out approach)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>isfcs</strong> – ISFCs for each subject or pair (or summary statistic) per voxel pair</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray or tuple of ndarrays</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="brainiak.isc.isc">
+<code class="descclassname">brainiak.isc.</code><code class="descname">isc</code><span class="sig-paren">(</span><em>data</em>, <em>pairwise=False</em>, <em>summary_statistic=None</em>, <em>tolerate_nans=True</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.isc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Intersubject correlation</p>
-<p>For each voxel, computes the correlation of each subject’s timecourse with
-the mean of all other subjects’ timecourses. By default the result is
-averaged across subjects, unless collapse_subj is set to False. A null
-distribution can optionally be computed using phase randomization, to
-compute a p value for each voxel.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>D</strong> (<em>voxel by time by subject ndarray</em>) – fMRI data for which to compute ISC</li>
-<li><strong>collapse_subj</strong> (<em>bool</em><em>, </em><em>default:True</em>) – Whether to average across subjects before returning result</li>
-<li><strong>return_p</strong> (<em>bool</em><em>, </em><em>default:False</em>) – Whether to use phase randomization to compute a p value for each voxel</li>
-<li><strong>num_perm</strong> (<em>int</em><em>, </em><em>default:1000</em>) – Number of null samples to use for computing p values</li>
-<li><strong>two_sided</strong> (<em>bool</em><em>, </em><em>default:False</em>) – Whether the p value should be one-sided (testing only for being
-above the null) or two-sided (testing for both significantly positive
-and significantly negative values)</li>
-<li><strong>random_state</strong> (<em>RandomState</em><em> or </em><em>an int seed</em><em> (</em><em>0 by default</em><em>)</em>) – A random number generator instance to define the state of the
-random permutations generator.</li>
-<li><strong>float_type</strong> (<em>either float16</em><em>, </em><em>float32</em><em>, or </em><em>float64</em><em>,</em>) – Depends on the required precision
-and available memory in the system.
-All the arrays generated during the execution will be cast
-to specified float type in order to save memory.</li>
+<p>For each voxel or ROI, compute the Pearson correlation between each
+subject’s response time series and other subjects’ response time series.
+If pairwise is False (default), use the leave-one-out approach, where
+correlation is computed between each subject and the average of the other
+subjects. If pairwise is True, compute correlations between all pairs of
+subjects. If summary_statistic is None, return N ISC values for N subjects
+(leave-one-out) or N(N-1)/2 ISC values for each pair of N subjects,
+corresponding to the upper triangle of the pairwise correlation matrix
+(see scipy.spatial.distance.squareform). Alternatively, use either
+‘mean’ or ‘median’ to compute summary statistic of ISCs (Fisher Z will
+be applied if using mean). Input data should be a n_TRs by n_voxels by
+n_subjects array (e.g., brainiak.image.MaskedMultiSubjectData) or a list
+where each item is a n_TRs by n_voxels ndarray for a given subject.
+Multiple input ndarrays must be the same shape. If a 2D array is supplied,
+the last dimension is assumed to correspond to subjects. If only two
+subjects are supplied, simply compute Pearson correlation (precludes
+averaging in leave-one-out approach, and does not apply summary statistic).
+When using leave-one-out approach, NaNs are ignored when computing mean
+time series of N-1 subjects (default: tolerate_nans=True). Alternatively,
+you may supply a float between 0 and 1 indicating a threshold proportion
+of N subjects with non-NaN values required when computing the average time
+series for a given voxel. For example, if tolerate_nans=.8, ISCs will be
+computed for any voxel where &gt;= 80% of subjects have non-NaN values,
+while voxels with &lt; 80% non-NaN values will be assigned NaNs. If set to
+False, NaNs are not tolerated and voxels with one or more NaNs among the
+N-1 subjects will be assigned NaN. Setting tolerate_nans to True or False
+will not affect the pairwise approach; however, if a threshold float is
+provided, voxels that do not reach this threshold will be excluded. Note
+that accommodating NaNs may be notably slower than setting tolerate_nans to
+False. Output is an ndarray where the first dimension is the number of
+subjects or pairs and the second dimension is the number of voxels (or
+ROIs). If only two subjects are supplied or a summary statistic is invoked,
+the output is a ndarray n_voxels long.</p>
+<p>The implementation is based on the work in <a class="reference internal" href="#hasson2004" id="id9"><span>[Hasson2004]</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>list</em><em> or </em><em>ndarray</em><em> (</em><em>n_TRs x n_voxels x n_subjects</em><em>)</em>) – fMRI data for which to compute ISC</p></li>
+<li><p><strong>pairwise</strong> (<em>bool</em><em>, </em><em>default: False</em>) – Whether to use pairwise (True) or leave-one-out (False) approach</p></li>
+<li><p><strong>summary_statistic</strong> (<em>None</em><em> or </em><em>str</em><em>, </em><em>default: None</em>) – Return all ISCs or collapse using ‘mean’ or ‘median’</p></li>
+<li><p><strong>tolerate_nans</strong> (<em>bool</em><em> or </em><em>float</em><em>, </em><em>default: True</em>) – Accommodate NaNs (when averaging in leave-one-out approach)</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>ISC</strong> (<em>voxel ndarray (or voxel by subject ndarray, if collapse_subj=False)</em>) – pearson correlation for each voxel, across subjects</li>
-<li><strong>p</strong> (<em>ndarray the same shape as ISC (if return_p = True)</em>) – p values for each ISC value under the null distribution</li>
-</ul>
-</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>iscs</strong> – ISC for each subject or pair (or summary statistic) per voxel</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>subjects or pairs by voxels ndarray</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
-<dt id="brainiak.isfc.isfc">
-<code class="descclassname">brainiak.isfc.</code><code class="descname">isfc</code><span class="sig-paren">(</span><em>D</em>, <em>collapse_subj=True</em>, <em>return_p=False</em>, <em>num_perm=1000</em>, <em>two_sided=False</em>, <em>random_state=0</em>, <em>float_type=&lt;class 'numpy.float64'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isfc.isfc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Intersubject functional correlation</p>
-<p>Computes the correlation between the timecoure of each voxel in each
-subject with the average of all other subjects’ timecourses in <em>all</em>
-voxels. By default the result is averaged across subjects, unless
-collapse_subj is set to False. A null distribution can optionally be
-computed using phase randomization, to compute a p value for each voxel-to-
-voxel correlation.</p>
-<p>Uses the high performance compute_correlation routine from fcma.util</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>D</strong> (<em>voxel by time by subject ndarray</em>) – fMRI data for which to compute ISFC</li>
-<li><strong>collapse_subj</strong> (<em>bool</em><em>, </em><em>default:True</em>) – Whether to average across subjects before returning result</li>
-<li><strong>return_p</strong> (<em>bool</em><em>, </em><em>default:False</em>) – Whether to use phase randomization to compute a p value for each voxel</li>
-<li><strong>num_perm</strong> (<em>int</em><em>, </em><em>default:1000</em>) – Number of null samples to use for computing p values</li>
-<li><strong>two_sided</strong> (<em>bool</em><em>, </em><em>default:False</em>) – Whether the p value should be one-sided (testing only for being
-above the null) or two-sided (testing for both significantly positive
-and significantly negative values)</li>
-<li><strong>random_state</strong> (<em>RandomState</em><em> or </em><em>an int seed</em><em> (</em><em>0 by default</em><em>)</em>) – A random number generator instance to define the state of the
-random permutations generator.</li>
-<li><strong>float_type</strong> (<em>either float16</em><em>, </em><em>float32</em><em>, or </em><em>float64</em>) – Depends on the required precision
-and available memory in the system.
-All the arrays generated during the execution will be cast
-to specified float type in order to save memory.</li>
+<dt id="brainiak.isc.permutation_isc">
+<code class="descclassname">brainiak.isc.</code><code class="descname">permutation_isc</code><span class="sig-paren">(</span><em>iscs</em>, <em>group_assignment=None</em>, <em>pairwise=False</em>, <em>summary_statistic='median'</em>, <em>n_permutations=1000</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.permutation_isc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group-level permutation test for ISCs</p>
+<p>For ISCs from one or more voxels or ROIs, permute group assignments to
+construct a permutation distribution. Input is a list or ndarray of
+ISCs  for a single voxel/ROI, or an ISCs-by-voxels ndarray. If two groups,
+ISC values should stacked along first dimension (vertically), and a
+group_assignment list (or 1d array) of same length as the number of
+subjects should be provided to indicate groups. If no group_assignment
+is provided, one-sample test is performed using a sign-flipping procedure.
+Performs exact test if number of possible permutations (2**N for one-sample
+sign-flipping, N! for two-sample shuffling) is less than or equal to number
+of requested permutation; otherwise, performs approximate permutation test
+using Monte Carlo resampling. ISC values should either be N ISC values for
+N subjects in the leave-one-out approach (pairwise=False) or N(N-1)/2 ISC
+values for N subjects in the pairwise approach (pairwise=True). In the
+pairwise approach, ISC values should correspond to the vectorized upper
+triangle of a square corrlation matrix (scipy.stats.distance.squareform).
+Note that in the pairwise approach, group_assignment order should match the
+row/column order of the subject-by-subject square ISC matrix even though
+the input ISCs should be supplied as the vectorized upper triangle of the
+square ISC matrix. Returns the observed ISC and permutation-based p-value
+(two-tailed test), as well as the permutation distribution of summary
+statistic. According to Chen et al., 2016, this is the preferred
+nonparametric approach for controlling false positive rates (FPR) for
+two-sample tests. This approach may yield inflated FPRs for one-sample
+tests.</p>
+<p>The implementation is based on the work in <a class="reference internal" href="#chen2016" id="id10"><span>[Chen2016]</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>iscs</strong> (<em>list</em><em> or </em><em>ndarray</em><em>, </em><em>correlation matrix of ISCs</em>) – ISC values for one or more voxels</p></li>
+<li><p><strong>group_assignment</strong> (<em>list</em><em> or </em><em>ndarray</em><em>, </em><em>group labels</em>) – Group labels matching order of ISC input</p></li>
+<li><p><strong>pairwise</strong> (<em>bool</em><em>, </em><em>default: False</em>) – Indicator of pairwise or leave-one-out, should match ISCs variable</p></li>
+<li><p><strong>summary_statistic</strong> (<em>str</em><em>, </em><em>default: 'median'</em>) – Summary statistic, either ‘median’ (default) or ‘mean’</p></li>
+<li><p><strong>n_permutations</strong> (<em>int</em><em>, </em><em>default: 1000</em>) – Number of permutation iteration (randomizing group assignment)</p></li>
+<li><p><strong>= int</strong><strong>, </strong><strong>None</strong><strong>, or </strong><strong>np.random.RandomState</strong><strong>, </strong><strong>default</strong> (<em>random_state</em>) – Initial random seed</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><strong>ISFC</strong> (<em>voxel by voxel ndarray</em>) – (or voxel by voxel by subject ndarray, if collapse_subj=False)
-pearson correlation between all pairs of voxels, across subjects</li>
-<li><strong>p</strong> (<em>ndarray the same shape as ISC (if return_p = True)</em>) – p values for each ISC value under the null distribution</li>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>observed</strong> (<em>float, ISC summary statistic or difference</em>) – Actual ISC or group difference (excluding between-group ISCs)</p></li>
+<li><p><strong>p</strong> (<em>float, p-value</em>) – p-value based on permutation test</p></li>
+<li><p><strong>distribution</strong> (<em>ndarray, permutations by voxels (optional)</em>) – Permutation distribution if return_bootstrap=True</p></li>
 </ul>
 </p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="brainiak.isc.phaseshift_isc">
+<code class="descclassname">brainiak.isc.</code><code class="descname">phaseshift_isc</code><span class="sig-paren">(</span><em>data</em>, <em>pairwise=False</em>, <em>summary_statistic='median'</em>, <em>n_shifts=1000</em>, <em>tolerate_nans=True</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.phaseshift_isc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Phase randomization for one-sample ISC test</p>
+<p>For each voxel or ROI, compute the actual ISC and p-values
+from a null distribution of ISCs where response time series
+are phase randomized prior to computing ISC. If pairwise,
+apply phase randomization to each subject and compute pairwise
+ISCs. If leave-one-out approach is used (pairwise=False), only
+apply phase randomization to the left-out subject in each iteration
+of the leave-one-out procedure. Input data should be a list where
+each item is a time-points by voxels ndarray for a given subject.
+Multiple input ndarrays must be the same shape. If a single ndarray is
+supplied, the last dimension is assumed to correspond to subjects.
+When using leave-one-out approach, NaNs are ignored when computing mean
+time series of N-1 subjects (default: tolerate_nans=True). Alternatively,
+you may supply a float between 0 and 1 indicating a threshold proportion
+of N subjects with non-NaN values required when computing the average time
+series for a given voxel. For example, if tolerate_nans=.8, ISCs will be
+computed for any voxel where &gt;= 80% of subjects have non-NaN values,
+while voxels with &lt; 80% non-NaN values will be assigned NaNs. If set to
+False, NaNs are not tolerated and voxels with one or more NaNs among the
+N-1 subjects will be assigned NaN. Setting tolerate_nans to True or False
+will not affect the pairwise approach; however, if a threshold float is
+provided, voxels that do not reach this threshold will be excluded. Note
+that accommodating NaNs may be notably slower than setting tolerate_nans to
+False. Returns the observed ISC and p-values (two-tailed test), as well as
+the null distribution of ISCs computed on phase-randomized data.</p>
+<p>The implementation is based on the work in <a class="reference internal" href="#lerner2011" id="id11"><span>[Lerner2011]</span></a> and
+<a class="reference internal" href="#simony2016" id="id12"><span>[Simony2016]</span></a>.</p>
+<dl class="citation">
+<dt class="label" id="lerner2011"><span class="brackets"><a class="fn-backref" href="#id11">Lerner2011</a></span></dt>
+<dd><p>“Topographic mapping of a hierarchy of temporal
+receptive windows using a narrated story.”, Y. Lerner, C. J. Honey,
+L. J. Silbert, U. Hasson, 2011, Journal of Neuroscience, 31, 2906-2915.
+<a class="reference external" href="https://doi.org/10.1523/jneurosci.3684-10.2011">https://doi.org/10.1523/jneurosci.3684-10.2011</a></p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>list</em><em> or </em><em>ndarray</em><em> (</em><em>n_TRs x n_voxels x n_subjects</em><em>)</em>) – fMRI data for which to compute ISFC</p></li>
+<li><p><strong>pairwise</strong> (<em>bool</em><em>, </em><em>default: False</em>) – Whether to use pairwise (True) or leave-one-out (False) approach</p></li>
+<li><p><strong>summary_statistic</strong> (<em>str</em><em>, </em><em>default: 'median'</em>) – Summary statistic, either ‘median’ (default) or ‘mean’</p></li>
+<li><p><strong>n_shifts</strong> (<em>int</em><em>, </em><em>default: 1000</em>) – Number of randomly shifted samples</p></li>
+<li><p><strong>tolerate_nans</strong> (<em>bool</em><em> or </em><em>float</em><em>, </em><em>default: True</em>) – Accommodate NaNs (when averaging in leave-one-out approach)</p></li>
+<li><p><strong>= int</strong><strong>, </strong><strong>None</strong><strong>, or </strong><strong>np.random.RandomState</strong><strong>, </strong><strong>default</strong> (<em>random_state</em>) – Initial random seed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>observed</strong> (<em>float, observed ISC (without time-shifting)</em>) – Actual ISCs</p></li>
+<li><p><strong>p</strong> (<em>float, p-value</em>) – p-value based on time-shifting randomization test</p></li>
+<li><p><strong>distribution</strong> (<em>ndarray, time-shifts by voxels (optional)</em>) – Time-shifted null distribution if return_bootstrap=True</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="brainiak.isc.squareform_isfc">
+<code class="descclassname">brainiak.isc.</code><code class="descname">squareform_isfc</code><span class="sig-paren">(</span><em>isfcs</em>, <em>iscs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.squareform_isfc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts square ISFCs to condensed ISFCs (and ISCs), and vice-versa</p>
+<p>If input is a 2- or 3-dimensional array of square ISFC matrices, converts
+this to the condensed off-diagonal ISFC values (i.e., the vectorized
+triangle) and the diagonal ISC values. In this case, input must be a
+single array of shape either n_voxels x n_voxels or n_subjects (or
+n_pairs) x n_voxels x n_voxels. The condensed ISFC values are vectorized
+according to scipy.spatial.distance.squareform, yielding n_voxels *
+(n_voxels - 1) / 2 values comprising every voxel pair. Alternatively, if
+input is an array of condensed off-diagonal ISFC values and an array of
+diagonal ISC values, the square (redundant) ISFC values are returned.
+This function mimics scipy.spatial.distance.squareform, but is intended
+to retain the diagonal ISC values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>isfcs</strong> (<em>ndarray</em>) – Either condensed or redundant ISFC values</p></li>
+<li><p><strong>iscs</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – Diagonal ISC values, required when input is condensed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>isfcs</strong> – If condensed ISFCs are passed, a single redundant ISFC array is
+returned; if redundant ISFCs are passed, both a condensed off-
+diagonal ISFC array and the diagonal ISC values are returned</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray or tuple of ndarrays</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="brainiak.isc.timeshift_isc">
+<code class="descclassname">brainiak.isc.</code><code class="descname">timeshift_isc</code><span class="sig-paren">(</span><em>data</em>, <em>pairwise=False</em>, <em>summary_statistic='median'</em>, <em>n_shifts=1000</em>, <em>tolerate_nans=True</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.timeshift_isc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Circular time-shift randomization for one-sample ISC test</p>
+<p>For each voxel or ROI, compute the actual ISC and p-values
+from a null distribution of ISCs where response time series
+are first circularly shifted by random intervals. If pairwise,
+apply time-shift randomization to each subjects and compute pairwise
+ISCs. If leave-one-out approach is used (pairwise=False), apply
+the random time-shift to only the left-out subject in each iteration
+of the leave-one-out procedure. Input data should be a list where
+each item is a time-points by voxels ndarray for a given subject.
+Multiple input ndarrays must be the same shape. If a single ndarray is
+supplied, the last dimension is assumed to correspond to subjects.
+When using leave-one-out approach, NaNs are ignored when computing mean
+time series of N-1 subjects (default: tolerate_nans=True). Alternatively,
+you may supply a float between 0 and 1 indicating a threshold proportion
+of N subjects with non-NaN values required when computing the average time
+series for a given voxel. For example, if tolerate_nans=.8, ISCs will be
+computed for any voxel where &gt;= 80% of subjects have non-NaN values,
+while voxels with &lt; 80% non-NaN values will be assigned NaNs. If set to
+False, NaNs are not tolerated and voxels with one or more NaNs among the
+N-1 subjects will be assigned NaN. Setting tolerate_nans to True or False
+will not affect the pairwise approach; however, if a threshold float is
+provided, voxels that do not reach this threshold will be excluded. Note
+that accommodating NaNs may be notably slower than setting tolerate_nans to
+False. Returns the observed ISC and p-values (two-tailed test), as well as
+the null distribution of ISCs computed on randomly time-shifted data.</p>
+<p>The implementation is based on the work in <a class="reference internal" href="#kauppi2010" id="id13"><span>[Kauppi2010]</span></a> and
+<a class="reference internal" href="#kauppi2014" id="id14"><span>[Kauppi2014]</span></a>.</p>
+<dl class="citation">
+<dt class="label" id="kauppi2010"><span class="brackets"><a class="fn-backref" href="#id13">Kauppi2010</a></span></dt>
+<dd><p>“Inter-subject correlation of brain hemodynamic
+responses during watching a movie: localization in space and
+frequency.”, J. P. Kauppi, I. P. Jääskeläinen, M. Sams, J. Tohka,
+2010, Frontiers in Neuroinformatics, 4, 5.
+<a class="reference external" href="https://doi.org/10.3389/fninf.2010.00005">https://doi.org/10.3389/fninf.2010.00005</a></p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>list</em><em> or </em><em>ndarray</em><em> (</em><em>n_TRs x n_voxels x n_subjects</em><em>)</em>) – fMRI data for which to compute ISFC</p></li>
+<li><p><strong>pairwise</strong> (<em>bool</em><em>, </em><em>default: False</em>) – Whether to use pairwise (True) or leave-one-out (False) approach</p></li>
+<li><p><strong>summary_statistic</strong> (<em>str</em><em>, </em><em>default: 'median'</em>) – Summary statistic, either ‘median’ (default) or ‘mean’</p></li>
+<li><p><strong>n_shifts</strong> (<em>int</em><em>, </em><em>default: 1000</em>) – Number of randomly shifted samples</p></li>
+<li><p><strong>tolerate_nans</strong> (<em>bool</em><em> or </em><em>float</em><em>, </em><em>default: True</em>) – Accommodate NaNs (when averaging in leave-one-out approach)</p></li>
+<li><p><strong>= int</strong><strong>, </strong><strong>None</strong><strong>, or </strong><strong>np.random.RandomState</strong><strong>, </strong><strong>default</strong> (<em>random_state</em>) – Initial random seed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>observed</strong> (<em>float, observed ISC (without time-shifting)</em>) – Actual ISCs</p></li>
+<li><p><strong>p</strong> (<em>float, p-value</em>) – p-value based on time-shifting randomization test</p></li>
+<li><p><strong>distribution</strong> (<em>ndarray, time-shifts by voxels (optional)</em>) – Time-shifted null distribution if return_bootstrap=True</p></li>
+</ul>
+</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -549,9 +895,7 @@ pearson correlation between all pairs of voxels, across subjects</li>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -560,7 +904,7 @@ pearson correlation between all pairs of voxels, across subjects</li>
         <a href="brainiak.eventseg.html" class="btn btn-neutral float-right" title="brainiak.eventseg package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="api.html" class="btn btn-neutral" title="API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="api.html" class="btn btn-neutral float-left" title="API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -569,11 +913,11 @@ pearson correlation between all pairs of voxels, across subjects</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation.
+        &copy; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -586,37 +930,15 @@ pearson correlation between all pairs of voxels, across subjects</li>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'0.8',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

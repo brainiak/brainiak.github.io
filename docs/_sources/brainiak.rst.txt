@@ -23,26 +23,26 @@ Subpackages
 Submodules
 ----------
 
-brainiak\.image module
-----------------------
+brainiak.image module
+---------------------
 
 .. automodule:: brainiak.image
     :members:
     :undoc-members:
     :show-inheritance:
 
-brainiak\.io module
--------------------
+brainiak.io module
+------------------
 
 .. automodule:: brainiak.io
     :members:
     :undoc-members:
     :show-inheritance:
 
-brainiak\.isfc module
----------------------
+brainiak.isc module
+-------------------
 
-.. automodule:: brainiak.isfc
+.. automodule:: brainiak.isc
     :members:
     :undoc-members:
     :show-inheritance:

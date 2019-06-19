@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Brain Imaging Analysis Kit &mdash; brainiak 0.8 documentation</title>
+  <title>Brain Imaging Analysis Kit &mdash; brainiak 0.9 documentation</title>
   
 
   
@@ -17,41 +17,36 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="brainiak 0.8 documentation" href="#"/>
-        <link rel="next" title="Installation" href="installation.html"/> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -65,7 +60,7 @@
             
             
               <div class="version">
-                0.8
+                0.9
               </div>
             
           
@@ -105,7 +100,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="#">brainiak</a>
@@ -113,9 +108,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -168,18 +164,18 @@ analysis.</p>
 <p>The package was originally created by a collaboration between Intel and the
 Princeton Neuroscience Institute (PNI).</p>
 <p>To reduce verbosity, we may refer to the Brain Imaging Analysis Kit using the
-<code class="docutils literal"><span class="pre">BrainIAK</span></code> abbreviation. Whenever lowercase spelling is used (e.g., Python
-package name), we use <code class="docutils literal"><span class="pre">brainiak</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">BrainIAK</span></code> abbreviation. Whenever lowercase spelling is used (e.g., Python
+package name), we use <code class="docutils literal notranslate"><span class="pre">brainiak</span></code>.</p>
 </div>
 <div class="section" id="quickstart">
 <h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
 <p>If you have <a class="reference external" href="conda.io">Conda</a>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">brainiak</span> <span class="o">-</span><span class="n">c</span> <span class="n">defaults</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">brainiak</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">brainiak</span> <span class="o">-</span><span class="n">c</span> <span class="n">defaults</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">brainiak</span>
 </pre></div>
 </div>
 <p>Otherwise, or if you want to compile from source, install the requirements (see
-<code class="xref py py-obj docutils literal"><span class="pre">docs/installation</span></code>) and then install from PyPI:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">brainiak</span>
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">docs/installation</span></code>) and then install from PyPI:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">brainiak</span>
 </pre></div>
 </div>
 <p>Note that we do not support Windows.</p>
@@ -187,16 +183,16 @@ package name), we use <code class="docutils literal"><span class="pre">brainiak<
 <div class="section" id="docker">
 <h1>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h1>
 <p>You can also test BrainIAK without installing it using Docker:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">pull</span> <span class="n">brainiak</span><span class="o">/</span><span class="n">brainiak</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">pull</span> <span class="n">brainiak</span><span class="o">/</span><span class="n">brainiak</span>
 <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8888</span><span class="p">:</span><span class="mi">8888</span> <span class="o">-</span><span class="n">v</span> <span class="n">brainiak</span><span class="p">:</span><span class="o">/</span><span class="n">mnt</span> <span class="o">--</span><span class="n">name</span> <span class="n">demo</span> <span class="n">brainiak</span><span class="o">/</span><span class="n">brainiak</span>
 </pre></div>
 </div>
 <p>To run Jupyter notebooks in the running container, try:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">notebook</span> <span class="o">--</span><span class="n">allow</span><span class="o">-</span><span class="n">root</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">browser</span> <span class="o">--</span><span class="n">ip</span><span class="o">=</span><span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">notebook</span> <span class="o">--</span><span class="n">allow</span><span class="o">-</span><span class="n">root</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">browser</span> <span class="o">--</span><span class="n">ip</span><span class="o">=</span><span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span>
 </pre></div>
 </div>
 <p>Then visit <a class="reference external" href="http://localhost:8888">http://localhost:8888</a> in your browser and enter the token. Protip:
-run <code class="docutils literal"><span class="pre">screen</span></code> before running the notebook command.</p>
+run <code class="docutils literal notranslate"><span class="pre">screen</span></code> before running the notebook command.</p>
 <p>Note that we do not support MPI execution using Docker containers and that performance will not be optimal.</p>
 </div>
 <div class="section" id="support">
@@ -250,55 +246,60 @@ use, e.g., <a class="reference external" href="http://brainiak.org/docs/brainiak
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release notes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="release_notes.html#brainiak-0-8-2018-11-06">BrainIAK 0.8 (2018-11-06)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="release_notes.html#brainiak-0-9-2019-06-18">BrainIAK 0.9 (2019-06-18)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="release_notes.html#features">Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="release_notes.html#bugfixes">Bugfixes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="release_notes.html#documentation-improvements">Documentation improvements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="release_notes.html#deprecations-and-removals">Deprecations and removals</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes.html#brainiak-0-8-2018-11-06">BrainIAK 0.8 (2018-11-06)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id9">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release_notes.html#bugfixes">Bugfixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release_notes.html#documentation-improvements">Documentation improvements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id19">Deprecations and removals</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="release_notes.html#brainiak-0-7-1-2018-02-20">BrainIAK 0.7.1 (2018-02-20)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id11">Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id13">Bugfixes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id15">Documentation improvements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id21">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id23">Bugfixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id25">Documentation improvements</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="release_notes.html#brainiak-0-7-2018-02-12">BrainIAK 0.7 (2018-02-12)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id17">Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id22">Documentation improvements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id27">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id32">Documentation improvements</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="release_notes.html#brainiak-0-6-2017-11-10">BrainIAK 0.6 (2017-11-10)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id24">Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id32">Bugfixes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id35">Deprecations and removals</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="release_notes.html#brainiak-0-5-2017-05-23">BrainIAK 0.5 (2017-05-23)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id37">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id34">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id42">Bugfixes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="release_notes.html#id45">Deprecations and removals</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="release_notes.html#brainiak-0-4-2017-01-19">BrainIAK 0.4 (2017-01-19)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="release_notes.html#brainiak-0-5-2017-05-23">BrainIAK 0.5 (2017-05-23)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="release_notes.html#id47">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id55">Deprecations and removals</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes.html#brainiak-0-4-2017-01-19">BrainIAK 0.4 (2017-01-19)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id57">Features</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="release_notes.html#brainiak-0-3-2-2016-10-31">BrainIAK 0.3.2 (2016-10-31)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id52">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id62">Features</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="release_notes.html#brainiak-0-3-1-2016-09-30">BrainIAK 0.3.1 (2016-09-30)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id55">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id65">Features</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="release_notes.html#brainiak-0-3-2016-09-30-yanked">BrainIAK 0.3 (2016-09-30) [YANKED]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="release_notes.html#brainiak-0-2-2016-08-03">BrainIAK 0.2 (2016-08-03)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id62">Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id64">Deprecations and removals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id72">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id74">Deprecations and removals</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="release_notes.html#brainiak-0-1-2016-07-12">BrainIAK 0.1 (2016-07-12)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id66">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="release_notes.html#id76">Features</a></li>
 </ul>
 </li>
 </ul>
@@ -361,7 +362,7 @@ use, e.g., <a class="reference external" href="http://brainiak.org/docs/brainiak
 <li class="toctree-l4"><a class="reference internal" href="brainiak.html#submodules">Submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="brainiak.html#module-brainiak.image">brainiak.image module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="brainiak.html#module-brainiak.io">brainiak.io module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="brainiak.html#module-brainiak.isfc">brainiak.isfc module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.html#module-brainiak.isc">brainiak.isc module</a></li>
 </ul>
 </li>
 </ul>
@@ -384,17 +385,15 @@ use, e.g., <a class="reference external" href="http://brainiak.org/docs/brainiak
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
 </div>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -410,11 +409,11 @@ use, e.g., <a class="reference external" href="http://brainiak.org/docs/brainiak
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation.
+        &copy; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -427,37 +426,15 @@ use, e.g., <a class="reference external" href="http://brainiak.org/docs/brainiak
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'0.8',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

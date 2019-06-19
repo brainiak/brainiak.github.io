@@ -1,5 +1,5 @@
-brainiak\.factoranalysis package
-================================
+brainiak.factoranalysis package
+===============================
 
 .. automodule:: brainiak.factoranalysis
     :members:
@@ -9,16 +9,16 @@ brainiak\.factoranalysis package
 Submodules
 ----------
 
-brainiak\.factoranalysis\.htfa module
--------------------------------------
+brainiak.factoranalysis.htfa module
+-----------------------------------
 
 .. automodule:: brainiak.factoranalysis.htfa
     :members:
     :undoc-members:
     :show-inheritance:
 
-brainiak\.factoranalysis\.tfa module
-------------------------------------
+brainiak.factoranalysis.tfa module
+----------------------------------
 
 .. automodule:: brainiak.factoranalysis.tfa
     :members:

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Release notes &mdash; brainiak 0.8 documentation</title>
+  <title>Release notes &mdash; brainiak 0.9 documentation</title>
   
 
   
@@ -17,42 +17,37 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="brainiak 0.8 documentation" href="index.html"/>
-        <link rel="next" title="API" href="api.html"/>
-        <link rel="prev" title="Installation" href="installation.html"/> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API" href="api.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -66,7 +61,7 @@
             
             
               <div class="version">
-                0.8
+                0.9
               </div>
             
           
@@ -93,55 +88,60 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Release notes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#brainiak-0-8-2018-11-06">BrainIAK 0.8 (2018-11-06)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#brainiak-0-9-2019-06-18">BrainIAK 0.9 (2019-06-18)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#bugfixes">Bugfixes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#documentation-improvements">Documentation improvements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#deprecations-and-removals">Deprecations and removals</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#brainiak-0-8-2018-11-06">BrainIAK 0.8 (2018-11-06)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bugfixes">Bugfixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#documentation-improvements">Documentation improvements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">Deprecations and removals</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#brainiak-0-7-1-2018-02-20">BrainIAK 0.7.1 (2018-02-20)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id11">Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">Bugfixes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id15">Documentation improvements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">Bugfixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">Documentation improvements</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#brainiak-0-7-2018-02-12">BrainIAK 0.7 (2018-02-12)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id17">Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id22">Documentation improvements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id27">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id32">Documentation improvements</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#brainiak-0-6-2017-11-10">BrainIAK 0.6 (2017-11-10)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id24">Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id32">Bugfixes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id35">Deprecations and removals</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#brainiak-0-5-2017-05-23">BrainIAK 0.5 (2017-05-23)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id37">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id34">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id42">Bugfixes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id45">Deprecations and removals</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#brainiak-0-4-2017-01-19">BrainIAK 0.4 (2017-01-19)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#brainiak-0-5-2017-05-23">BrainIAK 0.5 (2017-05-23)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id47">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id55">Deprecations and removals</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#brainiak-0-4-2017-01-19">BrainIAK 0.4 (2017-01-19)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id57">Features</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#brainiak-0-3-2-2016-10-31">BrainIAK 0.3.2 (2016-10-31)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id52">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id62">Features</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#brainiak-0-3-1-2016-09-30">BrainIAK 0.3.1 (2016-09-30)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id55">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id65">Features</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#brainiak-0-3-2016-09-30-yanked">BrainIAK 0.3 (2016-09-30) [YANKED]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#brainiak-0-2-2016-08-03">BrainIAK 0.2 (2016-08-03)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id62">Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id64">Deprecations and removals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id72">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id74">Deprecations and removals</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#brainiak-0-1-2016-07-12">BrainIAK 0.1 (2016-07-12)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id66">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id76">Features</a></li>
 </ul>
 </li>
 </ul>
@@ -159,7 +159,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">brainiak</a>
@@ -167,9 +167,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -213,171 +214,197 @@
             
   <div class="section" id="release-notes">
 <h1>Release notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="brainiak-0-8-2018-11-06">
-<h2>BrainIAK 0.8 (2018-11-06)<a class="headerlink" href="#brainiak-0-8-2018-11-06" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="brainiak-0-9-2019-06-18">
+<h2>BrainIAK 0.9 (2019-06-18)<a class="headerlink" href="#brainiak-0-9-2019-06-18" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="features">
 <h3>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>searchlight: Add ball shape. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/348">#348</a>)</li>
-<li>eventseg: Added event_chains option and model_prior function. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/353">#353</a>)</li>
-<li>srm: Added the ability to transform a new subject to a shared response.
-(<a class="reference external" href="https://github.com/brainiak/brainiak/pull/371">#371</a>).</li>
-<li>fmrisim: Added fitting procedure for SFNR and SNR parameters. Updated AR to
-be ARMA, involving both the generation and estimation. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/372">#372</a>)</li>
-<li>reprsimil: Added an option in BRSA to set the prior of SNR to be “equal”
-across all voxels. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/387">#387</a>)</li>
-</ul>
-</div>
-<div class="section" id="bugfixes">
-<h3>Bugfixes<a class="headerlink" href="#bugfixes" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>fmrisim: Corrected error in generating system noise; specifically spatial
-noise was being double counted. Updated the export epoch file to deal with
-error in epoch number generation. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/372">#372</a>).</li>
-<li>utils: Fix AFNI-style design matrix generation. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/381">#381</a>)</li>
-</ul>
-</div>
-<div class="section" id="documentation-improvements">
-<h3>Documentation improvements<a class="headerlink" href="#documentation-improvements" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>fcma: Clarify that image data is shuffled. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/365">#365</a>)</li>
-<li>Fix Conda channels in install instructions. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/373">#373</a>)</li>
+<li><p>isc: Revamped ISC/ISFC functionality with more statistical tests. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/384">#384</a>)</p></li>
+<li><p>utils: phase_randomize outputs phase-scrambled input data, not tied to
+ISC/ISFC. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/396">#396</a>)</p></li>
+<li><p>utils: p_from_null no longer estimates distribution, simply returns p-value.
+(<a class="reference external" href="https://github.com/brainiak/brainiak/issues/397">#397</a>)</p></li>
+<li><p>isc: Analyses will now tolerate NaNs or tolerate a proportion of NaNs. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/398">#398</a>)</p></li>
+<li><p>isc: Output either vectorized triangle and diagonal or square matrices.
+(<a class="reference external" href="https://github.com/brainiak/brainiak/issues/399">#399</a>)</p></li>
+<li><p>isc: Asymmetric ISFC analysis can now be performed based on a targets array.
+(<a class="reference external" href="https://github.com/brainiak/brainiak/issues/409">#409</a>)</p></li>
+<li><p>Added tutorials to Docker image. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/425">#425</a>)</p></li>
 </ul>
 </div>
 <div class="section" id="deprecations-and-removals">
 <h3>Deprecations and removals<a class="headerlink" href="#deprecations-and-removals" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>fmrisim: Removed plot_brain because other tools like nilearn do a much better
-job at plotting data. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/372">#372</a>)</li>
+<li><p>isfc: ISC/ISFC have a new API and are available in <a class="reference internal" href="brainiak.html#module-brainiak.isc" title="brainiak.isc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">brainiak.isc</span></code></a>, not
+<code class="docutils literal notranslate"><span class="pre">brainiak.isfc</span></code>. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/384">#384</a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="brainiak-0-8-2018-11-06">
+<h2>BrainIAK 0.8 (2018-11-06)<a class="headerlink" href="#brainiak-0-8-2018-11-06" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id9">
+<h3>Features<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>searchlight: Add ball shape. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/348">#348</a>)</p></li>
+<li><p>eventseg: Added event_chains option and model_prior function. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/353">#353</a>)</p></li>
+<li><p>srm: Added the ability to transform a new subject to a shared response.
+(<a class="reference external" href="https://github.com/brainiak/brainiak/pull/371">#371</a>).</p></li>
+<li><p>fmrisim: Added fitting procedure for SFNR and SNR parameters. Updated AR to
+be ARMA, involving both the generation and estimation. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/372">#372</a>)</p></li>
+<li><p>reprsimil: Added an option in BRSA to set the prior of SNR to be “equal”
+across all voxels. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/387">#387</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="bugfixes">
+<h3>Bugfixes<a class="headerlink" href="#bugfixes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>fmrisim: Corrected error in generating system noise; specifically spatial
+noise was being double counted. Updated the export epoch file to deal with
+error in epoch number generation. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/372">#372</a>).</p></li>
+<li><p>utils: Fix AFNI-style design matrix generation. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/381">#381</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="documentation-improvements">
+<h3>Documentation improvements<a class="headerlink" href="#documentation-improvements" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>fcma: Clarify that image data is shuffled. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/365">#365</a>)</p></li>
+<li><p>Fix Conda channels in install instructions. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/373">#373</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id19">
+<h3>Deprecations and removals<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>fmrisim: Removed plot_brain because other tools like nilearn do a much better
+job at plotting data. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/372">#372</a>)</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="brainiak-0-7-1-2018-02-20">
 <h2>BrainIAK 0.7.1 (2018-02-20)<a class="headerlink" href="#brainiak-0-7-1-2018-02-20" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id11">
-<h3>Features<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id21">
+<h3>Features<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>reprsimil: Changed the default optimizer of (G)BRSA to L-BFGD-B. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/337">#337</a>)</li>
+<li><p>reprsimil: Changed the default optimizer of (G)BRSA to L-BFGD-B. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/337">#337</a>)</p></li>
 </ul>
 </div>
-<div class="section" id="id13">
-<h3>Bugfixes<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id23">
+<h3>Bugfixes<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>eventseg: Fixed bug that was causing fits to be asymmetric (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/339">#339</a>)</li>
+<li><p>eventseg: Fixed bug that was causing fits to be asymmetric (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/339">#339</a>)</p></li>
 </ul>
 </div>
-<div class="section" id="id15">
-<h3>Documentation improvements<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id25">
+<h3>Documentation improvements<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>reprsimil: Added explanation that both BRSA and GBRSA assume zero-mean in the
-distribution of beta patterns. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/337">#337</a>)</li>
+<li><p>reprsimil: Added explanation that both BRSA and GBRSA assume zero-mean in the
+distribution of beta patterns. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/337">#337</a>)</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="brainiak-0-7-2018-02-12">
 <h2>BrainIAK 0.7 (2018-02-12)<a class="headerlink" href="#brainiak-0-7-2018-02-12" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id17">
-<h3>Features<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id27">
+<h3>Features<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>funcalign: Added the Robust Shared Response Model method. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/302">#302</a>)</li>
-<li>fmrisim: Update convolution and drift. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/309">#309</a>)</li>
-<li>eventseg: Added option to compute p values for ISC and ISFC (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/310">#310</a>)</li>
-<li>Added Conda packages. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/328">#328</a>)</li>
+<li><p>funcalign: Added the Robust Shared Response Model method. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/302">#302</a>)</p></li>
+<li><p>fmrisim: Update convolution and drift. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/309">#309</a>)</p></li>
+<li><p>eventseg: Added option to compute p values for ISC and ISFC (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/310">#310</a>)</p></li>
+<li><p>Added Conda packages. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/328">#328</a>)</p></li>
 </ul>
 </div>
-<div class="section" id="id22">
-<h3>Documentation improvements<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id32">
+<h3>Documentation improvements<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Updated the searchlight API docs. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/324">#324</a>)</li>
+<li><p>Updated the searchlight API docs. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/324">#324</a>)</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="brainiak-0-6-2017-11-10">
 <h2>BrainIAK 0.6 (2017-11-10)<a class="headerlink" href="#brainiak-0-6-2017-11-10" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id24">
-<h3>Features<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id34">
+<h3>Features<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>reprsimil: Add Group Bayesian RSA, add transform (decoding) and score (model
+<li><p>reprsimil: Add Group Bayesian RSA, add transform (decoding) and score (model
 selection) functions, add automatic determination of the number of necessary
 nuisance regressors. utils: modified gen_design to make the generated design
-matrix approximately scaled in amplitudes. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/194">#194</a>)</li>
-<li>searchlight: Improved performance via tweaked multiprocessing usage. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/240">#240</a>)</li>
-<li>fmrisim: Updated drift calculation and masking. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/244">#244</a>)</li>
-<li>eventseg: Add set_event_patterns() and notebook example (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/266">#266</a>)</li>
-<li>Added a Docker image for testing BrainIAK without installing. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/272">#272</a>)</li>
-<li>eventseg: Fixed numerical instability bug, added utility function for
-weighted variance (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/292">#292</a>)</li>
-<li>Restricted multiprocessing to the available number of CPUs. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/293">#293</a>)</li>
+matrix approximately scaled in amplitudes. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/194">#194</a>)</p></li>
+<li><p>searchlight: Improved performance via tweaked multiprocessing usage. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/240">#240</a>)</p></li>
+<li><p>fmrisim: Updated drift calculation and masking. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/244">#244</a>)</p></li>
+<li><p>eventseg: Add set_event_patterns() and notebook example (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/266">#266</a>)</p></li>
+<li><p>Added a Docker image for testing BrainIAK without installing. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/272">#272</a>)</p></li>
+<li><p>eventseg: Fixed numerical instability bug, added utility function for
+weighted variance (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/292">#292</a>)</p></li>
+<li><p>Restricted multiprocessing to the available number of CPUs. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/293">#293</a>)</p></li>
 </ul>
 </div>
-<div class="section" id="id32">
-<h3>Bugfixes<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id42">
+<h3>Bugfixes<a class="headerlink" href="#id42" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>searchlight: Do not use <code class="docutils literal"><span class="pre">sys.exit</span></code>. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/156">#156</a>)</li>
-<li>reprsimil: Follow random number guidelines. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/239">#239</a>)</li>
-</ul>
-</div>
-<div class="section" id="id35">
-<h3>Deprecations and removals<a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>Changed GitHub organization to BrainIAK. Update your remote URLs. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/277">#277</a>)</li>
-</ul>
-</div>
-</div>
-<div class="section" id="brainiak-0-5-2017-05-23">
-<h2>BrainIAK 0.5 (2017-05-23)<a class="headerlink" href="#brainiak-0-5-2017-05-23" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id37">
-<h3>Features<a class="headerlink" href="#id37" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li>FCMA partial similarity matrix option. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/168">#168</a>)</li>
-<li>Faster FCMA cross validation via multiprocessing. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/176">#176</a>)</li>
-<li>Inter-subject correlation (ISC) and inter-subject functional correlation
-(ISFC). (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/183">#183</a>)</li>
-<li>Input/output and image modules with high-level APIs. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/209">#209</a>)</li>
-<li>FCMA support for random permutations. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/217">#217</a>)</li>
-<li>A distributed version of SRM. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/220">#220</a>)</li>
-<li>Shape masks for the searchlight. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/221">#221</a>)</li>
+<li><p>searchlight: Do not use <code class="docutils literal notranslate"><span class="pre">sys.exit</span></code>. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/156">#156</a>)</p></li>
+<li><p>reprsimil: Follow random number guidelines. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/239">#239</a>)</p></li>
 </ul>
 </div>
 <div class="section" id="id45">
 <h3>Deprecations and removals<a class="headerlink" href="#id45" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Changed fmrisim to compute signal-to-fluctuation-noise ratio (SFNR) instead
-of signal-to-noise ratio (SNR). (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/224">#224</a>)</li>
+<li><p>Changed GitHub organization to BrainIAK. Update your remote URLs. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/277">#277</a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="brainiak-0-5-2017-05-23">
+<h2>BrainIAK 0.5 (2017-05-23)<a class="headerlink" href="#brainiak-0-5-2017-05-23" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id47">
+<h3>Features<a class="headerlink" href="#id47" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>FCMA partial similarity matrix option. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/168">#168</a>)</p></li>
+<li><p>Faster FCMA cross validation via multiprocessing. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/176">#176</a>)</p></li>
+<li><p>Inter-subject correlation (ISC) and inter-subject functional correlation
+(ISFC). (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/183">#183</a>)</p></li>
+<li><p>Input/output and image modules with high-level APIs. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/209">#209</a>)</p></li>
+<li><p>FCMA support for random permutations. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/217">#217</a>)</p></li>
+<li><p>A distributed version of SRM. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/220">#220</a>)</p></li>
+<li><p>Shape masks for the searchlight. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/221">#221</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="id55">
+<h3>Deprecations and removals<a class="headerlink" href="#id55" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Changed fmrisim to compute signal-to-fluctuation-noise ratio (SFNR) instead
+of signal-to-noise ratio (SNR). (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/224">#224</a>)</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="brainiak-0-4-2017-01-19">
 <h2>BrainIAK 0.4 (2017-01-19)<a class="headerlink" href="#brainiak-0-4-2017-01-19" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id47">
-<h3>Features<a class="headerlink" href="#id47" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id57">
+<h3>Features<a class="headerlink" href="#id57" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Distributed searchlight. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/148">#148</a>)</li>
-<li>Multi-voxel pattern analysis (MVPA) support in FCMA. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/154">#154</a>, <a class="reference external" href="https://github.com/brainiak/brainiak/pull/157)">#157</a>)</li>
-<li>Fast Pearson correlation coefficient computation. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/159">#159</a>)</li>
+<li><p>Distributed searchlight. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/148">#148</a>)</p></li>
+<li><p>Multi-voxel pattern analysis (MVPA) support in FCMA. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/154">#154</a>, <a class="reference external" href="https://github.com/brainiak/brainiak/pull/157)">#157</a>)</p></li>
+<li><p>Fast Pearson correlation coefficient computation. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/159">#159</a>)</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="brainiak-0-3-2-2016-10-31">
 <h2>BrainIAK 0.3.2 (2016-10-31)<a class="headerlink" href="#brainiak-0-3-2-2016-10-31" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id52">
-<h3>Features<a class="headerlink" href="#id52" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id62">
+<h3>Features<a class="headerlink" href="#id62" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Faster event segmentation via Cython implementation.  (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/111">#111</a>)</li>
-<li>fMRI data simulator (fmrisim). (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/135">#135</a>)</li>
+<li><p>Faster event segmentation via Cython implementation.  (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/111">#111</a>)</p></li>
+<li><p>fMRI data simulator (fmrisim). (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/135">#135</a>)</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="brainiak-0-3-1-2016-09-30">
 <h2>BrainIAK 0.3.1 (2016-09-30)<a class="headerlink" href="#brainiak-0-3-1-2016-09-30" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id55">
-<h3>Features<a class="headerlink" href="#id55" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id65">
+<h3>Features<a class="headerlink" href="#id65" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Event segmentation. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/72">#72</a>)</li>
-<li>Full correlation matrix analysis (FCMA). (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/97">#97</a>, <a class="reference external" href="https://github.com/brainiak/brainiak/pull/122">#122</a>)</li>
-<li>Bayesian representational similarity analysis (BRSA). (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/98">#98</a>)</li>
-<li>Deterministic SRM. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/102">#102</a>)</li>
-<li>Semi-supervised shared response model (SSSRM). (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/108">#108</a>)</li>
+<li><p>Event segmentation. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/72">#72</a>)</p></li>
+<li><p>Full correlation matrix analysis (FCMA). (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/97">#97</a>, <a class="reference external" href="https://github.com/brainiak/brainiak/pull/122">#122</a>)</p></li>
+<li><p>Bayesian representational similarity analysis (BRSA). (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/98">#98</a>)</p></li>
+<li><p>Deterministic SRM. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/102">#102</a>)</p></li>
+<li><p>Semi-supervised shared response model (SSSRM). (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/108">#108</a>)</p></li>
 </ul>
 </div>
 </div>
@@ -386,28 +413,29 @@ of signal-to-noise ratio (SNR). (<a class="reference external" href="https://git
 </div>
 <div class="section" id="brainiak-0-2-2016-08-03">
 <h2>BrainIAK 0.2 (2016-08-03)<a class="headerlink" href="#brainiak-0-2-2016-08-03" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id62">
-<h3>Features<a class="headerlink" href="#id62" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id72">
+<h3>Features<a class="headerlink" href="#id72" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Hyperparameter optimization. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/58">#58</a>)</li>
+<li><p>Hyperparameter optimization. (<a class="reference external" href="https://github.com/brainiak/brainiak/pull/58">#58</a>)</p></li>
 </ul>
 </div>
-<div class="section" id="id64">
-<h3>Deprecations and removals<a class="headerlink" href="#id64" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id74">
+<h3>Deprecations and removals<a class="headerlink" href="#id74" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Removed <code class="docutils literal"><span class="pre">_</span></code> from package names. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/73">#73</a>)</li>
+<li><p>Removed <code class="docutils literal notranslate"><span class="pre">_</span></code> from package names. (<a class="reference external" href="https://github.com/brainiak/brainiak/issues/73">#73</a>)</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="brainiak-0-1-2016-07-12">
 <h2>BrainIAK 0.1 (2016-07-12)<a class="headerlink" href="#brainiak-0-1-2016-07-12" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id66">
-<h3>Features<a class="headerlink" href="#id66" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id76">
+<h3>Features<a class="headerlink" href="#id76" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Initial release, including:<ul>
-<li>Shared response model (SRM).</li>
-<li>Topographic factor analysis (TFA) and hierarchical topographical factor
-analysis (HTFA).</li>
+<li><p>Initial release, including:</p>
+<ul>
+<li><p>Shared response model (SRM).</p></li>
+<li><p>Topographic factor analysis (TFA) and hierarchical topographical factor
+analysis (HTFA).</p></li>
 </ul>
 </li>
 </ul>
@@ -417,9 +445,7 @@ analysis (HTFA).</li>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -428,7 +454,7 @@ analysis (HTFA).</li>
         <a href="api.html" class="btn btn-neutral float-right" title="API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="installation.html" class="btn btn-neutral" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -437,11 +463,11 @@ analysis (HTFA).</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation.
+        &copy; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -454,37 +480,15 @@ analysis (HTFA).</li>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'0.8',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

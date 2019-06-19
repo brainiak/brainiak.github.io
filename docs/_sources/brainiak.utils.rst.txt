@@ -1,5 +1,5 @@
-brainiak\.utils package
-=======================
+brainiak.utils package
+======================
 
 .. automodule:: brainiak.utils
     :members:
@@ -9,16 +9,16 @@ brainiak\.utils package
 Submodules
 ----------
 
-brainiak\.utils\.fmrisim module
--------------------------------
+brainiak.utils.fmrisim module
+-----------------------------
 
 .. automodule:: brainiak.utils.fmrisim
     :members:
     :undoc-members:
     :show-inheritance:
 
-brainiak\.utils\.utils module
------------------------------
+brainiak.utils.utils module
+---------------------------
 
 .. automodule:: brainiak.utils.utils
     :members:
