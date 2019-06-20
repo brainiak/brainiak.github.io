@@ -26,9 +26,8 @@
 # 1. Install Docker (<a href="https://store.docker.com/editions/community/docker-ce-desktop-mac">Mac</a>, <a href="https://store.docker.com/editions/community/docker-ce-desktop-windows">Win</a>, <a href="https://store.docker.com/editions/community/docker-ce-server-ubuntu">Linux</a>)
 # 2. Run the following commands:
 <span class="unselectable">> </span>docker pull brainiak/brainiak
-<span class="unselectable">> </span>docker run -it -p 8888:8888 -v brainiak:/mnt --name demo brainiak/brainiak
-<span class="unselectable">> </span>python3 -m notebook --allow-root --no-browser --ip=0.0.0.0
-# 3. Visit <a href="http://localhost:8888">http://localhost:8888</a></code>
+<span class="unselectable">> </span>docker run -it -p 8899:8899 --name demo brainiak/brainiak
+# 3. Copy token from command output. Try an example in your browser (paste token when prompted): <a href="http://127.0.0.1:8899/notebooks/examples/funcalign/rsrm_synthetic_reconstruction.ipynb">http://127.0.0.1:8899/notebooks/examples/funcalign/rsrm_synthetic_reconstruction.ipynb</a></code>
 <code class="bash"><span class="hljs-built_in">Method 3: pip (Mac, Linux)</span>
 # 1. Install BrainIAK <a href="/docs/#requirements">requirements</a>
 # 2. Run the following command:
