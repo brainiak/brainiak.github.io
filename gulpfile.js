@@ -11,7 +11,7 @@ var uglify       = require('gulp-uglify')
 var open         = require('gulp-open')
 var babel        = require('gulp-babel')
 var replace      = require('gulp-replace')
-var wrapper      = require('gulp-wrapper')
+// var wrapper      = require('gulp-wrapper')
 var watch        = require('gulp-watch')
 
 // Integrate with Jekyll
@@ -107,15 +107,15 @@ function js(glob) {
         ]
       }
     ))
-    .pipe(wrapper({
-       header: banner +
-               "\n" +
-               jqueryCheck +
-               "\n" +
-               jqueryVersionCheck +
-               "\n+function () {\n",
-       footer: '\n}();\n'
-    }))
+    // .pipe(wrapper({
+    //    header: banner +
+    //            "\n" +
+    //            jqueryCheck +
+    //            "\n" +
+    //            jqueryVersionCheck +
+    //            "\n+function () {\n",
+    //    footer: '\n}();\n'
+    // }))
     .pipe(gulp.dest('assets/js'))
 }
 

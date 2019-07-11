@@ -14,7 +14,7 @@
     "babel-preset-es2015": "*",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^5.0.0",
-    "gulp-babel": "*",
+    "gulp-babel": "^8.0.0",
     "gulp-clean-css": "^4.0.0",
     "gulp-concat": "*",
     "gulp-open": "^3.0.1",
@@ -22,7 +22,6 @@
     "gulp-replace": "*",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "*",
-    "gulp-watch": "^5.0.1",
-    "gulp-wrapper": "*"
+    "gulp-watch": "^5.0.1"
   }
 }
