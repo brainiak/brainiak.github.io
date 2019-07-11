@@ -22,7 +22,6 @@
     "gulp-replace": "*",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "*",
-    "gulp-util": "*",
     "gulp-watch": "^5.0.1",
     "gulp-wrapper": "*"
   }

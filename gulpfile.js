@@ -16,7 +16,7 @@ var watch        = require('gulp-watch')
 
 // Integrate with Jekyll
 var child        = require('child_process')
-var gutil        = require('gulp-util')
+var log          = require('fancy-log')
 
 var PATH = {
   HOME                 : './',
@@ -65,7 +65,7 @@ gulp.task('jekyll', (cb) => {
 	const jekyllLogger = (buffer) => {
 		buffer.toString()
 		.split(/\n/)
-		.forEach((message) => gutil.log('Jekyll: ' + message))
+		.forEach((message) => log('Jekyll: ' + message))
 	}
 
 	jekyll.stdout.on('data', jekyllLogger)
@@ -219,4 +219,3 @@ gulp.task('build', function() {
 //   })
 // })
 gulp.task('default', gulp.series('jekyll', 'watch'))
-
