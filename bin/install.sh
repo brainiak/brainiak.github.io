@@ -12,8 +12,14 @@ fi
 
 brew install node
 
+# Install RVM
+curl -L get.rvm.io | bash -s stable
+mkdir ~/.local/lib
+rvm install ruby --latest
+rvm use --latest --default
+
 npm install -g gulp
 npm install
 
-sudo gem install bundler
+gem install bundle
 bundle install
