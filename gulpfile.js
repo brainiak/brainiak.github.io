@@ -95,7 +95,7 @@ function js(glob) {
         "compact" : false,
         "presets": [
           [
-            "es2015",
+            "env",
             {
               "modules": false,
               "loose": true
