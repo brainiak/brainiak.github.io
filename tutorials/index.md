@@ -112,33 +112,27 @@ If you have any questions or problems, you can ask the folks in our [Gitter](htt
   If you want to save your code, you can save a copy of the notebook to Google Drive (accessible from the File menu in Colab).
 
   **Instructions**
-  - In Google Chrome go to: colab.research.google.com
-  - In the window click on the Github tab (May need to select File->Open_Notebook for window to appear)
-
+  1. In Google Chrome go to: [https://colab.research.google.com](https://colab.research.google.com)
+  2. In the window click on the Github tab (May need to select File->Open_Notebook for window to appear)
     ![alt](/tutorials/img/colab-01.jpeg){:width="800px"}
+  3. Enter ‘brainiak tutorials’ in the search box
+  4. Choose branch master (should be already selected by default) and click on the tutorial you would like to run (e.g., `02-data-handling.ipynb`)
+  5. In the tutorial notebook menu, click on Insert->Code cell. This will insert a new cell (it may be inserted at the bottom)
+  6. Copy the following code, paste it into the cell just created, and hit `Shift-Enter` to run. NOTE: you may need to click `RUN ANYWAY` when Google Colab presents a warning.
+  ```
+  !pip install deepdish ipython matplotlib nilearn notebook pandas seaborn watchdog
+  !pip install pip\<10
+  !pip install git+https://github.com/brainiak/brainiak
+  !git clone https://github.com/brainiak/brainiak-tutorials.git
+  !cd brainiak-tutorials/tutorials/; cp -r 07-searchlight 09-fcma 13-real-time utils.py setup_environment.sh /content/
+  !mkdir /root/brainiak_datasets
+  ```
+  7. To download data for the tutorial, open the following setup notebook: [https://colab.research.google.com/github/brainiak/brainiak-tutorials/blob/master/tutorials/colab-env-setup.ipynb](https://colab.research.google.com/github/brainiak/brainiak-tutorials/blob/master/tutorials/colab-env-setup.ipynb)
+  ![alt](/tutorials/img/colab-02.jpeg){:width="800px"}
+  8. Copy the relevant cell in the setup notebook for the data you want to download and paste and run in a new cell in your tutorial notebook:
+    - You don't need to copy all cells in this section, just the cells for the data you need (e.g. only data for `02` if you are running `02-data-handling.ipynb`).
 
-  - Enter ‘brainiak tutorials’ in the search box
-  - Choose branch master (should be already selected by default)
-  - Click on notebook `tutorials/colab-env-setup.ipynb` (you may need to scroll down)
-
-    ![alt](/tutorials/img/colab-02.jpeg){:width="800px"}
-
-  - Run cell “Install Brainiak and code dependencies”
-  - A window will pop-up. Uncheck “Reset all runtimes before running”
-
-    ![alt](/tutorials/img/colab-03.jpeg){:width="800px"}
-
-  - After the installation is complete run cell “Git-clone helper files for tutorials”
-  - There are many download data cells. Pick only the data cell for your tutorial and run that cell. This may take a few minutes depending on the size of the data.
-  - You are now ready to execute your notebook.
-  - Open a new tab in Chrome and go to colab.research.google.com
-  - Click on File->Open Notebook
-  - In the window click on the Github tab
-  - Enter "brainiak tutorials" in the search box
-  - Pick the notebook that you need to run
-  - Execute cell
-  - A window will pop-up. Uncheck “Reset all runtimes before running”
-  - Continue running notebook
+  9. At this point, both data and software have been set up and you may start the tutorial.
 
   </div>
   <div class="tab-pane fade" id="pills-docker-macos" role="tabpanel" aria-labelledby="pills-docker-macos-tab" markdown="1">
