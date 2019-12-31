@@ -1,3 +1,20 @@
+- id: Cai2019 
+  title: "Representational structure or task structure? Bias in neural representational similarity analysis and a Bayesian method for reducing bias"
+  date: 2019-05-24
+  authors:
+     - Ming Bo Cai
+     - Nicolas W. Schuck
+     - Jonathan W. Pillow
+     - Yael Niv
+  journal: PLOS Computational Biology
+  volume: 15
+  number: 5
+  year: 2019
+  pages: e1006299
+  links:
+     paper: "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006299"
+     docs: "https://brainiak.org/docs/brainiak.reprsimil.html"
+
 - id: baldassano2018-1 
   title: "Representation of real-world event schemas during narrative perception"
   date: 2018-09-24
