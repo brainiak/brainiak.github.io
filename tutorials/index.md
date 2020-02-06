@@ -122,7 +122,7 @@ If you have any questions or problems, you can ask the folks in our [Gitter](htt
   ```
   !pip install deepdish ipython matplotlib nilearn notebook pandas seaborn watchdog
   !pip install pip\<10
-  !pip install git+https://github.com/brainiak/brainiak
+  !pip install -U git+https://github.com/brainiak/brainiak
   !git clone https://github.com/brainiak/brainiak-tutorials.git
   !cd brainiak-tutorials/tutorials/; cp -r 07-searchlight 09-fcma 13-real-time utils.py setup_environment.sh /content/
   !mkdir /root/brainiak_datasets
