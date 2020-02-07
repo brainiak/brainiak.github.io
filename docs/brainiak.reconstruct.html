@@ -1,0 +1,427 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>brainiak.reconstruct package &mdash; brainiak 0.10 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="brainiak.reprsimil package" href="brainiak.reprsimil.html" />
+    <link rel="prev" title="brainiak.hyperparamopt package" href="brainiak.hyperparamopt.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> brainiak
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.10
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">brainiak</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="api.html">API</a> &raquo;</li>
+        
+          <li><a href="brainiak.html">brainiak package</a> &raquo;</li>
+        
+      <li>brainiak.reconstruct package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/brainiak.reconstruct.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-brainiak.reconstruct">
+<span id="brainiak-reconstruct-package"></span><h1>brainiak.reconstruct package<a class="headerlink" href="#module-brainiak.reconstruct" title="Permalink to this headline">¶</a></h1>
+<p>Inverted encoding model for recreating continuous representations.</p>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-brainiak.reconstruct.iem">
+<span id="brainiak-reconstruct-iem-module"></span><h2>brainiak.reconstruct.iem module<a class="headerlink" href="#module-brainiak.reconstruct.iem" title="Permalink to this headline">¶</a></h2>
+<p>Inverted Encoding Model (IEM)</p>
+<p>Method to decode and reconstruct features from data.</p>
+<p>The implementation is roughly based on the following publications:</p>
+<p>[Kok2013] “1.Kok, P., Brouwer, G. J., Gerven, M. A. J. van &amp;
+Lange, F. P. de. Prior Expectations Bias Sensory Representations
+in Visual Cortex. J. Neurosci. 33, 16275–16284 (2013).</p>
+<p>[Brouwer2011] “2.Brouwer, G. J. &amp; Heeger, D. J. Cross-orientation
+suppression in human visual cortex. J. Neurophysiol. 106(5):
+2108-2119 (2011).</p>
+<p>[Brouwer2009] “3.Brouwer, G. J. &amp; Heeger, D. J.
+Decoding and Reconstructing Color from Responses in Human Visual
+Cortex. J. Neurosci. 29, 13992–14003 (2009).</p>
+<p>This implementation uses a set of sinusoidal
+basis functions to represent the set of possible feature values.
+A feature value is some characteristic of a stimulus, e.g. the
+angular location of a target along a horizontal line. This code was
+written to give some flexibility compared to the specific instances
+in Kok, 2013 &amp; in Brouwer, 2009. Users can set the number of basis
+functions, or channels, and the range of possible feature values.</p>
+<dl class="class">
+<dt id="brainiak.reconstruct.iem.InvertedEncoding">
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.reconstruct.iem.</code><code class="sig-name descname">InvertedEncoding</code><span class="sig-paren">(</span><em class="sig-param">n_channels=6</em>, <em class="sig-param">channel_exp=5</em>, <em class="sig-param">stimulus_mode='halfcircular'</em>, <em class="sig-param">range_start=0.0</em>, <em class="sig-param">range_stop=180.0</em>, <em class="sig-param">channel_density=180</em>, <em class="sig-param">stimulus_resolution=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reconstruct.iem.InvertedEncoding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Basis function-based reconstruction method</p>
+<p>Inverted encoding models (alternatively known as forward
+models) are used to reconstruct a feature, e.g. color of
+a stimulus, from patterns across voxels in functional
+data. The model uses n_channels number of idealized
+basis functions and assumes that the transformation from
+stimulus feature (e.g. color) to basis function is one-
+to-one and invertible. The response of a voxel is
+expressed as the weighted sum of basis functions.
+In this implementation, basis functions were half-wave
+rectified sinusoid functions raised to a power set by
+the user (e.g. 6).</p>
+<p>The model:
+Inverted encoding models reconstruct a stimulus feature from
+patterns of BOLD activity by relating the activity in each
+voxel, B, to the values of hypothetical channels (or basis
+functions), C, according to Equation 1 below.</p>
+<ol class="arabic simple">
+<li><p>B = W*C</p></li>
+</ol>
+<p>where W is a weight matrix that represents the relationship
+between BOLD activity and Channels. W must be estimated from
+training data; this implementation (and most described in the
+literature) uses linear regression to estimate W as in Equation
+2 below [note: inv() represents matrix inverse or
+pseudo-inverse].</p>
+<ol class="arabic simple" start="2">
+<li><p>W_est = B_train*inv(C_train)</p></li>
+</ol>
+<p>The weights in W_est (short for “estimated”) represent the
+contributions of each channel to the response of each voxel.
+Estimated channel responses can be computed given W_est and
+new voxel activity represented in matrix B_exp (short for
+“experiment”) through inversion of Equation 1:</p>
+<ol class="arabic simple" start="3">
+<li><p>C_est = inv(W_est)*B_exp</p></li>
+</ol>
+<p>Given estimated channel responses, C_est, it is straighforward
+to obtain the reconstructed feature value by summing over
+channels multiplied by their channel responses and taking the
+argmax (i.e. the feature associated with the maximum value).</p>
+<p>Using this model:
+Use fit() to estimate the weights of the basis functions given
+input data (e.g. beta values from fMRI data). This function
+will execute equation 2 above.</p>
+<p>Use predict() to compute predicted stimulus values
+from new functional data. This function computes estimated
+channel responses, as in equation 3, then computes summed
+channel output and finds the argmax (within the stimulus
+feature space) associated with those responses.</p>
+<p>Use score() to compute a measure of the error of the prediction
+based on known stimuli.</p>
+<p>This implementation assumes a circular (or half-
+circular) feature domain. Future implementations might
+generalize the feature input space, and increase the
+possible dimensionality.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_channels</strong> (<em>int</em><em>, </em><em>default 5. Number of channels</em>) – The number of channels, or basis functions, to be used in
+the inverted encoding model.</p></li>
+<li><p><strong>channel_exp</strong> (<em>int</em><em>, </em><em>default 6. Basis function exponent.</em>) – The exponent of the sinuoidal basis functions, which
+establishes the width of the functions.</p></li>
+<li><p><strong>stimulus_mode</strong> (<em>str</em><em>, </em><em>default 'halfcircular'</em><em> (</em><em>other option is</em>) – ‘circular’). Describes the feature domain.</p></li>
+<li><p><strong>range_start</strong> (<em>double</em><em>, </em><em>default 0. Lowest value of domain.</em>) – Beginning value of range of independent variable
+(usually degrees).</p></li>
+<li><p><strong>range_stop</strong> (<em>double</em><em>, </em><em>default 180. Highest value of domain.</em>) – Ending value of range of independent variable
+(usually degrees).</p></li>
+<li><p><strong>channel_density</strong> (<em>int</em><em>, </em><em>default 180. Number of points in the</em>) – feature domain.</p></li>
+<li><p><strong>stimulus_resolution</strong> (<em>double</em><em>, </em><em>default None will set the stimulus</em>) – resolution to be identical to the channel density. This sets
+the resolution at which the stimuli were presented (e.g. a
+spatial position with some width has a lower stimulus
+resolution).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="brainiak.reconstruct.iem.InvertedEncoding.channels_">
+<code class="sig-name descname">channels_</code><a class="headerlink" href="#brainiak.reconstruct.iem.InvertedEncoding.channels_" title="Permalink to this definition">¶</a></dt>
+<dd><p>matrix defining channel values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>[n_channels, channel density] NumPy 2D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="brainiak.reconstruct.iem.InvertedEncoding.W_">
+<code class="sig-name descname">W_</code><a class="headerlink" href="#brainiak.reconstruct.iem.InvertedEncoding.W_" title="Permalink to this definition">¶</a></dt>
+<dd><p>relates estimated channel responses to response amplitude
+data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>sklearn.linear_model model containing weight matrix that</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brainiak.reconstruct.iem.InvertedEncoding.fit">
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reconstruct.iem.InvertedEncoding.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use data and feature variable labels to fit an IEM</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>numpy matrix of voxel activation data.</em><em> [</em><em>observations</em><em>, </em><em>voxels</em><em>]</em>) – Should contain the beta values for each observation or
+trial and each voxel of training data.</p></li>
+<li><p><strong>y</strong> (<em>numpy array of response variable.</em><em> [</em><em>observations</em><em>]</em>) – Should contain the feature for each observation in X.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brainiak.reconstruct.iem.InvertedEncoding.get_params">
+<code class="sig-name descname">get_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reconstruct.iem.InvertedEncoding.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns model parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>params</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>parameter of this object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brainiak.reconstruct.iem.InvertedEncoding.predict">
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param">X</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reconstruct.iem.InvertedEncoding.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use test data to predict the feature</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>numpy matrix of voxel activation from test trials</em>) – </p></li>
+<li><p><strong>voxels</strong><strong>]</strong><strong> Used to predict feature</strong> (<em>[</em><em>observations</em><em>,</em>) – </p></li>
+<li><p><strong>with the given observation.</strong> (<em>associated</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>model_prediction</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy array of estimated feature values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brainiak.reconstruct.iem.InvertedEncoding.score">
+<code class="sig-name descname">score</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reconstruct.iem.InvertedEncoding.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate error measure of prediction. Default measurement
+is R^2, the coefficient of determination.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>numpy matrix of voxel activation from new data</em>) – [observations,voxels]</p></li>
+<li><p><strong>y</strong> (<em>numpy array of responses.</em><em> [</em><em>observations</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>score_value</strong> – feature and predicted features.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>the error measurement between the actual</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="brainiak.reconstruct.iem.InvertedEncoding.set_params">
+<code class="sig-name descname">set_params</code><span class="sig-paren">(</span><em class="sig-param">**parameters</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reconstruct.iem.InvertedEncoding.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets model parameters after initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>parameters</strong> (<em>structure with parameters and change values</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="brainiak.reprsimil.html" class="btn btn-neutral float-right" title="brainiak.reprsimil package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="brainiak.hyperparamopt.html" class="btn btn-neutral float-left" title="brainiak.hyperparamopt package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>brainiak.eventseg package &mdash; brainiak 0.9.1 documentation</title>
+  <title>brainiak.eventseg package &mdash; brainiak 0.10 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.9.1
+                0.10
               </div>
             
           
@@ -177,14 +177,22 @@ Jonathan W Pillow, Uri Hasson, Kenneth A Norman
 Discovering event structure in continuous narrative perception and memory
 Neuron, Volume 95, Issue 3, 709 - 721.e5
 <a class="reference external" href="https://doi.org/10.1016/j.neuron.2017.06.041">https://doi.org/10.1016/j.neuron.2017.06.041</a></p>
-<p>This class also extends the model described in the Neuron paper, by allowing
-transition matrices that are composed of multiple separate chains of events
-rather than a single linear path. This allows a model to contain patterns for
-multiple event sequences (e.g. narratives), and fit probabilities along each of
-these chains on a new, unlabeled timeseries.</p>
+<p>This class also extends the model described in the Neuron paper:
+1) It allows transition matrices that are composed of multiple separate
+chains of events rather than a single linear path. This allows a model to
+contain patterns for multiple event sequences (e.g. narratives), and
+fit probabilities along each of these chains on a new, unlabeled timeseries.
+To use this option, pass in an event_chain vector labeling which events
+belong to each chain, define event patterns using set_event_patterns(),
+then fit to a new dataset with find_events.</p>
+<p>2) To obtain better fits when the underlying event structure contains
+events that vary substantially in length, the split_merge option allows
+the fit() function to re-distribute events during fitting. The number of
+merge/split proposals is controlled by split_merge_proposals, which
+controls how thorough versus fast the fitting process is.</p>
 <dl class="class">
 <dt id="brainiak.eventseg.event.EventSegment">
-<em class="property">class </em><code class="descclassname">brainiak.eventseg.event.</code><code class="descname">EventSegment</code><span class="sig-paren">(</span><em>n_events=2</em>, <em>step_var=&lt;function EventSegment._default_var_schedule&gt;</em>, <em>n_iter=500</em>, <em>event_chains=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.eventseg.event.</code><code class="sig-name descname">EventSegment</code><span class="sig-paren">(</span><em class="sig-param">n_events=2</em>, <em class="sig-param">step_var=&lt;function EventSegment._default_var_schedule&gt;</em>, <em class="sig-param">n_iter=500</em>, <em class="sig-param">event_chains=None</em>, <em class="sig-param">split_merge=False</em>, <em class="sig-param">split_merge_proposals=1</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
 <p>Class for event segmentation of continuous fMRI data</p>
 <dl class="field-list simple">
@@ -193,15 +201,20 @@ these chains on a new, unlabeled timeseries.</p>
 <li><p><strong>n_events</strong> (<em>int</em>) – Number of segments to learn</p></li>
 <li><p><strong>step_var</strong> (<em>Callable</em><em>[</em><em>[</em><em>int</em><em>]</em><em>, </em><em>float</em><em>] </em><em>: default 4 *</em><em> (</em><em>0.98 **</em><em> (</em><em>step - 1</em><em>)</em><em>)</em>) – The Gaussian variance to use during fitting, as a function of the
 number of steps. Should decrease slowly over time.</p></li>
-<li><p><strong>n_iter</strong> (<em>int : default 500</em>) – Maximum number of steps to run during fitting</p></li>
+<li><p><strong>n_iter</strong> (<em>int</em><em>, </em><em>default: 500</em>) – Maximum number of steps to run during fitting</p></li>
 <li><p><strong>event_chains</strong> (<em>ndarray with length = n_events</em>) – Array with unique value for each separate chain of events, each linked
 in the order they appear in the array</p></li>
+<li><p><strong>split_merge</strong> (<em>bool</em><em>, </em><em>default: False</em>) – Determines whether merge/split proposals are used during fitting with
+fit(). This can improve fitting performance when events are highly
+uneven in size, but requires additional time</p></li>
+<li><p><strong>split_merge_proposals</strong> (<em>int</em><em>, </em><em>default: 1</em>) – Number of merges and splits to consider at each step. Computation time
+scales as O(proposals^2) so this should usually be a small value</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="attribute">
 <dt>
-<code class="descname">p_start, p_end</code></dt>
+<code class="sig-name descname">p_start, p_end</code></dt>
 <dd><p>initial and final prior distributions over events</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -212,7 +225,7 @@ in the order they appear in the array</p></li>
 
 <dl class="attribute">
 <dt id="brainiak.eventseg.event.EventSegment.P">
-<code class="descname">P</code><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.P" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">P</code><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.P" title="Permalink to this definition">¶</a></dt>
 <dd><p>HMM transition matrix</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -223,7 +236,7 @@ in the order they appear in the array</p></li>
 
 <dl class="attribute">
 <dt id="brainiak.eventseg.event.EventSegment.ll_">
-<code class="descname">ll_</code><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.ll_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">ll_</code><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.ll_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log-likelihood for training datasets over the course of training</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -234,7 +247,7 @@ in the order they appear in the array</p></li>
 
 <dl class="attribute">
 <dt id="brainiak.eventseg.event.EventSegment.segments_">
-<code class="descname">segments_</code><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.segments_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">segments_</code><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.segments_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Learned (soft) segmentation for training datasets</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -245,7 +258,7 @@ in the order they appear in the array</p></li>
 
 <dl class="attribute">
 <dt id="brainiak.eventseg.event.EventSegment.event_var_">
-<code class="descname">event_var_</code><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.event_var_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">event_var_</code><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.event_var_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gaussian variance at the end of learning</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -256,7 +269,7 @@ in the order they appear in the array</p></li>
 
 <dl class="attribute">
 <dt id="brainiak.eventseg.event.EventSegment.event_pat_">
-<code class="descname">event_pat_</code><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.event_pat_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">event_pat_</code><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.event_pat_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Learned mean patterns for each event</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -267,7 +280,7 @@ in the order they appear in the array</p></li>
 
 <dl class="method">
 <dt id="brainiak.eventseg.event.EventSegment.calc_weighted_event_var">
-<code class="descname">calc_weighted_event_var</code><span class="sig-paren">(</span><em>D</em>, <em>weights</em>, <em>event_pat</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.calc_weighted_event_var" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">calc_weighted_event_var</code><span class="sig-paren">(</span><em class="sig-param">D</em>, <em class="sig-param">weights</em>, <em class="sig-param">event_pat</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.calc_weighted_event_var" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes normalized weighted variance around event pattern</p>
 <p>Utility function for computing variance in a training set of weighted
 event examples. For each event, the sum of squared differences for all
@@ -293,7 +306,7 @@ variance (normalized by the number of voxels).</p>
 
 <dl class="method">
 <dt id="brainiak.eventseg.event.EventSegment.find_events">
-<code class="descname">find_events</code><span class="sig-paren">(</span><em>testing_data</em>, <em>var=None</em>, <em>scramble=False</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.find_events" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">find_events</code><span class="sig-paren">(</span><em class="sig-param">testing_data</em>, <em class="sig-param">var=None</em>, <em class="sig-param">scramble=False</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.find_events" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies learned event segmentation to new testing dataset</p>
 <p>After fitting an event segmentation using fit() or setting event
 patterns directly using set_event_patterns(), this function finds the
@@ -323,7 +336,7 @@ that timepoint t is in event e</p></li>
 
 <dl class="method">
 <dt id="brainiak.eventseg.event.EventSegment.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Learn a segmentation on training data</p>
 <p>Fits event patterns and a segmentation to training data. After
 running this function, the learned event patterns can be used to
@@ -347,7 +360,7 @@ are segmented simultaneously with the same event patterns</p></li>
 
 <dl class="method">
 <dt id="brainiak.eventseg.event.EventSegment.model_prior">
-<code class="descname">model_prior</code><span class="sig-paren">(</span><em>t</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.model_prior" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">model_prior</code><span class="sig-paren">(</span><em class="sig-param">t</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.model_prior" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the prior probability of the HMM</p>
 <p>Runs forward-backward without any data, showing the prior distribution
 of the model (for comparison with a posterior).</p>
@@ -367,7 +380,7 @@ of the model (for comparison with a posterior).</p>
 
 <dl class="method">
 <dt id="brainiak.eventseg.event.EventSegment.predict">
-<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.predict" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param">X</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies learned event segmentation to new testing dataset</p>
 <p>Alternative function for segmenting a new dataset after using
 fit() to learn a sequence of events, to comply with the sklearn
@@ -387,7 +400,7 @@ Classifier interface</p>
 
 <dl class="method">
 <dt id="brainiak.eventseg.event.EventSegment.set_event_patterns">
-<code class="descname">set_event_patterns</code><span class="sig-paren">(</span><em>event_pat</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.set_event_patterns" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_event_patterns</code><span class="sig-paren">(</span><em class="sig-param">event_pat</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.set_event_patterns" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set HMM event patterns manually</p>
 <p>Rather than fitting the event patterns automatically using fit(), this
 function allows them to be set explicitly. They can then be used to

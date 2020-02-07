@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>brainiak.utils package &mdash; brainiak 0.9.1 documentation</title>
+  <title>brainiak.utils package &mdash; brainiak 0.10 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.9.1
+                0.10
               </div>
             
           
@@ -218,7 +218,7 @@ Mingbo Cai (Princeton) 2017</p>
 </div></blockquote>
 <dl class="function">
 <dt id="brainiak.utils.fmrisim.apply_signal">
-<code class="descclassname">brainiak.utils.fmrisim.</code><code class="descname">apply_signal</code><span class="sig-paren">(</span><em>signal_function</em>, <em>volume_signal</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.apply_signal" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.fmrisim.</code><code class="sig-name descname">apply_signal</code><span class="sig-paren">(</span><em class="sig-param">signal_function</em>, <em class="sig-param">volume_signal</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.apply_signal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Combine the signal volume with its timecourse</p>
 <p>Apply the convolution of the HRF and stimulus time course to the
 volume.</p>
@@ -248,7 +248,7 @@ the same 4th dimension as signal_function</p>
 
 <dl class="function">
 <dt id="brainiak.utils.fmrisim.calc_noise">
-<code class="descclassname">brainiak.utils.fmrisim.</code><code class="descname">calc_noise</code><span class="sig-paren">(</span><em>volume</em>, <em>mask</em>, <em>template</em>, <em>noise_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.calc_noise" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.fmrisim.</code><code class="sig-name descname">calc_noise</code><span class="sig-paren">(</span><em class="sig-param">volume</em>, <em class="sig-param">mask</em>, <em class="sig-param">template</em>, <em class="sig-param">noise_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.calc_noise" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the noise properties of the volume supplied.
 This estimates what noise properties the volume has. For instance it
 determines the spatial smoothness, the autoregressive noise, system
@@ -278,7 +278,7 @@ dataset</p>
 
 <dl class="function">
 <dt id="brainiak.utils.fmrisim.compute_signal_change">
-<code class="descclassname">brainiak.utils.fmrisim.</code><code class="descname">compute_signal_change</code><span class="sig-paren">(</span><em>signal_function</em>, <em>noise_function</em>, <em>noise_dict</em>, <em>magnitude</em>, <em>method='PSC'</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.compute_signal_change" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.fmrisim.</code><code class="sig-name descname">compute_signal_change</code><span class="sig-paren">(</span><em class="sig-param">signal_function</em>, <em class="sig-param">noise_function</em>, <em class="sig-param">noise_dict</em>, <em class="sig-param">magnitude</em>, <em class="sig-param">method='PSC'</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.compute_signal_change" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rescale the signal to be a given magnitude, based on a specified
 metric (e.g. percent signal change). Metrics are heavily inspired by
 Welvaert &amp; Rosseel (2013). The rescaling is based on the maximal
@@ -340,7 +340,7 @@ average activity of the noise (mean / 100 * magnitude)</p></li>
 
 <dl class="function">
 <dt id="brainiak.utils.fmrisim.convolve_hrf">
-<code class="descclassname">brainiak.utils.fmrisim.</code><code class="descname">convolve_hrf</code><span class="sig-paren">(</span><em>stimfunction</em>, <em>tr_duration</em>, <em>hrf_type='double_gamma'</em>, <em>scale_function=True</em>, <em>temporal_resolution=100.0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.convolve_hrf" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.fmrisim.</code><code class="sig-name descname">convolve_hrf</code><span class="sig-paren">(</span><em class="sig-param">stimfunction</em>, <em class="sig-param">tr_duration</em>, <em class="sig-param">hrf_type='double_gamma'</em>, <em class="sig-param">scale_function=True</em>, <em class="sig-param">temporal_resolution=100.0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.convolve_hrf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convolve the specified hrf with the timecourse.
 The output of this is a downsampled convolution of the stimfunction and
 the HRF function. If temporal_resolution is 1 / tr_duration then the
@@ -382,7 +382,7 @@ columns in this array.</p>
 
 <dl class="function">
 <dt id="brainiak.utils.fmrisim.export_3_column">
-<code class="descclassname">brainiak.utils.fmrisim.</code><code class="descname">export_3_column</code><span class="sig-paren">(</span><em>stimfunction</em>, <em>filename</em>, <em>temporal_resolution=100.0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.export_3_column" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.fmrisim.</code><code class="sig-name descname">export_3_column</code><span class="sig-paren">(</span><em class="sig-param">stimfunction</em>, <em class="sig-param">filename</em>, <em class="sig-param">temporal_resolution=100.0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.export_3_column" title="Permalink to this definition">¶</a></dt>
 <dd><p>Output a tab separated three column timing file</p>
 <p>This produces a three column tab separated text file, with the three
 columns representing onset time (s), event duration (s) and weight,
@@ -403,7 +403,7 @@ stimfunction?</p></li>
 
 <dl class="function">
 <dt id="brainiak.utils.fmrisim.export_epoch_file">
-<code class="descclassname">brainiak.utils.fmrisim.</code><code class="descname">export_epoch_file</code><span class="sig-paren">(</span><em>stimfunction</em>, <em>filename</em>, <em>tr_duration</em>, <em>temporal_resolution=100.0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.export_epoch_file" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.fmrisim.</code><code class="sig-name descname">export_epoch_file</code><span class="sig-paren">(</span><em class="sig-param">stimfunction</em>, <em class="sig-param">filename</em>, <em class="sig-param">tr_duration</em>, <em class="sig-param">temporal_resolution=100.0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.export_epoch_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Output an epoch file, necessary for some inputs into brainiak</p>
 <p>This takes in the time course of stimulus events and outputs the epoch
 file used in Brainiak. The epoch file is a way to structure the timing
@@ -434,7 +434,7 @@ stimfunction?</p></li>
 
 <dl class="function">
 <dt id="brainiak.utils.fmrisim.generate_signal">
-<code class="descclassname">brainiak.utils.fmrisim.</code><code class="descname">generate_signal</code><span class="sig-paren">(</span><em>dimensions, feature_coordinates, feature_size, feature_type, signal_magnitude=[1], signal_constant=1</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.generate_signal" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.fmrisim.</code><code class="sig-name descname">generate_signal</code><span class="sig-paren">(</span><em class="sig-param">dimensions, feature_coordinates, feature_size, feature_type, signal_magnitude=[1], signal_constant=1</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.generate_signal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate volume containing signal</p>
 <p>Generate signal, of a specific shape in specific regions, for a single
 volume. This will then be convolved with the HRF across time</p>
@@ -474,7 +474,7 @@ multivariate activity)</p></li>
 
 <dl class="function">
 <dt id="brainiak.utils.fmrisim.generate_stimfunction">
-<code class="descclassname">brainiak.utils.fmrisim.</code><code class="descname">generate_stimfunction</code><span class="sig-paren">(</span><em>onsets, event_durations, total_time, weights=[1], timing_file=None, temporal_resolution=100.0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.generate_stimfunction" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.fmrisim.</code><code class="sig-name descname">generate_stimfunction</code><span class="sig-paren">(</span><em class="sig-param">onsets, event_durations, total_time, weights=[1], timing_file=None, temporal_resolution=100.0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.generate_stimfunction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the function for the timecourse events</p>
 <p>When do stimuli onset, how long for and to what extent should you
 resolve the fMRI time course. There are two ways to create this, either
@@ -510,7 +510,7 @@ resolution of temporal resolution / 1.0 elements per second</p>
 
 <dl class="function">
 <dt id="brainiak.utils.fmrisim.generate_noise">
-<code class="descclassname">brainiak.utils.fmrisim.</code><code class="descname">generate_noise</code><span class="sig-paren">(</span><em>dimensions</em>, <em>stimfunction_tr</em>, <em>tr_duration</em>, <em>template</em>, <em>mask=None</em>, <em>noise_dict=None</em>, <em>temporal_proportion=0.5</em>, <em>iterations=None</em>, <em>fit_thresh=0.05</em>, <em>fit_delta=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.generate_noise" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.fmrisim.</code><code class="sig-name descname">generate_noise</code><span class="sig-paren">(</span><em class="sig-param">dimensions</em>, <em class="sig-param">stimfunction_tr</em>, <em class="sig-param">tr_duration</em>, <em class="sig-param">template</em>, <em class="sig-param">mask=None</em>, <em class="sig-param">noise_dict=None</em>, <em class="sig-param">temporal_proportion=0.5</em>, <em class="sig-param">iterations=None</em>, <em class="sig-param">fit_thresh=0.05</em>, <em class="sig-param">fit_delta=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.generate_noise" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate the noise to be added to the signal.
 Default noise parameters will create a noise volume with a standard
 deviation of 0.1 (where the signal defaults to a value of 1). This has
@@ -578,7 +578,7 @@ parameter and the actual parameter</p></li>
 
 <dl class="function">
 <dt id="brainiak.utils.fmrisim.mask_brain">
-<code class="descclassname">brainiak.utils.fmrisim.</code><code class="descname">mask_brain</code><span class="sig-paren">(</span><em>volume</em>, <em>template_name=None</em>, <em>mask_threshold=None</em>, <em>mask_self=True</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.mask_brain" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.fmrisim.</code><code class="sig-name descname">mask_brain</code><span class="sig-paren">(</span><em class="sig-param">volume</em>, <em class="sig-param">template_name=None</em>, <em class="sig-param">mask_threshold=None</em>, <em class="sig-param">mask_self=True</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.mask_brain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mask the simulated volume
 This creates a mask specifying the approximate likelihood that a voxel is
 part of the brain. All values are bounded to the range of 0 to 1. An
@@ -615,12 +615,74 @@ the brain. This can be used to contrast the brain and non brain.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="function">
+<dt id="brainiak.utils.fmrisim.generate_1d_gaussian_rfs">
+<code class="sig-prename descclassname">brainiak.utils.fmrisim.</code><code class="sig-name descname">generate_1d_gaussian_rfs</code><span class="sig-paren">(</span><em class="sig-param">n_voxels</em>, <em class="sig-param">feature_resolution</em>, <em class="sig-param">feature_range</em>, <em class="sig-param">rf_size=15</em>, <em class="sig-param">random_tuning=True</em>, <em class="sig-param">rf_noise=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.generate_1d_gaussian_rfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a numpy matrix of Gaussian-shaped voxel receptive fields (RFs)
+along one dimension. Can specify whether they are evenly tiled or randomly
+tuned along the axis. RF range will be between 0 and 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_voxels</strong> (<em>int</em>) – Number of voxel RFs to create.</p></li>
+<li><p><strong>feature_resolution</strong> (<em>int</em>) – Number of points along the feature axis.</p></li>
+<li><p><strong>feature_range</strong> (<em>tuple</em><em> (</em><em>numeric</em><em>)</em>) – A tuple indicating the start and end values of the feature range. e.g.
+(0, 359) for motion directions.</p></li>
+<li><p><strong>rf_size</strong> (<em>numeric</em>) – Width of the Gaussian receptive field. Should be given in units of the
+feature dimension. e.g., 15 degrees wide in motion direction space.</p></li>
+<li><p><strong>random_tuning</strong> (<em>boolean</em><em> [</em><em>default True</em><em>]</em>) – Indicates whether or not the voxels are randomly tuned along the 1D
+feature axis or whether tuning is evenly spaced.</p></li>
+<li><p><strong>rf_noise</strong> (<em>float</em><em> [</em><em>default 0.</em><em>]</em>) – Amount of uniform noise to add to the Gaussian RF. This will cause the
+generated responses to be distorted by the same uniform noise for a
+given voxel.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>voxel_rfs</strong> (<em>2d numpy array (float)</em>) – The receptive fields in feature space. Dimensions are n_voxels by
+feature_resolution.</p></li>
+<li><p><strong>voxel_tuning</strong> (<em>1d numpy array (float)</em>) – The centers of the voxel RFs, in feature space.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="brainiak.utils.fmrisim.generate_1d_rf_responses">
+<code class="sig-prename descclassname">brainiak.utils.fmrisim.</code><code class="sig-name descname">generate_1d_rf_responses</code><span class="sig-paren">(</span><em class="sig-param">rfs</em>, <em class="sig-param">trial_list</em>, <em class="sig-param">feature_resolution</em>, <em class="sig-param">feature_range</em>, <em class="sig-param">trial_noise=0.25</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.fmrisim.generate_1d_rf_responses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates trial-wise data for a given set of receptive fields (RFs) and
+a 1d array of features presented across trials.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>voxel_rfs</strong> (<em>2d numpy array</em><em> (</em><em>float</em><em>)</em>) – The receptive fields in feature space. Dimensions must be n_voxels
+by feature_resolution.</p></li>
+<li><p><strong>trial_list</strong> (<em>1d numpy array</em><em> (</em><em>numeric</em><em>)</em>) – The feature value of the stimulus presented on individual trials.
+Array size be n_trials.</p></li>
+<li><p><strong>feature_resolution</strong> (<em>int</em>) – Number of points along the feature axis.</p></li>
+<li><p><strong>feature_range</strong> (<em>tuple</em><em> (</em><em>numeric</em><em>)</em>) – A tuple indicating the start and end values of the feature range. e.g.
+(0, 359) for motion directions.</p></li>
+<li><p><strong>trial_noise</strong> (<em>float</em><em> [</em><em>default 0.25</em><em>]</em>) – Amount of uniform noise to inject into the synthetic data. This is
+generated independently for every trial and voxel.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>trial_data</strong> – The synthetic data for each voxel and trial. Dimensions are n_voxels by
+n_trials.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>2d numpy array (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-brainiak.utils.utils">
 <span id="brainiak-utils-utils-module"></span><h2>brainiak.utils.utils module<a class="headerlink" href="#module-brainiak.utils.utils" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="brainiak.utils.utils.array_correlation">
-<code class="descclassname">brainiak.utils.utils.</code><code class="descname">array_correlation</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>axis=0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.array_correlation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.utils.</code><code class="sig-name descname">array_correlation</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">axis=0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.array_correlation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Column- or row-wise Pearson correlation between two arrays</p>
 <p>Computes sample Pearson correlation between two 1D or 2D arrays (e.g.,
 two n_TRs by n_voxels arrays). For 2D arrays, computes correlation
@@ -651,7 +713,7 @@ variables (e.g., many voxels).</p>
 
 <dl class="function">
 <dt id="brainiak.utils.utils.center_mass_exp">
-<code class="descclassname">brainiak.utils.utils.</code><code class="descname">center_mass_exp</code><span class="sig-paren">(</span><em>interval</em>, <em>scale=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.center_mass_exp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.utils.</code><code class="sig-name descname">center_mass_exp</code><span class="sig-paren">(</span><em class="sig-param">interval</em>, <em class="sig-param">scale=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.center_mass_exp" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>Calculate the center of mass of negative exponential distribution</dt><dd><p>p(x) = exp(-x / scale) / scale
 in the interval of (interval_left, interval_right).
@@ -684,7 +746,7 @@ interval_right) for exponential distribution.</p>
 
 <dl class="function">
 <dt id="brainiak.utils.utils.concatenate_not_none">
-<code class="descclassname">brainiak.utils.utils.</code><code class="descname">concatenate_not_none</code><span class="sig-paren">(</span><em>l</em>, <em>axis=0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.concatenate_not_none" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.utils.</code><code class="sig-name descname">concatenate_not_none</code><span class="sig-paren">(</span><em class="sig-param">l</em>, <em class="sig-param">axis=0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.concatenate_not_none" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct a numpy array by stacking not-None arrays in a list</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -705,7 +767,7 @@ but one dimension or are None, in which case they are ignored.</p></li>
 
 <dl class="function">
 <dt id="brainiak.utils.utils.cov2corr">
-<code class="descclassname">brainiak.utils.utils.</code><code class="descname">cov2corr</code><span class="sig-paren">(</span><em>cov</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.cov2corr" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.utils.</code><code class="sig-name descname">cov2corr</code><span class="sig-paren">(</span><em class="sig-param">cov</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.cov2corr" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>Calculate the correlation matrix based on a</dt><dd><p>covariance matrix</p>
 </dd>
@@ -725,7 +787,7 @@ but one dimension or are None, in which case they are ignored.</p></li>
 
 <dl class="function">
 <dt id="brainiak.utils.utils.from_tri_2_sym">
-<code class="descclassname">brainiak.utils.utils.</code><code class="descname">from_tri_2_sym</code><span class="sig-paren">(</span><em>tri</em>, <em>dim</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.from_tri_2_sym" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.utils.</code><code class="sig-name descname">from_tri_2_sym</code><span class="sig-paren">(</span><em class="sig-param">tri</em>, <em class="sig-param">dim</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.from_tri_2_sym" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>convert a upper triangular matrix in 1D format</dt><dd><p>to 2D symmetric matrix</p>
 </dd>
@@ -748,7 +810,7 @@ but one dimension or are None, in which case they are ignored.</p></li>
 
 <dl class="function">
 <dt id="brainiak.utils.utils.from_sym_2_tri">
-<code class="descclassname">brainiak.utils.utils.</code><code class="descname">from_sym_2_tri</code><span class="sig-paren">(</span><em>symm</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.from_sym_2_tri" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.utils.</code><code class="sig-name descname">from_sym_2_tri</code><span class="sig-paren">(</span><em class="sig-param">symm</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.from_sym_2_tri" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>convert a 2D symmetric matrix to an upper</dt><dd><p>triangular matrix in 1D format</p>
 </dd>
@@ -768,7 +830,7 @@ but one dimension or are None, in which case they are ignored.</p></li>
 
 <dl class="function">
 <dt id="brainiak.utils.utils.gen_design">
-<code class="descclassname">brainiak.utils.utils.</code><code class="descname">gen_design</code><span class="sig-paren">(</span><em>stimtime_files</em>, <em>scan_duration</em>, <em>TR</em>, <em>style='FSL'</em>, <em>temp_res=0.01</em>, <em>hrf_para={'response_delay': 6</em>, <em>'response_dispersion': 0.9</em>, <em>'undershoot_delay': 12</em>, <em>'undershoot_dispersion': 0.9</em>, <em>'undershoot_scale': 0.035}</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.gen_design" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.utils.</code><code class="sig-name descname">gen_design</code><span class="sig-paren">(</span><em class="sig-param">stimtime_files</em>, <em class="sig-param">scan_duration</em>, <em class="sig-param">TR</em>, <em class="sig-param">style='FSL'</em>, <em class="sig-param">temp_res=0.01</em>, <em class="sig-param">hrf_para={'response_delay': 6</em>, <em class="sig-param">'response_dispersion': 0.9</em>, <em class="sig-param">'undershoot_delay': 12</em>, <em class="sig-param">'undershoot_dispersion': 0.9</em>, <em class="sig-param">'undershoot_scale': 0.035}</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.gen_design" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>Generate design matrix based on a list of names of stimulus</dt><dd><p>timing files. The function will read each file, and generate
 a numpy array of size [time_points * condition], where
@@ -850,7 +912,7 @@ one experiment condition, in the order in stimtime_files</p>
 
 <dl class="function">
 <dt id="brainiak.utils.utils.phase_randomize">
-<code class="descclassname">brainiak.utils.utils.</code><code class="descname">phase_randomize</code><span class="sig-paren">(</span><em>data</em>, <em>voxelwise=False</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.phase_randomize" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.utils.</code><code class="sig-name descname">phase_randomize</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">voxelwise=False</em>, <em class="sig-param">random_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.phase_randomize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Randomize phase of time series across subjects</p>
 <p>For each subject, apply Fourier transform to voxel time series
 and then randomly shift the phase of each frequency before inverting
@@ -886,7 +948,7 @@ random permutations generator.</p></li>
 
 <dl class="function">
 <dt id="brainiak.utils.utils.p_from_null">
-<code class="descclassname">brainiak.utils.utils.</code><code class="descname">p_from_null</code><span class="sig-paren">(</span><em>observed</em>, <em>distribution</em>, <em>side='two-sided'</em>, <em>exact=False</em>, <em>axis=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.p_from_null" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.utils.</code><code class="sig-name descname">p_from_null</code><span class="sig-paren">(</span><em class="sig-param">observed</em>, <em class="sig-param">distribution</em>, <em class="sig-param">side='two-sided'</em>, <em class="sig-param">exact=False</em>, <em class="sig-param">axis=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.p_from_null" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute p-value from null distribution</p>
 <p>Returns the p-value for an observed test statistic given a null
 distribution. Performs either a ‘two-sided’ (i.e., two-tailed)
@@ -926,7 +988,7 @@ and Molecular Biology, 9, 1544-6115.
 
 <dl class="class">
 <dt id="brainiak.utils.utils.ReadDesign">
-<em class="property">class </em><code class="descclassname">brainiak.utils.utils.</code><code class="descname">ReadDesign</code><span class="sig-paren">(</span><em>fname=None</em>, <em>include_orth=True</em>, <em>include_pols=True</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.ReadDesign" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.utils.utils.</code><code class="sig-name descname">ReadDesign</code><span class="sig-paren">(</span><em class="sig-param">fname=None</em>, <em class="sig-param">include_orth=True</em>, <em class="sig-param">include_pols=True</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.ReadDesign" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="simple">
 <dt>A class which has the ability of reading in design matrix in .1D file,</dt><dd><p>generated by AFNI’s 3dDeconvolve.</p>
@@ -949,7 +1011,7 @@ signals.</p></li>
 </dl>
 <dl class="attribute">
 <dt id="brainiak.utils.utils.ReadDesign.design">
-<code class="descname">design</code><a class="headerlink" href="#brainiak.utils.utils.ReadDesign.design" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">design</code><a class="headerlink" href="#brainiak.utils.utils.ReadDesign.design" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>2d array. The design matrix read in from the csv file.</p>
@@ -959,7 +1021,7 @@ signals.</p></li>
 
 <dl class="attribute">
 <dt id="brainiak.utils.utils.ReadDesign.design_task">
-<code class="descname">design_task</code><a class="headerlink" href="#brainiak.utils.utils.ReadDesign.design_task" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">design_task</code><a class="headerlink" href="#brainiak.utils.utils.ReadDesign.design_task" title="Permalink to this definition">¶</a></dt>
 <dd><p>task conditions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -970,7 +1032,7 @@ signals.</p></li>
 
 <dl class="attribute">
 <dt id="brainiak.utils.utils.ReadDesign.n_col">
-<code class="descname">n_col</code><a class="headerlink" href="#brainiak.utils.utils.ReadDesign.n_col" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">n_col</code><a class="headerlink" href="#brainiak.utils.utils.ReadDesign.n_col" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>number of total columns in the design matrix.</p>
@@ -980,7 +1042,7 @@ signals.</p></li>
 
 <dl class="attribute">
 <dt id="brainiak.utils.utils.ReadDesign.column_types">
-<code class="descname">column_types</code><a class="headerlink" href="#brainiak.utils.utils.ReadDesign.column_types" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">column_types</code><a class="headerlink" href="#brainiak.utils.utils.ReadDesign.column_types" title="Permalink to this definition">¶</a></dt>
 <dd><p>0 for orthogonal regressors (usually head motion parameters),
 -1 for polynomial basis (capturing slow drift of signals),
 values &gt; 0 for stimulus conditions</p>
@@ -993,7 +1055,7 @@ values &gt; 0 for stimulus conditions</p>
 
 <dl class="attribute">
 <dt id="brainiak.utils.utils.ReadDesign.n_basis">
-<code class="descname">n_basis</code><a class="headerlink" href="#brainiak.utils.utils.ReadDesign.n_basis" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">n_basis</code><a class="headerlink" href="#brainiak.utils.utils.ReadDesign.n_basis" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>scalar. The number of polynomial bases in the designn matrix.</p>
@@ -1003,7 +1065,7 @@ values &gt; 0 for stimulus conditions</p>
 
 <dl class="attribute">
 <dt id="brainiak.utils.utils.ReadDesign.n_stim">
-<code class="descname">n_stim</code><a class="headerlink" href="#brainiak.utils.utils.ReadDesign.n_stim" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">n_stim</code><a class="headerlink" href="#brainiak.utils.utils.ReadDesign.n_stim" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>scalar. The number of stimulus conditions.</p>
@@ -1013,7 +1075,7 @@ values &gt; 0 for stimulus conditions</p>
 
 <dl class="attribute">
 <dt id="brainiak.utils.utils.ReadDesign.n_orth">
-<code class="descname">n_orth</code><a class="headerlink" href="#brainiak.utils.utils.ReadDesign.n_orth" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">n_orth</code><a class="headerlink" href="#brainiak.utils.utils.ReadDesign.n_orth" title="Permalink to this definition">¶</a></dt>
 <dd><p>motions)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1024,7 +1086,7 @@ values &gt; 0 for stimulus conditions</p>
 
 <dl class="attribute">
 <dt id="brainiak.utils.utils.ReadDesign.StimLabels">
-<code class="descname">StimLabels</code><a class="headerlink" href="#brainiak.utils.utils.ReadDesign.StimLabels" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">StimLabels</code><a class="headerlink" href="#brainiak.utils.utils.ReadDesign.StimLabels" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>list. The names of each column in the design matrix.</p>
@@ -1034,14 +1096,14 @@ values &gt; 0 for stimulus conditions</p>
 
 <dl class="method">
 <dt id="brainiak.utils.utils.ReadDesign.read_afni">
-<code class="descname">read_afni</code><span class="sig-paren">(</span><em>fname</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.ReadDesign.read_afni" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">read_afni</code><span class="sig-paren">(</span><em class="sig-param">fname</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.ReadDesign.read_afni" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="function">
 <dt id="brainiak.utils.utils.sumexp_stable">
-<code class="descclassname">brainiak.utils.utils.</code><code class="descname">sumexp_stable</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.sumexp_stable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.utils.</code><code class="sig-name descname">sumexp_stable</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.sumexp_stable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the sum of exponents for a list of samples</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1067,7 +1129,7 @@ It useful for computing the softmax_i(v)=exp(v_i)/sum(exp(v)) function.</p>
 
 <dl class="function">
 <dt id="brainiak.utils.utils.usable_cpu_count">
-<code class="descclassname">brainiak.utils.utils.</code><code class="descname">usable_cpu_count</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.usable_cpu_count" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.utils.utils.</code><code class="sig-name descname">usable_cpu_count</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.utils.utils.usable_cpu_count" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get number of CPUs usable by the current process.</p>
 <p>Takes into consideration cpusets restrictions.</p>
 <dl class="field-list simple">

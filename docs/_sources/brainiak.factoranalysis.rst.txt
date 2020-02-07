@@ -2,9 +2,9 @@ brainiak.factoranalysis package
 ===============================
 
 .. automodule:: brainiak.factoranalysis
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 Submodules
 ----------
@@ -13,16 +13,15 @@ brainiak.factoranalysis.htfa module
 -----------------------------------
 
 .. automodule:: brainiak.factoranalysis.htfa
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 brainiak.factoranalysis.tfa module
 ----------------------------------
 
 .. automodule:: brainiak.factoranalysis.tfa
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   :members:
+   :undoc-members:
+   :show-inheritance:
 

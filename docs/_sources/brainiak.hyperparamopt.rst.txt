@@ -2,9 +2,9 @@ brainiak.hyperparamopt package
 ==============================
 
 .. automodule:: brainiak.hyperparamopt
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 Submodules
 ----------
@@ -13,8 +13,7 @@ brainiak.hyperparamopt.hpo module
 ---------------------------------
 
 .. automodule:: brainiak.hyperparamopt.hpo
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   :members:
+   :undoc-members:
+   :show-inheritance:
 

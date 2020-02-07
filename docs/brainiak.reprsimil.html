@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>brainiak.reprsimil package &mdash; brainiak 0.9.1 documentation</title>
+  <title>brainiak.reprsimil package &mdash; brainiak 0.10 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="brainiak.searchlight package" href="brainiak.searchlight.html" />
-    <link rel="prev" title="brainiak.hyperparamopt package" href="brainiak.hyperparamopt.html" /> 
+    <link rel="prev" title="brainiak.reconstruct package" href="brainiak.reconstruct.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.9.1
+                0.10
               </div>
             
           
@@ -168,37 +168,34 @@
 <span id="brainiak-reprsimil-brsa-module"></span><h2>brainiak.reprsimil.brsa module<a class="headerlink" href="#module-brainiak.reprsimil.brsa" title="Permalink to this headline">¶</a></h2>
 <p>Bayesian Representational Similarity Analysis (BRSA)</p>
 <blockquote>
-<div><p>This implementation is based the work in <a class="reference internal" href="#cai2016" id="id1"><span>[Cai2016]</span></a>.</p>
+<div><p>This implementation is based on <a class="reference internal" href="#cai2016" id="id1"><span>[Cai2016]</span></a> and <a class="reference internal" href="#cai2019" id="id2"><span>[Cai2019]</span></a>:</p>
 </div></blockquote>
 <dl class="citation">
 <dt class="label" id="cai2016"><span class="brackets"><a class="fn-backref" href="#id1">Cai2016</a></span></dt>
 <dd><p>“A Bayesian method for reducing bias in neural
 representational similarity analysis”,
-M.B. Cai, N. Schuck, J. Pillow, Y. Niv,
+M.B. Cai, N.W. Schuck, J.W. Pillow, Y. Niv,
 Advances in Neural Information Processing Systems 29, 2016, 4952–4960
 Available at:
-<a class="reference external" href="http://papers.nips.cc/paper/6131-a-bayesian-method-for-reducing-bias-in-neural-representational-similarity-analysis.pdf">http://papers.nips.cc/paper/6131-a-bayesian-method-for-reducing-bias-in-neural-representational-similarity-analysis.pdf</a>
-Some extensions beyond the paper have been made here.
-More specifically:
-(1) spatial noise correlation (or alternatively
-considered as signals of intrinsic fluctuation not related to tasks);
-(2) new fitting procedure which marginalizes all voxel-specific
-parameters such as pseudo-SNR, noise variance, auto-regressive
-coefficients, in <a class="reference internal" href="#brainiak.reprsimil.brsa.GBRSA" title="brainiak.reprsimil.brsa.GBRSA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GBRSA</span></code></a> class;
-(3) capacity to jointly fit to data of multiple participants,
-in <a class="reference internal" href="#brainiak.reprsimil.brsa.GBRSA" title="brainiak.reprsimil.brsa.GBRSA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GBRSA</span></code></a> class;
-(4) cross-validation score between a full model and a null model
-in <a class="reference internal" href="#brainiak.reprsimil.brsa.BRSA.score" title="brainiak.reprsimil.brsa.BRSA.score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BRSA.score</span></code></a> and <a class="reference internal" href="#brainiak.reprsimil.brsa.GBRSA.score" title="brainiak.reprsimil.brsa.GBRSA.score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GBRSA.score</span></code></a>;
-(5) capability of decoding task-related signals and intrinsic
-fluctuation from new data based on model fitted from training data
-in <a class="reference internal" href="#brainiak.reprsimil.brsa.BRSA.transform" title="brainiak.reprsimil.brsa.BRSA.transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BRSA.transform</span></code></a> and <a class="reference internal" href="#brainiak.reprsimil.brsa.GBRSA.transform" title="brainiak.reprsimil.brsa.GBRSA.transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GBRSA.transform</span></code></a>.
-<a class="reference internal" href="#brainiak.reprsimil.brsa.GBRSA" title="brainiak.reprsimil.brsa.GBRSA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GBRSA</span></code></a> may perform better than <a class="reference internal" href="#brainiak.reprsimil.brsa.BRSA" title="brainiak.reprsimil.brsa.BRSA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BRSA</span></code></a> due to (2). It can be
-use for single participant as well.</p>
+<a class="reference external" href="http://papers.nips.cc/paper/6131-a-bayesian-method-for-reducing-bias-in-neural-representational-similarity-analysis.pdf">http://papers.nips.cc/paper/6131-a-bayesian-method-for-reducing-bias-in-neural-representational-similarity-analysis.pdf</a></p>
+</dd>
+<dt class="label" id="cai2019"><span class="brackets"><a class="fn-backref" href="#id2">Cai2019</a></span></dt>
+<dd><p>“Representational structure or task structure?
+Bias in neural representational similarity analysis and
+a Bayesian method for reducing bias”,
+M.B. Cai, N.W. Schuck, J.W. Pillow, Y. Niv,
+PLoS computational biology 15.5 (2019): e1006299.
+<a class="reference external" href="https://doi.org/10.1371/journal.pcbi.1006299">https://doi.org/10.1371/journal.pcbi.1006299</a></p>
+<p><a class="reference internal" href="#brainiak.reprsimil.brsa.BRSA" title="brainiak.reprsimil.brsa.BRSA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BRSA</span></code></a> is based on [Cai2016] with additional consideration
+of spatial noise correlation proposed in [Cai2019].
+<a class="reference internal" href="#brainiak.reprsimil.brsa.GBRSA" title="brainiak.reprsimil.brsa.GBRSA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GBRSA</span></code></a> is based on [Cai2019].
+<a class="reference internal" href="#brainiak.reprsimil.brsa.GBRSA" title="brainiak.reprsimil.brsa.GBRSA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GBRSA</span></code></a> may perform better than <a class="reference internal" href="#brainiak.reprsimil.brsa.BRSA" title="brainiak.reprsimil.brsa.BRSA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BRSA</span></code></a> due to marginalization of all
+voxel-wise parameters. It can be use for single participant as well.</p>
 </dd>
 </dl>
 <dl class="class">
 <dt id="brainiak.reprsimil.brsa.BRSA">
-<em class="property">class </em><code class="descclassname">brainiak.reprsimil.brsa.</code><code class="descname">BRSA</code><span class="sig-paren">(</span><em>n_iter=100</em>, <em>rank=None</em>, <em>auto_nuisance=True</em>, <em>n_nureg=None</em>, <em>nureg_zscore=True</em>, <em>nureg_method='PCA'</em>, <em>baseline_single=False</em>, <em>GP_space=False</em>, <em>GP_inten=False</em>, <em>space_smooth_range=None</em>, <em>inten_smooth_range=None</em>, <em>tau_range=5.0</em>, <em>tau2_prior=&lt;function prior_GP_var_inv_gamma&gt;</em>, <em>eta=0.0001</em>, <em>init_iter=20</em>, <em>optimizer='L-BFGS-B'</em>, <em>random_state=None</em>, <em>anneal_speed=10</em>, <em>tol=0.0001</em>, <em>minimize_options={'disp': False</em>, <em>'gtol': 0.0001</em>, <em>'maxiter': 6}</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.reprsimil.brsa.</code><code class="sig-name descname">BRSA</code><span class="sig-paren">(</span><em class="sig-param">n_iter=100</em>, <em class="sig-param">rank=None</em>, <em class="sig-param">auto_nuisance=True</em>, <em class="sig-param">n_nureg=None</em>, <em class="sig-param">nureg_zscore=True</em>, <em class="sig-param">nureg_method='PCA'</em>, <em class="sig-param">baseline_single=False</em>, <em class="sig-param">GP_space=False</em>, <em class="sig-param">GP_inten=False</em>, <em class="sig-param">space_smooth_range=None</em>, <em class="sig-param">inten_smooth_range=None</em>, <em class="sig-param">tau_range=5.0</em>, <em class="sig-param">tau2_prior=&lt;function prior_GP_var_inv_gamma&gt;</em>, <em class="sig-param">eta=0.0001</em>, <em class="sig-param">init_iter=20</em>, <em class="sig-param">optimizer='L-BFGS-B'</em>, <em class="sig-param">random_state=None</em>, <em class="sig-param">anneal_speed=10</em>, <em class="sig-param">tol=0.0001</em>, <em class="sig-param">minimize_options={'disp': False</em>, <em class="sig-param">'gtol': 0.0001</em>, <em class="sig-param">'maxiter': 6}</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
 <p>Bayesian representational Similarity Analysis (BRSA)</p>
 <p>Given the time series of neural imaging data in a region of interest
@@ -346,13 +343,13 @@ Both functions are part of brsa module.
 See also <a class="reference internal" href="#brainiak.reprsimil.brsa.prior_GP_var_inv_gamma" title="brainiak.reprsimil.brsa.prior_GP_var_inv_gamma"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prior_GP_var_inv_gamma</span></code></a> and
 <a class="reference internal" href="#brainiak.reprsimil.brsa.prior_GP_var_half_cauchy" title="brainiak.reprsimil.brsa.prior_GP_var_half_cauchy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prior_GP_var_half_cauchy</span></code></a>
 To use the default inverse-Gamma prior, you can ignore this argument:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">brainiak.reprsimil.brsa</span> <span class="k">import</span> <span class="n">BRSA</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">brainiak.reprsimil.brsa</span> <span class="kn">import</span> <span class="n">BRSA</span>
 <span class="n">brsa</span> <span class="o">=</span> <span class="n">BRSA</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>If you want to try the alternative half-Cauchy prior,
 then you need to import it in addition to BRSA:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">brainiak.reprsimil.brsa</span> <span class="k">import</span> <span class="n">BRSA</span><span class="p">,</span> <span class="n">prior_GP_var_half_cauchy</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">brainiak.reprsimil.brsa</span> <span class="kn">import</span> <span class="n">BRSA</span><span class="p">,</span> <span class="n">prior_GP_var_half_cauchy</span>
 <span class="n">brsa</span> <span class="o">=</span> <span class="n">BRSA</span><span class="p">(</span><span class="n">tau2_prior</span><span class="o">=</span><span class="n">prior_GP_var_half_cauchy</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -404,7 +401,7 @@ procedure.</p></li>
 </dl>
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.BRSA.U_">
-<code class="descname">U_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.U_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">U_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.U_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The shared covariance matrix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -415,7 +412,7 @@ procedure.</p></li>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.BRSA.L_">
-<code class="descname">L_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.L_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">L_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.L_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The Cholesky factor of the shared covariance matrix
 (lower-triangular matrix).</p>
 <dl class="field-list simple">
@@ -427,7 +424,7 @@ procedure.</p></li>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.BRSA.C_">
-<code class="descname">C_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.C_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">C_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.C_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The correlation matrix derived from the shared covariance matrix.
 This is the estimated similarity matrix between neural patterns
 to your task conditions. Notice that it is recommended that
@@ -451,7 +448,7 @@ in gray matter in than white matter.</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.BRSA.nSNR_">
-<code class="descname">nSNR_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.nSNR_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">nSNR_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.nSNR_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The normalized pseuso-SNR of all voxels.
 They are normalized such that the geometric mean is 1.
 Note that this attribute can not be interpreted as true SNR,
@@ -466,7 +463,7 @@ of each voxel to the representational similarity structure.</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.BRSA.sigma_">
-<code class="descname">sigma_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.sigma_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">sigma_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.sigma_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The estimated standard deviation of the noise in each voxel
 Assuming AR(1) model, this means the standard deviation
 of the innovation noise.</p>
@@ -479,7 +476,7 @@ of the innovation noise.</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.BRSA.rho_">
-<code class="descname">rho_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.rho_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">rho_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.rho_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The estimated autoregressive coefficient of each voxel</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -490,7 +487,7 @@ of the innovation noise.</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.BRSA.bGP_">
-<code class="descname">bGP_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.bGP_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">bGP_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.bGP_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The standard deviation of the GP prior</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -501,7 +498,7 @@ of the innovation noise.</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.BRSA.lGPspace_">
-<code class="descname">lGPspace_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.lGPspace_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">lGPspace_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.lGPspace_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The length scale of Gaussian Process prior of log(SNR)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -512,7 +509,7 @@ of the innovation noise.</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.BRSA.lGPinten_">
-<code class="descname">lGPinten_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.lGPinten_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">lGPinten_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.lGPinten_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The length scale in fMRI intensity of the GP prior of log(SNR)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -523,7 +520,7 @@ of the innovation noise.</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.BRSA.beta_">
-<code class="descname">beta_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.beta_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">beta_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.beta_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The maximum a posterior estimation of the response amplitudes
 of each voxel to each task condition.</p>
 <dl class="field-list simple">
@@ -535,7 +532,7 @@ of each voxel to each task condition.</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.BRSA.beta0_">
-<code class="descname">beta0_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.beta0_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">beta0_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.beta0_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The loading weights of each voxel for the shared time courses
 not captured by the design matrix. This helps capture the
 structure of spatial covariance of task-unrelated signal.
@@ -550,7 +547,7 @@ regressors plus one for DC component</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.BRSA.X0_">
-<code class="descname">X0_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.X0_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">X0_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.X0_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The estimated time course that is shared across voxels but
 unrelated to the events of interest (design matrix).</p>
 <dl class="field-list simple">
@@ -562,7 +559,7 @@ unrelated to the events of interest (design matrix).</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.BRSA.beta0_null_">
-<code class="descname">beta0_null_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.beta0_null_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">beta0_null_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.beta0_null_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The equivalent of beta0_ in a null model which does not
 include the design matrix and response pattern beta.</p>
 <dl class="field-list simple">
@@ -574,7 +571,7 @@ include the design matrix and response pattern beta.</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.BRSA.X0_null_">
-<code class="descname">X0_null_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.X0_null_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">X0_null_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.X0_null_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The equivalent of X0_ in a null model which does not
 include the design matrix and response pattern beta</p>
 <dl class="field-list simple">
@@ -586,7 +583,7 @@ include the design matrix and response pattern beta</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.BRSA.n_nureg_">
-<code class="descname">n_nureg_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.n_nureg_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">n_nureg_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.n_nureg_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of nuisance regressor in addition to such
 regressors provided by the user (if any), if auto_nuisance
 is set to True. If n_nureg is set to ‘opt’,
@@ -602,7 +599,7 @@ threshold for singular values.</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.BRSA.random_state_">
-<code class="descname">random_state_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.random_state_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">random_state_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.random_state_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Random number generator initialized using random_state.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -613,7 +610,7 @@ threshold for singular values.</p>
 
 <dl class="method">
 <dt id="brainiak.reprsimil.brsa.BRSA.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>design</em>, <em>nuisance=None</em>, <em>scan_onsets=None</em>, <em>coords=None</em>, <em>inten=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">design</em>, <em class="sig-param">nuisance=None</em>, <em class="sig-param">scan_onsets=None</em>, <em class="sig-param">coords=None</em>, <em class="sig-param">inten=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Bayesian RSA</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -677,7 +674,7 @@ some visual datasets.</p></li>
 
 <dl class="method">
 <dt id="brainiak.reprsimil.brsa.BRSA.score">
-<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>design</em>, <em>scan_onsets=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.score" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">score</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">design</em>, <em class="sig-param">scan_onsets=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.score" title="Permalink to this definition">¶</a></dt>
 <dd><dl>
 <dt>Use the model and parameters estimated by fit function</dt><dd><p>from some data of a participant to evaluate the log
 likelihood of some new data of the same participant.
@@ -736,7 +733,7 @@ task conditions.</p></li>
 
 <dl class="method">
 <dt id="brainiak.reprsimil.brsa.BRSA.transform">
-<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>scan_onsets=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.transform" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y=None</em>, <em class="sig-param">scan_onsets=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.BRSA.transform" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>Use the model to estimate the time course of response to</dt><dd><p>each condition (ts), and the time course unrelated to task
 (ts0) which is spread across the brain.
@@ -783,7 +780,7 @@ loading weights estimated during the fit step.</p></li>
 
 <dl class="class">
 <dt id="brainiak.reprsimil.brsa.GBRSA">
-<em class="property">class </em><code class="descclassname">brainiak.reprsimil.brsa.</code><code class="descname">GBRSA</code><span class="sig-paren">(</span><em>n_iter=100</em>, <em>rank=None</em>, <em>auto_nuisance=True</em>, <em>n_nureg=None</em>, <em>nureg_zscore=True</em>, <em>nureg_method='PCA'</em>, <em>baseline_single=False</em>, <em>logS_range=1.0</em>, <em>SNR_prior='exp'</em>, <em>SNR_bins=21</em>, <em>rho_bins=20</em>, <em>tol=0.0001</em>, <em>optimizer='L-BFGS-B'</em>, <em>minimize_options={'disp': False</em>, <em>'gtol': 0.0001</em>, <em>'maxiter': 20}</em>, <em>random_state=None</em>, <em>anneal_speed=10</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.reprsimil.brsa.</code><code class="sig-name descname">GBRSA</code><span class="sig-paren">(</span><em class="sig-param">n_iter=100</em>, <em class="sig-param">rank=None</em>, <em class="sig-param">auto_nuisance=True</em>, <em class="sig-param">n_nureg=None</em>, <em class="sig-param">nureg_zscore=True</em>, <em class="sig-param">nureg_method='PCA'</em>, <em class="sig-param">baseline_single=False</em>, <em class="sig-param">logS_range=1.0</em>, <em class="sig-param">SNR_prior='exp'</em>, <em class="sig-param">SNR_bins=21</em>, <em class="sig-param">rho_bins=20</em>, <em class="sig-param">tol=0.0001</em>, <em class="sig-param">optimizer='L-BFGS-B'</em>, <em class="sig-param">minimize_options={'disp': False</em>, <em class="sig-param">'gtol': 0.0001</em>, <em class="sig-param">'maxiter': 20}</em>, <em class="sig-param">random_state=None</em>, <em class="sig-param">anneal_speed=10</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#brainiak.reprsimil.brsa.BRSA" title="brainiak.reprsimil.brsa.BRSA"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.reprsimil.brsa.BRSA</span></code></a></p>
 <p>Group Bayesian representational Similarity Analysis (GBRSA)</p>
 <p>Given the time series of neural imaging data in a region of interest
@@ -976,7 +973,7 @@ the amount of perturbation is reduced by 2.713 times.</p></li>
 </dl>
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.GBRSA.U_">
-<code class="descname">U_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.U_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">U_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.U_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The shared covariance matrix</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -987,7 +984,7 @@ the amount of perturbation is reduced by 2.713 times.</p></li>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.GBRSA.L_">
-<code class="descname">L_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.L_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">L_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.L_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The Cholesky factor of the shared covariance matrix
 (lower-triangular matrix).</p>
 <dl class="field-list simple">
@@ -999,7 +996,7 @@ the amount of perturbation is reduced by 2.713 times.</p></li>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.GBRSA.C_">
-<code class="descname">C_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.C_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">C_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.C_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The correlation matrix derived from the shared covariance matrix.
 This is the estimated similarity matrix between neural patterns
 to your task conditions. Notice that it is recommended that
@@ -1023,7 +1020,7 @@ in gray matter in than white matter.</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.GBRSA.nSNR_">
-<code class="descname">nSNR_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.nSNR_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">nSNR_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.nSNR_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The pseuso-SNR of all voxels. If SNR_prior=’lognormal’,
 the geometric mean of nSNR_ would be approximately 1.
 If SNR_prior=’unif’, all nSNR_ would be in the range of (0,1).
@@ -1042,7 +1039,7 @@ of each voxel to the representational similarity structure.</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.GBRSA.sigma_">
-<code class="descname">sigma_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.sigma_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">sigma_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.sigma_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The estimated standard deviation of the noise in each voxel
 Assuming AR(1) model, this means the standard deviation
 of the innovation noise.</p>
@@ -1055,7 +1052,7 @@ of the innovation noise.</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.GBRSA.rho_">
-<code class="descname">rho_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.rho_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">rho_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.rho_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The estimated autoregressive coefficient of each voxel</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1066,7 +1063,7 @@ of the innovation noise.</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.GBRSA.beta_">
-<code class="descname">beta_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.beta_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">beta_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.beta_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The posterior mean estimation of the response amplitudes
 of each voxel to each task condition.</p>
 <dl class="field-list simple">
@@ -1078,7 +1075,7 @@ of each voxel to each task condition.</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.GBRSA.beta0_">
-<code class="descname">beta0_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.beta0_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">beta0_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.beta0_" title="Permalink to this definition">¶</a></dt>
 <dd><p>for each subject.
 The loading weights of each voxel for the shared time courses
 not captured by the design matrix.
@@ -1093,7 +1090,7 @@ regressors plus one for DC component.</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.GBRSA.X0_">
-<code class="descname">X0_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.X0_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">X0_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.X0_" title="Permalink to this definition">¶</a></dt>
 <dd><p>for each subject.
 The estimated time course that is shared across voxels but
 unrelated to the events of interest (design matrix).</p>
@@ -1106,7 +1103,7 @@ unrelated to the events of interest (design matrix).</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.GBRSA.beta0_null_">
-<code class="descname">beta0_null_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.beta0_null_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">beta0_null_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.beta0_null_" title="Permalink to this definition">¶</a></dt>
 <dd><p>for each subject.
 The equivalent of beta0_ in a null model which does not
 include the design matrix and response pattern beta</p>
@@ -1119,7 +1116,7 @@ include the design matrix and response pattern beta</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.GBRSA.X0_null_">
-<code class="descname">X0_null_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.X0_null_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">X0_null_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.X0_null_" title="Permalink to this definition">¶</a></dt>
 <dd><p>for each subject.
 The equivalent of X0_ in a null model which does not
 include the design matrix and response pattern beta</p>
@@ -1132,7 +1129,7 @@ include the design matrix and response pattern beta</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.GBRSA.n_nureg_">
-<code class="descname">n_nureg_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.n_nureg_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">n_nureg_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.n_nureg_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of nuisance regressor used to model the spatial noise
 correlation of each participant.</p>
 <dl class="field-list simple">
@@ -1144,7 +1141,7 @@ correlation of each participant.</p>
 
 <dl class="attribute">
 <dt id="brainiak.reprsimil.brsa.GBRSA.random_state_">
-<code class="descname">random_state_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.random_state_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">random_state_</code><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.random_state_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Random number generator initialized using random_state.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -1155,7 +1152,7 @@ correlation of each participant.</p>
 
 <dl class="method">
 <dt id="brainiak.reprsimil.brsa.GBRSA.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>design</em>, <em>nuisance=None</em>, <em>scan_onsets=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">design</em>, <em class="sig-param">nuisance=None</em>, <em class="sig-param">scan_onsets=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit the model to data of all participants jointly.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1210,7 +1207,7 @@ assume all data are from the same run for each participant.</p></li>
 
 <dl class="method">
 <dt id="brainiak.reprsimil.brsa.GBRSA.score">
-<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>design</em>, <em>scan_onsets=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.score" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">score</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">design</em>, <em class="sig-param">scan_onsets=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.score" title="Permalink to this definition">¶</a></dt>
 <dd><dl>
 <dt>After fit() is applied to the data of a group of participants,</dt><dd><p>use the parameters estimated by fit() function to evaluate
 from some data of a set of participants to evaluate
@@ -1279,7 +1276,7 @@ task conditions.</p></li>
 
 <dl class="method">
 <dt id="brainiak.reprsimil.brsa.GBRSA.transform">
-<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>scan_onsets=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.transform" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y=None</em>, <em class="sig-param">scan_onsets=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.GBRSA.transform" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>Use the model to estimate the time course of response to</dt><dd><p>each condition (ts), and the time course unrelated to task
 (ts0) which is spread across the brain.
@@ -1331,7 +1328,7 @@ not provided, None will be returned.</p></li>
 
 <dl class="function">
 <dt id="brainiak.reprsimil.brsa.Ncomp_SVHT_MG_DLD_approx">
-<code class="descclassname">brainiak.reprsimil.brsa.</code><code class="descname">Ncomp_SVHT_MG_DLD_approx</code><span class="sig-paren">(</span><em>X</em>, <em>zscore=True</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.Ncomp_SVHT_MG_DLD_approx" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.reprsimil.brsa.</code><code class="sig-name descname">Ncomp_SVHT_MG_DLD_approx</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">zscore=True</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.Ncomp_SVHT_MG_DLD_approx" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>This function implements the approximate calculation of the</dt><dd><p>optimal hard threshold for singular values, by Matan Gavish
 and David L. Donoho:
@@ -1359,7 +1356,7 @@ and DLD</p>
 
 <dl class="function">
 <dt id="brainiak.reprsimil.brsa.prior_GP_var_inv_gamma">
-<code class="descclassname">brainiak.reprsimil.brsa.</code><code class="descname">prior_GP_var_inv_gamma</code><span class="sig-paren">(</span><em>y_invK_y</em>, <em>n_y</em>, <em>tau_range</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.prior_GP_var_inv_gamma" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.reprsimil.brsa.</code><code class="sig-name descname">prior_GP_var_inv_gamma</code><span class="sig-paren">(</span><em class="sig-param">y_invK_y</em>, <em class="sig-param">n_y</em>, <em class="sig-param">tau_range</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.prior_GP_var_inv_gamma" title="Permalink to this definition">¶</a></dt>
 <dd><dl>
 <dt>Imposing an inverse-Gamma prior onto the variance (tau^2)</dt><dd><p>parameter of a Gaussian Process, which is in turn a prior
 imposed over an unknown function y = f(x).
@@ -1420,7 +1417,7 @@ on large variation of y.</p></li>
 
 <dl class="function">
 <dt id="brainiak.reprsimil.brsa.prior_GP_var_half_cauchy">
-<code class="descclassname">brainiak.reprsimil.brsa.</code><code class="descname">prior_GP_var_half_cauchy</code><span class="sig-paren">(</span><em>y_invK_y</em>, <em>n_y</em>, <em>tau_range</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.prior_GP_var_half_cauchy" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.reprsimil.brsa.</code><code class="sig-name descname">prior_GP_var_half_cauchy</code><span class="sig-paren">(</span><em class="sig-param">y_invK_y</em>, <em class="sig-param">n_y</em>, <em class="sig-param">tau_range</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.reprsimil.brsa.prior_GP_var_half_cauchy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Imposing a half-Cauchy prior onto the standard deviation (tau)
 of the Gaussian Process which is in turn a prior imposed over
 a function y = f(x).
@@ -1451,7 +1448,7 @@ For more information on usage, see description in BRSA class:
         <a href="brainiak.searchlight.html" class="btn btn-neutral float-right" title="brainiak.searchlight package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="brainiak.hyperparamopt.html" class="btn btn-neutral float-left" title="brainiak.hyperparamopt package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="brainiak.reconstruct.html" class="btn btn-neutral float-left" title="brainiak.reconstruct package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

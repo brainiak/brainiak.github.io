@@ -2,35 +2,42 @@ brainiak.funcalign package
 ==========================
 
 .. automodule:: brainiak.funcalign
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 Submodules
 ----------
+
+brainiak.funcalign.fastsrm module
+---------------------------------
+
+.. automodule:: brainiak.funcalign.fastsrm
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 brainiak.funcalign.rsrm module
 ------------------------------
 
 .. automodule:: brainiak.funcalign.rsrm
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 brainiak.funcalign.srm module
 -----------------------------
 
 .. automodule:: brainiak.funcalign.srm
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 brainiak.funcalign.sssrm module
 -------------------------------
 
 .. automodule:: brainiak.funcalign.sssrm
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   :members:
+   :undoc-members:
+   :show-inheritance:
 

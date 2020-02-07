@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>brainiak package &mdash; brainiak 0.9.1 documentation</title>
+  <title>brainiak package &mdash; brainiak 0.10 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.9.1
+                0.10
               </div>
             
           
@@ -186,6 +186,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="brainiak.funcalign.html">brainiak.funcalign package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="brainiak.funcalign.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.funcalign.html#module-brainiak.funcalign.fastsrm">brainiak.funcalign.fastsrm module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="brainiak.funcalign.html#module-brainiak.funcalign.rsrm">brainiak.funcalign.rsrm module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="brainiak.funcalign.html#module-brainiak.funcalign.srm">brainiak.funcalign.srm module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="brainiak.funcalign.html#module-brainiak.funcalign.sssrm">brainiak.funcalign.sssrm module</a></li>
@@ -194,6 +195,11 @@
 <li class="toctree-l1"><a class="reference internal" href="brainiak.hyperparamopt.html">brainiak.hyperparamopt package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="brainiak.hyperparamopt.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="brainiak.hyperparamopt.html#module-brainiak.hyperparamopt.hpo">brainiak.hyperparamopt.hpo module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="brainiak.reconstruct.html">brainiak.reconstruct package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.reconstruct.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.reconstruct.html#module-brainiak.reconstruct.iem">brainiak.reconstruct.iem module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="brainiak.reprsimil.html">brainiak.reprsimil package</a><ul>
@@ -223,7 +229,7 @@
 <p>Generic image functionality.</p>
 <dl class="class">
 <dt id="brainiak.image.ConditionSpec">
-<em class="property">class </em><code class="descclassname">brainiak.image.</code><code class="descname">ConditionSpec</code><a class="headerlink" href="#brainiak.image.ConditionSpec" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.image.</code><code class="sig-name descname">ConditionSpec</code><a class="headerlink" href="#brainiak.image.ConditionSpec" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 <p>One-hot representation of conditions across epochs and TRs.</p>
 <p>The shape is (n_conditions, n_epochs, n_trs).</p>
@@ -231,12 +237,12 @@
 
 <dl class="class">
 <dt id="brainiak.image.MaskedMultiSubjectData">
-<em class="property">class </em><code class="descclassname">brainiak.image.</code><code class="descname">MaskedMultiSubjectData</code><a class="headerlink" href="#brainiak.image.MaskedMultiSubjectData" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.image.</code><code class="sig-name descname">MaskedMultiSubjectData</code><a class="headerlink" href="#brainiak.image.MaskedMultiSubjectData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 <p>Array with shape n_TRs, n_voxels, n_subjects.</p>
-<dl class="classmethod">
+<dl class="method">
 <dt id="brainiak.image.MaskedMultiSubjectData.from_masked_images">
-<em class="property">classmethod </em><code class="descname">from_masked_images</code><span class="sig-paren">(</span><em>masked_images: Iterable[numpy.ndarray], n_subjects: int</em><span class="sig-paren">)</span> &#x2192; T<a class="headerlink" href="#brainiak.image.MaskedMultiSubjectData.from_masked_images" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">from_masked_images</code><span class="sig-paren">(</span><em class="sig-param">masked_images: Iterable[numpy.ndarray], n_subjects: int</em><span class="sig-paren">)</span> &#x2192; T<a class="headerlink" href="#brainiak.image.MaskedMultiSubjectData.from_masked_images" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new instance of MaskedMultiSubjecData from masked images.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -263,7 +269,7 @@
 
 <dl class="function">
 <dt id="brainiak.image.mask_image">
-<code class="descclassname">brainiak.image.</code><code class="descname">mask_image</code><span class="sig-paren">(</span><em>image: nibabel.spatialimages.SpatialImage</em>, <em>mask: numpy.ndarray</em>, <em>data_type: type = None</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#brainiak.image.mask_image" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.image.</code><code class="sig-name descname">mask_image</code><span class="sig-paren">(</span><em class="sig-param">image: nibabel.spatialimages.SpatialImage</em>, <em class="sig-param">mask: numpy.ndarray</em>, <em class="sig-param">data_type: type = None</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#brainiak.image.mask_image" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mask image after optionally casting its type.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -287,7 +293,7 @@
 
 <dl class="function">
 <dt id="brainiak.image.mask_images">
-<code class="descclassname">brainiak.image.</code><code class="descname">mask_images</code><span class="sig-paren">(</span><em>images: Iterable[nibabel.spatialimages.SpatialImage], mask: numpy.ndarray, image_type: type = None</em><span class="sig-paren">)</span> &#x2192; Iterable[numpy.ndarray]<a class="headerlink" href="#brainiak.image.mask_images" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.image.</code><code class="sig-name descname">mask_images</code><span class="sig-paren">(</span><em class="sig-param">images: Iterable[nibabel.spatialimages.SpatialImage], mask: numpy.ndarray, image_type: type = None</em><span class="sig-paren">)</span> &#x2192; Iterable[numpy.ndarray]<a class="headerlink" href="#brainiak.image.mask_images" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mask images.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -305,7 +311,7 @@
 
 <dl class="function">
 <dt id="brainiak.image.multimask_images">
-<code class="descclassname">brainiak.image.</code><code class="descname">multimask_images</code><span class="sig-paren">(</span><em>images: Iterable[nibabel.spatialimages.SpatialImage], masks: Sequence[numpy.ndarray], image_type: type = None</em><span class="sig-paren">)</span> &#x2192; Iterable[Sequence[numpy.ndarray]]<a class="headerlink" href="#brainiak.image.multimask_images" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.image.</code><code class="sig-name descname">multimask_images</code><span class="sig-paren">(</span><em class="sig-param">images: Iterable[nibabel.spatialimages.SpatialImage], masks: Sequence[numpy.ndarray], image_type: type = None</em><span class="sig-paren">)</span> &#x2192; Iterable[Sequence[numpy.ndarray]]<a class="headerlink" href="#brainiak.image.multimask_images" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mask images with multiple masks.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -323,12 +329,12 @@
 
 <dl class="class">
 <dt id="brainiak.image.SingleConditionSpec">
-<em class="property">class </em><code class="descclassname">brainiak.image.</code><code class="descname">SingleConditionSpec</code><a class="headerlink" href="#brainiak.image.SingleConditionSpec" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.image.</code><code class="sig-name descname">SingleConditionSpec</code><a class="headerlink" href="#brainiak.image.SingleConditionSpec" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#brainiak.image.ConditionSpec" title="brainiak.image.ConditionSpec"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.image.ConditionSpec</span></code></a></p>
 <p>ConditionSpec with a single condition applicable to an epoch.</p>
 <dl class="method">
 <dt id="brainiak.image.SingleConditionSpec.extract_labels">
-<code class="descname">extract_labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#brainiak.image.SingleConditionSpec.extract_labels" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">extract_labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#brainiak.image.SingleConditionSpec.extract_labels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract condition labels.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -348,7 +354,7 @@
 <p>I/O functionality.</p>
 <dl class="function">
 <dt id="brainiak.io.load_boolean_mask">
-<code class="descclassname">brainiak.io.</code><code class="descname">load_boolean_mask</code><span class="sig-paren">(</span><em>path: Union[str, pathlib.Path], predicate: Callable[numpy.ndarray, numpy.ndarray] = None</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#brainiak.io.load_boolean_mask" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.io.</code><code class="sig-name descname">load_boolean_mask</code><span class="sig-paren">(</span><em class="sig-param">path: Union[str, pathlib.Path], predicate: Callable[numpy.ndarray, numpy.ndarray] = None</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#brainiak.io.load_boolean_mask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load boolean nibabel.SpatialImage mask.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -369,7 +375,7 @@
 
 <dl class="function">
 <dt id="brainiak.io.load_images">
-<code class="descclassname">brainiak.io.</code><code class="descname">load_images</code><span class="sig-paren">(</span><em>image_paths: Iterable[Union[str, pathlib.Path]]</em><span class="sig-paren">)</span> &#x2192; Iterable[nibabel.spatialimages.SpatialImage]<a class="headerlink" href="#brainiak.io.load_images" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.io.</code><code class="sig-name descname">load_images</code><span class="sig-paren">(</span><em class="sig-param">image_paths: Iterable[Union[str, pathlib.Path]]</em><span class="sig-paren">)</span> &#x2192; Iterable[nibabel.spatialimages.SpatialImage]<a class="headerlink" href="#brainiak.io.load_images" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load images from paths.</p>
 <p>For efficiency, returns an iterator, not a sequence, so the results cannot
 be accessed by indexing.</p>
@@ -387,7 +393,7 @@ again.</p>
 
 <dl class="function">
 <dt id="brainiak.io.load_images_from_dir">
-<code class="descclassname">brainiak.io.</code><code class="descname">load_images_from_dir</code><span class="sig-paren">(</span><em>in_dir: Union[str, pathlib.Path], suffix: str = 'nii.gz'</em><span class="sig-paren">)</span> &#x2192; Iterable[nibabel.spatialimages.SpatialImage]<a class="headerlink" href="#brainiak.io.load_images_from_dir" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.io.</code><code class="sig-name descname">load_images_from_dir</code><span class="sig-paren">(</span><em class="sig-param">in_dir: Union[str, pathlib.Path], suffix: str = 'nii.gz'</em><span class="sig-paren">)</span> &#x2192; Iterable[nibabel.spatialimages.SpatialImage]<a class="headerlink" href="#brainiak.io.load_images_from_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load images from directory.</p>
 <p>For efficiency, returns an iterator, not a sequence, so the results cannot
 be accessed by indexing.</p>
@@ -412,7 +418,7 @@ called again.</p>
 
 <dl class="function">
 <dt id="brainiak.io.load_labels">
-<code class="descclassname">brainiak.io.</code><code class="descname">load_labels</code><span class="sig-paren">(</span><em>path: Union[str, pathlib.Path]</em><span class="sig-paren">)</span> &#x2192; List[brainiak.image.SingleConditionSpec]<a class="headerlink" href="#brainiak.io.load_labels" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.io.</code><code class="sig-name descname">load_labels</code><span class="sig-paren">(</span><em class="sig-param">path: Union[str, pathlib.Path]</em><span class="sig-paren">)</span> &#x2192; List[brainiak.image.SingleConditionSpec]<a class="headerlink" href="#brainiak.io.load_labels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load labels files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -429,7 +435,7 @@ called again.</p>
 
 <dl class="function">
 <dt id="brainiak.io.save_as_nifti_file">
-<code class="descclassname">brainiak.io.</code><code class="descname">save_as_nifti_file</code><span class="sig-paren">(</span><em>data: numpy.ndarray, affine: numpy.ndarray, path: Union[str, pathlib.Path]</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#brainiak.io.save_as_nifti_file" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.io.</code><code class="sig-name descname">save_as_nifti_file</code><span class="sig-paren">(</span><em class="sig-param">data: numpy.ndarray, affine: numpy.ndarray, path: Union[str, pathlib.Path]</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#brainiak.io.save_as_nifti_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a Nifti file and save it.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -480,7 +486,7 @@ Lositsky, Y. Yeshurun, A. Wiesel, U. Hasson, 2016, Nature Communications,
 </dl>
 <dl class="function">
 <dt id="brainiak.isc.bootstrap_isc">
-<code class="descclassname">brainiak.isc.</code><code class="descname">bootstrap_isc</code><span class="sig-paren">(</span><em>iscs</em>, <em>pairwise=False</em>, <em>summary_statistic='median'</em>, <em>n_bootstraps=1000</em>, <em>ci_percentile=95</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.bootstrap_isc" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.isc.</code><code class="sig-name descname">bootstrap_isc</code><span class="sig-paren">(</span><em class="sig-param">iscs</em>, <em class="sig-param">pairwise=False</em>, <em class="sig-param">summary_statistic='median'</em>, <em class="sig-param">n_bootstraps=1000</em>, <em class="sig-param">ci_percentile=95</em>, <em class="sig-param">random_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.bootstrap_isc" title="Permalink to this definition">¶</a></dt>
 <dd><p>One-sample group-level bootstrap hypothesis test for ISCs</p>
 <p>For ISCs from one more voxels or ROIs, resample subjects with replacement
 to construct a bootstrap distribution. Input is a list or ndarray of
@@ -532,7 +538,7 @@ P. Hall, S. R., Wilson, 1991, Biometrics, 757-762.
 
 <dl class="function">
 <dt id="brainiak.isc.compute_summary_statistic">
-<code class="descclassname">brainiak.isc.</code><code class="descname">compute_summary_statistic</code><span class="sig-paren">(</span><em>iscs</em>, <em>summary_statistic='mean'</em>, <em>axis=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.compute_summary_statistic" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.isc.</code><code class="sig-name descname">compute_summary_statistic</code><span class="sig-paren">(</span><em class="sig-param">iscs</em>, <em class="sig-param">summary_statistic='mean'</em>, <em class="sig-param">axis=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.compute_summary_statistic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes summary statistics for ISCs</p>
 <p>Computes either the ‘mean’ or ‘median’ across a set of ISCs. In the
 case of the mean, ISC values are first Fisher Z transformed (arctanh),
@@ -566,7 +572,7 @@ compute the mean of the flattened array.</p></li>
 
 <dl class="function">
 <dt id="brainiak.isc.isfc">
-<code class="descclassname">brainiak.isc.</code><code class="descname">isfc</code><span class="sig-paren">(</span><em>data</em>, <em>targets=None</em>, <em>pairwise=False</em>, <em>summary_statistic=None</em>, <em>vectorize_isfcs=True</em>, <em>tolerate_nans=True</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.isfc" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.isc.</code><code class="sig-name descname">isfc</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">targets=None</em>, <em class="sig-param">pairwise=False</em>, <em class="sig-param">summary_statistic=None</em>, <em class="sig-param">vectorize_isfcs=True</em>, <em class="sig-param">tolerate_nans=True</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.isfc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Intersubject functional correlation (ISFC)</p>
 <p>For each input voxel or ROI, compute the Pearson correlation between each
 subject’s response time series and all input voxels or ROIs in other
@@ -635,7 +641,7 @@ ISFCs (False)</p></li>
 
 <dl class="function">
 <dt id="brainiak.isc.isc">
-<code class="descclassname">brainiak.isc.</code><code class="descname">isc</code><span class="sig-paren">(</span><em>data</em>, <em>pairwise=False</em>, <em>summary_statistic=None</em>, <em>tolerate_nans=True</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.isc" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.isc.</code><code class="sig-name descname">isc</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">pairwise=False</em>, <em class="sig-param">summary_statistic=None</em>, <em class="sig-param">tolerate_nans=True</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.isc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Intersubject correlation</p>
 <p>For each voxel or ROI, compute the Pearson correlation between each
 subject’s response time series and other subjects’ response time series.
@@ -691,7 +697,7 @@ the output is a ndarray n_voxels long.</p>
 
 <dl class="function">
 <dt id="brainiak.isc.permutation_isc">
-<code class="descclassname">brainiak.isc.</code><code class="descname">permutation_isc</code><span class="sig-paren">(</span><em>iscs</em>, <em>group_assignment=None</em>, <em>pairwise=False</em>, <em>summary_statistic='median'</em>, <em>n_permutations=1000</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.permutation_isc" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.isc.</code><code class="sig-name descname">permutation_isc</code><span class="sig-paren">(</span><em class="sig-param">iscs</em>, <em class="sig-param">group_assignment=None</em>, <em class="sig-param">pairwise=False</em>, <em class="sig-param">summary_statistic='median'</em>, <em class="sig-param">n_permutations=1000</em>, <em class="sig-param">random_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.permutation_isc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Group-level permutation test for ISCs</p>
 <p>For ISCs from one or more voxels or ROIs, permute group assignments to
 construct a permutation distribution. Input is a list or ndarray of
@@ -742,7 +748,7 @@ tests.</p>
 
 <dl class="function">
 <dt id="brainiak.isc.phaseshift_isc">
-<code class="descclassname">brainiak.isc.</code><code class="descname">phaseshift_isc</code><span class="sig-paren">(</span><em>data</em>, <em>pairwise=False</em>, <em>summary_statistic='median'</em>, <em>n_shifts=1000</em>, <em>tolerate_nans=True</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.phaseshift_isc" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.isc.</code><code class="sig-name descname">phaseshift_isc</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">pairwise=False</em>, <em class="sig-param">summary_statistic='median'</em>, <em class="sig-param">n_shifts=1000</em>, <em class="sig-param">tolerate_nans=True</em>, <em class="sig-param">random_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.phaseshift_isc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Phase randomization for one-sample ISC test</p>
 <p>For each voxel or ROI, compute the actual ISC and p-values
 from a null distribution of ISCs where response time series
@@ -802,7 +808,7 @@ L. J. Silbert, U. Hasson, 2011, Journal of Neuroscience, 31, 2906-2915.
 
 <dl class="function">
 <dt id="brainiak.isc.squareform_isfc">
-<code class="descclassname">brainiak.isc.</code><code class="descname">squareform_isfc</code><span class="sig-paren">(</span><em>isfcs</em>, <em>iscs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.squareform_isfc" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.isc.</code><code class="sig-name descname">squareform_isfc</code><span class="sig-paren">(</span><em class="sig-param">isfcs</em>, <em class="sig-param">iscs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.squareform_isfc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts square ISFCs to condensed ISFCs (and ISCs), and vice-versa</p>
 <p>If input is a 2- or 3-dimensional array of square ISFC matrices, converts
 this to the condensed off-diagonal ISFC values (i.e., the vectorized
@@ -835,7 +841,7 @@ diagonal ISFC array and the diagonal ISC values are returned</p>
 
 <dl class="function">
 <dt id="brainiak.isc.timeshift_isc">
-<code class="descclassname">brainiak.isc.</code><code class="descname">timeshift_isc</code><span class="sig-paren">(</span><em>data</em>, <em>pairwise=False</em>, <em>summary_statistic='median'</em>, <em>n_shifts=1000</em>, <em>tolerate_nans=True</em>, <em>random_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.timeshift_isc" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.isc.</code><code class="sig-name descname">timeshift_isc</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">pairwise=False</em>, <em class="sig-param">summary_statistic='median'</em>, <em class="sig-param">n_shifts=1000</em>, <em class="sig-param">tolerate_nans=True</em>, <em class="sig-param">random_state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.timeshift_isc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Circular time-shift randomization for one-sample ISC test</p>
 <p>For each voxel or ROI, compute the actual ISC and p-values
 from a null distribution of ISCs where response time series
