@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>brainiak.searchlight package &mdash; brainiak 0.9.1 documentation</title>
+  <title>brainiak.searchlight package &mdash; brainiak 0.10 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.9.1
+                0.10
               </div>
             
           
@@ -168,7 +168,7 @@
 <span id="brainiak-searchlight-searchlight-module"></span><h2>brainiak.searchlight.searchlight module<a class="headerlink" href="#module-brainiak.searchlight.searchlight" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="brainiak.searchlight.searchlight.Ball">
-<em class="property">class </em><code class="descclassname">brainiak.searchlight.searchlight.</code><code class="descname">Ball</code><span class="sig-paren">(</span><em>rad</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Ball" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.searchlight.searchlight.</code><code class="sig-name descname">Ball</code><span class="sig-paren">(</span><em class="sig-param">rad</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Ball" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#brainiak.searchlight.searchlight.Shape" title="brainiak.searchlight.searchlight.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.searchlight.searchlight.Shape</span></code></a></p>
 <p>Searchlight shape which is a ball
 inscribed in a cube of size (2*rad+1,2*rad+1,2*rad+1).
@@ -183,7 +183,7 @@ less than rad from the center point is set to True.</p>
 
 <dl class="class">
 <dt id="brainiak.searchlight.searchlight.Cube">
-<em class="property">class </em><code class="descclassname">brainiak.searchlight.searchlight.</code><code class="descname">Cube</code><span class="sig-paren">(</span><em>rad</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Cube" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.searchlight.searchlight.</code><code class="sig-name descname">Cube</code><span class="sig-paren">(</span><em class="sig-param">rad</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Cube" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#brainiak.searchlight.searchlight.Shape" title="brainiak.searchlight.searchlight.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.searchlight.searchlight.Shape</span></code></a></p>
 <p>Searchlight shape which is a cube of size (2*rad+1,2*rad+1,2*rad+1)</p>
 <dl class="field-list simple">
@@ -195,7 +195,7 @@ less than rad from the center point is set to True.</p>
 
 <dl class="class">
 <dt id="brainiak.searchlight.searchlight.Diamond">
-<em class="property">class </em><code class="descclassname">brainiak.searchlight.searchlight.</code><code class="descname">Diamond</code><span class="sig-paren">(</span><em>rad</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Diamond" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.searchlight.searchlight.</code><code class="sig-name descname">Diamond</code><span class="sig-paren">(</span><em class="sig-param">rad</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Diamond" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#brainiak.searchlight.searchlight.Shape" title="brainiak.searchlight.searchlight.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.searchlight.searchlight.Shape</span></code></a></p>
 <p>Searchlight shape which is a diamond
 inscribed in a cube of size (2*rad+1,2*rad+1,2*rad+1).
@@ -210,7 +210,7 @@ less than rad from the center point is set to True.</p>
 
 <dl class="class">
 <dt id="brainiak.searchlight.searchlight.Searchlight">
-<em class="property">class </em><code class="descclassname">brainiak.searchlight.searchlight.</code><code class="descname">Searchlight</code><span class="sig-paren">(</span><em>sl_rad=1</em>, <em>max_blk_edge=10</em>, <em>shape=&lt;class 'brainiak.searchlight.searchlight.Cube'&gt;</em>, <em>min_active_voxels_proportion=0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.searchlight.searchlight.</code><code class="sig-name descname">Searchlight</code><span class="sig-paren">(</span><em class="sig-param">sl_rad=1</em>, <em class="sig-param">max_blk_edge=10</em>, <em class="sig-param">shape=&lt;class 'brainiak.searchlight.searchlight.Cube'&gt;</em>, <em class="sig-param">min_active_voxels_proportion=0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Distributed Searchlight</p>
 <p>Run a user-defined function over each voxel in a multi-subject
@@ -235,7 +235,7 @@ consideration.</p></li>
 </dl>
 <dl class="method">
 <dt id="brainiak.searchlight.searchlight.Searchlight.broadcast">
-<code class="descname">broadcast</code><span class="sig-paren">(</span><em>bcast_var</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight.broadcast" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">broadcast</code><span class="sig-paren">(</span><em class="sig-param">bcast_var</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight.broadcast" title="Permalink to this definition">¶</a></dt>
 <dd><p>Distribute data to processes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -246,7 +246,7 @@ consideration.</p></li>
 
 <dl class="method">
 <dt id="brainiak.searchlight.searchlight.Searchlight.distribute">
-<code class="descname">distribute</code><span class="sig-paren">(</span><em>subjects</em>, <em>mask</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight.distribute" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">distribute</code><span class="sig-paren">(</span><em class="sig-param">subjects</em>, <em class="sig-param">mask</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight.distribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Distribute data to MPI ranks</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -271,7 +271,7 @@ Rank 2: [None, None, None]</p>
 
 <dl class="method">
 <dt id="brainiak.searchlight.searchlight.Searchlight.run_block_function">
-<code class="descname">run_block_function</code><span class="sig-paren">(</span><em>block_fn</em>, <em>extra_block_fn_params=None</em>, <em>pool_size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight.run_block_function" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">run_block_function</code><span class="sig-paren">(</span><em class="sig-param">block_fn</em>, <em class="sig-param">extra_block_fn_params=None</em>, <em class="sig-param">pool_size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight.run_block_function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform a function for each block in a volume.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -300,7 +300,7 @@ restrictions.</p>
 
 <dl class="method">
 <dt id="brainiak.searchlight.searchlight.Searchlight.run_searchlight">
-<code class="descname">run_searchlight</code><span class="sig-paren">(</span><em>voxel_fn</em>, <em>pool_size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight.run_searchlight" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">run_searchlight</code><span class="sig-paren">(</span><em class="sig-param">voxel_fn</em>, <em class="sig-param">pool_size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight.run_searchlight" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform a function at each voxel which is set to True in the
 user-provided mask. The mask passed to the searchlight function will be
 further masked by the user-provided searchlight shape.</p>
@@ -334,13 +334,13 @@ cube</p>
 
 <dl class="class">
 <dt id="brainiak.searchlight.searchlight.Shape">
-<em class="property">class </em><code class="descclassname">brainiak.searchlight.searchlight.</code><code class="descname">Shape</code><span class="sig-paren">(</span><em>rad</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Shape" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.searchlight.searchlight.</code><code class="sig-name descname">Shape</code><span class="sig-paren">(</span><em class="sig-param">rad</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Shape" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Searchlight shape which is contained in a cube sized
 (2*rad+1,2*rad+1,2*rad+1)</p>
 <dl class="attribute">
 <dt id="brainiak.searchlight.searchlight.Shape.mask_">
-<code class="descname">mask_</code><a class="headerlink" href="#brainiak.searchlight.searchlight.Shape.mask_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">mask_</code><a class="headerlink" href="#brainiak.searchlight.searchlight.Shape.mask_" title="Permalink to this definition">¶</a></dt>
 <dd><p>which is set to True within the boundaries of the desired shape</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>

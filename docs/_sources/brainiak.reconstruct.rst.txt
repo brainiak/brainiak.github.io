@@ -1,0 +1,19 @@
+brainiak.reconstruct package
+============================
+
+.. automodule:: brainiak.reconstruct
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+brainiak.reconstruct.iem module
+-------------------------------
+
+.. automodule:: brainiak.reconstruct.iem
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

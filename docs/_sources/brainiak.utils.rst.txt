@@ -2,9 +2,9 @@ brainiak.utils package
 ======================
 
 .. automodule:: brainiak.utils
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 Submodules
 ----------
@@ -13,16 +13,15 @@ brainiak.utils.fmrisim module
 -----------------------------
 
 .. automodule:: brainiak.utils.fmrisim
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 brainiak.utils.utils module
 ---------------------------
 
 .. automodule:: brainiak.utils.utils
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   :members:
+   :undoc-members:
+   :show-inheritance:
 

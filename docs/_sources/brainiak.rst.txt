@@ -2,23 +2,24 @@ brainiak package
 ================
 
 .. automodule:: brainiak
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 Subpackages
 -----------
 
 .. toctree::
 
-    brainiak.eventseg
-    brainiak.factoranalysis
-    brainiak.fcma
-    brainiak.funcalign
-    brainiak.hyperparamopt
-    brainiak.reprsimil
-    brainiak.searchlight
-    brainiak.utils
+   brainiak.eventseg
+   brainiak.factoranalysis
+   brainiak.fcma
+   brainiak.funcalign
+   brainiak.hyperparamopt
+   brainiak.reconstruct
+   brainiak.reprsimil
+   brainiak.searchlight
+   brainiak.utils
 
 Submodules
 ----------
@@ -27,24 +28,23 @@ brainiak.image module
 ---------------------
 
 .. automodule:: brainiak.image
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 brainiak.io module
 ------------------
 
 .. automodule:: brainiak.io
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 brainiak.isc module
 -------------------
 
 .. automodule:: brainiak.isc
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   :members:
+   :undoc-members:
+   :show-inheritance:
 

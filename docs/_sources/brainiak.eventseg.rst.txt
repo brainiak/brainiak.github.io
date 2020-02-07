@@ -2,9 +2,9 @@ brainiak.eventseg package
 =========================
 
 .. automodule:: brainiak.eventseg
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 Submodules
 ----------
@@ -13,8 +13,7 @@ brainiak.eventseg.event module
 ------------------------------
 
 .. automodule:: brainiak.eventseg.event
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
