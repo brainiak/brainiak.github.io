@@ -1,4 +1,25 @@
-- id: Cai2019 
+- id: Kumar2020
+  title: "BrainIAK tutorials: User-friendly learning materials for advanced fMRI analysis"
+  date: 2020-01-15
+  authors:
+     - Manoj Kumar
+     - Cameron T. Ellis
+     - Qihong Lu
+     - Hejia Zhang
+     - Mihai Capotă
+     - Theodore L. Willke
+     - Peter J. Ramadge
+     - Nicholas B. Turk-Browne
+     - Kenneth A. Norman
+  journal: PLOS Computational Biology
+  volume: 16
+  number: 1
+  year: 2020
+  pages: e1007549
+  links:
+     paper: "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007549"
+
+- id: Cai2019
   title: "Representational structure or task structure? Bias in neural representational similarity analysis and a Bayesian method for reducing bias"
   date: 2019-05-24
   authors:
@@ -15,7 +36,7 @@
      paper: "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006299"
      docs: "https://brainiak.org/docs/brainiak.reprsimil.html"
 
-- id: baldassano2018-1 
+- id: baldassano2018-1
   title: "Representation of real-world event schemas during narrative perception"
   date: 2018-09-24
   authors:
@@ -97,7 +118,7 @@
      code: "https://github.com/brainiak/brainiak/tree/master/brainiak/fcma"
      docs: "http://brainiak.org/docs/brainiak.fcma.html"
 
-- id: baldassano2017-1 
+- id: baldassano2017-1
   title: "Discovering Event Structure in Continuous Narrative Perception and Memory"
   date: 2017-08-02
   authors:
