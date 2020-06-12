@@ -1,3 +1,20 @@
+
+- id: Ellis2020
+  title: "Facilitating open-science with realistic fMRI simulation: validation and application"
+  date: 2020-02-19
+  authors:
+     - Cameron T. Ellis
+     - Christopher Baldassano
+     - Anna C. Schapiro
+     - Ming Bo Cai
+     - Jonathan D. Cohen
+  journal: PeerJ
+  volume: 8
+  year: 2020
+  pages: e8564
+  links:
+     paper: "https://doi.org/10.7717/peerj.8564"
+
 - id: Kumar2020
   title: "BrainIAK tutorials: User-friendly learning materials for advanced fMRI analysis"
   date: 2020-01-15
@@ -18,6 +35,23 @@
   pages: e1007549
   links:
      paper: "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007549"
+     
+- id: Ellis2019
+  title: "Feasibility of topological data analysis for event-related fMRI"
+  date: 2019-05-09
+  authors:
+     - Cameron T. Ellis
+     - Michael Lesnick
+     - Gregory Henselman-Petrusek
+     - Bryn B. Keller
+     - Jonathan D. Cohen
+  journal: Network Neuroscicence
+  volume: 3
+  number: 3
+  year: 2019
+  pages: 1-12
+  links:
+     paper: "https://www.mitpressjournals.org/doi/full/10.1162/netn_a_00095"
 
 - id: Cai2019
   title: "Representational structure or task structure? Bias in neural representational similarity analysis and a Bayesian method for reducing bias"
