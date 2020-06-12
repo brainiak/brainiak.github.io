@@ -4,17 +4,16 @@
   date: 2020-02-19
   authors:
      - Cameron T. Ellis
-     - Michael Lesnick
-     - Gregory Henselman-Petrusek
-     - Bryn B. Keller
-     - Theodore L. Willke
+     - Christopher Baldassano
+     - Anna C. Schapiro
+     - Ming Bo Cai
      - Jonathan D. Cohen
   journal: PeerJ
   volume: 8
   year: 2020
   pages: e8564
   links:
-     paper: ""
+     paper: "https://doi.org/10.7717/peerj.8564"
 
 - id: Kumar2020
   title: "BrainIAK tutorials: User-friendly learning materials for advanced fMRI analysis"
@@ -45,7 +44,6 @@
      - Michael Lesnick
      - Gregory Henselman-Petrusek
      - Bryn B. Keller
-     - Theodore L. Willke
      - Jonathan D. Cohen
   journal: Network Neuroscicence
   volume: 3
