@@ -1,3 +1,18 @@
+- id: Cai2020
+  title: "Incorporating structured assumptions with probabilistic graphical models in fMRI data analysis"
+  date: 2020-05-17
+  authors:
+     - Ming Bo Cai
+     - Michael Shvartsman
+     - Anqi Wu
+     - Hejia Zhang
+     - Xia Zhu
+  journal: Neuropsychologia
+  volume: 144
+  year: 2020
+  pages: 107500
+  links:
+     paper: "https://www.sciencedirect.com/science/article/pii/S0028393220301706"
 
 - id: Ellis2020
   title: "Facilitating open-science with realistic fMRI simulation: validation and application"
@@ -69,6 +84,8 @@
   links:
      paper: "https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006299"
      docs: "https://brainiak.org/docs/brainiak.reprsimil.html"
+     example: "https://github.com/brainiak/brainiak/tree/master/examples/reprsimil"
+     code: "https://github.com/brainiak/brainiak/blob/master/brainiak/reprsimil/brsa.py"
 
 - id: baldassano2018-1
   title: "Representation of real-world event schemas during narrative perception"
