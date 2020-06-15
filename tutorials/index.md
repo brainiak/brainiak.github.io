@@ -12,6 +12,7 @@ Advanced fMRI analyses have the potential to answer questions that mainstream me
 
 - [Preview](#preview): browse the tutorials from your web browser
 - [Getting started](#getting-started): install and run the tutorials on your own machine or in the cloud
+- [Introductory Video](https://drive.google.com/file/d/1_GZKubq0hRKQSu-xJRL3tyaJAoA8e-fG/view?ts=5ee786de): An introduction to BrainIAK
 </div>
 </div>
 
