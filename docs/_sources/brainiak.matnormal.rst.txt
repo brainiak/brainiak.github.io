@@ -1,0 +1,50 @@
+brainiak.matnormal package
+==========================
+
+.. automodule:: brainiak.matnormal
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+brainiak.matnormal.covs module
+------------------------------
+
+.. automodule:: brainiak.matnormal.covs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+brainiak.matnormal.matnormal\_likelihoods module
+------------------------------------------------
+
+.. automodule:: brainiak.matnormal.matnormal_likelihoods
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+brainiak.matnormal.mnrsa module
+-------------------------------
+
+.. automodule:: brainiak.matnormal.mnrsa
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+brainiak.matnormal.regression module
+------------------------------------
+
+.. automodule:: brainiak.matnormal.regression
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+brainiak.matnormal.utils module
+-------------------------------
+
+.. automodule:: brainiak.matnormal.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
