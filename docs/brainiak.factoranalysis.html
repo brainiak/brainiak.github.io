@@ -1,39 +1,40 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>brainiak.factoranalysis package &mdash; brainiak 0.10 documentation</title>
+  <title>brainiak.factoranalysis package &mdash; brainiak 0.11 documentation</title>
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="brainiak.fcma package" href="brainiak.fcma.html" />
@@ -51,7 +52,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> brainiak
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> brainiak
           
 
           
@@ -61,7 +62,7 @@
             
             
               <div class="version">
-                0.10
+                0.11
               </div>
             
           
@@ -78,6 +79,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -95,6 +97,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -133,7 +136,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="api.html">API</a> &raquo;</li>
         
@@ -199,7 +202,7 @@ IEEE International Conference on Big Data, 2016.
 <a class="reference external" href="https://doi.org/10.1109/BigData.2016.7840719">https://doi.org/10.1109/BigData.2016.7840719</a></p>
 </dd>
 </dl>
-<dl class="class">
+<dl class="py class">
 <dt id="brainiak.factoranalysis.htfa.HTFA">
 <em class="property">class </em><code class="sig-prename descclassname">brainiak.factoranalysis.htfa.</code><code class="sig-name descname">HTFA</code><span class="sig-paren">(</span><em class="sig-param">K</em>, <em class="sig-param">n_subj</em>, <em class="sig-param">max_global_iter=10</em>, <em class="sig-param">max_local_iter=10</em>, <em class="sig-param">threshold=0.01</em>, <em class="sig-param">nlss_method='trf'</em>, <em class="sig-param">nlss_loss='soft_l1'</em>, <em class="sig-param">jac='2-point'</em>, <em class="sig-param">x_scale='jac'</em>, <em class="sig-param">tr_solver=None</em>, <em class="sig-param">weight_method='rr'</em>, <em class="sig-param">upper_ratio=1.8</em>, <em class="sig-param">lower_ratio=0.02</em>, <em class="sig-param">voxel_ratio=0.25</em>, <em class="sig-param">tr_ratio=0.1</em>, <em class="sig-param">max_voxel=5000</em>, <em class="sig-param">max_tr=500</em>, <em class="sig-param">comm=&lt;mpi4py.MPI.Intracomm object&gt;</em>, <em class="sig-param">verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.htfa.HTFA" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#brainiak.factoranalysis.tfa.TFA" title="brainiak.factoranalysis.tfa.TFA"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.factoranalysis.tfa.TFA</span></code></a></p>
@@ -245,7 +248,7 @@ More information at
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.factoranalysis.htfa.HTFA.global_prior_">
 <code class="sig-name descname">global_prior_</code><a class="headerlink" href="#brainiak.factoranalysis.htfa.HTFA.global_prior_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The global prior on mean and variance of centers and widths.</p>
@@ -256,7 +259,7 @@ More information at
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.factoranalysis.htfa.HTFA.global_posterior_">
 <code class="sig-name descname">global_posterior_</code><a class="headerlink" href="#brainiak.factoranalysis.htfa.HTFA.global_posterior_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The global posterior on mean and variance of centers and widths.</p>
@@ -267,7 +270,7 @@ More information at
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.factoranalysis.htfa.HTFA.local_posterior_">
 <code class="sig-name descname">local_posterior_</code><a class="headerlink" href="#brainiak.factoranalysis.htfa.HTFA.local_posterior_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Local posterior on centers and widths of subjects allocated
@@ -279,7 +282,7 @@ to this process.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.factoranalysis.htfa.HTFA.local_weights_">
 <code class="sig-name descname">local_weights_</code><a class="headerlink" href="#brainiak.factoranalysis.htfa.HTFA.local_weights_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Local posterior on weights allocated to this process.</p>
@@ -292,9 +295,9 @@ to this process.</p>
 
 <p class="rubric">Notes</p>
 <p>We recommend to use data in MNI space to better interpret global template</p>
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.htfa.HTFA.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">R</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.htfa.HTFA.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">R</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.htfa.HTFA.fit" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>Compute Hierarchical Topographical Factor Analysis Model</dt><dd><p>[Manning2014-1][Manning2014-2]</p>
 </dd>
@@ -338,9 +341,9 @@ Peter J. Ramadge, and Kenneth A. Norman
 2016.</p>
 </dd>
 </dl>
-<dl class="class">
+<dl class="py class">
 <dt id="brainiak.factoranalysis.tfa.TFA">
-<em class="property">class </em><code class="sig-prename descclassname">brainiak.factoranalysis.tfa.</code><code class="sig-name descname">TFA</code><span class="sig-paren">(</span><em class="sig-param">max_iter=10</em>, <em class="sig-param">threshold=1.0</em>, <em class="sig-param">K=50</em>, <em class="sig-param">nlss_method='trf'</em>, <em class="sig-param">nlss_loss='soft_l1'</em>, <em class="sig-param">jac='2-point'</em>, <em class="sig-param">x_scale='jac'</em>, <em class="sig-param">tr_solver=None</em>, <em class="sig-param">weight_method='rr'</em>, <em class="sig-param">upper_ratio=1.8</em>, <em class="sig-param">lower_ratio=0.02</em>, <em class="sig-param">max_num_tr=500</em>, <em class="sig-param">max_num_voxel=5000</em>, <em class="sig-param">seed=100</em>, <em class="sig-param">verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.factoranalysis.tfa.</code><code class="sig-name descname">TFA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">max_iter</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">threshold</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">K</span><span class="o">=</span><span class="default_value">50</span></em>, <em class="sig-param"><span class="n">nlss_method</span><span class="o">=</span><span class="default_value">'trf'</span></em>, <em class="sig-param"><span class="n">nlss_loss</span><span class="o">=</span><span class="default_value">'soft_l1'</span></em>, <em class="sig-param"><span class="n">jac</span><span class="o">=</span><span class="default_value">'2-point'</span></em>, <em class="sig-param"><span class="n">x_scale</span><span class="o">=</span><span class="default_value">'jac'</span></em>, <em class="sig-param"><span class="n">tr_solver</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">weight_method</span><span class="o">=</span><span class="default_value">'rr'</span></em>, <em class="sig-param"><span class="n">upper_ratio</span><span class="o">=</span><span class="default_value">1.8</span></em>, <em class="sig-param"><span class="n">lower_ratio</span><span class="o">=</span><span class="default_value">0.02</span></em>, <em class="sig-param"><span class="n">max_num_tr</span><span class="o">=</span><span class="default_value">500</span></em>, <em class="sig-param"><span class="n">max_num_voxel</span><span class="o">=</span><span class="default_value">5000</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
 <p>Topographical Factor Analysis (TFA)</p>
 <p>Given data from one subject, factorize it as a spatial factor F and
@@ -380,7 +383,7 @@ and maximum sigma of scanner coordinates.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.factoranalysis.tfa.TFA.local_posterior_">
 <code class="sig-name descname">local_posterior_</code><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.local_posterior_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Local posterior on subject’s centers and widths</p>
@@ -391,7 +394,7 @@ and maximum sigma of scanner coordinates.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.factoranalysis.tfa.TFA.F_">
 <code class="sig-name descname">F_</code><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.F_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Latent factors of the subject</p>
@@ -402,7 +405,7 @@ and maximum sigma of scanner coordinates.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.factoranalysis.tfa.TFA.W_">
 <code class="sig-name descname">W_</code><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.W_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Weight matrix of the subject</p>
@@ -413,9 +416,9 @@ and maximum sigma of scanner coordinates.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">R</em>, <em class="sig-param">template_prior=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">R</span></em>, <em class="sig-param"><span class="n">template_prior</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Topographical Factor Analysis (TFA)[Manning2014]</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -429,9 +432,9 @@ None when fitting TFA alone</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.get_bounds">
-<code class="sig-name descname">get_bounds</code><span class="sig-paren">(</span><em class="sig-param">R</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.get_bounds" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_bounds</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">R</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.get_bounds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate lower and upper bounds for centers and widths</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -446,9 +449,9 @@ None when fitting TFA alone</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.get_centers">
-<code class="sig-name descname">get_centers</code><span class="sig-paren">(</span><em class="sig-param">estimation</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.get_centers" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_centers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">estimation</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.get_centers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get estimation on centers</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -463,9 +466,9 @@ None when fitting TFA alone</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.get_centers_mean_cov">
-<code class="sig-name descname">get_centers_mean_cov</code><span class="sig-paren">(</span><em class="sig-param">estimation</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.get_centers_mean_cov" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_centers_mean_cov</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">estimation</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.get_centers_mean_cov" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get estimation on the covariance of centers’ mean</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -480,9 +483,9 @@ None when fitting TFA alone</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.get_factors">
-<code class="sig-name descname">get_factors</code><span class="sig-paren">(</span><em class="sig-param">unique_R</em>, <em class="sig-param">inds</em>, <em class="sig-param">centers</em>, <em class="sig-param">widths</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.get_factors" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_factors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unique_R</span></em>, <em class="sig-param"><span class="n">inds</span></em>, <em class="sig-param"><span class="n">centers</span></em>, <em class="sig-param"><span class="n">widths</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.get_factors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate factors based on centers and widths</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -505,7 +508,7 @@ array.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.get_map_offset">
 <code class="sig-name descname">get_map_offset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.get_map_offset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute offset of prior/posterior</p>
@@ -519,9 +522,9 @@ array.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.get_template">
-<code class="sig-name descname">get_template</code><span class="sig-paren">(</span><em class="sig-param">R</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.get_template" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_template</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">R</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.get_template" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute a template on latent factors</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -538,9 +541,9 @@ array.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.get_unique_R">
-<code class="sig-name descname">get_unique_R</code><span class="sig-paren">(</span><em class="sig-param">R</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.get_unique_R" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_unique_R</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">R</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.get_unique_R" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get unique vlaues from coordinate matrix</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -559,9 +562,9 @@ array.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.get_weights">
-<code class="sig-name descname">get_weights</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">F</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.get_weights" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_weights</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">F</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.get_weights" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate weight matrix based on fMRI data and factors</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -579,9 +582,9 @@ array.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.get_widths">
-<code class="sig-name descname">get_widths</code><span class="sig-paren">(</span><em class="sig-param">estimation</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.get_widths" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_widths</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">estimation</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.get_widths" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get estimation on widths</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -596,9 +599,9 @@ array.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.get_widths_mean_var">
-<code class="sig-name descname">get_widths_mean_var</code><span class="sig-paren">(</span><em class="sig-param">estimation</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.get_widths_mean_var" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_widths_mean_var</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">estimation</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.get_widths_mean_var" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get estimation on the variance of widths’ mean</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -613,9 +616,9 @@ array.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.init_centers_widths">
-<code class="sig-name descname">init_centers_widths</code><span class="sig-paren">(</span><em class="sig-param">R</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.init_centers_widths" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">init_centers_widths</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">R</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.init_centers_widths" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize prior of centers and widths</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -628,9 +631,9 @@ array.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.init_prior">
-<code class="sig-name descname">init_prior</code><span class="sig-paren">(</span><em class="sig-param">R</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.init_prior" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">init_prior</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">R</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.init_prior" title="Permalink to this definition">¶</a></dt>
 <dd><p>initialize prior for the subject</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -642,9 +645,9 @@ array.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.set_K">
-<code class="sig-name descname">set_K</code><span class="sig-paren">(</span><em class="sig-param">K</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.set_K" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_K</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">K</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.set_K" title="Permalink to this definition">¶</a></dt>
 <dd><p>set K for the subject</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -659,9 +662,9 @@ array.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.set_centers">
-<code class="sig-name descname">set_centers</code><span class="sig-paren">(</span><em class="sig-param">estimation</em>, <em class="sig-param">centers</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.set_centers" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_centers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">estimation</span></em>, <em class="sig-param"><span class="n">centers</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.set_centers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set estimation on centers</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -673,9 +676,9 @@ array.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.set_centers_mean_cov">
-<code class="sig-name descname">set_centers_mean_cov</code><span class="sig-paren">(</span><em class="sig-param">estimation</em>, <em class="sig-param">centers_mean_cov</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.set_centers_mean_cov" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_centers_mean_cov</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">estimation</span></em>, <em class="sig-param"><span class="n">centers_mean_cov</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.set_centers_mean_cov" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set estimation on centers</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -687,9 +690,9 @@ array.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.set_prior">
-<code class="sig-name descname">set_prior</code><span class="sig-paren">(</span><em class="sig-param">prior</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.set_prior" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_prior</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">prior</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.set_prior" title="Permalink to this definition">¶</a></dt>
 <dd><p>set prior for the subject</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -704,9 +707,9 @@ array.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.set_seed">
-<code class="sig-name descname">set_seed</code><span class="sig-paren">(</span><em class="sig-param">seed</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.set_seed" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_seed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seed</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.set_seed" title="Permalink to this definition">¶</a></dt>
 <dd><p>set seed for the subject</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -721,9 +724,9 @@ array.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.set_widths">
-<code class="sig-name descname">set_widths</code><span class="sig-paren">(</span><em class="sig-param">estimation</em>, <em class="sig-param">widths</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.set_widths" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_widths</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">estimation</span></em>, <em class="sig-param"><span class="n">widths</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.set_widths" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set estimation on widths</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -735,9 +738,9 @@ array.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.factoranalysis.tfa.TFA.set_widths_mean_var">
-<code class="sig-name descname">set_widths_mean_var</code><span class="sig-paren">(</span><em class="sig-param">estimation</em>, <em class="sig-param">widths_mean_var</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.set_widths_mean_var" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_widths_mean_var</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">estimation</span></em>, <em class="sig-param"><span class="n">widths_mean_var</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.factoranalysis.tfa.TFA.set_widths_mean_var" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set estimation on centers</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -749,6 +752,21 @@ array.</p></li>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+</div>
+<div class="section" id="module-brainiak.factoranalysis.tfa_extension">
+<span id="brainiak-factoranalysis-tfa-extension-module"></span><h2>brainiak.factoranalysis.tfa_extension module<a class="headerlink" href="#module-brainiak.factoranalysis.tfa_extension" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="brainiak.factoranalysis.tfa_extension.factor">
+<code class="sig-prename descclassname">brainiak.factoranalysis.tfa_extension.</code><code class="sig-name descname">factor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n">numpy.ndarray<span class="p">[</span>float64<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">arg1</span><span class="p">:</span> <span class="n">numpy.ndarray<span class="p">[</span>float64<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">arg2</span><span class="p">:</span> <span class="n">numpy.ndarray<span class="p">[</span>float64<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">arg3</span><span class="p">:</span> <span class="n">numpy.ndarray<span class="p">[</span>float64<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">arg4</span><span class="p">:</span> <span class="n">numpy.ndarray<span class="p">[</span>float64<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">arg5</span><span class="p">:</span> <span class="n">numpy.ndarray<span class="p">[</span>float64<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">arg6</span><span class="p">:</span> <span class="n">numpy.ndarray<span class="p">[</span>int64<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">arg7</span><span class="p">:</span> <span class="n">numpy.ndarray<span class="p">[</span>int64<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">arg8</span><span class="p">:</span> <span class="n">numpy.ndarray<span class="p">[</span>int64<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#brainiak.factoranalysis.tfa_extension.factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate factor matrix</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="brainiak.factoranalysis.tfa_extension.recon">
+<code class="sig-prename descclassname">brainiak.factoranalysis.tfa_extension.</code><code class="sig-name descname">recon</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n">numpy.ndarray<span class="p">[</span>float64<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">arg1</span><span class="p">:</span> <span class="n">numpy.ndarray<span class="p">[</span>float64<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">arg2</span><span class="p">:</span> <span class="n">numpy.ndarray<span class="p">[</span>float64<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">arg3</span><span class="p">:</span> <span class="n">numpy.ndarray<span class="p">[</span>float64<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">arg4</span><span class="p">:</span> <span class="n">numpy.ndarray<span class="p">[</span>float64<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#brainiak.factoranalysis.tfa_extension.recon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reconstruct data</p>
 </dd></dl>
 
 </div>
@@ -774,11 +792,19 @@ array.</p></li>
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -789,7 +815,6 @@ array.</p></li>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

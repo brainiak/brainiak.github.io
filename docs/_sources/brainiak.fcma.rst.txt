@@ -17,10 +17,10 @@ brainiak.fcma.classifier module
    :undoc-members:
    :show-inheritance:
 
-brainiak.fcma.cython\_blas module
----------------------------------
+brainiak.fcma.fcma\_extension module
+------------------------------------
 
-.. automodule:: brainiak.fcma.cython_blas
+.. automodule:: brainiak.fcma.fcma_extension
    :members:
    :undoc-members:
    :show-inheritance:
@@ -56,4 +56,3 @@ brainiak.fcma.voxelselector module
    :members:
    :undoc-members:
    :show-inheritance:
-

@@ -16,4 +16,3 @@ brainiak.reprsimil.brsa module
    :members:
    :undoc-members:
    :show-inheritance:
-

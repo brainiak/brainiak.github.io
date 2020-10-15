@@ -1,0 +1,1186 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>brainiak.matnormal package &mdash; brainiak 0.11 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="brainiak.reconstruct package" href="brainiak.reconstruct.html" />
+    <link rel="prev" title="brainiak.hyperparamopt package" href="brainiak.hyperparamopt.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> brainiak
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.11
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">brainiak</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="api.html">API</a> &raquo;</li>
+        
+          <li><a href="brainiak.html">brainiak package</a> &raquo;</li>
+        
+      <li>brainiak.matnormal package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/brainiak.matnormal.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-brainiak.matnormal">
+<span id="brainiak-matnormal-package"></span><h1>brainiak.matnormal package<a class="headerlink" href="#module-brainiak.matnormal" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="some-properties-of-the-matrix-variate-normal-distribution">
+<h2>Some properties of the matrix-variate normal distribution<a class="headerlink" href="#some-properties-of-the-matrix-variate-normal-distribution" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[\DeclareMathOperator{\Tr}{Tr}
+\newcommand{\trp}{^{T}} % transpose
+\newcommand{\trace}{\text{Trace}} % trace
+\newcommand{\inv}{^{-1}}
+\newcommand{\mb}{\mathbf{b}}
+\newcommand{\M}{\mathbf{M}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\G}{\mathbf{G}}
+\newcommand{\A}{\mathbf{A}}
+\newcommand{\R}{\mathbf{R}}
+\renewcommand{\S}{\mathbf{S}}
+\newcommand{\B}{\mathbf{B}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\mH}{\mathbf{H}}
+\newcommand{\U}{\mathbf{U}}
+\newcommand{\mL}{\mathbf{L}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\etr}{\mathrm{etr}}
+\renewcommand{\H}{\mathbf{H}}
+\newcommand{\vecop}{\mathrm{vec}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\Y}{\mathbf{Y}}
+\newcommand{\Z}{\mathbf{Z}}
+\renewcommand{\L}{\mathbf{L}}\]</div>
+<p>The matrix-variate normal distribution is a generalization to matrices of the
+normal distribution. Another name for it is the multivariate normal
+distribution with kronecker separable covariance.
+The distributional intuition is as follows: if
+<span class="math notranslate nohighlight">\(X \sim \mathcal{MN}(M,R,C)\)</span> then
+<span class="math notranslate nohighlight">\(\mathrm{vec}(X)\sim\mathcal{N}(\mathrm{vec}(M), C \otimes R)\)</span>,
+where <span class="math notranslate nohighlight">\(\mathrm{vec}(\cdot)\)</span> is the vectorization operator and
+<span class="math notranslate nohighlight">\(\otimes\)</span> is the Kronecker product. If we think of X as a matrix of TRs
+by voxels in the fMRI setting, then this model assumes that each voxel has the
+same TR-by-TR covariance structure (represented by the matrix R),
+and each volume has the same spatial covariance (represented by the matrix C).
+This assumption allows us to model both covariances separately.
+We can assume that the spatial covariance itself is kronecker-structured,
+which implies that the spatial covariance of voxels is the same in the X,
+Y and Z dimensions.</p>
+<p>The log-likelihood for the matrix-normal density is:</p>
+<div class="math notranslate nohighlight">
+\[\log p(X\mid \M,\R, \C) = -2\log mn - m \log|\C| -  n \log|\R| -
+\Tr\left[\C\inv(\X-\M)\trp\R\inv(\X-\M)\right]\]</div>
+<p>Here <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(M\)</span> are both <span class="math notranslate nohighlight">\(m\times n\)</span> matrices, <span class="math notranslate nohighlight">\(\R\)</span>
+is <span class="math notranslate nohighlight">\(m\times m\)</span> and <span class="math notranslate nohighlight">\(\C\)</span> is <span class="math notranslate nohighlight">\(n\times n\)</span>.</p>
+<p>The <a class="reference internal" href="#module-brainiak.matnormal" title="brainiak.matnormal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">brainiak.matnormal</span></code></a> package provides structure to infer models that
+can be stated in the matrix-normal notation that are useful for fMRI analysis.
+It provides a few interfaces. <code class="xref py py-obj docutils literal notranslate"><span class="pre">MatnormModelBase</span></code> is intended as a
+base class for matrix-variate models. It provides a wrapper for the tensorflow
+optimizer that provides convergence checks based on thresholds on the function
+value and gradient, and simple verbose outputs. It also provides an interface
+for noise covariances (<code class="xref py py-obj docutils literal notranslate"><span class="pre">CovBase</span></code>). Any class that follows the interface
+can be used as a noise covariance in any of the matrix normal models. The
+package includes a variety of noise covariances to work with.</p>
+</div>
+<div class="section" id="matrix-normal-marginals">
+<h2>Matrix normal marginals<a class="headerlink" href="#matrix-normal-marginals" title="Permalink to this headline">¶</a></h2>
+<p>Here we extend the multivariate gaussian marginalization identity to matrix
+normals. This is used in a number of the models in the package. Below, we
+use lowercase subscripts for sizes to make dimensionalities easier to track.
+Uppercase subscripts for covariances help keep track where they come from.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{X}_{ij} &amp;\sim \mathcal{MN}(\mathbf{A}_{ij},
+\Sigma_{\mathbf{X}i},\Sigma_{\mathbf{X}j})\\
+\mathbf{Y}_{jk} &amp;\sim \mathcal{MN}(\mathbf{B}_{jk},
+ \Sigma_{\mathbf{Y}j},\Sigma_{\mathbf{Y}k})\\
+\mathbf{Z}_{ik}\mid\mathbf{X}_{ij},\mathbf{Y}_{jk} &amp;\sim
+ \mathcal{MN}(\mathbf{X}_{ij}\mathbf{Y}_{jk} + \mathbf{C}_{ik},
+  \Sigma_{\mathbf{Z}_i}, \Sigma_{\mathbf{Z}_k})\\\end{split}\]</div>
+<p>We vectorize, and convert to a form we recognize as
+<span class="math notranslate nohighlight">\(y \sim \mathcal{N}(Mx+b, \Sigma)\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\vecop(\mathbf{Z}_{ik})\mid\mathbf{X}_{ij},\mathbf{Y}_{jk} &amp;\sim
+ \mathcal{N}(\vecop(\X_{ij}\mathbf{Y}_{jk}+\mathbf{C}_{ik}),
+ \Sigma_{\mathbf{Z}_k}\otimes\Sigma_{\mathbf{Z}_i})\\
+\vecop(\mathbf{Z}_{ik})\mid\mathbf{X}_{ij},\mathbf{Y}_{jk}
+&amp;\sim \mathcal{N}((\I_k\otimes\X_{ij})\vecop(\mathbf{Y}_{jk})
+ + \vecop(\mathbf{C}_{ik}),
+ \Sigma_{\mathbf{Z}_k}\otimes\Sigma_{\mathbf{Z}_i})\end{split}\]</div>
+<p>Now we can use our standard gaussian marginalization identity:</p>
+<div class="math notranslate nohighlight">
+\[\vecop(\mathbf{Z}_{ik})\mid\mathbf{X}_{ij} \sim
+\mathcal{N}((\I_k\otimes\X_{ij})\vecop(\mathbf{B}_{jk}) +
+ \vecop(\mathbf{C}_{ik}),
+ \Sigma_{\mathbf{Z}_k}\otimes\Sigma_{\mathbf{Z}_i} +
+ (\I_k\otimes\X_{ij})(\Sigma_{\mathbf{Y}_k}\otimes
+ \Sigma_{\mathbf{Y}_j})(\I_k\otimes\X_{ij})\trp )\]</div>
+<p>Collect terms using the mixed-product property of kronecker products:</p>
+<div class="math notranslate nohighlight">
+\[\vecop(\mathbf{Z}_{ik})\mid\mathbf{X}_{ij} \sim
+ \mathcal{N}(\vecop(\X_{ij}\mathbf{B}_{jk}) +
+  \vecop(\mathbf{C}_{ik}), \Sigma_{\mathbf{Z}_k}\otimes
+  \Sigma_{\mathbf{Z}_i} + \Sigma_{\mathbf{Y}_k}\otimes
+   \X_{ij}\Sigma_{\mathbf{Y}_j}\X_{ij}\trp)\]</div>
+<p>Now, we can see that the marginal density is a matrix-variate normal only if
+<span class="math notranslate nohighlight">\(\Sigma_{\mathbf{Z}_k}= \Sigma_{\mathbf{Y}_k}\)</span> – that is, the
+variable we’re marginalizing over has the same covariance in the dimension
+we’re <em>not</em> marginalizing over as the marginal density. Otherwise the densit
+is well-defined but the covariance retains its kronecker structure. So we let
+<span class="math notranslate nohighlight">\(\Sigma_k:=\Sigma_{\mathbf{Z}_k}= \Sigma_{\mathbf{Y}_k}\)</span>, factor,
+and transform it back into a matrix normal:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\vecop(\mathbf{Z}_{ik})\mid\mathbf{X}_{ij} &amp;\sim
+ \mathcal{N}(\vecop(\X\mathbf{B}_{jk}) + \vecop(\mathbf{C}_{ik}),
+  \Sigma_{k}\otimes\Sigma_{\mathbf{Z}_i} + \Sigma_{_k}\otimes
+  \X\Sigma_{\mathbf{Y}_j}\X\trp)\\
+\vecop(\mathbf{Z}_{ik})\mid\mathbf{X}_{ij} &amp;\sim
+ \mathcal{N}(\vecop(\X\mathbf{B}_{jk}) + \vecop(\mathbf{C}_{ik}),
+  \Sigma_{k}\otimes(\Sigma_{\mathbf{Z}_i}
+  +\X\Sigma_{\mathbf{Y}_j}\X\trp))\\
+\mathbf{Z}_{ik}\mid\mathbf{X}_{ij} &amp;\sim
+ \mathcal{MN}(\X\mathbf{B}_{jk} + \mathbf{C}_{ik},
+  \Sigma_{\mathbf{Z}_i} +\X\Sigma_{\mathbf{Y}_j}\X\trp,\Sigma_{k})\end{split}\]</div>
+<p>We can do it in the other direction as well, because if
+<span class="math notranslate nohighlight">\(\X \sim \mathcal{MN}(M, U, V)\)</span> then <span class="math notranslate nohighlight">\(\X\trp \sim
+\mathcal{MN}(M\trp, V, U)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{Z\trp}_{ik}\mid\mathbf{X}_{ij},\mathbf{Y}_{jk} &amp;\sim
+\mathcal{MN}(\mathbf{Y}_{jk}\trp\mathbf{X}_{ij}\trp +
+\mathbf{C}\trp_{ik}, \Sigma_{\mathbf{Z}_k},\Sigma_{\mathbf{Z}_i})\\
+\mbox{let } \Sigma_i :=
+ \Sigma_{\mathbf{Z}_i}=\Sigma_{\mathbf{X}_i} \\
+\cdots\\
+\mathbf{Z\trp}_{ik}\mid\mathbf{Y}_{jk} &amp;\sim
+ \mathcal{MN}(\mathbf{A}_{jk}\trp\mathbf{X}_{ij}\trp +
+  \mathbf{C}\trp_{ik}, \Sigma_{\mathbf{Z}_k} +
+   \Y\trp\Sigma_{\mathbf{Y}_j}\Y,\Sigma_{\mathbf{Z}_i})\\
+\mathbf{Z}_{ik}\mid\mathbf{Y}_{jk} &amp;\sim
+ \mathcal{MN}(\mathbf{X}_{ij}\mathbf{A}_{jk}+
+  \mathbf{C}_{ik},\Sigma_{\mathbf{Z}_i},\Sigma_{\mathbf{Z}_k} +
+   \Y\trp\Sigma_{\mathbf{Y}_j}\Y)\end{split}\]</div>
+<p>These marginal likelihoods are implemented relatively efficiently in
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">MatnormModelBase.matnorm_logp_marginal_row</span></code> and
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">MatnormModelBase.matnorm_logp_marginal_col</span></code>.</p>
+</div>
+<div class="section" id="partitioned-matrix-normal-conditionals">
+<h2>Partitioned matrix normal conditionals<a class="headerlink" href="#partitioned-matrix-normal-conditionals" title="Permalink to this headline">¶</a></h2>
+<p>Here we extend the multivariate gaussian conditional identity to matrix
+normals. This is used for prediction in some models. Below, we
+use lowercase subscripts for sizes to make dimensionalities easier to track.
+Uppercase subscripts for covariances help keep track where they come from.</p>
+<p>Next, we do the same for the partitioned gaussian identity. First two
+vectorized matrix-normals that form our partition:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{X}_{ij} &amp;\sim \mathcal{MN}(\mathbf{A}_{ij}, \Sigma_{i},
+\Sigma_{j}) \rightarrow \vecop[\mathbf{X}_{ij}] \sim
+\mathcal{N}(\vecop[\mathbf{A}_{ij}], \Sigma_{j}\otimes\Sigma_{i})\\
+\mathbf{Y}_{ik} &amp;\sim \mathcal{MN}(\mathbf{B}_{ik}, \Sigma_{i},
+\Sigma_{k}) \rightarrow \vecop[\mathbf{Y}_{ik}] \sim
+\mathcal{N}(\vecop[\mathbf{B}_{ik}], \Sigma_{k}\otimes\Sigma_{i})\\
+\begin{bmatrix}\vecop[\mathbf{X}_{ij}] \\ \vecop[\mathbf{Y}_{ik}]
+\end{bmatrix}
+&amp; \sim \mathcal{N}\left(\vecop\begin{bmatrix}\mathbf{A}_{ij}
+\\ \mathbf{B}_{ik}
+\end{bmatrix}
+, \begin{bmatrix} \Sigma_{j}\otimes \Sigma_i  &amp;
+ \Sigma_{jk} \otimes \Sigma_i  \\
+\Sigma_{kj}\otimes \Sigma_i &amp; \Sigma_{k} \otimes
+ \Sigma_i\end{bmatrix}\right)\end{split}\]</div>
+<p>We apply the standard partitioned Gaussian identity and simplify using the
+properties of the <span class="math notranslate nohighlight">\(\vecop\)</span> operator and the mixed product property
+of kronecker products:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\vecop[\X_{ij}] \mid \vecop[\Y_{ik}]\sim
+\mathcal{N}(&amp;\vecop[\A_{ij}] + (\Sigma_{jk}\otimes\Sigma_i)
+(\Sigma_k\inv\otimes\Sigma_i\inv)(\vecop[\Y_{ik}]-\vecop[\B_{ik}]),\\
+&amp; \Sigma_j\otimes\Sigma_i -  (\Sigma_{jk}\otimes\Sigma_i)
+(\Sigma_k\inv\otimes\Sigma_i\inv) (\Sigma_{kj}\otimes\Sigma_i))\\
+=\mathcal{N}(&amp;\vecop[\A_{ij}] +
+ (\Sigma_{jk}\Sigma_k\inv\otimes\Sigma_i\Sigma_i\inv)
+ (\vecop[\Y_{ik}]-\vecop[\B_{ik}]), \\
+ &amp; \Sigma_j\otimes\Sigma_i -
+ (\Sigma_{jk}\Sigma_k\inv\Sigma_{kj}\otimes
+ \Sigma_i\Sigma_i\inv \Sigma_i))\\
+=\mathcal{N}(&amp;\vecop[\A_{ij}] + (\Sigma_{jk}\Sigma_k\inv\otimes\I)
+(\vecop[\Y_{ik}]-\vecop[\B_{ik}]), \\
+ &amp; \Sigma_j\otimes\Sigma_i -
+ (\Sigma_{jk}\Sigma_k\inv\Sigma_{kj}\otimes\Sigma_i)\\
+=\mathcal{N}(&amp;\vecop[\A_{ij}] +
+\vecop[\Y_{ik}-\B_{ik}\Sigma_k\inv\Sigma_{kj}],
+ (\Sigma_j-\Sigma_{jk}\Sigma_k\inv\Sigma_{kj})\otimes\Sigma_i)\end{split}\]</div>
+<p>Next, we recognize that this multivariate gaussian is equivalent to the
+following matrix variate gaussian:</p>
+<div class="math notranslate nohighlight">
+\[\X_{ij} \mid \Y_{ik}\sim \mathcal{MN}(\A_{ij} +
+(\Y_{ik}-\B_{ik})\Sigma_k\inv\Sigma_{kj}, \Sigma_i,
+\Sigma_j-\Sigma_{jk}\Sigma_k\inv\Sigma_{kj})\]</div>
+<p>The conditional in the other direction can be written by working through the
+same algebra:</p>
+<div class="math notranslate nohighlight">
+\[\Y_{ik} \mid \X_{ij}\sim \mathcal{MN}(\B_{ik} +(\X_{ij}-
+\A_{ij})\Sigma_j\inv\Sigma_{jk}, \Sigma_i,
+\Sigma_k-\Sigma_{kj}\Sigma_j\inv\Sigma_{jk})\]</div>
+<p>Finally, vertical rather than horizontal concatenation (yielding a partitioned
+row rather than column covariance) can be written by recognizing the behavior
+of the matrix normal under transposition:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\X\trp_{ji} \mid \Y\trp_{ki}\sim \mathcal{MN}(&amp;\A\trp_{ji} +
+\Sigma_{jk}\Sigma_k\inv(\Y\trp_{ki}-\B\trp_{ki}),
+ \Sigma_j-\Sigma_{jk}\Sigma_k\inv\Sigma_{kj}, \Sigma_i)\\
+\Y\trp_{ki} \mid \X\trp_{ji}\sim \mathcal{MN}(&amp;\B\trp_{ki} +
+\Sigma_{kj}\Sigma_j\inv(\X\trp_{ji}-\A\trp_{ji}),
+ \Sigma_k-\Sigma_{kj}\Sigma_j\inv\Sigma_{jk}, \Sigma_i)\end{split}\]</div>
+<p>These conditional likelihoods are implemented relatively efficiently
+in <code class="xref py py-obj docutils literal notranslate"><span class="pre">MatnormModelBase.matnorm_logp_conditional_row</span></code> and
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">MatnormModelBase.matnorm_logp_conditional_col</span></code>.</p>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-brainiak.matnormal.covs">
+<span id="brainiak-matnormal-covs-module"></span><h2>brainiak.matnormal.covs module<a class="headerlink" href="#module-brainiak.matnormal.covs" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="brainiak.matnormal.covs.CovAR1">
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.matnormal.covs.</code><code class="sig-name descname">CovAR1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">rho</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sigma</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">scan_onsets</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovAR1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.matnormal.covs.CovBase</span></code></a></p>
+<p>AR(1) covariance parameterized by autoregressive parameter rho
+and new noise sigma.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<em>int</em>) – size of covariance matrix</p></li>
+<li><p><strong>rho</strong> (<em>float</em><em> or </em><em>None</em>) – initial value of autoregressive parameter (if None, initialize
+randomly)</p></li>
+<li><p><strong>sigma</strong> (<em>float</em><em> or </em><em>None</em>) – initial value of new noise parameter (if None, initialize randomly)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovAR1.get_optimize_vars">
+<code class="sig-name descname">get_optimize_vars</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovAR1.get_optimize_vars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of tf variables that need to get optimized to
+fit this covariance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovAR1.logdet">
+<em class="property">property </em><code class="sig-name descname">logdet</code><a class="headerlink" href="#brainiak.matnormal.covs.CovAR1.logdet" title="Permalink to this definition">¶</a></dt>
+<dd><p>log-determinant of this covariance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovAR1.solve">
+<code class="sig-name descname">solve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovAR1.solve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given this covariance <span class="math notranslate nohighlight">\(\Sigma\)</span> and some input <span class="math notranslate nohighlight">\(X\)</span>,
+compute <span class="math notranslate nohighlight">\(\Sigma^{-1}x\)</span></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="brainiak.matnormal.covs.CovBase">
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.matnormal.covs.</code><code class="sig-name descname">CovBase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Base metaclass for residual covariances.
+For more on abstract classes, see
+<a class="reference external" href="https://docs.python.org/3/library/abc.html">https://docs.python.org/3/library/abc.html</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>size</strong> (<em>int</em>) – The size of the covariance matrix.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovBase.get_optimize_vars">
+<em class="property">abstract </em><code class="sig-name descname">get_optimize_vars</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovBase.get_optimize_vars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of tf variables that need to get optimized to fit
+this covariance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovBase.logdet">
+<em class="property">property </em><code class="sig-name descname">logdet</code><a class="headerlink" href="#brainiak.matnormal.covs.CovBase.logdet" title="Permalink to this definition">¶</a></dt>
+<dd><p>log determinant of this covariance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovBase.solve">
+<em class="property">abstract </em><code class="sig-name descname">solve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovBase.solve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given this covariance <span class="math notranslate nohighlight">\(\Sigma\)</span> and some input <span class="math notranslate nohighlight">\(X\)</span>,
+compute <span class="math notranslate nohighlight">\(\Sigma^{-1}x\)</span></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="brainiak.matnormal.covs.CovDiagonal">
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.matnormal.covs.</code><code class="sig-name descname">CovDiagonal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">diag_var</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovDiagonal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.matnormal.covs.CovBase</span></code></a></p>
+<p>Uncorrelated (diagonal) noise covariance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<em>int</em>) – size of covariance matrix</p></li>
+<li><p><strong>diag_var</strong> (<em>float</em><em> or </em><em>None</em>) – initial value of (diagonal) variance vector (if None, initialize
+randomly)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovDiagonal.get_optimize_vars">
+<code class="sig-name descname">get_optimize_vars</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovDiagonal.get_optimize_vars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of tf variables that need to get optimized to fit
+this covariance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovDiagonal.logdet">
+<em class="property">property </em><code class="sig-name descname">logdet</code><a class="headerlink" href="#brainiak.matnormal.covs.CovDiagonal.logdet" title="Permalink to this definition">¶</a></dt>
+<dd><p>log determinant of this covariance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovDiagonal.solve">
+<code class="sig-name descname">solve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovDiagonal.solve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given this covariance <span class="math notranslate nohighlight">\(\Sigma\)</span> and some input <span class="math notranslate nohighlight">\(X\)</span>,
+compute <span class="math notranslate nohighlight">\(\Sigma^{-1}x\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>tf.Tensor</em>) – Tensor to multiply by inverse of this covariance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="brainiak.matnormal.covs.CovDiagonalGammaPrior">
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.matnormal.covs.</code><code class="sig-name descname">CovDiagonalGammaPrior</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">sigma</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">1.5</span></em>, <em class="sig-param"><span class="n">beta</span><span class="o">=</span><span class="default_value">1e-10</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovDiagonalGammaPrior" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#brainiak.matnormal.covs.CovDiagonal" title="brainiak.matnormal.covs.CovDiagonal"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.matnormal.covs.CovDiagonal</span></code></a></p>
+<p>Uncorrelated (diagonal) noise covariance</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="brainiak.matnormal.covs.CovIdentity">
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.matnormal.covs.</code><code class="sig-name descname">CovIdentity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovIdentity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.matnormal.covs.CovBase</span></code></a></p>
+<p>Identity noise covariance.</p>
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovIdentity.get_optimize_vars">
+<code class="sig-name descname">get_optimize_vars</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovIdentity.get_optimize_vars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of tf variables that need to get optimized to
+fit this covariance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovIdentity.logdet">
+<em class="property">property </em><code class="sig-name descname">logdet</code><a class="headerlink" href="#brainiak.matnormal.covs.CovIdentity.logdet" title="Permalink to this definition">¶</a></dt>
+<dd><p>log determinant of this covariance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovIdentity.solve">
+<code class="sig-name descname">solve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovIdentity.solve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given this covariance <span class="math notranslate nohighlight">\(\Sigma\)</span> and some input <span class="math notranslate nohighlight">\(X\)</span>,
+compute <span class="math notranslate nohighlight">\(\Sigma^{-1}x\)</span></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="brainiak.matnormal.covs.CovIsotropic">
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.matnormal.covs.</code><code class="sig-name descname">CovIsotropic</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">var</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovIsotropic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.matnormal.covs.CovBase</span></code></a></p>
+<p>Scaled identity (isotropic) noise covariance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<em>int</em>) – size of covariance matrix</p></li>
+<li><p><strong>var</strong> (<em>float</em><em> or </em><em>None</em>) – initial value of new variance parameter (if None, initialize randomly)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovIsotropic.get_optimize_vars">
+<code class="sig-name descname">get_optimize_vars</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovIsotropic.get_optimize_vars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of tf variables that need to get optimized to fit
+this covariance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovIsotropic.logdet">
+<em class="property">property </em><code class="sig-name descname">logdet</code><a class="headerlink" href="#brainiak.matnormal.covs.CovIsotropic.logdet" title="Permalink to this definition">¶</a></dt>
+<dd><p>log determinant of this covariance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovIsotropic.solve">
+<code class="sig-name descname">solve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovIsotropic.solve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given this covariance <span class="math notranslate nohighlight">\(\Sigma\)</span> and some input <span class="math notranslate nohighlight">\(X\)</span>,
+compute <span class="math notranslate nohighlight">\(\Sigma^{-1}x\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>tf.Tensor</em>) – Tensor to multiply by inverse of this covariance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="brainiak.matnormal.covs.CovKroneckerFactored">
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.matnormal.covs.</code><code class="sig-name descname">CovKroneckerFactored</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sizes</span></em>, <em class="sig-param"><span class="n">Sigmas</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mask</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovKroneckerFactored" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.matnormal.covs.CovBase</span></code></a></p>
+<p>Kronecker product noise covariance parameterized in terms
+of its component cholesky factors</p>
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovKroneckerFactored.L">
+<em class="property">property </em><code class="sig-name descname">L</code><a class="headerlink" href="#brainiak.matnormal.covs.CovKroneckerFactored.L" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovKroneckerFactored.get_optimize_vars">
+<code class="sig-name descname">get_optimize_vars</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovKroneckerFactored.get_optimize_vars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of tf variables that need to get optimized
+to fit this covariance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovKroneckerFactored.logdet">
+<em class="property">property </em><code class="sig-name descname">logdet</code><a class="headerlink" href="#brainiak.matnormal.covs.CovKroneckerFactored.logdet" title="Permalink to this definition">¶</a></dt>
+<dd><p>log|Sigma| using the diagonals of the cholesky factors.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovKroneckerFactored.solve">
+<code class="sig-name descname">solve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovKroneckerFactored.solve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given this covariance <span class="math notranslate nohighlight">\(\Sigma\)</span> and some input <span class="math notranslate nohighlight">\(X\)</span>,
+compute <span class="math notranslate nohighlight">\(\Sigma^{-1}x\)</span> using traingular solves with the cholesky
+factors.</p>
+<p>Specifically, we solve <span class="math notranslate nohighlight">\(L L^T x = y\)</span> by solving
+<span class="math notranslate nohighlight">\(L z = y\)</span> and <span class="math notranslate nohighlight">\(L^T x = z\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>tf.Tensor</em>) – Tensor to multiply by inverse of this covariance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="brainiak.matnormal.covs.CovUnconstrainedCholesky">
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.matnormal.covs.</code><code class="sig-name descname">CovUnconstrainedCholesky</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Sigma</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovUnconstrainedCholesky" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.matnormal.covs.CovBase</span></code></a></p>
+<p>Unconstrained noise covariance parameterized in terms of its cholesky</p>
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovUnconstrainedCholesky.L">
+<em class="property">property </em><code class="sig-name descname">L</code><a class="headerlink" href="#brainiak.matnormal.covs.CovUnconstrainedCholesky.L" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cholesky factor of this covariance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovUnconstrainedCholesky.get_optimize_vars">
+<code class="sig-name descname">get_optimize_vars</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovUnconstrainedCholesky.get_optimize_vars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of tf variables that need to get optimized to fit
+this covariance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovUnconstrainedCholesky.logdet">
+<em class="property">property </em><code class="sig-name descname">logdet</code><a class="headerlink" href="#brainiak.matnormal.covs.CovUnconstrainedCholesky.logdet" title="Permalink to this definition">¶</a></dt>
+<dd><p>log determinant of this covariance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovUnconstrainedCholesky.solve">
+<code class="sig-name descname">solve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovUnconstrainedCholesky.solve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given this covariance <span class="math notranslate nohighlight">\(\Sigma\)</span> and some input <span class="math notranslate nohighlight">\(X\)</span>,
+compute <span class="math notranslate nohighlight">\(\Sigma^{-1}x\)</span> (using cholesky solve)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>tf.Tensor</em>) – Tensor to multiply by inverse of this covariance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="brainiak.matnormal.covs.CovUnconstrainedCholeskyWishartReg">
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.matnormal.covs.</code><code class="sig-name descname">CovUnconstrainedCholeskyWishartReg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">Sigma</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovUnconstrainedCholeskyWishartReg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#brainiak.matnormal.covs.CovUnconstrainedCholesky" title="brainiak.matnormal.covs.CovUnconstrainedCholesky"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.matnormal.covs.CovUnconstrainedCholesky</span></code></a></p>
+<p>Unconstrained noise covariance parameterized in terms of its
+cholesky factor. Regularized using the trick from
+Chung et al. 2015 such that as the covariance approaches
+singularity, the likelihood goes to 0.</p>
+<p class="rubric">References</p>
+<p>Chung, Y., Gelman, A., Rabe-Hesketh, S., Liu, J., &amp; Dorie, V. (2015).
+Weakly Informative Prior for Point Estimation of Covariance Matrices
+in Hierarchical Models. Journal of Educational and Behavioral Statistics,
+40(2), 136–157. <a class="reference external" href="https://doi.org/10.3102/1076998615570945">https://doi.org/10.3102/1076998615570945</a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="brainiak.matnormal.covs.CovUnconstrainedInvCholesky">
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.matnormal.covs.</code><code class="sig-name descname">CovUnconstrainedInvCholesky</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">invSigma</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovUnconstrainedInvCholesky" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.matnormal.covs.CovBase</span></code></a></p>
+<p>Unconstrained noise covariance parameterized
+in terms of its precision cholesky. Use this over the
+regular cholesky unless you have a good reason not to, since
+this saves a cholesky solve on every step of optimization</p>
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovUnconstrainedInvCholesky.Linv">
+<em class="property">property </em><code class="sig-name descname">Linv</code><a class="headerlink" href="#brainiak.matnormal.covs.CovUnconstrainedInvCholesky.Linv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inverse of Cholesky factor of this covariance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovUnconstrainedInvCholesky.get_optimize_vars">
+<code class="sig-name descname">get_optimize_vars</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovUnconstrainedInvCholesky.get_optimize_vars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of tf variables that need to get optimized to fit
+this covariance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovUnconstrainedInvCholesky.logdet">
+<em class="property">property </em><code class="sig-name descname">logdet</code><a class="headerlink" href="#brainiak.matnormal.covs.CovUnconstrainedInvCholesky.logdet" title="Permalink to this definition">¶</a></dt>
+<dd><p>log determinant of this covariance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.covs.CovUnconstrainedInvCholesky.solve">
+<code class="sig-name descname">solve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.covs.CovUnconstrainedInvCholesky.solve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given this covariance <span class="math notranslate nohighlight">\(\Sigma\)</span> and some input <span class="math notranslate nohighlight">\(X\)</span>,
+compute <span class="math notranslate nohighlight">\(\Sigma^{-1}x\)</span> (using cholesky solve)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>tf.Tensor</em>) – Tensor to multiply by inverse of this covariance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-brainiak.matnormal.matnormal_likelihoods">
+<span id="brainiak-matnormal-matnormal-likelihoods-module"></span><h2>brainiak.matnormal.matnormal_likelihoods module<a class="headerlink" href="#module-brainiak.matnormal.matnormal_likelihoods" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="brainiak.matnormal.matnormal_likelihoods.matnorm_logp">
+<code class="sig-prename descclassname">brainiak.matnormal.matnormal_likelihoods.</code><code class="sig-name descname">matnorm_logp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">row_cov</span></em>, <em class="sig-param"><span class="n">col_cov</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.matnormal_likelihoods.matnorm_logp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log likelihood for centered matrix-variate normal density.
+Assumes that row_cov and col_cov follow the API defined in CovBase.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>tf.Tensor</em>) – Observation tensor</p></li>
+<li><p><strong>row_cov</strong> (<a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><em>CovBase</em></a>) – Row covariance implementing the CovBase API</p></li>
+<li><p><strong>col_cov</strong> (<a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><em>CovBase</em></a>) – Column Covariance implementing the CovBase API</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="brainiak.matnormal.matnormal_likelihoods.matnorm_logp_conditional_col">
+<code class="sig-prename descclassname">brainiak.matnormal.matnormal_likelihoods.</code><code class="sig-name descname">matnorm_logp_conditional_col</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">row_cov</span></em>, <em class="sig-param"><span class="n">col_cov</span></em>, <em class="sig-param"><span class="n">cond</span></em>, <em class="sig-param"><span class="n">cond_cov</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.matnormal_likelihoods.matnorm_logp_conditional_col" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log likelihood for centered conditional matrix-variate normal density.</p>
+<p>Consider the following partitioned matrix-normal density:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix}
+\operatorname{vec}\left[\mathbf{X}_{i j}\right] \\
+\operatorname{vec}\left[\mathbf{Y}_{i k}\right]\end{bmatrix}
+\sim \mathcal{N}\left(0,\begin{bmatrix} \Sigma_{j} \otimes
+\Sigma_{i} &amp; \Sigma_{j k} \otimes \Sigma_{i}\\
+\Sigma_{k j} \otimes \Sigma_{i} &amp; \Sigma_{k} \otimes \Sigma_{i}
+\end{bmatrix}\right)\end{split}\]</div>
+<p>Then we can write the conditional:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{X}_{i j} \mid \mathbf{Y}_{i k} \sim \mathcal{M}\
+\mathcal{N}\left(0, \Sigma_{i}, \Sigma_{j}-\Sigma_{j k}\
+\Sigma_{k}^{-1} \Sigma_{k j}\right)\]</div>
+<p>This function efficiently computes the conditionals by unpacking some
+info in the covariance classes and then dispatching to
+<a class="reference internal" href="#brainiak.matnormal.matnormal_likelihoods.solve_det_conditional" title="brainiak.matnormal.matnormal_likelihoods.solve_det_conditional"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_det_conditional</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>tf.Tensor</em>) – Observation tensor</p></li>
+<li><p><strong>row_cov</strong> (<a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><em>CovBase</em></a>) – Row covariance (<span class="math notranslate nohighlight">\(\Sigma_{i}\)</span> in the notation above).</p></li>
+<li><p><strong>col_cov</strong> (<a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><em>CovBase</em></a>) – Column covariance (<span class="math notranslate nohighlight">\(\Sigma_{j}\)</span> in the notation above).</p></li>
+<li><p><strong>cond</strong> (<em>tf.Tensor</em>) – Off-diagonal block of the partitioned covariance (<span class="math notranslate nohighlight">\(\Sigma_{jk}\)</span>
+in the notation above).</p></li>
+<li><p><strong>cond_cov</strong> (<a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><em>CovBase</em></a>) – Covariance of conditioning variable (<span class="math notranslate nohighlight">\(\Sigma_{k}\)</span> in the
+notation above).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="brainiak.matnormal.matnormal_likelihoods.matnorm_logp_conditional_row">
+<code class="sig-prename descclassname">brainiak.matnormal.matnormal_likelihoods.</code><code class="sig-name descname">matnorm_logp_conditional_row</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">row_cov</span></em>, <em class="sig-param"><span class="n">col_cov</span></em>, <em class="sig-param"><span class="n">cond</span></em>, <em class="sig-param"><span class="n">cond_cov</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.matnormal_likelihoods.matnorm_logp_conditional_row" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log likelihood for centered conditional matrix-variate normal density.</p>
+<p>Consider the following partitioned matrix-normal density:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix}
+\operatorname{vec}\left[\mathbf{X}_{i j}\right] \\
+\operatorname{vec}\left[\mathbf{Y}_{i k}\right]\end{bmatrix}
+\sim \mathcal{N}\left(0,\begin{bmatrix} \Sigma_{j} \otimes
+\Sigma_{i} &amp; \Sigma_{j k} \otimes \Sigma_{i}\\
+\Sigma_{k j} \otimes \Sigma_{i} &amp; \Sigma_{k} \otimes \Sigma_{i}
+\end{bmatrix}\right)\end{split}\]</div>
+<p>Then we can write the conditional:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{X}^T j i \mid \mathbf{Y}_{k i}^T
+\sim \mathcal{M}\
+\mathcal{N}\left(0, \Sigma_{j}-\Sigma_{j k} \Sigma_{k}^{-1}
+\Sigma_{k j},\
+\Sigma_{i}\right)\]</div>
+<p>This function efficiently computes the conditionals by unpacking some
+info in the covariance classes and then dispatching to
+<a class="reference internal" href="#brainiak.matnormal.matnormal_likelihoods.solve_det_conditional" title="brainiak.matnormal.matnormal_likelihoods.solve_det_conditional"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_det_conditional</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>tf.Tensor</em>) – Observation tensor</p></li>
+<li><p><strong>row_cov</strong> (<a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><em>CovBase</em></a>) – Row covariance (<span class="math notranslate nohighlight">\(\Sigma_{i}\)</span> in the notation above).</p></li>
+<li><p><strong>col_cov</strong> (<a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><em>CovBase</em></a>) – Column covariance (<span class="math notranslate nohighlight">\(\Sigma_{j}\)</span> in the notation above).</p></li>
+<li><p><strong>cond</strong> (<em>tf.Tensor</em>) – Off-diagonal block of the partitioned covariance (<span class="math notranslate nohighlight">\(\Sigma_{jk}\)</span>
+in the notation above).</p></li>
+<li><p><strong>cond_cov</strong> (<a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><em>CovBase</em></a>) – Covariance of conditioning variable (<span class="math notranslate nohighlight">\(\Sigma_{k}\)</span> in the
+notation above).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="brainiak.matnormal.matnormal_likelihoods.matnorm_logp_marginal_col">
+<code class="sig-prename descclassname">brainiak.matnormal.matnormal_likelihoods.</code><code class="sig-name descname">matnorm_logp_marginal_col</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">row_cov</span></em>, <em class="sig-param"><span class="n">col_cov</span></em>, <em class="sig-param"><span class="n">marg</span></em>, <em class="sig-param"><span class="n">marg_cov</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.matnormal_likelihoods.matnorm_logp_marginal_col" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log likelihood for centered marginal matrix-variate normal density.</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}X &amp;\sim \mathcal{MN}(0, R, Q)\\\Y \mid \X &amp;\sim \mathcal{MN}(XA, R, C),\\\Y &amp;\sim \mathcal{MN}(0, R, C + A^TQA)\end{aligned}\end{align} \]</div>
+<p>This function efficiently computes the marginals by unpacking some
+info in the covariance classes and then dispatching to
+<a class="reference internal" href="#brainiak.matnormal.matnormal_likelihoods.solve_det_marginal" title="brainiak.matnormal.matnormal_likelihoods.solve_det_marginal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_det_marginal</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>tf.Tensor</em>) – Observation tensor</p></li>
+<li><p><strong>row_cov</strong> (<a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><em>CovBase</em></a>) – Row covariance implementing the CovBase API (<span class="math notranslate nohighlight">\(R\)</span> above).</p></li>
+<li><p><strong>col_cov</strong> (<a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><em>CovBase</em></a>) – Column Covariance implementing the CovBase API (<span class="math notranslate nohighlight">\(C\)</span> above).</p></li>
+<li><p><strong>marg</strong> (<em>tf.Tensor</em>) – Marginal factor (<span class="math notranslate nohighlight">\(A\)</span> above).</p></li>
+<li><p><strong>marg_cov</strong> (<a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><em>CovBase</em></a>) – Prior covariance implementing the CovBase API (<span class="math notranslate nohighlight">\(Q\)</span> above).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="brainiak.matnormal.matnormal_likelihoods.matnorm_logp_marginal_row">
+<code class="sig-prename descclassname">brainiak.matnormal.matnormal_likelihoods.</code><code class="sig-name descname">matnorm_logp_marginal_row</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">row_cov</span></em>, <em class="sig-param"><span class="n">col_cov</span></em>, <em class="sig-param"><span class="n">marg</span></em>, <em class="sig-param"><span class="n">marg_cov</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.matnormal_likelihoods.matnorm_logp_marginal_row" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log likelihood for marginal centered matrix-variate normal density.</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}X &amp;\sim \mathcal{MN}(0, Q, C)\\\Y \mid \X &amp;\sim \mathcal{MN}(AX, R, C),\\\Y &amp;\sim \mathcal{MN}(0, R + AQA^T, C)\end{aligned}\end{align} \]</div>
+<p>This function efficiently computes the marginals by unpacking some
+info in the covariance classes and then dispatching to
+<a class="reference internal" href="#brainiak.matnormal.matnormal_likelihoods.solve_det_marginal" title="brainiak.matnormal.matnormal_likelihoods.solve_det_marginal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_det_marginal</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>tf.Tensor</em>) – Observation tensor</p></li>
+<li><p><strong>row_cov</strong> (<a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><em>CovBase</em></a>) – Row covariance implementing the CovBase API (<span class="math notranslate nohighlight">\(R\)</span> above).</p></li>
+<li><p><strong>col_cov</strong> (<a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><em>CovBase</em></a>) – Column Covariance implementing the CovBase API (<span class="math notranslate nohighlight">\(C\)</span> above).</p></li>
+<li><p><strong>marg</strong> (<em>tf.Tensor</em>) – Marginal factor (<span class="math notranslate nohighlight">\(A\)</span> above).</p></li>
+<li><p><strong>marg_cov</strong> (<a class="reference internal" href="#brainiak.matnormal.covs.CovBase" title="brainiak.matnormal.covs.CovBase"><em>CovBase</em></a>) – Prior covariance implementing the CovBase API (<span class="math notranslate nohighlight">\(Q\)</span> above).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="brainiak.matnormal.matnormal_likelihoods.solve_det_conditional">
+<code class="sig-prename descclassname">brainiak.matnormal.matnormal_likelihoods.</code><code class="sig-name descname">solve_det_conditional</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">sigma</span></em>, <em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">Q</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.matnormal_likelihoods.solve_det_conditional" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use matrix inversion lemma for the solve:</p>
+<div class="math notranslate nohighlight">
+\[(\Sigma - AQ^{-1}A^T)^{-1} X =\
+(\Sigma^{-1} + \Sigma^{-1} A (Q -
+A^T \Sigma^{-1} A)^{-1} A^T \Sigma^{-1}) X\]</div>
+<p>Use matrix determinant lemma for determinant:</p>
+<div class="math notranslate nohighlight">
+\[\log|(\Sigma - AQ^{-1}A^T)| =
+\log|Q - A^T \Sigma^{-1} A| - \log|Q| + \log|\Sigma|\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>tf.Tensor</em>) – Tensor to multiply the solve by</p></li>
+<li><p><strong>sigma</strong> (<em>brainiak.matnormal.CovBase</em>) – Covariance object implementing solve and logdet</p></li>
+<li><p><strong>A</strong> (<em>tf.Tensor</em>) – Factor multiplying the variable we conditioned on</p></li>
+<li><p><strong>Q</strong> (<em>brainiak.matnormal.CovBase</em>) – Covariance object of conditioning variable,
+implementing solve and logdet</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="brainiak.matnormal.matnormal_likelihoods.solve_det_marginal">
+<code class="sig-prename descclassname">brainiak.matnormal.matnormal_likelihoods.</code><code class="sig-name descname">solve_det_marginal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">sigma</span></em>, <em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">Q</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.matnormal_likelihoods.solve_det_marginal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use matrix inversion lemma for the solve:</p>
+<div class="math notranslate nohighlight">
+\[(\Sigma + AQA^T)^{-1} X =\
+(\Sigma^{-1} - \Sigma^{-1} A (Q^{-1} +
+A^T \Sigma^{-1} A)^{-1} A^T \Sigma^{-1}) X\]</div>
+<p>Use matrix determinant lemma for determinant:</p>
+<div class="math notranslate nohighlight">
+\[\log|(\Sigma + AQA^T)| = \log|Q^{-1} + A^T \Sigma^{-1} A|
++ \log|Q| + \log|\Sigma|\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>tf.Tensor</em>) – Tensor to multiply the solve by</p></li>
+<li><p><strong>sigma</strong> (<em>brainiak.matnormal.CovBase</em>) – Covariance object implementing solve and logdet</p></li>
+<li><p><strong>A</strong> (<em>tf.Tensor</em>) – Factor multiplying the variable we marginalized out</p></li>
+<li><p><strong>Q</strong> (<em>brainiak.matnormal.CovBase</em>) – Covariance object of marginalized variable,
+implementing solve and logdet</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-brainiak.matnormal.mnrsa">
+<span id="brainiak-matnormal-mnrsa-module"></span><h2>brainiak.matnormal.mnrsa module<a class="headerlink" href="#module-brainiak.matnormal.mnrsa" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="brainiak.matnormal.mnrsa.MNRSA">
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.matnormal.mnrsa.</code><code class="sig-name descname">MNRSA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time_cov</span></em>, <em class="sig-param"><span class="n">space_cov</span></em>, <em class="sig-param"><span class="n">n_nureg</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">optimizer</span><span class="o">=</span><span class="default_value">'L-BFGS-B'</span></em>, <em class="sig-param"><span class="n">optCtrl</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.mnrsa.MNRSA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Matrix normal version of RSA.</p>
+<p>The goal of this analysis is to find the covariance of the mapping from
+some design matrix X to the fMRI signal Y. It does so by marginalizing over
+the actual mapping (i.e. averaging over the uncertainty in it), which
+happens to correct a bias imposed by structure in the design matrix on the
+RSA estimate (see Cai et al., NIPS 2016).</p>
+<p>This implementation makes different choices about residual covariance
+relative to <code class="xref py py-obj docutils literal notranslate"><span class="pre">brainiak.reprsimil.BRSA</span></code>: Here, the noise covariance is
+assumed to be kronecker-separable. Informally, this means that all voxels
+have the same temporal covariance, and all time points have the same
+spatial covariance. This is in contrast to BRSA, which allows different
+temporal covariance for each voxel. On the other hand, computational
+efficiencies enabled by this choice allow MNRSA to support a richer class
+of space and time covariances (anything in <a class="reference internal" href="#module-brainiak.matnormal.covs" title="brainiak.matnormal.covs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">brainiak.matnormal.covs</span></code></a>).</p>
+<p>For users: in general, if you are worried about voxels each having
+different temporal noise structure,you should use
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">brainiak.reprsimil.BRSA</span></code>. If you are worried about between-voxel
+correlations or temporal covaraince structures that BRSA does not
+support, you should use MNRSA.</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}Y &amp;\sim \mathcal{MN}(0, \Sigma_t + XLL^TX^T+
+X_0X_0^T, \Sigma_s)\\\U &amp;= LL^T\end{aligned}\end{align} \]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time_cov</strong> (<em>subclass of CovBase</em>) – Temporal noise covariance class following CovBase interface.</p></li>
+<li><p><strong>space_cov</strong> (<em>subclass of CovBase</em>) – Spatial noise covariance class following CovBase interface.</p></li>
+<li><p><strong>optimizer</strong> (<em>string</em><em>, </em><em>Default :'L-BFGS'</em>) – Name of scipy optimizer to use.</p></li>
+<li><p><strong>optCtrl</strong> (<em>dict</em><em>, </em><em>default: None</em>) – Additional arguments to pass to scipy.optimize.minimize.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="brainiak.matnormal.mnrsa.MNRSA.L">
+<em class="property">property </em><code class="sig-name descname">L</code><a class="headerlink" href="#brainiak.matnormal.mnrsa.MNRSA.L" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cholesky factor of the RSA matrix.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.mnrsa.MNRSA.fit">
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">naive_init</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.mnrsa.MNRSA.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate dimension reduction and cognitive model parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>2d array</em>) – Brain data matrix (TRs by voxels). Y in the math</p></li>
+<li><p><strong>y</strong> (<em>2d array</em><em> or </em><em>vector</em>) – Behavior data matrix (TRs by behavioral obsevations). X in the math</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=1000</em>) – Maximum number of iterations to run</p></li>
+<li><p><strong>step</strong> (<em>int</em><em>, </em><em>default=100</em>) – Number of steps between optimizer output</p></li>
+<li><p><strong>restart</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If this is true, optimizer is restarted (e.g. for a new dataset).
+Otherwise optimizer will continue from where it is now (for example
+for running more iterations if the initial number was not enough).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.mnrsa.MNRSA.logp">
+<code class="sig-name descname">logp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">Y</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.mnrsa.MNRSA.logp" title="Permalink to this definition">¶</a></dt>
+<dd><p>MNRSA Log-likelihood</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-brainiak.matnormal.regression">
+<span id="brainiak-matnormal-regression-module"></span><h2>brainiak.matnormal.regression module<a class="headerlink" href="#module-brainiak.matnormal.regression" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="brainiak.matnormal.regression.MatnormalRegression">
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.matnormal.regression.</code><code class="sig-name descname">MatnormalRegression</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time_cov</span></em>, <em class="sig-param"><span class="n">space_cov</span></em>, <em class="sig-param"><span class="n">optimizer</span><span class="o">=</span><span class="default_value">'L-BFGS-B'</span></em>, <em class="sig-param"><span class="n">optCtrl</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.regression.MatnormalRegression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>This analysis allows maximum likelihood estimation of regression models
+in the presence of both spatial and temporal covariance.</p>
+<dl class="simple">
+<dt>..math::</dt><dd><p>Y sim mathcal{MN}(Xeta, time_cov, space_cov)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time_cov</strong> (<em>subclass of CovBase</em>) – TR noise covariance class following CovBase interface.</p></li>
+<li><p><strong>space_cov</strong> (<em>subclass of CovBase</em>) – Voxel noise covariance class following CovBase interface.</p></li>
+<li><p><strong>optimizer</strong> (<em>string</em><em>, </em><em>default=&quot;L-BFGS-B&quot;</em>) – Scipy optimizer to use. For other options, see “method” argument
+of scipy.optimize.minimize</p></li>
+<li><p><strong>optCtrl</strong> (<em>dict</em><em>, </em><em>default=None</em>) – Additional arguments to pass to scipy.optimize.minimize.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="brainiak.matnormal.regression.MatnormalRegression.calibrate">
+<code class="sig-name descname">calibrate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Y</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.regression.MatnormalRegression.calibrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode design matrix from fMRI dataset, based on a previously
+trained mapping. This method just does naive MLE:</p>
+<div class="math notranslate nohighlight">
+\[X = Y \Sigma_s^{-1}B^T(B \Sigma_s^{-1} B^T)^{-1}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>Y</strong> (<em>np.array</em><em>, </em><em>TRs by voxels.</em>) – fMRI dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.regression.MatnormalRegression.fit">
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">naive_init</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.regression.MatnormalRegression.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the regression fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em><em>, </em><em>TRs by conditions.</em>) – Design matrix</p></li>
+<li><p><strong>y</strong> (<em>np.array</em><em>, </em><em>TRs by voxels.</em>) – fMRI data</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.regression.MatnormalRegression.logp">
+<code class="sig-name descname">logp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">Y</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.regression.MatnormalRegression.logp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log likelihood of model (internal)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="brainiak.matnormal.regression.MatnormalRegression.predict">
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.regression.MatnormalRegression.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict fMRI signal from design matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>np.array</em><em>, </em><em>TRs by conditions.</em>) – Design matrix</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-brainiak.matnormal.utils">
+<span id="brainiak-matnormal-utils-module"></span><h2>brainiak.matnormal.utils module<a class="headerlink" href="#module-brainiak.matnormal.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="brainiak.matnormal.utils.flatten_cholesky_unique">
+<code class="sig-prename descclassname">brainiak.matnormal.utils.</code><code class="sig-name descname">flatten_cholesky_unique</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">L</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.utils.flatten_cholesky_unique" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flattens nonzero-elements Cholesky (triangular) factor
+into a vector, and logs diagonal to make parameterization
+unique. Inverse of unflatten_cholesky_unique.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="brainiak.matnormal.utils.make_val_and_grad">
+<code class="sig-prename descclassname">brainiak.matnormal.utils.</code><code class="sig-name descname">make_val_and_grad</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lossfn</span></em>, <em class="sig-param"><span class="n">train_vars</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.utils.make_val_and_grad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a function that ouptuts the loss and gradient in a format compatible
+with scipy.optimize.minimize</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="brainiak.matnormal.utils.pack_trainable_vars">
+<code class="sig-prename descclassname">brainiak.matnormal.utils.</code><code class="sig-name descname">pack_trainable_vars</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">trainable_vars</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.utils.pack_trainable_vars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pack trainable vars in a model into a single
+vector that can be passed to scipy.optimize</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="brainiak.matnormal.utils.rmn">
+<code class="sig-prename descclassname">brainiak.matnormal.utils.</code><code class="sig-name descname">rmn</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rowcov</span></em>, <em class="sig-param"><span class="n">colcov</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.utils.rmn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random draws from a zero-mean matrix-normal distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rowcov</strong> (<em>np.ndarray</em>) – Row covariance (assumed to be positive definite)</p></li>
+<li><p><strong>colcov</strong> (<em>np.ndarray</em>) – Column covariance (assumed to be positive definite)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="brainiak.matnormal.utils.scaled_I">
+<code class="sig-prename descclassname">brainiak.matnormal.utils.</code><code class="sig-name descname">scaled_I</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">size</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.utils.scaled_I" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scaled identity matrix
+<span class="math notranslate nohighlight">\(x I_{size}\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em><em> or </em><em>coercable to float</em>) – Scale to multiply the identity matrix by</p></li>
+<li><p><strong>size</strong> (<em>int</em><em> or </em><em>otherwise coercable to a size</em>) – Dimension of the scaled identity matrix to return</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="brainiak.matnormal.utils.unflatten_cholesky_unique">
+<code class="sig-prename descclassname">brainiak.matnormal.utils.</code><code class="sig-name descname">unflatten_cholesky_unique</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">L_flat</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.utils.unflatten_cholesky_unique" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a vector of elements into a triangular matrix
+(Cholesky factor). Exponentiates diagonal to make
+parameterization unique. Inverse of flatten_cholesky_unique.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="brainiak.matnormal.utils.unpack_trainable_vars">
+<code class="sig-prename descclassname">brainiak.matnormal.utils.</code><code class="sig-name descname">unpack_trainable_vars</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">trainable_vars</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.utils.unpack_trainable_vars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unpack trainable vars from a single vector as
+used/returned by scipy.optimize</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="brainiak.matnormal.utils.x_tx">
+<code class="sig-prename descclassname">brainiak.matnormal.utils.</code><code class="sig-name descname">x_tx</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.utils.x_tx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inner product
+<span class="math notranslate nohighlight">\(x^T x\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>tf.Tensor</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="brainiak.matnormal.utils.xx_t">
+<code class="sig-prename descclassname">brainiak.matnormal.utils.</code><code class="sig-name descname">xx_t</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.matnormal.utils.xx_t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Outer product
+<span class="math notranslate nohighlight">\(xx^T\)</span></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>tf.Tensor</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="brainiak.reconstruct.html" class="btn btn-neutral float-right" title="brainiak.reconstruct package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="brainiak.hyperparamopt.html" class="btn btn-neutral float-left" title="brainiak.hyperparamopt package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -16,4 +16,3 @@ brainiak.reconstruct.iem module
    :members:
    :undoc-members:
    :show-inheritance:
-

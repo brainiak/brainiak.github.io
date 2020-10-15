@@ -16,4 +16,3 @@ brainiak.hyperparamopt.hpo module
    :members:
    :undoc-members:
    :show-inheritance:
-

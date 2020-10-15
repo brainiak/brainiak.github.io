@@ -1,39 +1,40 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>brainiak.funcalign package &mdash; brainiak 0.10 documentation</title>
+  <title>brainiak.funcalign package &mdash; brainiak 0.11 documentation</title>
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="brainiak.hyperparamopt package" href="brainiak.hyperparamopt.html" />
@@ -51,7 +52,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> brainiak
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> brainiak
           
 
           
@@ -61,7 +62,7 @@
             
             
               <div class="version">
-                0.10
+                0.11
               </div>
             
           
@@ -78,6 +79,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -95,6 +97,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -133,7 +136,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="api.html">API</a> &raquo;</li>
         
@@ -175,9 +178,9 @@ H. Richard, L. Martin, A. Pinho, J. Pillow, B. Thirion, 2019
 <a class="reference external" href="https://arxiv.org/pdf/1909.12537.pdf">https://arxiv.org/pdf/1909.12537.pdf</a></p>
 </dd>
 </dl>
-<dl class="class">
+<dl class="py class">
 <dt id="brainiak.funcalign.fastsrm.FastSRM">
-<em class="property">class </em><code class="sig-prename descclassname">brainiak.funcalign.fastsrm.</code><code class="sig-name descname">FastSRM</code><span class="sig-paren">(</span><em class="sig-param">atlas=None</em>, <em class="sig-param">n_components=20</em>, <em class="sig-param">n_iter=100</em>, <em class="sig-param">temp_dir=None</em>, <em class="sig-param">low_ram=False</em>, <em class="sig-param">seed=None</em>, <em class="sig-param">n_jobs=1</em>, <em class="sig-param">verbose='warn'</em>, <em class="sig-param">aggregate='mean'</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.fastsrm.FastSRM" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.funcalign.fastsrm.</code><code class="sig-name descname">FastSRM</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">atlas</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_components</span><span class="o">=</span><span class="default_value">20</span></em>, <em class="sig-param"><span class="n">n_iter</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">temp_dir</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">low_ram</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_jobs</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">'warn'</span></em>, <em class="sig-param"><span class="n">aggregate</span><span class="o">=</span><span class="default_value">'mean'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.fastsrm.FastSRM" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
 <p>SRM decomposition using a very low amount of memory and computational power thanks to the use of an atlas as described in <a class="reference internal" href="#richard2019" id="id1"><span>[Richard2019]</span></a>.</p>
 <p>Given multi-subject data, factorize it as a shared response S among all subjects and an orthogonal transform (basis) W per subject:</p>
@@ -198,7 +201,7 @@ H. Richard, L. Martin, A. Pinho, J. Pillow, B. Thirion, 2019
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt>
 <code class="sig-name descname">`basis_list`</code></dt>
 <dd><ul class="simple">
@@ -218,9 +221,9 @@ H. Richard, L. Martin, A. Pinho, J. Pillow, B. Thirion, 2019
 <p><strong>References:</strong>
 H. Richard, L. Martin, A. Pinho, J. Pillow, B. Thirion, 2019: Fast shared response model for fMRI data (<a class="reference external" href="https://arxiv.org/pdf/1909.12537.pdf">https://arxiv.org/pdf/1909.12537.pdf</a>)</p>
 </div>
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.funcalign.fastsrm.FastSRM.add_subjects">
-<code class="sig-name descname">add_subjects</code><span class="sig-paren">(</span><em class="sig-param">imgs</em>, <em class="sig-param">shared_response</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.fastsrm.FastSRM.add_subjects" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_subjects</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imgs</span></em>, <em class="sig-param"><span class="n">shared_response</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.fastsrm.FastSRM.add_subjects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add subjects to the current fit. Each new basis will be appended at the end of the list of basis (which can be accessed using self.basis)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -241,15 +244,15 @@ H. Richard, L. Martin, A. Pinho, J. Pillow, B. Thirion, 2019: Fast shared respon
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.funcalign.fastsrm.FastSRM.clean">
 <code class="sig-name descname">clean</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.fastsrm.FastSRM.clean" title="Permalink to this definition">¶</a></dt>
 <dd><p>This erases temporary files and basis_list attribute to free memory. This method should be called when fitted model is not needed anymore.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.funcalign.fastsrm.FastSRM.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">imgs</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.fastsrm.FastSRM.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imgs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.fastsrm.FastSRM.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes basis across subjects from input imgs</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -267,9 +270,9 @@ H. Richard, L. Martin, A. Pinho, J. Pillow, B. Thirion, 2019: Fast shared respon
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.funcalign.fastsrm.FastSRM.fit_transform">
-<code class="sig-name descname">fit_transform</code><span class="sig-paren">(</span><em class="sig-param">imgs</em>, <em class="sig-param">subjects_indexes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.fastsrm.FastSRM.fit_transform" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit_transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imgs</span></em>, <em class="sig-param"><span class="n">subjects_indexes</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.fastsrm.FastSRM.fit_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes basis across subjects and shared response from input imgs
 return shared response.</p>
 <dl class="field-list simple">
@@ -298,9 +301,9 @@ return shared response.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.funcalign.fastsrm.FastSRM.inverse_transform">
-<code class="sig-name descname">inverse_transform</code><span class="sig-paren">(</span><em class="sig-param">shared_response</em>, <em class="sig-param">subjects_indexes=None</em>, <em class="sig-param">sessions_indexes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.fastsrm.FastSRM.inverse_transform" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">inverse_transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">shared_response</span></em>, <em class="sig-param"><span class="n">subjects_indexes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sessions_indexes</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.fastsrm.FastSRM.inverse_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>From shared response and basis from training data
 reconstruct subject’s data</p>
 <dl class="field-list simple">
@@ -331,9 +334,9 @@ reconstruct subject’s data</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.funcalign.fastsrm.FastSRM.transform">
-<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param">imgs</em>, <em class="sig-param">subjects_indexes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.fastsrm.FastSRM.transform" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imgs</span></em>, <em class="sig-param"><span class="n">subjects_indexes</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.fastsrm.FastSRM.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>From data in imgs and basis from training data,
 computes shared response.</p>
 <dl class="field-list simple">
@@ -376,9 +379,9 @@ J. Turek, C. Ellis, L. Skalaban, N. Turk-Browne, T. Willke
 under review, 2017.</p>
 </dd>
 </dl>
-<dl class="class">
+<dl class="py class">
 <dt id="brainiak.funcalign.rsrm.RSRM">
-<em class="property">class </em><code class="sig-prename descclassname">brainiak.funcalign.rsrm.</code><code class="sig-name descname">RSRM</code><span class="sig-paren">(</span><em class="sig-param">n_iter=10</em>, <em class="sig-param">features=50</em>, <em class="sig-param">gamma=1.0</em>, <em class="sig-param">rand_seed=0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.rsrm.RSRM" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.funcalign.rsrm.</code><code class="sig-name descname">RSRM</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_iter</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">features</span><span class="o">=</span><span class="default_value">50</span></em>, <em class="sig-param"><span class="n">gamma</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">rand_seed</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.rsrm.RSRM" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
 <p>Robust Shared Response Model (RSRM)</p>
 <p>Given multi-subject data, factorize it as a shared response R among all
@@ -410,7 +413,7 @@ components. Higher values yield sparser individual components.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.rsrm.RSRM.w_">
 <code class="sig-name descname">w_</code><a class="headerlink" href="#brainiak.funcalign.rsrm.RSRM.w_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The orthogonal transforms (mappings) for each subject.</p>
@@ -421,7 +424,7 @@ components. Higher values yield sparser individual components.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.rsrm.RSRM.r_">
 <code class="sig-name descname">r_</code><a class="headerlink" href="#brainiak.funcalign.rsrm.RSRM.r_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The shared response.</p>
@@ -432,7 +435,7 @@ components. Higher values yield sparser individual components.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.rsrm.RSRM.s_">
 <code class="sig-name descname">s_</code><a class="headerlink" href="#brainiak.funcalign.rsrm.RSRM.s_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The individual components for each subject.</p>
@@ -443,7 +446,7 @@ components. Higher values yield sparser individual components.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.rsrm.RSRM.random_state_">
 <code class="sig-name descname">random_state_</code><a class="headerlink" href="#brainiak.funcalign.rsrm.RSRM.random_state_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Random number generator initialized using rand_seed</p>
@@ -463,9 +466,9 @@ subjects.</p>
 Block-Coordinate Descent (BCD) algorithm proposed in <a class="reference internal" href="#turek2017" id="id3"><span>[Turek2017]</span></a>.</p>
 <p>This is a single node version.</p>
 </div>
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.funcalign.rsrm.RSRM.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">X</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.rsrm.RSRM.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.rsrm.RSRM.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Robust Shared Response Model</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -474,9 +477,9 @@ Block-Coordinate Descent (BCD) algorithm proposed in <a class="reference interna
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.funcalign.rsrm.RSRM.transform">
-<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param">X</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.rsrm.RSRM.transform" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.rsrm.RSRM.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use the model to transform new data to Shared Response space</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -492,9 +495,9 @@ Block-Coordinate Descent (BCD) algorithm proposed in <a class="reference interna
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.funcalign.rsrm.RSRM.transform_subject">
-<code class="sig-name descname">transform_subject</code><span class="sig-paren">(</span><em class="sig-param">X</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.rsrm.RSRM.transform_subject" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">transform_subject</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.rsrm.RSRM.transform_subject" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform a new subject using the existing model</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -534,9 +537,9 @@ IEEE International Conference on Big Data, 2016.
 <a class="reference external" href="https://doi.org/10.1109/BigData.2016.7840719">https://doi.org/10.1109/BigData.2016.7840719</a></p>
 </dd>
 </dl>
-<dl class="class">
+<dl class="py class">
 <dt id="brainiak.funcalign.srm.DetSRM">
-<em class="property">class </em><code class="sig-prename descclassname">brainiak.funcalign.srm.</code><code class="sig-name descname">DetSRM</code><span class="sig-paren">(</span><em class="sig-param">n_iter=10</em>, <em class="sig-param">features=50</em>, <em class="sig-param">rand_seed=0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.srm.DetSRM" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.funcalign.srm.</code><code class="sig-name descname">DetSRM</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_iter</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">features</span><span class="o">=</span><span class="default_value">50</span></em>, <em class="sig-param"><span class="n">rand_seed</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.srm.DetSRM" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
 <p>Deterministic Shared Response Model (DetSRM)</p>
 <p>Given multi-subject data, factorize it as a shared response S among all
@@ -552,7 +555,7 @@ subjects and an orthogonal transform W per subject:</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.srm.DetSRM.w_">
 <code class="sig-name descname">w_</code><a class="headerlink" href="#brainiak.funcalign.srm.DetSRM.w_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The orthogonal transforms (mappings) for each subject.</p>
@@ -563,7 +566,7 @@ subjects and an orthogonal transform W per subject:</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.srm.DetSRM.s_">
 <code class="sig-name descname">s_</code><a class="headerlink" href="#brainiak.funcalign.srm.DetSRM.s_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The shared response.</p>
@@ -574,7 +577,7 @@ subjects and an orthogonal transform W per subject:</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.srm.DetSRM.random_state_">
 <code class="sig-name descname">random_state_</code><a class="headerlink" href="#brainiak.funcalign.srm.DetSRM.random_state_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Random number generator initialized using rand_seed</p>
@@ -598,9 +601,9 @@ sum of voxels from all subjects, T - the number of samples, K - the
 number of features (typically, <span class="math notranslate nohighlight">\(V \gg T \gg K\)</span>), and N - the
 number of subjects.</p>
 </div>
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.funcalign.srm.DetSRM.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.srm.DetSRM.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.srm.DetSRM.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Deterministic Shared Response Model</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -612,9 +615,9 @@ number of subjects.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.funcalign.srm.DetSRM.transform">
-<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.srm.DetSRM.transform" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.srm.DetSRM.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use the model to transform data to the Shared Response subspace</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -632,9 +635,9 @@ number of subjects.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.funcalign.srm.DetSRM.transform_subject">
-<code class="sig-name descname">transform_subject</code><span class="sig-paren">(</span><em class="sig-param">X</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.srm.DetSRM.transform_subject" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">transform_subject</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.srm.DetSRM.transform_subject" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform a new subject using the existing model.
 The subject is assumed to have recieved equivalent stimulation</p>
 <dl class="field-list simple">
@@ -652,7 +655,7 @@ The subject is assumed to have recieved equivalent stimulation</p>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="brainiak.funcalign.srm.SRM">
 <em class="property">class </em><code class="sig-prename descclassname">brainiak.funcalign.srm.</code><code class="sig-name descname">SRM</code><span class="sig-paren">(</span><em class="sig-param">n_iter=10</em>, <em class="sig-param">features=50</em>, <em class="sig-param">rand_seed=0</em>, <em class="sig-param">comm=&lt;mpi4py.MPI.Intracomm object&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.srm.SRM" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
@@ -671,7 +674,7 @@ subjects and an orthogonal transform W per subject:</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.srm.SRM.w_">
 <code class="sig-name descname">w_</code><a class="headerlink" href="#brainiak.funcalign.srm.SRM.w_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The orthogonal transforms (mappings) for each subject.</p>
@@ -682,7 +685,7 @@ subjects and an orthogonal transform W per subject:</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.srm.SRM.s_">
 <code class="sig-name descname">s_</code><a class="headerlink" href="#brainiak.funcalign.srm.SRM.s_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The shared response.</p>
@@ -693,7 +696,7 @@ subjects and an orthogonal transform W per subject:</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.srm.SRM.sigma_s_">
 <code class="sig-name descname">sigma_s_</code><a class="headerlink" href="#brainiak.funcalign.srm.SRM.sigma_s_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The covariance of the shared response Normal distribution.</p>
@@ -704,7 +707,7 @@ subjects and an orthogonal transform W per subject:</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.srm.SRM.mu_">
 <code class="sig-name descname">mu_</code><a class="headerlink" href="#brainiak.funcalign.srm.SRM.mu_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The voxel means over the samples for each subject.</p>
@@ -715,7 +718,7 @@ subjects and an orthogonal transform W per subject:</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.srm.SRM.rho2_">
 <code class="sig-name descname">rho2_</code><a class="headerlink" href="#brainiak.funcalign.srm.SRM.rho2_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The estimated noise variance <span class="math notranslate nohighlight">\(\rho_i^2\)</span> for each subject</p>
@@ -726,7 +729,7 @@ subjects and an orthogonal transform W per subject:</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.srm.SRM.comm">
 <code class="sig-name descname">comm</code><a class="headerlink" href="#brainiak.funcalign.srm.SRM.comm" title="Permalink to this definition">¶</a></dt>
 <dd><p>The MPI communicator containing the data</p>
@@ -737,7 +740,7 @@ subjects and an orthogonal transform W per subject:</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.srm.SRM.random_state_">
 <code class="sig-name descname">random_state_</code><a class="headerlink" href="#brainiak.funcalign.srm.SRM.random_state_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Random number generator initialized using rand_seed</p>
@@ -761,9 +764,9 @@ memory complexity is <span class="math notranslate nohighlight">\(O(V T)\)</span
 V - the sum of voxels from all subjects, T - the number of samples, and
 K - the number of features (typically, <span class="math notranslate nohighlight">\(V \gg T \gg K\)</span>).</p>
 </div>
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.funcalign.srm.SRM.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.srm.SRM.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.srm.SRM.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the probabilistic Shared Response Model</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -775,9 +778,29 @@ K - the number of features (typically, <span class="math notranslate nohighlight
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
+<dt id="brainiak.funcalign.srm.SRM.save">
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.srm.SRM.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save fitted SRM to .npz file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>str</em><em>, </em><em>file-like object</em><em>, or </em><em>pathlib.Path</em>) – Filename (string), open file (file-like object) or pathlib.Path
+where the fitted SRM will be saved. If file is a string or a Path,
+the .npz extension will be appended to the filename if it is not
+already there.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="brainiak.funcalign.srm.SRM.transform">
-<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.srm.SRM.transform" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.srm.SRM.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use the model to transform matrix to Shared Response space</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -796,9 +819,9 @@ note that number of voxels and samples can vary across subjects</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.funcalign.srm.SRM.transform_subject">
-<code class="sig-name descname">transform_subject</code><span class="sig-paren">(</span><em class="sig-param">X</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.srm.SRM.transform_subject" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">transform_subject</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.srm.SRM.transform_subject" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform a new subject using the existing model.
 The subject is assumed to have recieved equivalent stimulation</p>
 <dl class="field-list simple">
@@ -831,9 +854,9 @@ IEEE International Conference on Acoustics, Speech and Signal Processing
 <a class="reference external" href="https://doi.org/10.1109/ICASSP.2017.7952326">https://doi.org/10.1109/ICASSP.2017.7952326</a></p>
 </dd>
 </dl>
-<dl class="class">
+<dl class="py class">
 <dt id="brainiak.funcalign.sssrm.SSSRM">
-<em class="property">class </em><code class="sig-prename descclassname">brainiak.funcalign.sssrm.</code><code class="sig-name descname">SSSRM</code><span class="sig-paren">(</span><em class="sig-param">n_iter=10</em>, <em class="sig-param">features=50</em>, <em class="sig-param">gamma=1.0</em>, <em class="sig-param">alpha=0.5</em>, <em class="sig-param">rand_seed=0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.sssrm.SSSRM" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.funcalign.sssrm.</code><code class="sig-name descname">SSSRM</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_iter</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">features</span><span class="o">=</span><span class="default_value">50</span></em>, <em class="sig-param"><span class="n">gamma</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">rand_seed</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.sssrm.SSSRM" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.ClassifierMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
 <p>Semi-Supervised Shared Response Model (SS-SRM)</p>
 <p>Given multi-subject data, factorize it as a shared response S among all
@@ -856,7 +879,7 @@ l2 regularization) in a semi-supervised manner:</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.sssrm.SSSRM.w_">
 <code class="sig-name descname">w_</code><a class="headerlink" href="#brainiak.funcalign.sssrm.SSSRM.w_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The orthogonal transforms (mappings) for each subject.</p>
@@ -867,7 +890,7 @@ l2 regularization) in a semi-supervised manner:</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.sssrm.SSSRM.s_">
 <code class="sig-name descname">s_</code><a class="headerlink" href="#brainiak.funcalign.sssrm.SSSRM.s_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The shared response.</p>
@@ -878,7 +901,7 @@ l2 regularization) in a semi-supervised manner:</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.sssrm.SSSRM.theta_">
 <code class="sig-name descname">theta_</code><a class="headerlink" href="#brainiak.funcalign.sssrm.SSSRM.theta_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The MLR class plane parameters.</p>
@@ -889,7 +912,7 @@ l2 regularization) in a semi-supervised manner:</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.sssrm.SSSRM.bias_">
 <code class="sig-name descname">bias_</code><a class="headerlink" href="#brainiak.funcalign.sssrm.SSSRM.bias_" title="Permalink to this definition">¶</a></dt>
 <dd><p>The MLR class biases.</p>
@@ -900,7 +923,7 @@ l2 regularization) in a semi-supervised manner:</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.sssrm.SSSRM.classes_">
 <code class="sig-name descname">classes_</code><a class="headerlink" href="#brainiak.funcalign.sssrm.SSSRM.classes_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mapping table for each classes to original class label.</p>
@@ -911,7 +934,7 @@ l2 regularization) in a semi-supervised manner:</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.funcalign.sssrm.SSSRM.random_state_">
 <code class="sig-name descname">random_state_</code><a class="headerlink" href="#brainiak.funcalign.sssrm.SSSRM.random_state_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Random number generator initialized using rand_seed</p>
@@ -931,9 +954,9 @@ subjects. The number of labeled samples per subject can be different.</p>
 Block-Coordinate Descent (BCD) algorithm proposed in <a class="reference internal" href="#turek2016" id="id8"><span>[Turek2016]</span></a>.</p>
 <p>This is a single node version.</p>
 </div>
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.funcalign.sssrm.SSSRM.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">Z</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.sssrm.SSSRM.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">Z</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.sssrm.SSSRM.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Semi-Supervised Shared Response Model</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -949,9 +972,9 @@ for training the MLR classifier.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.funcalign.sssrm.SSSRM.predict">
-<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param">X</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.sssrm.SSSRM.predict" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.sssrm.SSSRM.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Classify the output for given data</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -968,9 +991,9 @@ the moment of training the model.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.funcalign.sssrm.SSSRM.transform">
-<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.sssrm.SSSRM.transform" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.funcalign.sssrm.SSSRM.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use the model to transform matrix to Shared Response space</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1014,11 +1037,19 @@ note that number of voxels and samples can vary across subjects.</p></li>
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -1029,7 +1060,6 @@ note that number of voxels and samples can vary across subjects.</p></li>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

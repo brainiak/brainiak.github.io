@@ -40,4 +40,3 @@ brainiak.funcalign.sssrm module
    :members:
    :undoc-members:
    :show-inheritance:
-
