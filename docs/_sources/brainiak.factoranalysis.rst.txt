@@ -25,3 +25,10 @@ brainiak.factoranalysis.tfa module
    :undoc-members:
    :show-inheritance:
 
+brainiak.factoranalysis.tfa\_extension module
+---------------------------------------------
+
+.. automodule:: brainiak.factoranalysis.tfa_extension
+   :members:
+   :undoc-members:
+   :show-inheritance:

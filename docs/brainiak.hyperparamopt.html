@@ -1,42 +1,43 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>brainiak.hyperparamopt package &mdash; brainiak 0.10 documentation</title>
+  <title>brainiak.hyperparamopt package &mdash; brainiak 0.11 documentation</title>
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="brainiak.reconstruct package" href="brainiak.reconstruct.html" />
+    <link rel="next" title="brainiak.matnormal package" href="brainiak.matnormal.html" />
     <link rel="prev" title="brainiak.funcalign package" href="brainiak.funcalign.html" /> 
 </head>
 
@@ -51,7 +52,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> brainiak
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> brainiak
           
 
           
@@ -61,7 +62,7 @@
             
             
               <div class="version">
-                0.10
+                0.11
               </div>
             
           
@@ -78,6 +79,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -95,6 +97,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -133,7 +136,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="api.html">API</a> &raquo;</li>
         
@@ -182,9 +185,9 @@ Vision Architectures”, James Bergstra, Daniel Yamins, David Cox.
 JMLR W&amp;CP 28 (1) : 115–123, 2013</p>
 </dd>
 </dl>
-<dl class="function">
+<dl class="py function">
 <dt id="brainiak.hyperparamopt.hpo.fmin">
-<code class="sig-prename descclassname">brainiak.hyperparamopt.hpo.</code><code class="sig-name descname">fmin</code><span class="sig-paren">(</span><em class="sig-param">loss_fn</em>, <em class="sig-param">space</em>, <em class="sig-param">max_evals</em>, <em class="sig-param">trials</em>, <em class="sig-param">init_random_evals=30</em>, <em class="sig-param">explore_prob=0.2</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.hyperparamopt.hpo.fmin" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">brainiak.hyperparamopt.hpo.</code><code class="sig-name descname">fmin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">loss_fn</span></em>, <em class="sig-param"><span class="n">space</span></em>, <em class="sig-param"><span class="n">max_evals</span></em>, <em class="sig-param"><span class="n">trials</span></em>, <em class="sig-param"><span class="n">init_random_evals</span><span class="o">=</span><span class="default_value">30</span></em>, <em class="sig-param"><span class="n">explore_prob</span><span class="o">=</span><span class="default_value">0.2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.hyperparamopt.hpo.fmin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find the minimum of function through hyper parameter optimization.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -233,7 +236,7 @@ best hyperparameter value(s).</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="brainiak.reconstruct.html" class="btn btn-neutral float-right" title="brainiak.reconstruct package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="brainiak.matnormal.html" class="btn btn-neutral float-right" title="brainiak.matnormal package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="brainiak.funcalign.html" class="btn btn-neutral float-left" title="brainiak.funcalign package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -245,11 +248,19 @@ best hyperparameter value(s).</p>
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -260,7 +271,6 @@ best hyperparameter value(s).</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

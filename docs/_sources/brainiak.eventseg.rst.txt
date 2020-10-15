@@ -16,4 +16,3 @@ brainiak.eventseg.event module
    :members:
    :undoc-members:
    :show-inheritance:
-

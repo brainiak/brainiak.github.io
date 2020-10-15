@@ -1,39 +1,40 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>brainiak.searchlight package &mdash; brainiak 0.10 documentation</title>
+  <title>brainiak.searchlight package &mdash; brainiak 0.11 documentation</title>
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="brainiak.utils package" href="brainiak.utils.html" />
@@ -51,7 +52,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> brainiak
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> brainiak
           
 
           
@@ -61,7 +62,7 @@
             
             
               <div class="version">
-                0.10
+                0.11
               </div>
             
           
@@ -78,6 +79,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -95,6 +97,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -133,7 +136,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="api.html">API</a> &raquo;</li>
         
@@ -166,9 +169,9 @@
 </div>
 <div class="section" id="module-brainiak.searchlight.searchlight">
 <span id="brainiak-searchlight-searchlight-module"></span><h2>brainiak.searchlight.searchlight module<a class="headerlink" href="#module-brainiak.searchlight.searchlight" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="brainiak.searchlight.searchlight.Ball">
-<em class="property">class </em><code class="sig-prename descclassname">brainiak.searchlight.searchlight.</code><code class="sig-name descname">Ball</code><span class="sig-paren">(</span><em class="sig-param">rad</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Ball" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.searchlight.searchlight.</code><code class="sig-name descname">Ball</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rad</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Ball" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#brainiak.searchlight.searchlight.Shape" title="brainiak.searchlight.searchlight.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.searchlight.searchlight.Shape</span></code></a></p>
 <p>Searchlight shape which is a ball
 inscribed in a cube of size (2*rad+1,2*rad+1,2*rad+1).
@@ -181,9 +184,9 @@ less than rad from the center point is set to True.</p>
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="brainiak.searchlight.searchlight.Cube">
-<em class="property">class </em><code class="sig-prename descclassname">brainiak.searchlight.searchlight.</code><code class="sig-name descname">Cube</code><span class="sig-paren">(</span><em class="sig-param">rad</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Cube" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.searchlight.searchlight.</code><code class="sig-name descname">Cube</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rad</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Cube" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#brainiak.searchlight.searchlight.Shape" title="brainiak.searchlight.searchlight.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.searchlight.searchlight.Shape</span></code></a></p>
 <p>Searchlight shape which is a cube of size (2*rad+1,2*rad+1,2*rad+1)</p>
 <dl class="field-list simple">
@@ -193,9 +196,9 @@ less than rad from the center point is set to True.</p>
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="brainiak.searchlight.searchlight.Diamond">
-<em class="property">class </em><code class="sig-prename descclassname">brainiak.searchlight.searchlight.</code><code class="sig-name descname">Diamond</code><span class="sig-paren">(</span><em class="sig-param">rad</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Diamond" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.searchlight.searchlight.</code><code class="sig-name descname">Diamond</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rad</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Diamond" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#brainiak.searchlight.searchlight.Shape" title="brainiak.searchlight.searchlight.Shape"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.searchlight.searchlight.Shape</span></code></a></p>
 <p>Searchlight shape which is a diamond
 inscribed in a cube of size (2*rad+1,2*rad+1,2*rad+1).
@@ -208,7 +211,7 @@ less than rad from the center point is set to True.</p>
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="brainiak.searchlight.searchlight.Searchlight">
 <em class="property">class </em><code class="sig-prename descclassname">brainiak.searchlight.searchlight.</code><code class="sig-name descname">Searchlight</code><span class="sig-paren">(</span><em class="sig-param">sl_rad=1</em>, <em class="sig-param">max_blk_edge=10</em>, <em class="sig-param">shape=&lt;class 'brainiak.searchlight.searchlight.Cube'&gt;</em>, <em class="sig-param">min_active_voxels_proportion=0</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -233,9 +236,9 @@ consideration.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.searchlight.searchlight.Searchlight.broadcast">
-<code class="sig-name descname">broadcast</code><span class="sig-paren">(</span><em class="sig-param">bcast_var</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight.broadcast" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">broadcast</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bcast_var</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight.broadcast" title="Permalink to this definition">¶</a></dt>
 <dd><p>Distribute data to processes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -244,9 +247,9 @@ consideration.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.searchlight.searchlight.Searchlight.distribute">
-<code class="sig-name descname">distribute</code><span class="sig-paren">(</span><em class="sig-param">subjects</em>, <em class="sig-param">mask</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight.distribute" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">distribute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">subjects</span></em>, <em class="sig-param"><span class="n">mask</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight.distribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Distribute data to MPI ranks</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -269,9 +272,9 @@ Rank 2: [None, None, None]</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.searchlight.searchlight.Searchlight.run_block_function">
-<code class="sig-name descname">run_block_function</code><span class="sig-paren">(</span><em class="sig-param">block_fn</em>, <em class="sig-param">extra_block_fn_params=None</em>, <em class="sig-param">pool_size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight.run_block_function" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">run_block_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">block_fn</span></em>, <em class="sig-param"><span class="n">extra_block_fn_params</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pool_size</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight.run_block_function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform a function for each block in a volume.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -298,9 +301,9 @@ restrictions.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.searchlight.searchlight.Searchlight.run_searchlight">
-<code class="sig-name descname">run_searchlight</code><span class="sig-paren">(</span><em class="sig-param">voxel_fn</em>, <em class="sig-param">pool_size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight.run_searchlight" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">run_searchlight</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">voxel_fn</span></em>, <em class="sig-param"><span class="n">pool_size</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Searchlight.run_searchlight" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform a function at each voxel which is set to True in the
 user-provided mask. The mask passed to the searchlight function will be
 further masked by the user-provided searchlight shape.</p>
@@ -332,13 +335,13 @@ cube</p>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="brainiak.searchlight.searchlight.Shape">
-<em class="property">class </em><code class="sig-prename descclassname">brainiak.searchlight.searchlight.</code><code class="sig-name descname">Shape</code><span class="sig-paren">(</span><em class="sig-param">rad</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Shape" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">brainiak.searchlight.searchlight.</code><code class="sig-name descname">Shape</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rad</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.searchlight.searchlight.Shape" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Searchlight shape which is contained in a cube sized
 (2*rad+1,2*rad+1,2*rad+1)</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.searchlight.searchlight.Shape.mask_">
 <code class="sig-name descname">mask_</code><a class="headerlink" href="#brainiak.searchlight.searchlight.Shape.mask_" title="Permalink to this definition">¶</a></dt>
 <dd><p>which is set to True within the boundaries of the desired shape</p>
@@ -379,11 +382,19 @@ cube</p>
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -394,7 +405,6 @@ cube</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

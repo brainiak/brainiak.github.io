@@ -17,6 +17,22 @@ brainiak.utils.fmrisim module
    :undoc-members:
    :show-inheritance:
 
+brainiak.utils.fmrisim\_real\_time\_generator module
+----------------------------------------------------
+
+.. automodule:: brainiak.utils.fmrisim_real_time_generator
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+brainiak.utils.kronecker\_solvers module
+----------------------------------------
+
+.. automodule:: brainiak.utils.kronecker_solvers
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 brainiak.utils.utils module
 ---------------------------
 
@@ -24,4 +40,3 @@ brainiak.utils.utils module
    :members:
    :undoc-members:
    :show-inheritance:
-

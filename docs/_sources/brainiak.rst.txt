@@ -10,12 +10,14 @@ Subpackages
 -----------
 
 .. toctree::
+   :maxdepth: 4
 
    brainiak.eventseg
    brainiak.factoranalysis
    brainiak.fcma
    brainiak.funcalign
    brainiak.hyperparamopt
+   brainiak.matnormal
    brainiak.reconstruct
    brainiak.reprsimil
    brainiak.searchlight
@@ -47,4 +49,3 @@ brainiak.isc module
    :members:
    :undoc-members:
    :show-inheritance:
-

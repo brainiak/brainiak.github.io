@@ -1,39 +1,40 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>brainiak.eventseg package &mdash; brainiak 0.10 documentation</title>
+  <title>brainiak.eventseg package &mdash; brainiak 0.11 documentation</title>
   
-
-  
-  
-  
-  
-
-  
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="brainiak.factoranalysis package" href="brainiak.factoranalysis.html" />
@@ -51,7 +52,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> brainiak
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> brainiak
           
 
           
@@ -61,7 +62,7 @@
             
             
               <div class="version">
-                0.10
+                0.11
               </div>
             
           
@@ -78,6 +79,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -95,6 +97,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -133,7 +136,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="api.html">API</a> &raquo;</li>
         
@@ -190,7 +193,7 @@ events that vary substantially in length, the split_merge option allows
 the fit() function to re-distribute events during fitting. The number of
 merge/split proposals is controlled by split_merge_proposals, which
 controls how thorough versus fast the fitting process is.</p>
-<dl class="class">
+<dl class="py class">
 <dt id="brainiak.eventseg.event.EventSegment">
 <em class="property">class </em><code class="sig-prename descclassname">brainiak.eventseg.event.</code><code class="sig-name descname">EventSegment</code><span class="sig-paren">(</span><em class="sig-param">n_events=2</em>, <em class="sig-param">step_var=&lt;function EventSegment._default_var_schedule&gt;</em>, <em class="sig-param">n_iter=500</em>, <em class="sig-param">event_chains=None</em>, <em class="sig-param">split_merge=False</em>, <em class="sig-param">split_merge_proposals=1</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
@@ -212,7 +215,7 @@ scales as O(proposals^2) so this should usually be a small value</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt>
 <code class="sig-name descname">p_start, p_end</code></dt>
 <dd><p>initial and final prior distributions over events</p>
@@ -223,7 +226,7 @@ scales as O(proposals^2) so this should usually be a small value</p></li>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.eventseg.event.EventSegment.P">
 <code class="sig-name descname">P</code><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.P" title="Permalink to this definition">¶</a></dt>
 <dd><p>HMM transition matrix</p>
@@ -234,7 +237,7 @@ scales as O(proposals^2) so this should usually be a small value</p></li>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.eventseg.event.EventSegment.ll_">
 <code class="sig-name descname">ll_</code><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.ll_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log-likelihood for training datasets over the course of training</p>
@@ -245,7 +248,7 @@ scales as O(proposals^2) so this should usually be a small value</p></li>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.eventseg.event.EventSegment.segments_">
 <code class="sig-name descname">segments_</code><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.segments_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Learned (soft) segmentation for training datasets</p>
@@ -256,7 +259,7 @@ scales as O(proposals^2) so this should usually be a small value</p></li>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.eventseg.event.EventSegment.event_var_">
 <code class="sig-name descname">event_var_</code><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.event_var_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gaussian variance at the end of learning</p>
@@ -267,7 +270,7 @@ scales as O(proposals^2) so this should usually be a small value</p></li>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="brainiak.eventseg.event.EventSegment.event_pat_">
 <code class="sig-name descname">event_pat_</code><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.event_pat_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Learned mean patterns for each event</p>
@@ -278,9 +281,9 @@ scales as O(proposals^2) so this should usually be a small value</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.eventseg.event.EventSegment.calc_weighted_event_var">
-<code class="sig-name descname">calc_weighted_event_var</code><span class="sig-paren">(</span><em class="sig-param">D</em>, <em class="sig-param">weights</em>, <em class="sig-param">event_pat</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.calc_weighted_event_var" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">calc_weighted_event_var</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">D</span></em>, <em class="sig-param"><span class="n">weights</span></em>, <em class="sig-param"><span class="n">event_pat</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.calc_weighted_event_var" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes normalized weighted variance around event pattern</p>
 <p>Utility function for computing variance in a training set of weighted
 event examples. For each event, the sum of squared differences for all
@@ -304,9 +307,9 @@ variance (normalized by the number of voxels).</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.eventseg.event.EventSegment.find_events">
-<code class="sig-name descname">find_events</code><span class="sig-paren">(</span><em class="sig-param">testing_data</em>, <em class="sig-param">var=None</em>, <em class="sig-param">scramble=False</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.find_events" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">find_events</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">testing_data</span></em>, <em class="sig-param"><span class="n">var</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">scramble</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.find_events" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies learned event segmentation to new testing dataset</p>
 <p>After fitting an event segmentation using fit() or setting event
 patterns directly using set_event_patterns(), this function finds the
@@ -334,9 +337,9 @@ that timepoint t is in event e</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.eventseg.event.EventSegment.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y=None</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Learn a segmentation on training data</p>
 <p>Fits event patterns and a segmentation to training data. After
 running this function, the learned event patterns can be used to
@@ -358,9 +361,9 @@ are segmented simultaneously with the same event patterns</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.eventseg.event.EventSegment.model_prior">
-<code class="sig-name descname">model_prior</code><span class="sig-paren">(</span><em class="sig-param">t</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.model_prior" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">model_prior</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.model_prior" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the prior probability of the HMM</p>
 <p>Runs forward-backward without any data, showing the prior distribution
 of the model (for comparison with a posterior).</p>
@@ -378,9 +381,9 @@ of the model (for comparison with a posterior).</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.eventseg.event.EventSegment.predict">
-<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param">X</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.predict" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies learned event segmentation to new testing dataset</p>
 <p>Alternative function for segmenting a new dataset after using
 fit() to learn a sequence of events, to comply with the sklearn
@@ -398,9 +401,9 @@ Classifier interface</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="brainiak.eventseg.event.EventSegment.set_event_patterns">
-<code class="sig-name descname">set_event_patterns</code><span class="sig-paren">(</span><em class="sig-param">event_pat</em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.set_event_patterns" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_event_patterns</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event_pat</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.eventseg.event.EventSegment.set_event_patterns" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set HMM event patterns manually</p>
 <p>Rather than fitting the event patterns automatically using fit(), this
 function allows them to be set explicitly. They can then be used to
@@ -437,11 +440,19 @@ find corresponding events in a new dataset, using find_events().</p>
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -452,7 +463,6 @@ find corresponding events in a new dataset, using find_events().</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
