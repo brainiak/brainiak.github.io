@@ -420,6 +420,8 @@ We have compiled a list of useful resources that cover the basics of GitHUB, Pyt
 
 Like BrainIAK itself, these tutorials are open-sourced as a service to the field and can be freely used, modified, and shared. They are licensed under the Apache License, Version 2.0. If you find them helpful in your research or re-use code they contain, you might consider citing:
 
+Manoj Kumar, Michael J. Anderson, James W. Antony, Christopher Baldassano, Paula P. Brooks, Ming Bo Cai, Po-Hsuan Cameron Chen, Cameron T. Ellis, Gregory Henselman-Petrusek, David Huberdeau, J. Benjamin Hutchinson, Peeta Y. Li, Qihong Lu, Jeremy R. Manning, Anne C. Mennen, Samuel A. Nastase, Hugo Richard, Anna C. Schapiro, Nicolas W. Schuck, Michael Shvartsman, Narayanan Sundaram, Daniel Suo, Javier S. Turek, Vy A. Vo, Grant Wallace, Yida Wang, Hejia Zhang, Xia Zhu, Mihai Capota, Jonathan D. Cohen, Uri Hasson, Kai Li, Peter J. Ramadge, Nicholas B. Turk-Browne, Theodore L. Willke, Kenneth A. Norman, (2020, December 9). BrainIAK: The Brain Imaging Analysis Kit. OHBM Aperture, [https://doi.org/10.31219/osf.io/db2ev](https://doi.org/10.31219/osf.io/db2ev)
+
 Kumar, M., Ellis, C.T., Lu, Q., Zhang, H., Capotă, M., Willke, T.L., Ramadge, P.J., Turk-Browne, N.B. and Norman, K.A., 2020. BrainIAK tutorials: User-friendly learning materials for advanced fMRI analysis. PLoS Computational Biology, 16(1), e1007549. [https://doi.org/10.1371/journal.pcbi.1007549](https://doi.org/10.1371/journal.pcbi.1007549)
 
 </div>
