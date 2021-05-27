@@ -15,4 +15,5 @@ https://osf.io/db2ev
 [Topographic Factor Analysis (TFA)](/examples/htfa.html)
 [Inverted Encoding Model (IEM)](/examples/iem.html)
 [fmrisim](/examples/fmrisim_multivariate_example.html)
+[Matrix-normal models](/examples/Matrix-normal_model_prototyping.html)
 [Real-Time fMRI Analysis](/examples/rtcloud_notebook.html)
