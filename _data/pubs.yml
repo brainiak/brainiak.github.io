@@ -25,9 +25,11 @@
       - Narayanan Sundaram
       - Daniel Suo
       - Javier S. Turek
+      - David Turner
       - Vy A. Vo
       - Grant Wallace
       - Yida Wang
+      - Jamal A. Williams
       - Hejia Zhang
       - Xia Zhu
       - Mihai Capota
@@ -40,10 +42,10 @@
       - Kenneth A. Norman
   journal: preprint
   volume: 
-  year: 2020
+  year: 2021
   pages: 
   links:
-     paper: "https://doi.org/10.31219/osf.io/db2ev"
+     paper: "https://apertureneuropub.cloud68.co/articles/42/index.html"
 
 - id: Cai2020
   title: "Incorporating structured assumptions with probabilistic graphical models in fMRI data analysis"
