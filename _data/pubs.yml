@@ -1,3 +1,25 @@
+- id: Wallace2022
+  title: "RT-Cloud: A cloud-based software framework to simplify and standardize real-time fMRI"
+  date: 2022-08-15
+  authors:
+     - Grant Wallace
+     - Stephen Polcyn
+     - Paula P. Brooks
+     - Anne C. Mennen
+     - Ke Zhao
+     - Paul S. Scotti
+     - Sebastian Michelmann
+     - Kai Li
+     - Nicholas B. Turk-Browne
+     - Jonathan D. Cohen
+     - Kenneth A. Norman
+  journal: NeuroImage
+  volume: 257
+  year: 2022
+  pages: 119295
+  links:
+     paper: "https://www.sciencedirect.com/science/article/pii/S1053811922004141"
+
 - id: Kumar2020_12
   title: "BrainIAK: The Brain Imaging Analysis Kit"
   date: 2020-12-09
