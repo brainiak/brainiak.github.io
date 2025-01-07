@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>（Group) Bayesian Representational Similarity Analysis &mdash; brainiak 0.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Event segmentation and alignment in fMRI data" href="../eventseg/Event_Segmentation.html" />
+    <link rel="prev" title="Examples" href="../../examples.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            brainiak
+          </a>
+              <div class="version">
+                0.12
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">（Group) Bayesian Representational Similarity Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#annotated-bibliography">Annotated Bibliography</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#table-of-contents">Table of contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#notes-on-data-preparation">Notes on data preparation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notes-on-model-assumption">Notes on model assumption</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#load-some-package-which-we-will-use-in-this-demo">Load some package which we will use in this demo.</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#simulate-data">Simulate data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#load-an-example-design-matrix">Load an example design matrix.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simulate-noise">simulate noise</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specify-simulated-similarity-matrix">specify simulated similarity matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simulate-task-related-signals">Simulate task-related signals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#synthesize-data-by-adding-signal-with-noise">Synthesize data by adding signal with noise</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#fit-group-bayesian-rsa-to-simulated-data">Fit Group Bayesian RSA to simulated data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#prepare-onset-information-for-model-fitting">Prepare onset information for model fitting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#instantiate-a-gbrsa-object">Instantiate a GBRSA object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fit-model-to-the-data">Fit model to the data</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#evaluation">Evaluation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#result-of-gbrsa">Result of GBRSA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compare-with-result-of-traditional-rsa">Compare with result of traditional RSA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#evaluating-estimated-pseudo-snr-map-against-the-simulated-snr-map">Evaluating estimated pseudo-SNR map against the simulated SNR map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examine-the-recovery-of-activation-pattern">Examine the recovery of activation pattern</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#other-usage-decoding-task-related-signal-from-new-data">Other usage: “decoding” task-related signal from new data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#model-selection-by-cross-validation">Model selection by cross-validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#avoid-false-discovery">Avoid false discovery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../eventseg/Event_Segmentation.html">Event segmentation and alignment in fMRI data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fcma/FCMA_demo.html">Full Correlation Matrix Analysis (FCMA) demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fmrisim/fmrisim_multivariate_example.html">fmrisim demo script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html">Hierarchical Topographic Factor Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#annotated-bibliography">Annotated bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#getting-started">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#code">Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#summary">Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iem/iem.html">Inverted Encoding Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iem_synthetic_RF/iem_example_synthetic_RF_data.html">Inverted encoding model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../isc/ISC.html">Intersubject correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matnormal/Matrix-normal%20model%20prototyping.html">Rapid prototyping of fMRI models with <code class="docutils literal notranslate"><span class="pre">brainiak.matnormal</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matnormal/Matrix-normal%20model%20prototyping.html#annotated-bibliography">Annotated Bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../real-time/README_INSTRUCTIONS.html">Set Up Instructions for the Real-Time fMRI Cloud-Based Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../real-time/rtcloud_notebook.html">Implementing a Real-Time fMRI Cloud-Based Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../srm/SRM.html">Shared response model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">brainiak</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">（Group) Bayesian Representational Similarity Analysis</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/brsa/brsa_demo.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="group-bayesian-representational-similarity-analysis">
+<h1>（Group) Bayesian Representational Similarity Analysis<a class="headerlink" href="#group-bayesian-representational-similarity-analysis" title="Permalink to this heading"></a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>Author: Ming Bo Cai (<a class="reference external" href="mailto:mingbo&#46;cai&#37;&#52;&#48;ircn&#46;jp">mingbo<span>&#46;</span>cai<span>&#64;</span>ircn<span>&#46;</span>jp</a>)</p>
+<p>This demo shows how to use the Bayesian Representational Similarity Analysis (Bayesian RSA, <a class="reference external" href="https://proceedings.neurips.cc/paper/2016/hash/b06f50d1f89bd8b2a0fb771c1a69c2b0-Abstract.html">Cai et al., 2016</a>,<a class="reference external" href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006299&amp;amp;rev=2">2019</a>) with a simulated dataset.</p>
+<p>Bayesian RSA builds a generative model for fMRI data which include a covariance structure as estimation target. The covariance structure specifies the distribution by which the unknown spatial neural response patterns for each task condition follow. In the model, the task-evoked patterns modulated by the design matrix, together with spontaneous activity and noise, constitute the fMRI data. By marginalizing the intermediate unknown variables including voxel-wise response amplitudes to the task conditions, the model computes a log likelihood for any possible covariance structure of condition-evoked response patterns to give rise to the fMRI data. It can then directly infer the most likely covariance structure, and convert it to the similarity structure of the neural representation for the task conditions in a region of interest. This is different from the traditional RSA approach which first estimates neural response patterns from data and then treats the noisy estimated patterns as true patterns to calculate their similarity structure. It was shown (<a class="reference external" href="https://proceedings.neurips.cc/paper/2016/hash/b06f50d1f89bd8b2a0fb771c1a69c2b0-Abstract.html">Cai et al., 2016</a>,<a class="reference external" href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006299&amp;amp;rev=2">2019</a>) that the traditional approach can introduce bias to the estimated similarity structure and BRSA reduces this bias.</p>
+<p>The BrainIAK Bayesian RSA module (brainiak.reprsimil.brsa) includes the following variants of Bayesian RSA:</p>
+<ul class="simple">
+<li><p>(the original) BRSA: a model that estimates representational similarity structure for one subject, and maximum likelihood estimates of SNR and noise parameters for each voxel.</p></li>
+<li><p>GBRSA: a model that can either estimate representaitonal similarity structure for one subject, or the shared similarity structure across a group of subjects. It marginalizes voxel-wise SNR and noise parameters and is likely more accurate, but may be slower than BRSA. “G” stands for “Group”.</p></li>
+</ul>
+<p>This notebook demonstrates the usage of GBRSA on multiple subjects using simulated data. The usage of BRSA method is similar, and readers can refer to this <a class="reference external" href="https://github.com/brainiak/brainiak/blob/master/examples/reprsimil/bayesian_rsa_example.ipynb">example</a></p>
+<p>To run GBRSA on single subject, you can provide data to GBRSA in the same format as for a group of subjects shown in this notebook, except that the data is a list of numpy array of one subject’s data</p>
+</div>
+<div class="section" id="annotated-bibliography">
+<h2>Annotated Bibliography<a class="headerlink" href="#annotated-bibliography" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Cai, M. B., Schuck, N. W., Pillow, J. W., &amp; Niv, Y. (2016). A Bayesian method for reducing bias in neural representational similarity analysis. <em>Advances in Neural Information Processing Systems</em> (pp. 4951-4959). <a class="reference external" href="https://proceedings.neurips.cc/paper/2016/hash/b06f50d1f89bd8b2a0fb771c1a69c2b0-Abstract.html">link</a> <em>Describes potential biases in computing RSA that could lead to spurious results and introduces a Bayesian approach to reduce bias.</em></p></li>
+<li><p>Cai, M. B., Schuck, N. W., Pillow, J. W., &amp; Niv, Y. (2019). Representational structure or task structure? Bias in neural representational similarity analysis and a Bayesian method for reducing bias. <em>PLoS Computational Biology</em>, 15(5), e1006299. <a class="reference external" href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006299&amp;amp;rev=2">link</a> <em>This paper improves the earlier version of BRSA by additionally modeling the spatial noise correlation and marginalizing voxel-wise noise parameters. The paper also introduces group BRSA and the use of cross-validation to compare an estimated model against a null model, and further extends BRSA to task-signal decoding, using the estimated similarity structure as an empirical prior for estimating neural patterns.</em></p></li>
+</ol>
+</div>
+<div class="section" id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#simulate-data"><span class="std std-ref">Simulate data</span></a></p></li>
+<li><p><a class="reference internal" href="#fit-group-bayesian-rsa-to-simulated-data"><span class="std std-ref">Fit Group Bayesian RSA to simulated data</span></a></p></li>
+<li><p><a class="reference internal" href="#evaluation"><span class="std std-ref">Evaluation</span></a></p></li>
+<li><p><a class="reference internal" href="#other-usage-decoding-task-related-signal-from-new-data"><span class="std std-ref">Other usage: &quot;decoding&quot; task-related signal from new data</span></a></p></li>
+<li><p><a class="reference internal" href="#model-selection-by-cross-validation"><span class="std std-ref">Model selection by cross-validation</span></a></p></li>
+<li><p><a class="reference internal" href="#avoid-false-discovery"><span class="std std-ref">Avoid false discovery</span></a></p></li>
+<li><p><a class="reference internal" href="#summary"><span class="std std-ref">Summary</span></a></p></li>
+</ul>
+<div class="section" id="notes-on-data-preparation">
+<h3>Notes on data preparation<a class="headerlink" href="#notes-on-data-preparation" title="Permalink to this heading"></a></h3>
+<p>When you apply this tool to real fMRI data, it is required that the data of each participant to be motion corrected. If multiple runs are acquired for each participant, they should be spatially aligned. Slice-timing correction is recommended.</p>
+<p>You will need to have the mask of the Region of Interest (ROI) ready (typically defined anatomically or by independent tasks). nilearn provides tools to extract signal from mask. You can refer to this <a class="reference external" href="http://nilearn.github.io/manipulating_images/manipulating_images.html">tutorial</a></p>
+</div>
+<div class="section" id="notes-on-model-assumption">
+<h3>Notes on model assumption<a class="headerlink" href="#notes-on-model-assumption" title="Permalink to this heading"></a></h3>
+<p>Please note that the model assumes that the covariance matrix U which all $\beta_i$ follow describe a multi-variate Gaussian distribution that is zero-meaned. This assumption does not imply that there must be both positive and negative responses across voxels.
+However, it means that (Group) Bayesian RSA treats the task-evoked activity against baseline BOLD level as signal, while in other RSA tools the deviation of task-evoked activity in each voxel from the average task-evoked activity level across voxels may be considered as signal of interest.
+Due to this assumption in (G)BRSA, relatively high degree of similarity may be expected when the activity patterns of two task conditions share a strong sensory driven components. When two task conditions elicit exactly the same activity pattern but only differ in their global magnitudes, under the assumption in (G)BRSA, their similarity is 1. However, if one take the assumption that only deviation of pattern from average patterns is signal of interest (which is currently not supported by (G)BRSA), their similarity would be -1 because the deviations of the two patterns from their average pattern are exactly opposite.</p>
+</div>
+<div class="section" id="load-some-package-which-we-will-use-in-this-demo">
+<h3>Load some package which we will use in this demo.<a class="headerlink" href="#load-some-package-which-we-will-use-in-this-demo" title="Permalink to this heading"></a></h3>
+<p>If you see error related to loading any package, you can install that package. For example, if you use Anaconda, you can use “conda install matplotlib” to install matplotlib.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.spatial.distance</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">spdist</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">brainiak.reprsimil.brsa</span><span class="w"> </span><span class="kn">import</span> <span class="n">GBRSA</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">brainiak.utils.utils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">utils</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You might want to keep a log of the output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
+    <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;gbrsa_example.log&#39;</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(relativeCreated)6d</span><span class="s1"> </span><span class="si">%(threadName)s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="simulate-data">
+<h2>Simulate data<a class="headerlink" href="#simulate-data" title="Permalink to this heading"></a></h2>
+<p>We want to simulate some data in which each voxel responds to different task conditions differently, but following a common covariance structure.</p>
+<p>This example simulate 5 subjects. If you find the whole notebook runs for too long on your computer, you can reduce the number of simulated subjects by changing <code class="docutils literal notranslate"><span class="pre">n_subj</span></code> below.</p>
+<div class="section" id="load-an-example-design-matrix">
+<h3>Load an example design matrix.<a class="headerlink" href="#load-an-example-design-matrix" title="Permalink to this heading"></a></h3>
+<p>To use BRSA, you need to prepare design matrix for the task with your favorate software, such as using <code class="docutils literal notranslate"><span class="pre">3ddeconvolve</span></code> of AFNI, or using SPM or FSL.</p>
+<p>The design matrix reflects your belief of how fMRI signal should respond to a task (if a voxel does respond).
+The common assumption is that a neural event that you are interested in will elicit a slow hemodynamic response in some voxels. The response peaks around 4-6 seconds after the event onset and dissipatess ~12 seconds after the event. Therefore, typically you convolve a time series A, composed of delta (stem) functions reflecting the time of each neural event belonging to the same category (e.g. all trials in which a participant sees a face), with a hemodynamic response function B, to form the hypothetic response of any voxel to such type of neural event.
+One convoluted time course can be generated this way for each type of event. The time courses corresponding to all events, put together, are called design matrix.
+Our goal is to figure out how the (spatial) response patterns of a population of voxels (in an Region of Interest, ROI) to different types of tasks (e.g., watching different categories of animals, different conditions of a cognitive task) are similar or disimilar. So we need the design matrix in order to estimate the similarity matrix we are interested in.</p>
+<p>Basically, (G)BRSA just needs a numpy array which is in size of {time points} * {condition}.
+We can use the utility called <code class="docutils literal notranslate"><span class="pre">ReadDesign</span></code> from <code class="docutils literal notranslate"><span class="pre">brainiak.utils</span></code> to read a design matrix generated from AFNI. For design matrix saved as Matlab data file by SPM or or other toolbox, you can use <code class="docutils literal notranslate"><span class="pre">scipy.io.loadmat('YOURFILENAME')</span></code> and extract the design matrix from the dictionary returned.
+You can also generate design matrix using the function <code class="docutils literal notranslate"><span class="pre">gen_design</span></code> in <code class="docutils literal notranslate"><span class="pre">brainiak.utils</span></code>. It takes in (names of) event timing files in AFNI or FSL format (denoting onsets, duration, and weight for each event belonging to the same condition) and outputs the design matrix as numpy array.</p>
+<div class="section" id="details-about-design-matrix">
+<h4>details about design matrix<a class="headerlink" href="#details-about-design-matrix" title="Permalink to this heading"></a></h4>
+<p>In this simulation, we use a design matrix of a task consisting of 16 different conditions, which by design cannot be fully counter-balanced in their orders. For simplicity, we repeat the design matrix of one run by 2 to 3 times, mimicking 2 to 3 fMRI runs with identical timing.
+Note that different subjects do not have to have the same number of voxels or time points. The timing of the task conditions can also differ across subjects. The simulation below reflects this.</p>
+<p>In typical fMRI analysis, some nuisance regressors such as head motion, baseline time series and slow drift are also entered into regression. <strong>In using (G)BRSA, you should not include such nuisance regressors into the design matrix, because the spatial spread of such nuisance regressors might be quite different from the spatial spread of task related signal.</strong> Including such nuisance regressors in design matrix might influence the pseudo-SNR map, which in turn influences the estimation of the shared covariance matrix. But you may include motion time course in the nuisance parameter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_subj</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">n_run</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">n_subj</span><span class="p">)</span>
+<span class="n">ROI_edge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">n_subj</span><span class="p">)</span>
+<span class="c1"># We simulate &quot;ROIs&quot; of a square shape</span>
+<span class="n">design</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_subj</span>
+<span class="k">for</span> <span class="n">subj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">):</span>
+    <span class="n">design</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">ReadDesign</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="s2">&quot;example_design.1D&quot;</span><span class="p">)</span>
+    <span class="n">design</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span><span class="o">.</span><span class="n">n_TR</span> <span class="o">=</span> <span class="n">design</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span><span class="o">.</span><span class="n">n_TR</span> <span class="o">*</span> <span class="n">n_run</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span>
+    <span class="n">design</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span><span class="o">.</span><span class="n">design_task</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">design</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span><span class="o">.</span><span class="n">design_task</span><span class="p">[:,:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                                 <span class="p">[</span><span class="n">n_run</span><span class="p">[</span><span class="n">subj</span><span class="p">],</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="c1"># The last &quot;condition&quot; in design matrix</span>
+    <span class="c1"># codes for trials subjects made an error.</span>
+    <span class="c1"># We ignore it here.</span>
+<span class="n">n_C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">design</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">design_task</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># The total number of conditions.</span>
+<span class="n">n_V</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">roi_e</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">roi_e</span> <span class="ow">in</span> <span class="n">ROI_edge</span><span class="p">]</span>
+<span class="c1"># The total number of simulated voxels</span>
+<span class="n">n_T</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">n_TR</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">design</span><span class="p">]</span>
+<span class="c1"># The total number of time points,</span>
+<span class="c1"># after concatenating all fMRI runs</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+                 <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">design</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">design_task</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;hypothetic fMRI response time courses &#39;</span>
+          <span class="s1">&#39;of all conditions for one subject</span><span class="se">\n</span><span class="s1">&#39;</span>
+         <span class="s1">&#39;(design matrix)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/515e307d58c961c6a94ee78680fe255d59e976d60ee597b5dd7a18015ec58013.png" src="../../_images/515e307d58c961c6a94ee78680fe255d59e976d60ee597b5dd7a18015ec58013.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="simulate-noise">
+<h3>simulate noise<a class="headerlink" href="#simulate-noise" title="Permalink to this heading"></a></h3>
+<p>We simulate noise which is Gaussian Process (mimicking smooth noise in fMRI) in space and AR(1) in time</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">noise_bot</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">noise_top</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">noise_level</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_subj</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_subj</span>
+<span class="n">rho1</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_subj</span>
+<span class="n">white_noise_magnitude</span> <span class="o">=</span> <span class="mf">0.4</span>
+<span class="k">for</span> <span class="n">subj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">):</span>
+    <span class="c1"># each subject may have different noise level</span>
+    <span class="n">noise_level</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_V</span><span class="p">[</span><span class="n">subj</span><span class="p">])</span> <span class="o">*</span> \
+        <span class="p">(</span><span class="n">noise_top</span> <span class="o">-</span> <span class="n">noise_bot</span><span class="p">)</span> <span class="o">+</span> <span class="n">noise_bot</span>
+    <span class="c1"># The standard deviation of the noise is in the range of [noise_bot, noise_top]</span>
+    <span class="c1"># In fact, we simulate autocorrelated noise with AR(1) model. So the noise_level reflects</span>
+    <span class="c1"># the independent additive noise at each time point (the &quot;fresh&quot; noise)</span>
+
+<span class="c1"># AR(1) coefficient</span>
+<span class="n">rho1_top</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="n">rho1_bot</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span>
+<span class="k">for</span> <span class="n">subj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">):</span>
+    <span class="n">rho1</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_V</span><span class="p">[</span><span class="n">subj</span><span class="p">])</span> \
+        <span class="o">*</span> <span class="p">(</span><span class="n">rho1_top</span> <span class="o">-</span> <span class="n">rho1_bot</span><span class="p">)</span> <span class="o">+</span> <span class="n">rho1_bot</span>
+
+<span class="n">noise_smooth_width</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">dist2</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_subj</span>
+<span class="k">for</span> <span class="n">subj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">):</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">ROI_edge</span><span class="p">[</span><span class="n">subj</span><span class="p">],</span> <span class="mi">0</span><span class="p">:</span><span class="n">ROI_edge</span><span class="p">[</span><span class="n">subj</span><span class="p">],</span> <span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">coords_flat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">coords</span><span class="p">,[</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_V</span><span class="p">[</span><span class="n">subj</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">dist2</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> <span class="o">=</span> <span class="n">spdist</span><span class="o">.</span><span class="n">squareform</span><span class="p">(</span><span class="n">spdist</span><span class="o">.</span><span class="n">pdist</span><span class="p">(</span><span class="n">coords_flat</span><span class="p">,</span> <span class="s1">&#39;sqeuclidean&#39;</span><span class="p">))</span>
+
+    <span class="c1"># generating noise</span>
+    <span class="n">K_noise</span> <span class="o">=</span> <span class="n">noise_level</span><span class="p">[</span><span class="n">subj</span><span class="p">][:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> \
+        <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">dist2</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> <span class="o">/</span> <span class="n">noise_smooth_width</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span> \
+           <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n_V</span><span class="p">[</span><span class="n">subj</span><span class="p">])</span> <span class="o">*</span> <span class="n">white_noise_magnitude</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">noise_level</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span>
+    <span class="c1"># We make spatially correlated noise by generating</span>
+    <span class="c1"># noise at each time point from a Gaussian Process</span>
+    <span class="c1"># defined over the coordinates.</span>
+    <span class="n">L_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">K_noise</span><span class="p">)</span>
+    <span class="n">noise</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n_T</span><span class="p">[</span><span class="n">subj</span><span class="p">],</span> <span class="n">n_V</span><span class="p">[</span><span class="n">subj</span><span class="p">]])</span>
+    <span class="n">noise</span><span class="p">[</span><span class="n">subj</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">L_noise</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_V</span><span class="p">[</span><span class="n">subj</span><span class="p">]))</span>\
+        <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">rho1</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i_t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_T</span><span class="p">[</span><span class="n">subj</span><span class="p">]):</span>
+        <span class="n">noise</span><span class="p">[</span><span class="n">subj</span><span class="p">][</span><span class="n">i_t</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">noise</span><span class="p">[</span><span class="n">subj</span><span class="p">][</span><span class="n">i_t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">rho1</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> \
+            <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">L_noise</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_V</span><span class="p">[</span><span class="n">subj</span><span class="p">]))</span>
+    <span class="c1"># For each voxel, the noise follows AR(1) process:</span>
+    <span class="c1"># fresh noise plus a dampened version of noise at</span>
+    <span class="c1"># the previous time point.</span>
+    <span class="c1"># In this simulation, we also introduced spatial smoothness resembling a Gaussian Process.</span>
+    <span class="c1"># Notice that we simulated in this way only to introduce spatial noise correlation.</span>
+    <span class="c1"># Gaussian Process is not the assumption of the form of spatial noise correlation in the model.</span>
+    <span class="n">noise</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">K_noise</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">ROI_edge</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">ROI_edge</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">ROI_edge</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">ROI_edge</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Spatial covariance matrix of noise</span><span class="se">\n</span><span class="s1"> of one participant in a simulated square &quot;ROI&quot;&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x coordinates of voxels&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y coordinates of voxels&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
+                 <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">noise</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;noise in an example voxel&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;TR&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;demeaned signal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/dba329a71fa734906f14393953a574a95897a935fdd40b938805847142d0b8c2.png" src="../../_images/dba329a71fa734906f14393953a574a95897a935fdd40b938805847142d0b8c2.png" />
+<img alt="../../_images/99e22f7a97264c9f44de69bffaef6738352e3a6687965a2b2a4a154c7e6f5cae.png" src="../../_images/99e22f7a97264c9f44de69bffaef6738352e3a6687965a2b2a4a154c7e6f5cae.png" />
+</div>
+</div>
+</div>
+<div class="section" id="specify-simulated-similarity-matrix">
+<h3>specify simulated similarity matrix<a class="headerlink" href="#specify-simulated-similarity-matrix" title="Permalink to this heading"></a></h3>
+<p>We assume the magnitude of response to each condition follows a common covariance matrix, underlying a similarity structure displayed below, for easy visualization of the effectiveness of different RSA approaches.</p>
+<p>Let’s keep the pattern of the ideal covariance / correlation below in mind and see how well BRSA can recover their patterns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ideal covariance matrix</span>
+<span class="n">ideal_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n_C</span><span class="p">,</span> <span class="n">n_C</span><span class="p">])</span>
+<span class="n">ideal_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n_C</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.6</span>
+<span class="n">ideal_cov</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">:</span><span class="mi">12</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.6</span>
+<span class="k">for</span> <span class="n">cond</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">):</span>
+    <span class="n">ideal_cov</span><span class="p">[</span><span class="n">cond</span><span class="p">,</span><span class="n">cond</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">ideal_cov</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;ideal covariance matrix&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">std_diag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">ideal_cov</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+<span class="n">ideal_corr</span> <span class="o">=</span> <span class="n">ideal_cov</span> <span class="o">/</span> <span class="n">std_diag</span> <span class="o">/</span> <span class="n">std_diag</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">ideal_corr</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;ideal correlation matrix&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/8aaa7ebda3fc3d559e2bc9b7e499b4a85d24d71c8f02f76e8be1ae789cf75a0e.png" src="../../_images/8aaa7ebda3fc3d559e2bc9b7e499b4a85d24d71c8f02f76e8be1ae789cf75a0e.png" />
+<img alt="../../_images/4c15cdf58e0aff22f56995bd82347ec93031ca2033229aa7b894db716e6e765a.png" src="../../_images/4c15cdf58e0aff22f56995bd82347ec93031ca2033229aa7b894db716e6e765a.png" />
+</div>
+</div>
+</div>
+<div class="section" id="simulate-task-related-signals">
+<h3>Simulate task-related signals<a class="headerlink" href="#simulate-task-related-signals" title="Permalink to this heading"></a></h3>
+<p>We make a realistic assumption that signal-to-noise ratio (SNR) is not constant across voxels. In the following, the map of pseudo-SNR (proportional to real SNR) is generated from a Gaussian Process defined on a “square” ROI, just for simplicity of code. Task-evoked response amplitudes are then simulated as samples drawn from multi-variate Gaussian distributions with covariance matrix equaling the ideal covariance matrix above, times the pseudo-SNR of each voxel.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L_full</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">ideal_cov</span><span class="p">)</span>        
+
+<span class="c1"># generating signal</span>
+<span class="n">snr_level</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_subj</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.6</span> <span class="o">+</span> <span class="mf">0.4</span>
+<span class="c1"># Notice that accurately speaking this is not SNR.</span>
+<span class="c1"># The magnitude of signal depends not only on beta but also on x.</span>
+<span class="c1"># (noise_level*snr_level)**2 is the factor multiplied</span>
+<span class="c1"># with ideal_cov to form the covariance matrix from which</span>
+<span class="c1"># the response amplitudes (beta) of a voxel are drawn from.</span>
+
+<span class="n">tau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_subj</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.8</span> <span class="o">+</span> <span class="mf">0.2</span>
+<span class="c1"># magnitude of Gaussian Process from which the log(SNR) is drawn</span>
+<span class="n">smooth_width</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_subj</span><span class="p">)</span> <span class="o">*</span> <span class="mf">5.0</span> <span class="o">+</span> <span class="mf">3.0</span>
+<span class="c1"># spatial length scale of the Gaussian Process, unit: voxel</span>
+
+
+
+<span class="n">snr</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_subj</span>
+<span class="n">signal</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_subj</span>
+<span class="n">betas_simulated</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_subj</span>
+
+<span class="k">for</span> <span class="n">subj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">):</span>
+
+    <span class="n">K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">dist2</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> <span class="o">/</span> <span class="n">smooth_width</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">tau</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> \
+        <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n_V</span><span class="p">[</span><span class="n">subj</span><span class="p">])</span> <span class="o">*</span> <span class="n">tau</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="mf">0.01</span>
+    <span class="c1"># K is the spatial covariance of SNR.</span>
+    <span class="c1"># A tiny amount is added to the diagonal of</span>
+    <span class="c1"># the GP covariance matrix to make sure it can be inverted</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
+    <span class="n">snr</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_V</span><span class="p">[</span><span class="n">subj</span><span class="p">])))</span> <span class="o">*</span> <span class="n">snr_level</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span>
+    <span class="n">sqrt_v</span> <span class="o">=</span> <span class="n">noise_level</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> <span class="o">*</span> <span class="n">snr</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span>
+    <span class="n">betas_simulated</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">L_full</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_C</span><span class="p">,</span> <span class="n">n_V</span><span class="p">[</span><span class="n">subj</span><span class="p">]))</span> <span class="o">*</span> <span class="n">sqrt_v</span>
+    <span class="c1"># Simulated activation pattern (beta)</span>
+    <span class="n">signal</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">design</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span><span class="o">.</span><span class="n">design_task</span><span class="p">,</span> <span class="n">betas_simulated</span><span class="p">[</span><span class="n">subj</span><span class="p">])</span>
+
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">snr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">ROI_edge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ROI_edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]]))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;pseudo-SNR in a square &quot;ROI&quot; </span><span class="se">\n</span><span class="s1">of participant 0&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/58c3fac9e98d512184f124c107aa3024711e14c0630f4b3020a83d1c5fe5953c.png" src="../../_images/58c3fac9e98d512184f124c107aa3024711e14c0630f4b3020a83d1c5fe5953c.png" />
+</div>
+</div>
+</div>
+<div class="section" id="synthesize-data-by-adding-signal-with-noise">
+<h3>Synthesize data by adding signal with noise<a class="headerlink" href="#synthesize-data-by-adding-signal-with-noise" title="Permalink to this heading"></a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_subj</span>
+<span class="k">for</span> <span class="n">subj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">):</span>
+    <span class="n">Y</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> <span class="o">=</span> <span class="n">signal</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> <span class="o">+</span> <span class="n">noise</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span>
+    <span class="c1"># The data to be fed to the program.</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we take a look at the voxels with the lowest SNR and highest SNR for the participant with median level of overall SNR</p>
+<p>The reason that the pseudo-SNRs in the example voxels are not too small, while the signal looks much smaller is because we happen to have low amplitudes in our design matrix. The true SNR depends on both the amplitudes in design matrix and the pseudo-SNR. Therefore, be aware that pseudo-SNR does not directly reflects how much signal the data have, but rather a map indicating the relative strength of signal in differerent voxels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snr_all</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">snr</span><span class="p">)</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">snr_all</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">snr_all</span><span class="p">)))</span>
+<span class="n">median_subj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">idx</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">n_V</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="n">idx</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n_V</span><span class="p">]))[</span><span class="n">median_subj</span><span class="p">]</span>
+<span class="c1"># choose a voxel of medium level SNR.</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
+                 <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">noise_plot</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">noise</span><span class="p">[</span><span class="n">median_subj</span><span class="p">][:,</span><span class="n">idx</span><span class="p">],</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">signal_plot</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">signal</span><span class="p">[</span><span class="n">median_subj</span><span class="p">][:,</span><span class="n">idx</span><span class="p">],</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">noise_plot</span><span class="p">,</span> <span class="n">signal_plot</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;noise&#39;</span><span class="p">,</span> <span class="s1">&#39;signal&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;simulated data in an example voxel&#39;</span>
+          <span class="s1">&#39; with pseudo-SNR of </span><span class="si">{:.3f}</span><span class="s1"> in participant </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">snr</span><span class="p">[</span><span class="n">median_subj</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">median_subj</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;TR&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
+                 <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">data_plot</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">median_subj</span><span class="p">][:,</span><span class="n">idx</span><span class="p">],</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;observed data of the voxel (signal+noise)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;TR&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">snr_all</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">snr_all</span><span class="p">)))</span>
+<span class="n">highest_subj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">idx</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">n_V</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n_V</span><span class="p">]))[</span><span class="n">highest_subj</span><span class="p">]</span>
+<span class="c1"># display the voxel of the highest level SNR.</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
+                 <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">noise_plot</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">noise</span><span class="p">[</span><span class="n">highest_subj</span><span class="p">][:,</span><span class="n">idx</span><span class="p">],</span><span class="s1">&#39;g--&#39;</span><span class="p">)</span>
+<span class="n">signal_plot</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">signal</span><span class="p">[</span><span class="n">highest_subj</span><span class="p">][:,</span><span class="n">idx</span><span class="p">],</span><span class="s1">&#39;b--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">noise_plot</span><span class="p">,</span> <span class="n">signal_plot</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;noise&#39;</span><span class="p">,</span> <span class="s1">&#39;signal&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;simulated data in the voxel with the highest&#39;</span>
+          <span class="s1">&#39; pseudo-SNR of </span><span class="si">{:.3f}</span><span class="s1"> in subject </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">snr</span><span class="p">[</span><span class="n">highest_subj</span><span class="p">][</span><span class="n">idx</span><span class="p">],</span> <span class="n">highest_subj</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;TR&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
+                 <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">data_plot</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">highest_subj</span><span class="p">][:,</span><span class="n">idx</span><span class="p">],</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;observed data of the voxel (signal+noise)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;TR&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/74e4f5012bb4445c114fb05ee7bd6282817a7d0a4a64085e0b087f273e47c2a3.png" src="../../_images/74e4f5012bb4445c114fb05ee7bd6282817a7d0a4a64085e0b087f273e47c2a3.png" />
+<img alt="../../_images/04befc0a71c09eeeb4e8e138581add8c070e2bca122895c578fed1e77a69fada.png" src="../../_images/04befc0a71c09eeeb4e8e138581add8c070e2bca122895c578fed1e77a69fada.png" />
+<img alt="../../_images/382731c09ed93604dbfebed19e9ec95506a9f25b397d857ce488e9c832779123.png" src="../../_images/382731c09ed93604dbfebed19e9ec95506a9f25b397d857ce488e9c832779123.png" />
+<img alt="../../_images/31cb0dd8e1389107c80986b5cf166420a21fe8e9e9b647516c9e0f8b3aacf2ca.png" src="../../_images/31cb0dd8e1389107c80986b5cf166420a21fe8e9e9b647516c9e0f8b3aacf2ca.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="fit-group-bayesian-rsa-to-simulated-data">
+<h2>Fit Group Bayesian RSA to simulated data<a class="headerlink" href="#fit-group-bayesian-rsa-to-simulated-data" title="Permalink to this heading"></a></h2>
+<p>In BRSA and GBRSA, the nuisance regressors in typical fMRI analysis (such as head motion signal) are replaced by principal components estimated from residuals after subtracting mean posterior estimation of task-related response. <code class="docutils literal notranslate"><span class="pre">n_nureg</span></code> tells the model how many principal components to keep from the residual as nuisance regressors, in order to account for spatial correlation in noise. When it is set to None and <code class="docutils literal notranslate"><span class="pre">auto_nuisance=True</span></code>, this number will be estimated automatically by an algorithm of <a class="reference external" href="https://ieeexplore.ieee.org/document/6846297">Gavish &amp; Dohono 2014</a>. If you prefer not using this approach based on principal components of residuals, you can set <code class="docutils literal notranslate"><span class="pre">auto_nuisance=False</span></code>, and optionally provide your own nuisance regressors as a list (one numpy array per subject) as nuisance argument to <code class="docutils literal notranslate"><span class="pre">GBRSA.fit()</span></code>. In practice, we find that the result is much better with <code class="docutils literal notranslate"><span class="pre">auto_nuisance=True</span></code>.</p>
+<p>Apparently one can imagine that the choice of the number of principal components used as nuisance regressors can influence the result. If you just choose 1 or 2, perhaps only the global drift would be captured. But including too many nuisance regressors would slow the fitting speed and might have risk of overfitting. Among all the algorithms we have tested with simulation data, the Gavish &amp; Donoho algorithm appears the most robust and the estimate is closest to the true simulated number. But it does have a tendency to under-estimate the number of components, which is one limitation in (G)BRSA module.</p>
+<div class="section" id="prepare-onset-information-for-model-fitting">
+<h3>Prepare onset information for model fitting<a class="headerlink" href="#prepare-onset-information-for-model-fitting" title="Permalink to this heading"></a></h3>
+<p>When you have multiple runs, the noise won’t be correlated between runs. Therefore, you should tell BRSA when is the onset of each scan.</p>
+<p>Note that the data (variable Y above) you feed to BRSA is the concatenation of data from all runs along the time dimension, as a 2-D matrix of time x space</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scan_onsets</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">design</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">n_TR</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="n">n_run</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)[:</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;scan onsets: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scan_onsets</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>scan onsets: [array([  0, 186, 372], dtype=int32), array([  0, 186, 372], dtype=int32), array([  0, 186], dtype=int32), array([  0, 186, 372], dtype=int32), array([  0, 186], dtype=int32)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="instantiate-a-gbrsa-object">
+<h3>Instantiate a GBRSA object<a class="headerlink" href="#instantiate-a-gbrsa-object" title="Permalink to this heading"></a></h3>
+<p>To reduce the running time at a cost of inaccuracy, you may specify <code class="docutils literal notranslate"><span class="pre">SNR_prior='equal'</span></code> and a smaller <code class="docutils literal notranslate"><span class="pre">rho_bins</span></code> parameter, as the code commented out below. There are multiple other parameters, we take the defaults in this example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gbrsa</span> <span class="o">=</span> <span class="n">GBRSA</span><span class="p">()</span>
+
+<span class="c1"># gbrsa = GBRSA(SNR_prior=&#39;equal&#39;, rho_bins=11)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="fit-model-to-the-data">
+<h3>Fit model to the data<a class="headerlink" href="#fit-model-to-the-data" title="Permalink to this heading"></a></h3>
+<p>This may take a while.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gbrsa</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">Y</span><span class="p">,</span> <span class="n">design</span><span class="o">=</span><span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">design_task</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">design</span><span class="p">],</span><span class="n">scan_onsets</span><span class="o">=</span><span class="n">scan_onsets</span><span class="p">)</span>
+<span class="c1"># The data to fit should be given to the argument X.</span>
+<span class="c1"># Design matrix goes to design. And so on.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GBRSA(nureg_method=&lt;function GBRSA.__init__.&lt;locals&gt;.&lt;lambda&gt; at 0x7f3d0bc79b90&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="evaluation">
+<h2>Evaluation<a class="headerlink" href="#evaluation" title="Permalink to this heading"></a></h2>
+<div class="section" id="result-of-gbrsa">
+<h3>Result of GBRSA<a class="headerlink" href="#result-of-gbrsa" title="Permalink to this heading"></a></h3>
+<p>We can have a look at the estimated similarity in matrix <code class="docutils literal notranslate"><span class="pre">gbrsa.C_</span></code>.</p>
+<p>We can also compare the ideal covariance above with the one recovered, <code class="docutils literal notranslate"><span class="pre">gbrsa.U_</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">gbrsa</span><span class="o">.</span><span class="n">C_</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Estimated correlation structure</span><span class="se">\n</span><span class="s1"> shared between voxels</span><span class="se">\n</span><span class="s1">&#39;</span>
+         <span class="s1">&#39;This constitutes the output of Bayesian RSA</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">gbrsa</span><span class="o">.</span><span class="n">U_</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Estimated covariance structure</span><span class="se">\n</span><span class="s1"> shared between voxels</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6910e321d7dfe4fa38254f615a8bc02c13a6149527912e251d635bf0f997b1d1.png" src="../../_images/6910e321d7dfe4fa38254f615a8bc02c13a6149527912e251d635bf0f997b1d1.png" />
+<img alt="../../_images/5372aed15dbb9a4db365385d4fcd27bef2b62d2d9b42c00fad986d0540d10489.png" src="../../_images/5372aed15dbb9a4db365385d4fcd27bef2b62d2d9b42c00fad986d0540d10489.png" />
+</div>
+</div>
+</div>
+<div class="section" id="compare-with-result-of-traditional-rsa">
+<h3>Compare with result of traditional RSA<a class="headerlink" href="#compare-with-result-of-traditional-rsa" title="Permalink to this heading"></a></h3>
+<p>In this approach, estimated activation patterns of each task condition ($\beta$) are obtained by regressing data against design matrix.
+And then Pearson correlation or other (dis)similarity metric is calculated between the noisy estimates of $\beta$s of different conditions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sum_point_corr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_C</span><span class="p">,</span> <span class="n">n_C</span><span class="p">))</span>
+<span class="n">sum_point_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_C</span><span class="p">,</span> <span class="n">n_C</span><span class="p">))</span>
+<span class="n">betas_point</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_subj</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Example result from one participant (traditional RSA)&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">subj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">):</span>
+    <span class="n">regressor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">design</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span><span class="o">.</span><span class="n">design_task</span><span class="p">,</span>
+                          <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">betas_point</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">regressor</span><span class="p">,</span> <span class="n">Y</span><span class="p">[</span><span class="n">subj</span><span class="p">],</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">point_corr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">betas_point</span><span class="p">[</span><span class="n">subj</span><span class="p">][</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:])</span>
+    <span class="n">point_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">betas_point</span><span class="p">[</span><span class="n">subj</span><span class="p">][</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:])</span>
+    <span class="n">sum_point_corr</span> <span class="o">+=</span> <span class="n">point_corr</span>
+    <span class="n">sum_point_cov</span> <span class="o">+=</span> <span class="n">point_cov</span>
+    <span class="k">if</span> <span class="n">subj</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">point_corr</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Correlation structure estimated</span><span class="se">\n</span><span class="s1">&#39;</span>
+                 <span class="s1">&#39;based on point estimates of betas</span><span class="se">\n</span><span class="s1">&#39;</span>
+                 <span class="s1">&#39;for subject </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subj</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">point_cov</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Covariance structure of</span><span class="se">\n</span><span class="s1">&#39;</span>
+                 <span class="s1">&#39;point estimates of betas</span><span class="se">\n</span><span class="s1">&#39;</span>
+                 <span class="s1">&#39;for subject </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subj</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Group average result of traditional RSA&#39;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">sum_point_corr</span> <span class="o">/</span> <span class="n">n_subj</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Correlation structure estimated</span><span class="se">\n</span><span class="s1">&#39;</span>
+         <span class="s1">&#39;based on point estimates of betas</span><span class="se">\n</span><span class="s1">&#39;</span>
+         <span class="s1">&#39;averaged over subjects (traditional RSA)</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">sum_point_cov</span> <span class="o">/</span> <span class="n">n_subj</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Covariance structure of</span><span class="se">\n</span><span class="s1">&#39;</span>
+         <span class="s1">&#39;point estimates of betas</span><span class="se">\n</span><span class="s1">&#39;</span>
+         <span class="s1">&#39;averaged over subjects (traditional RSA)</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Compare with the result of Group Bayesian RSA&#39;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">gbrsa</span><span class="o">.</span><span class="n">C_</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Estimated correlation structure</span><span class="se">\n</span><span class="s1">&#39;</span>
+          <span class="s1">&#39;shared between voxels (Bayesian RSA)</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">gbrsa</span><span class="o">.</span><span class="n">U_</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Estimated covariance structure</span><span class="se">\n</span><span class="s1">&#39;</span>
+          <span class="s1">&#39;shared between voxels (Bayesian RSA)</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;conditions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example result from one participant (traditional RSA)
+</pre></div>
+</div>
+<img alt="../../_images/4bc9726b06c88f2fb5df357891039133fa5fd89ae19503f54eacf72dd620105d.png" src="../../_images/4bc9726b06c88f2fb5df357891039133fa5fd89ae19503f54eacf72dd620105d.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Group average result of traditional RSA
+</pre></div>
+</div>
+<img alt="../../_images/5360de21c0cda64c3776b604bb46cb25e7a70f752cb940b85b77fc9e25d3ecb5.png" src="../../_images/5360de21c0cda64c3776b604bb46cb25e7a70f752cb940b85b77fc9e25d3ecb5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compare with the result of Group Bayesian RSA
+</pre></div>
+</div>
+<img alt="../../_images/e6d978d34f65da4040096f237b12cc982c728f4568d2aa12c9d2893598524ab2.png" src="../../_images/e6d978d34f65da4040096f237b12cc982c728f4568d2aa12c9d2893598524ab2.png" />
+</div>
+</div>
+<p>Compare the root mean squared error between the estimated similarity and simulated similarity structures</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RMS_GBRSA</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">gbrsa</span><span class="o">.</span><span class="n">C_</span> <span class="o">-</span> <span class="n">ideal_corr</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+<span class="n">RMS_RSA</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">point_corr</span> <span class="o">-</span> <span class="n">ideal_corr</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;RMS error of group Bayesian RSA: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">RMS_GBRSA</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;RMS error of standard RSA: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">RMS_RSA</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RMS error of group Bayesian RSA: 0.08086539168945868
+RMS error of standard RSA: 0.34747836290315093
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="evaluating-estimated-pseudo-snr-map-against-the-simulated-snr-map">
+<h3>Evaluating estimated pseudo-SNR map against the simulated SNR map<a class="headerlink" href="#evaluating-estimated-pseudo-snr-map-against-the-simulated-snr-map" title="Permalink to this heading"></a></h3>
+<p>If you have chosen <code class="docutils literal notranslate"><span class="pre">SNR_prior='equal'</span></code>, the estimated pseudo-SNR map will be flat</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subj</span> <span class="o">=</span> <span class="n">highest_subj</span>
+
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="n">n_subj</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+
+<span class="n">vmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">gbrsa</span><span class="o">.</span><span class="n">nSNR_</span><span class="p">[</span><span class="n">s</span><span class="p">])</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">)])</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">):</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">gbrsa</span><span class="o">.</span><span class="n">nSNR_</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="p">[</span><span class="n">ROI_edge</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">ROI_edge</span><span class="p">[</span><span class="n">s</span><span class="p">]]),</span>
+                        <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;estimated pseudo-SNR&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;xx-large&quot;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="n">n_subj</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">vmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">snr</span><span class="p">[</span><span class="n">s</span><span class="p">])</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">)])</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">):</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">snr</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="p">[</span><span class="n">ROI_edge</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">ROI_edge</span><span class="p">[</span><span class="n">s</span><span class="p">]]),</span>
+                        <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;simulated pseudo-SNR&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;xx-large&quot;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d412e74922c2708a094fa6b21ff131c81ebd6f0c9aed469ca0d474f498dd0eb5.png" src="../../_images/d412e74922c2708a094fa6b21ff131c81ebd6f0c9aed469ca0d474f498dd0eb5.png" />
+<img alt="../../_images/89bcb2904747b6381aa4a708a0aa86b707b9acff96e03808c130335a0fb7fc9c.png" src="../../_images/89bcb2904747b6381aa4a708a0aa86b707b9acff96e03808c130335a0fb7fc9c.png" />
+</div>
+</div>
+</div>
+<div class="section" id="examine-the-recovery-of-activation-pattern">
+<h3>Examine the recovery of activation pattern<a class="headerlink" href="#examine-the-recovery-of-activation-pattern" title="Permalink to this heading"></a></h3>
+<p>Scatter plot of the recovered $\beta$s and true $\beta$s. Each column is result from one subject. Ｔhe closer the dots are close to the diagnal line, the better the recovery is.
+Top: result by GBRSA. Bottom: result by standard regression analysis</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="n">n_subj</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">):</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">betas_simulated</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="p">,</span> <span class="n">gbrsa</span><span class="o">.</span><span class="n">beta_</span><span class="p">[</span><span class="n">s</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;recovered betas by GBRSA&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;xx-large&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_subj</span><span class="o">/</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;true betas&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;xx-large&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;r=</span><span class="si">{:0.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">stats</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">betas_simulated</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">gbrsa</span><span class="o">.</span><span class="n">beta_</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">ravel</span><span class="p">())[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;estimated vs. simulated betas, </span><span class="se">\n</span><span class="s1">by GBRSA&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;xx-large&quot;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="n">n_subj</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">):</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">betas_simulated</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="p">,</span> <span class="n">betas_point</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:])</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;recovered betas by simple regression&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;xx-large&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_subj</span><span class="o">/</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;true betas&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;xx-large&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;r=</span><span class="si">{:0.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">stats</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">betas_simulated</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">betas_point</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">ravel</span><span class="p">())[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;estimated vs. simulated betas, </span><span class="se">\n</span><span class="s1">by simple regression&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;xx-large&quot;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/11007175efc784af4b29d7d6c9cea6614bfeb561a5a0b9ad7eadb35899674333.png" src="../../_images/11007175efc784af4b29d7d6c9cea6614bfeb561a5a0b9ad7eadb35899674333.png" />
+<img alt="../../_images/15206436661ff6e9752ca89b7901271bc94d3020aafe19c639f847e4f54898b6.png" src="../../_images/15206436661ff6e9752ca89b7901271bc94d3020aafe19c639f847e4f54898b6.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="other-usage-decoding-task-related-signal-from-new-data">
+<h2>Other usage: “decoding” task-related signal from new data<a class="headerlink" href="#other-usage-decoding-task-related-signal-from-new-data" title="Permalink to this heading"></a></h2>
+<p>Now we generate a new data set.
+We keep the signal the same as in training data, but generate new noise.</p>
+<p>We can use the <code class="docutils literal notranslate"><span class="pre">transform()</span></code> function of gbrsa to estimate the “design matrix” in this new dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">noise_new</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_subj</span>
+<span class="n">Y_new</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">n_subj</span>
+<span class="k">for</span> <span class="n">subj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">):</span>
+    
+    <span class="c1"># generating noise</span>
+    <span class="n">K_noise</span> <span class="o">=</span> <span class="n">noise_level</span><span class="p">[</span><span class="n">subj</span><span class="p">][:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> \
+        <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">dist2</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> <span class="o">/</span> <span class="n">noise_smooth_width</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span> \
+           <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n_V</span><span class="p">[</span><span class="n">subj</span><span class="p">])</span> <span class="o">*</span> <span class="n">white_noise_magnitude</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">noise_level</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span>
+    <span class="c1"># We make spatially correlated noise by generating</span>
+    <span class="c1"># noise at each time point from a Gaussian Process</span>
+    <span class="c1"># defined over the coordinates.</span>
+    <span class="n">L_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">K_noise</span><span class="p">)</span>
+    <span class="n">noise_new</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n_T</span><span class="p">[</span><span class="n">subj</span><span class="p">],</span> <span class="n">n_V</span><span class="p">[</span><span class="n">subj</span><span class="p">]])</span>
+    <span class="n">noise_new</span><span class="p">[</span><span class="n">subj</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">L_noise</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_V</span><span class="p">[</span><span class="n">subj</span><span class="p">]))</span>\
+        <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">rho1</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i_t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_T</span><span class="p">[</span><span class="n">subj</span><span class="p">]):</span>
+        <span class="n">noise_new</span><span class="p">[</span><span class="n">subj</span><span class="p">][</span><span class="n">i_t</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">noise_new</span><span class="p">[</span><span class="n">subj</span><span class="p">][</span><span class="n">i_t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">rho1</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> \
+            <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">L_noise</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_V</span><span class="p">[</span><span class="n">subj</span><span class="p">]))</span>
+    <span class="n">Y_new</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> <span class="o">=</span> <span class="n">signal</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> <span class="o">+</span> <span class="n">noise_new</span><span class="p">[</span><span class="n">subj</span><span class="p">]</span> 
+
+
+
+<span class="n">ts</span><span class="p">,</span> <span class="n">ts0</span> <span class="o">=</span> <span class="n">gbrsa</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Y_new</span><span class="p">,</span><span class="n">scan_onsets</span><span class="o">=</span><span class="n">scan_onsets</span><span class="p">)</span>
+<span class="c1"># ts is the estimated task-related time course, with each column corresponding to the task condition of the same</span>
+<span class="c1"># column in design matrix.</span>
+<span class="c1"># ts0 is the estimated time courses that have the same spatial spread as those in the training data (X0).</span>
+<span class="c1"># It is possible some task related signal is still in X0 or ts0, but not captured by the design matrix.</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="n">n_subj</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">):</span>
+    <span class="n">recovered_plot</span><span class="p">,</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">[</span><span class="n">s</span><span class="p">][:</span><span class="mi">200</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+    <span class="n">design_plot</span><span class="p">,</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">design</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">design_task</span><span class="p">[:</span><span class="mi">200</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="s1">&#39;g&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_subj</span><span class="o">/</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;xx-large&#39;</span><span class="p">)</span>
+    
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">design_plot</span><span class="p">,</span> <span class="n">recovered_plot</span><span class="p">],</span>
+           <span class="p">[</span><span class="s1">&#39;design matrix for one condition&#39;</span><span class="p">,</span> <span class="s1">&#39;recovered time course for the condition&#39;</span><span class="p">],</span>
+          <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;xx-large&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># We did not plot the whole time series for the purpose of seeing closely how much the two</span>
+<span class="c1"># time series overlap</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="n">n_subj</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">design</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">design_task</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">ts</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">:],</span><span class="n">vmin</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_subj</span><span class="o">/</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;recovered time course&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;xx-large&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;true design matrix&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;xx-large&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;correlation between true design matrix </span><span class="se">\n</span><span class="s1">and the recovered task-related activity&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;average SNR level:&#39;</span><span class="p">,</span> <span class="n">snr_level</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Apparently how much the recovered time course resembles the true design matrix depends on SNR&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d155bbed8aae759ec8d12a9796596fef494b00c1ddce26ef3fbbe3128fdc4601.png" src="../../_images/d155bbed8aae759ec8d12a9796596fef494b00c1ddce26ef3fbbe3128fdc4601.png" />
+<img alt="../../_images/61c88c7db0220fbb8bb57afb45dc6772cb7b23093d037d6a5f5d3dc7e383d9cf.png" src="../../_images/61c88c7db0220fbb8bb57afb45dc6772cb7b23093d037d6a5f5d3dc7e383d9cf.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>average SNR level: [0.46520476 0.59677297 0.51632359 0.41470869 0.69860492]
+Apparently how much the recovered time course resembles the true design matrix depends on SNR
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="model-selection-by-cross-validation">
+<h2>Model selection by cross-validation<a class="headerlink" href="#model-selection-by-cross-validation" title="Permalink to this heading"></a></h2>
+<p>Both BRSA and GBRSA can compare full model against a null model (without task-related responses) by cross-validating the parameters of one model learnt from some training data on some testing data. GBRSA provides a <code class="docutils literal notranslate"><span class="pre">score()</span></code> function, which returns a pair of cross-validated log likelihood for the testing data.</p>
+<p>The first returned item is a numpy array of the cross-validated log likelihood of the model you have specified, for the testing data of all the subjects.
+The second is a numpy arrary of those of a null model which assumes everything else the same except that there is no task-related activity.</p>
+<p>Notice that comparing the score of your model of interest against its corresponding null model is not the only way to compare models. You might also want to compare against a model using the same set of design matrix, but a different rank (especially rank 1, which means all task conditions have the same response pattern, only differing in their magnitude).</p>
+<p>In general, in the context of GBRSA, a model means the timing of each event and the way these events are grouped, together with other trivial parameters such as the rank of the covariance matrix and the number of nuisance regressors. All these parameters can influence model performance.
+In future, we may provide interface to evaluate the predictive power for the data by different predefined similarity matrix or covariance matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">width</span> <span class="o">=</span> <span class="mf">0.35</span>
+<span class="p">[</span><span class="n">score</span><span class="p">,</span> <span class="n">score_null</span><span class="p">]</span> <span class="o">=</span> <span class="n">gbrsa</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">Y_new</span><span class="p">,</span> <span class="n">design</span><span class="o">=</span><span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">design_task</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">design</span><span class="p">],</span> <span class="n">scan_onsets</span><span class="o">=</span><span class="n">scan_onsets</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_subj</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">score</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">score_null</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+<span class="c1"># plt.ylim(0, np.max([np.asarray(score)-np.asarray(score_null)])+100)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;cross-validated log likelihood&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;partipants&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Difference between cross-validated log likelihoods</span><span class="se">\n</span><span class="s1"> of full model and null model</span><span class="se">\n</span><span class="s1">on new data containing signal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;When cross-validating on new data that have the same property of signal and noise with training data., full model should be better than null model&#39;</span><span class="p">)</span>
+
+<span class="n">Y_nosignal</span> <span class="o">=</span> <span class="p">[</span><span class="n">noise_new</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">)]</span>
+<span class="p">[</span><span class="n">score_noise</span><span class="p">,</span> <span class="n">score_null_noise</span><span class="p">]</span> <span class="o">=</span> <span class="n">gbrsa</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">Y_nosignal</span><span class="p">,</span> <span class="n">design</span><span class="o">=</span><span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">design_task</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">design</span><span class="p">],</span> <span class="n">scan_onsets</span><span class="o">=</span><span class="n">scan_onsets</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_subj</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">score_noise</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">score_null_noise</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+<span class="c1"># plt.ylim(np.min([np.asarray(score_noise)-np.asarray(score_null_noise)])-100,</span>
+<span class="c1">#          0)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;cross-validated log likelihood&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;partipants&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Difference between cross-validated log likelihoods</span><span class="se">\n</span><span class="s1"> of full model and null model</span><span class="se">\n</span><span class="s1">on pure noise&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;When cross-validating on pure noise, full model should not be better than null model&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/fb6491d720444f28bca327a9ace67bf58c457727465f038248d34e775f43b2c4.png" src="../../_images/fb6491d720444f28bca327a9ace67bf58c457727465f038248d34e775f43b2c4.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>When cross-validating on new data that have the same property of signal and noise with training data., full model should be better than null model
+</pre></div>
+</div>
+<img alt="../../_images/c928690e0e7ab0585a96ee557e8af2b4bcbe39786dd9a7d085972ab2d9ea680a.png" src="../../_images/c928690e0e7ab0585a96ee557e8af2b4bcbe39786dd9a7d085972ab2d9ea680a.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>When cross-validating on pure noise, full model should not be better than null model
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="avoid-false-discovery">
+<h2>Avoid false discovery<a class="headerlink" href="#avoid-false-discovery" title="Permalink to this heading"></a></h2>
+<p>If a model is fit to pure noise, some result of similarity structure can still be returned. How do we know if the result is valid?</p>
+<p>One approach is to examine the cross-validation score on left-out scans acquired with the same task.</p>
+<p>Below, we fit the model to data containing only noise and cross-validate it on another set of noise.</p>
+<p>When fitted to noise, the result should be meaningless. Ideally the cross-validated log likelihood of the full model should be smaller than that of the null model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gbrsa_noise</span> <span class="o">=</span> <span class="n">GBRSA</span><span class="p">(</span><span class="n">n_iter</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">gbrsa_noise</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="p">[</span><span class="n">noise</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">)],</span>
+                <span class="n">design</span><span class="o">=</span><span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">design_task</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">design</span><span class="p">],</span><span class="n">scan_onsets</span><span class="o">=</span><span class="n">scan_onsets</span><span class="p">)</span>
+<span class="n">Y_nosignal</span> <span class="o">=</span> <span class="p">[</span><span class="n">noise_new</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subj</span><span class="p">)]</span>
+<span class="p">[</span><span class="n">score_noise</span><span class="p">,</span> <span class="n">score_null_noise</span><span class="p">]</span> <span class="o">=</span> <span class="n">gbrsa_noise</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">Y_nosignal</span><span class="p">,</span>
+                                                    <span class="n">design</span><span class="o">=</span><span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">design_task</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">design</span><span class="p">],</span> <span class="n">scan_onsets</span><span class="o">=</span><span class="n">scan_onsets</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_subj</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">score_noise</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">score_null_noise</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">score_noise</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">score_null_noise</span><span class="p">)])</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">score_noise</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">score_null_noise</span><span class="p">)])</span><span class="o">+</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;cross-validated log likelihood&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;partipants&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Difference between cross-validated log likelihoods</span><span class="se">\n</span><span class="s1"> of full model and null model</span><span class="se">\n</span><span class="s1">trained on pure noise&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/16a1f6ebacbb1ef162f97696c7caab7f32804fbc31551a2cbe5e8af815874b14.png" src="../../_images/16a1f6ebacbb1ef162f97696c7caab7f32804fbc31551a2cbe5e8af815874b14.png" />
+</div>
+</div>
+<p>We can see that the difference is smaller but full model generally performs slightly worse, because of overfitting. This is expected.</p>
+<p>So, after fitting a model to your data, you should also check cross-validated log likelihood on separate runs from the same group of participants, and make sure your model is at least better than a null model before you trust your similarity matrix.</p>
+<p>Another diagnostic of bad model to your data is very small diagonal values in the shared covariance structure <code class="docutils literal notranslate"><span class="pre">U_</span></code> as shown below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">gbrsa_noise</span><span class="o">.</span><span class="n">U_</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;covariance matrix of task conditions estimated from pure noise&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;covariance matrix of task conditions estimated from pure noise&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/5bdd8b85abbfc66f20313dd3aaf1e5de31078be4ef01cda6a8e48264bb2af816.png" src="../../_images/5bdd8b85abbfc66f20313dd3aaf1e5de31078be4ef01cda6a8e48264bb2af816.png" />
+</div>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading"></a></h2>
+<p>(Group) Bayesian RSA models the covariance structure of the task-related activation patterns, and how the activation patterns and task-unrelated fluctuations together contribute to the temporal correlation in the fMRI data. By simulating fMRI data containing both task-related activation and spatio-temporally correlated noise, we show that (Group) Bayesian RSA recovers the similarity structure of activation patterns better than traditional RSA and suffers less from spurious correlation structure. GBRSA can additionally be used to decode task-related signals from new data. GBRSA also provides the ability to cross-validate the full model containing task-related signals against a null model assuming only spatiotemporally correlated noise, to prevent false discoveries.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../examples.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../eventseg/Event_Segmentation.html" class="btn btn-neutral float-right" title="Event segmentation and alignment in fMRI data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event segmentation and alignment in fMRI data &mdash; brainiak 0.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Full Correlation Matrix Analysis (FCMA) demo" href="../fcma/FCMA_demo.html" />
+    <link rel="prev" title="（Group) Bayesian Representational Similarity Analysis" href="../brsa/brsa_demo.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            brainiak
+          </a>
+              <div class="version">
+                0.12
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../brsa/brsa_demo.html">（Group) Bayesian Representational Similarity Analysis</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Event segmentation and alignment in fMRI data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#annotated-bibliography">Annotated Bibliography</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-data">Loading data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#finding-event-boundaries-during-perception">Finding event boundaries during perception</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#warm-up-event-structure-in-activity-patterns">Warm-up: Event structure in activity patterns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fitting-the-hmm">Fitting the HMM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#determining-the-number-of-events-with-the-hmm">Determining the number of events with the HMM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#optimal-segmentation-with-the-hmm">Optimal segmentation with the HMM</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#comparing-model-and-human-labeled-boundaries">Comparing model and human-labeled boundaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aligning-movie-and-recall-data">Aligning movie and recall data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../fcma/FCMA_demo.html">Full Correlation Matrix Analysis (FCMA) demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fmrisim/fmrisim_multivariate_example.html">fmrisim demo script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html">Hierarchical Topographic Factor Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#annotated-bibliography">Annotated bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#getting-started">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#code">Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#summary">Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iem/iem.html">Inverted Encoding Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iem_synthetic_RF/iem_example_synthetic_RF_data.html">Inverted encoding model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../isc/ISC.html">Intersubject correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matnormal/Matrix-normal%20model%20prototyping.html">Rapid prototyping of fMRI models with <code class="docutils literal notranslate"><span class="pre">brainiak.matnormal</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matnormal/Matrix-normal%20model%20prototyping.html#annotated-bibliography">Annotated Bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../real-time/README_INSTRUCTIONS.html">Set Up Instructions for the Real-Time fMRI Cloud-Based Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../real-time/rtcloud_notebook.html">Implementing a Real-Time fMRI Cloud-Based Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../srm/SRM.html">Shared response model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">brainiak</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Event segmentation and alignment in fMRI data</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/eventseg/Event_Segmentation.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="event-segmentation-and-alignment-in-fmri-data">
+<h1>Event segmentation and alignment in fMRI data<a class="headerlink" href="#event-segmentation-and-alignment-in-fmri-data" title="Permalink to this heading"></a></h1>
+<p>Author: Christopher Baldassano (<a class="reference external" href="mailto:c&#46;baldassano&#37;&#52;&#48;columbia&#46;edu">c<span>&#46;</span>baldassano<span>&#64;</span>columbia<span>&#46;</span>edu</a>)</p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>Humans tend to segment continuous perceptual experiences into discrete events. We have devised this notebook to capture the neural representations of this “chunking” process using a Hidden Markov Models (HMM). The notebook uses real data from naturalistic movie viewing and recall, suggesting ways to align derived neural event states with subjective annotations of event boundaries and with the recall time series.</p>
+</div>
+<div class="section" id="annotated-bibliography">
+<h2>Annotated Bibliography<a class="headerlink" href="#annotated-bibliography" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Baldassano, C., Chen, J., Zadbood, A., Pillow, J. W., Hasson, U., &amp; Norman, K. A. (2017). Discovering event structure in continuous narrative perception and memory. <em>Neuron</em>, 95(3), 709–721.e5. <a class="reference external" href="https://doi.org/10.1016/j.neuron.2017.06.041"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Describes and validates the event segmentation method, and applies it to perception and recall data from multiple experiments.</em></p></li>
+<li><p>Baldassano, C., Hasson, U., &amp; Norman, K. A. (2018). Representation of real-world event schemas during narrative perception. <em>Journal of Neuroscience</em>, 38(45), 9689–9699. <a class="reference external" href="https://doi.org/10.1523/JNEUROSCI.0251-18.2018"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Uses the event segmentation model to find common event structure among narratives with a shared schematic script.</em></p></li>
+<li><p>Ben-Yakov, A., &amp; Henson, R. N. (2018). The hippocampal film editor: sensitivity and specificity to event boundaries in continuous experience. <em>Journal of Neuroscience</em>, 38(47), 10057–10068. <a class="reference external" href="https://doi.org/10.1523/JNEUROSCI.0524-18.2018"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Further studies the relationship between the event boundaries produced by the event segmentation model, human-annotated boundaries, and hippocampal responses.</em></p></li>
+<li><p>Silva, M., Baldassano, C., &amp; Fuentemilla, L. (2019). Rapid memory reactivation at movie event boundaries promotes episodic encoding. <em>Journal of Neuroscience</em>, 39(43), 8538–8548. <a class="reference external" href="https://doi.org/10.1523/JNEUROSCI.0360-19.2019"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Applies the event segmentation model to EEG signals collected while subjects were watching a movie.</em></p></li>
+<li><p>Antony, J. W., Hartshorne, T. H., Pomeroy, K., Gureckis, T. M., Hasson, U., McDougle, S. D., &amp; Norman, K. A. (2020). Behavioral, physiological, and neural signatures of surprise during naturalistic sports viewing. <em>Neuron</em>. <a class="reference external" href="https://doi.org/10.1016/j.neuron.2020.10.029"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Uses the event segmentation model to relate the number and timing of event boundaries in neural signals  to the degree of surprise elicited in basketball games.</em></p></li>
+</ol>
+</div>
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#loading-data"><span class="std std-ref">Loading data</span></a></p></li>
+<li><p><a class="reference internal" href="#finding-event-boundaries-during-perception"><span class="std std-ref">Finding event boundaries during perception</span></a></p></li>
+<li><p><a class="reference internal" href="#comparing-model-and-human-labeled-boundaries"><span class="std std-ref">Comparing model and human-labeled boundaries</span></a></p></li>
+<li><p><a class="reference internal" href="#aligning-movie-and-recall-data"><span class="std std-ref">Aligning movie and recall data</span></a></p></li>
+<li><p><a class="reference internal" href="#summary"><span class="std std-ref">Summary</span></a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>    
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">brainiak.eventseg.event</span><span class="w"> </span><span class="kn">import</span> <span class="n">EventSegment</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">patches</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">smallsize</span><span class="o">=</span><span class="mi">14</span><span class="p">;</span> <span class="n">mediumsize</span><span class="o">=</span><span class="mi">16</span><span class="p">;</span> <span class="n">largesize</span><span class="o">=</span><span class="mi">18</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;xtick&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">smallsize</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;ytick&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">smallsize</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;legend&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">mediumsize</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">titlesize</span><span class="o">=</span><span class="n">largesize</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">mediumsize</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span> <span class="n">titlesize</span><span class="o">=</span><span class="n">mediumsize</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="loading-data">
+<h2>Loading data<a class="headerlink" href="#loading-data" title="Permalink to this heading"></a></h2>
+<p>This tutorial will use data from the first run of the Sherlock dataset <a class="reference external" href="https://doi.org/10.1038/nn.4450">(Chen et al. 2017)</a>, masked to only include the Angular Gyrus.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;Sherlock_AG_movie.npy&#39;</span><span class="p">):</span>
+    <span class="o">!</span>wget<span class="w"> </span>https://ndownloader.figshare.com/files/22927253<span class="w"> </span>-O<span class="w"> </span>Sherlock_AG_movie.npy
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;Sherlock_AG_recall.npy&#39;</span><span class="p">):</span>
+    <span class="o">!</span>wget<span class="w"> </span>https://ndownloader.figshare.com/files/22927256<span class="w"> </span>-O<span class="w"> </span>Sherlock_AG_recall.npy
+
+<span class="n">movie</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;Sherlock_AG_movie.npy&#39;</span><span class="p">)</span>
+<span class="n">recall</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;Sherlock_AG_recall.npy&#39;</span><span class="p">)</span>
+<span class="n">movie_group</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">movie</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2020-11-10 13:56:28--  https://ndownloader.figshare.com/files/22927253
+Resolving ndownloader.figshare.com (ndownloader.figshare.com)... 54.246.227.97, 52.17.195.112, 52.212.255.91, ...
+Connecting to ndownloader.figshare.com (ndownloader.figshare.com)|54.246.227.97|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/22927253/Sherlock_AG_movie.npy [following]
+--2020-11-10 13:56:29--  https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/22927253/Sherlock_AG_movie.npy
+Resolving s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)... 52.218.112.91
+Connecting to s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)|52.218.112.91|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 256101248 (244M) [application/octet-stream]
+Saving to: ‘Sherlock_AG_movie.npy’
+
+Sherlock_AG_movie.n 100%[===================&gt;] 244.24M  9.00MB/s    in 36s     
+
+2020-11-10 13:57:05 (6.83 MB/s) - ‘Sherlock_AG_movie.npy’ saved [256101248/256101248]
+
+--2020-11-10 13:57:05--  https://ndownloader.figshare.com/files/22927256
+Resolving ndownloader.figshare.com (ndownloader.figshare.com)... 34.250.14.20, 52.17.195.112, 52.212.255.91, ...
+Connecting to ndownloader.figshare.com (ndownloader.figshare.com)|34.250.14.20|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/22927256/Sherlock_AG_recall.npy [following]
+--2020-11-10 13:57:06--  https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/22927256/Sherlock_AG_recall.npy
+Resolving s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)... 52.218.24.75
+Connecting to s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)|52.218.24.75|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 8240168 (7.9M) [application/octet-stream]
+Saving to: ‘Sherlock_AG_recall.npy’
+
+Sherlock_AG_recall. 100%[===================&gt;]   7.86M  6.44MB/s    in 1.2s    
+
+2020-11-10 13:57:07 (6.44 MB/s) - ‘Sherlock_AG_recall.npy’ saved [8240168/8240168]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="finding-event-boundaries-during-perception">
+<h2>Finding event boundaries during perception<a class="headerlink" href="#finding-event-boundaries-during-perception" title="Permalink to this heading"></a></h2>
+<div class="section" id="warm-up-event-structure-in-activity-patterns">
+<h3>Warm-up: Event structure in activity patterns<a class="headerlink" href="#warm-up-event-structure-in-activity-patterns" title="Permalink to this heading"></a></h3>
+<p>Before applying any model, a good first step is to plot the correlation between activity patterns for each pair of timepoints during the movie. In this dataset, this shows blocks along the diagonal, which indicates that activity patterns are remaining stable for periods of tens of timepoints. This is the kind of structure that the HMM will be looking for.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">movie_group</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Timepoint&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Timepoint&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Spatial pattern correlation&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6f02c7b22bbaf209a7aadc374e11eadec13ed56588a8a844ae51a872293f6a98.png" src="../../_images/6f02c7b22bbaf209a7aadc374e11eadec13ed56588a8a844ae51a872293f6a98.png" />
+</div>
+</div>
+</div>
+<div class="section" id="fitting-the-hmm">
+<h3>Fitting the HMM<a class="headerlink" href="#fitting-the-hmm" title="Permalink to this heading"></a></h3>
+<p>To use an HMM to find both the event timings and the patterns corresponding to each event, we can use the EventSegment class from the brainiak toolbox. We need to specify the number of events, which here we set to 29 (corresponding to the number of boundaries typically annotated by human subjects).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">movie_HMM</span> <span class="o">=</span> <span class="n">EventSegment</span><span class="p">(</span><span class="n">n_events</span> <span class="o">=</span> <span class="mi">29</span><span class="p">)</span>
+<span class="n">movie_HMM</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">movie_group</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This fit produces:</p>
+<ul class="simple">
+<li><p>The log-likelihood (measuring overall model fit) over training. (Note that the log-likelihood on held-out test data is often a better measure of model quality - see below).</p></li>
+<li><p>The mean voxel pattern for each event. Here we show only 1% of the voxels since the ROI is large.</p></li>
+<li><p>A matrix showing the probability of being in each event at each timepoint. We can use this to derive the most likely timepoints where boundaries occur, and plot these on top of the timepoint similarity matrix for comparison.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting the log-likelihood (measuring overall model fit)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">movie_HMM</span><span class="o">.</span><span class="n">ll_</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Log likelihood during training&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Model fitting steps&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Model fitting steps&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/2b68a502babb757b8b336f6b6cd7985f1769924d8445bcd12dcc86f52acef021.png" src="../../_images/2b68a502babb757b8b336f6b6cd7985f1769924d8445bcd12dcc86f52acef021.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting mean activity in each event for some example voxels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">example_vox</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">movie_HMM</span><span class="o">.</span><span class="n">event_pat_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">movie_HMM</span><span class="o">.</span><span class="n">event_pat_</span><span class="p">[</span><span class="n">example_vox</span><span class="p">,:],</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Event number&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Voxels&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Voxels&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/8d086726e93a22108e39d9231fcc8712e1788146c1000a9e947b8ceb7ca08471.png" src="../../_images/8d086726e93a22108e39d9231fcc8712e1788146c1000a9e947b8ceb7ca08471.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot probability of being in each event at each timepoint</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">movie_HMM</span><span class="o">.</span><span class="n">segments_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">tick_bottom</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Event probability&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.05, &#39;Event probability&#39;)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 864x432 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../../_images/14009b3154d8ecdc4c2ab33620ee20bc07ca65fcc3cb2c308c9fe2b551a13e8b.png" src="../../_images/14009b3154d8ecdc4c2ab33620ee20bc07ca65fcc3cb2c308c9fe2b551a13e8b.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Identify event boundaries as timepoints when max probability switches events</span>
+<span class="n">event_bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">movie_HMM</span><span class="o">.</span><span class="n">segments_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">nTRs</span> <span class="o">=</span> <span class="n">movie_group</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="c1"># Plot boundaries as boxes on top of timepoint correlation matrix</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_tt_similarity_matrix</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">data_matrix</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">n_TRs</span><span class="p">,</span> <span class="n">title_text</span><span class="p">):</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">data_matrix</span><span class="p">),</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title_text</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;TR&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;TR&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># plot the boundaries </span>
+    <span class="n">bounds_aug</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="mi">0</span><span class="p">],</span> <span class="n">bounds</span><span class="p">,</span> <span class="p">[</span><span class="n">n_TRs</span><span class="p">]))</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bounds_aug</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">rect</span> <span class="o">=</span> <span class="n">patches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">bounds_aug</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">bounds_aug</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
+            <span class="n">bounds_aug</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">bounds_aug</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+            <span class="n">bounds_aug</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">bounds_aug</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+            <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span><span class="n">facecolor</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+        <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+
+
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">title_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">Overlay the HMM-predicted event boundaries</span>
+<span class="s1">on top of the TR-TR correlation matrix</span>
+<span class="s1">&#39;&#39;&#39;</span>
+<span class="n">plot_tt_similarity_matrix</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">movie_group</span><span class="p">,</span> <span class="n">event_bounds</span><span class="p">,</span> <span class="n">nTRs</span><span class="p">,</span> <span class="n">title_text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5432c71d8cfbffd95a109758b269311965e687987f79cf573e058b815d8641db.png" src="../../_images/5432c71d8cfbffd95a109758b269311965e687987f79cf573e058b815d8641db.png" />
+</div>
+</div>
+</div>
+<div class="section" id="determining-the-number-of-events-with-the-hmm">
+<h3>Determining the number of events with the HMM<a class="headerlink" href="#determining-the-number-of-events-with-the-hmm" title="Permalink to this heading"></a></h3>
+<p>What if we don’t want to prespecify the number of events, but instead want to determine the number of events from the data? One way to determine the best number of events is to fit the model on a training set and then test the model fit on independent subjects.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">test_ll</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">k_array</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">k_array</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Trying </span><span class="si">%d</span><span class="s1"> events&#39;</span> <span class="o">%</span> <span class="n">k</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   Fitting model on training subjects...&#39;</span><span class="p">)</span>
+    <span class="n">movie_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">movie</span><span class="p">[:</span><span class="mi">8</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">movie_HMM</span> <span class="o">=</span> <span class="n">EventSegment</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">movie_HMM</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">movie_train</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   Testing model fit on held-out subjects...&#39;</span><span class="p">)</span>
+    <span class="n">movie_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">movie</span><span class="p">[</span><span class="mi">8</span><span class="p">:],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">test_ll</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">movie_HMM</span><span class="o">.</span><span class="n">find_events</span><span class="p">(</span><span class="n">movie_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying 20 events
+   Fitting model on training subjects...
+   Testing model fit on held-out subjects...
+Trying 30 events
+   Fitting model on training subjects...
+   Testing model fit on held-out subjects...
+Trying 40 events
+   Fitting model on training subjects...
+   Testing model fit on held-out subjects...
+Trying 50 events
+   Fitting model on training subjects...
+   Testing model fit on held-out subjects...
+Trying 60 events
+   Fitting model on training subjects...
+   Testing model fit on held-out subjects...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_array</span><span class="p">,</span> <span class="n">test_ll</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of events&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Log-likelihood&#39;</span><span class="p">)</span>
+
+<span class="n">movie_dur</span> <span class="o">=</span> <span class="n">nTRs</span> <span class="o">*</span> <span class="mf">1.5</span>  <span class="c1"># Data acquired every 1.5 seconds</span>
+<span class="n">secax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">secondary_xaxis</span><span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">,</span>
+                                  <span class="n">functions</span><span class="o">=</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">movie_dur</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">float_info</span><span class="o">.</span><span class="n">epsilon</span><span class="p">),</span>
+                                             <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">movie_dur</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">float_info</span><span class="o">.</span><span class="n">epsilon</span><span class="p">)))</span>
+<span class="n">secax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Average event length (sec)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Average event length (sec)&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/f41632f76303bee0ecbdc791141822170b878541af3c9743f345d13ecc5386b8.png" src="../../_images/f41632f76303bee0ecbdc791141822170b878541af3c9743f345d13ecc5386b8.png" />
+</div>
+</div>
+</div>
+<div class="section" id="optimal-segmentation-with-the-hmm">
+<h3>Optimal segmentation with the HMM<a class="headerlink" href="#optimal-segmentation-with-the-hmm" title="Permalink to this heading"></a></h3>
+<p>Since 40 events maximized the test log-likelihood, we’ll generate two versions of HMM boundaries using 40 events. In addition to the “vanilla” HMM, we’ll run an HMM with more flexibility during fitting (allowing for split-merge operations). This is slower (and so should usually only be used for generating a final segmentation), but can produce better fits if events are very uneven in duration. We will use these segmentations below for comparison with human labeled event boundaries.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Fitting HMM with 40 events...&#39;</span><span class="p">)</span>
+<span class="n">HMM40</span> <span class="o">=</span> <span class="n">EventSegment</span><span class="p">(</span><span class="n">n_events</span> <span class="o">=</span> <span class="mi">40</span><span class="p">)</span>
+<span class="n">HMM40</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">movie_group</span><span class="p">)</span>
+<span class="n">HMM40_bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">HMM40</span><span class="o">.</span><span class="n">segments_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)))[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Fitting split-merge HMM with 40 events...&#39;</span><span class="p">)</span>
+<span class="n">HMM40_SM</span> <span class="o">=</span> <span class="n">EventSegment</span><span class="p">(</span><span class="n">n_events</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> <span class="n">split_merge</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">HMM40_SM</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">movie_group</span><span class="p">)</span>
+<span class="n">HMM40_SM_bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">HMM40_SM</span><span class="o">.</span><span class="n">segments_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)))[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting HMM with 40 events...
+Fitting split-merge HMM with 40 events...
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="comparing-model-and-human-labeled-boundaries">
+<h2>Comparing model and human-labeled boundaries<a class="headerlink" href="#comparing-model-and-human-labeled-boundaries" title="Permalink to this heading"></a></h2>
+<p>We can also quantitatively compare the event boundaries between different models, or between a model and human-labeled event boundaries. Because there is some ambiguity in both the stimulus and the model about exactly which timepoint the transition occurs at, we will count two boundaries as being a “match” if they are within 3 TRs (4.5 seconds) of each other.</p>
+<p>To determine whether the match is statistically significant, we generate permuted versions of the boundaries as a null model for comparison.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Timepoints of event boundaries annotated by human raters</span>
+<span class="n">human_bounds</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">26</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">86</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">131</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">157</span><span class="p">,</span> <span class="mi">173</span><span class="p">,</span> <span class="mi">192</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> 
+    <span class="mi">226</span><span class="p">,</span> <span class="mi">313</span><span class="p">,</span> <span class="mi">362</span><span class="p">,</span> <span class="mi">398</span><span class="p">,</span> <span class="mi">505</span><span class="p">,</span> <span class="mi">526</span><span class="p">,</span> <span class="mi">533</span><span class="p">,</span> <span class="mi">568</span><span class="p">,</span> <span class="mi">616</span><span class="p">,</span> <span class="mi">634</span><span class="p">,</span> <span class="mi">678</span><span class="p">,</span>
+    <span class="mi">696</span><span class="p">,</span> <span class="mi">747</span><span class="p">,</span> <span class="mi">780</span><span class="p">,</span> <span class="mi">870</span><span class="p">,</span> <span class="mi">890</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Computes fraction of ground truth bounds that are covered by a set of proposed bounds</span>
+<span class="c1"># Returns z score relative to a null distribution via permutation</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">match_z</span><span class="p">(</span><span class="n">proposed_bounds</span><span class="p">,</span> <span class="n">gt_bounds</span><span class="p">,</span> <span class="n">num_TRs</span><span class="p">):</span>
+    <span class="n">nPerm</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">gt_lengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="mi">0</span><span class="p">],</span><span class="n">gt_bounds</span><span class="p">,[</span><span class="n">num_TRs</span><span class="p">])))</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nPerm</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nPerm</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">gt_bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">gt_lengths</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">gt_bounds</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">proposed_bounds</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">threshold</span><span class="p">):</span>
+                <span class="k">match</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">match</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gt_bounds</span><span class="p">)</span>
+        <span class="n">gt_lengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">gt_lengths</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">match</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">match</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">match</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="n">match_z</span><span class="p">(</span><span class="n">HMM40_bounds</span><span class="p">,</span> <span class="n">human_bounds</span><span class="p">,</span> <span class="n">nTRs</span><span class="p">),</span>
+     <span class="n">match_z</span><span class="p">(</span><span class="n">HMM40_SM_bounds</span><span class="p">,</span> <span class="n">human_bounds</span><span class="p">,</span> <span class="n">nTRs</span><span class="p">)]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;HMM40:    z = </span><span class="si">%f</span><span class="s1">, p = </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">norm</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;HMM_SM40: z = </span><span class="si">%f</span><span class="s1">, p = </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">norm</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HMM40:    z = 2.989227, p = 0.001398
+HMM_SM40: z = 3.454808, p = 0.000275
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="aligning-movie-and-recall-data">
+<h2>Aligning movie and recall data<a class="headerlink" href="#aligning-movie-and-recall-data" title="Permalink to this heading"></a></h2>
+<p>A simple model of free recall is that a subject will revisit the same sequence of events experienced during perception, but the lengths of the events will not be identical between perception and recall. We use the same fit function as for a single dataset, but now we pass in both the movie and recall datasets in a list. We assume the two datasets have shared event transitions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">movie_recall_HMM</span> <span class="o">=</span> <span class="n">EventSegment</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">movie_recall_HMM</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">movie_group</span><span class="p">,</span> <span class="n">recall</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">movie_recall_HMM</span><span class="o">.</span><span class="n">segments_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">@</span> <span class="n">movie_recall_HMM</span><span class="o">.</span><span class="n">segments_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Timepoints during recall&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Timepoints during movie&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Prob of being in the same event&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7d171a80ef59bf58a6c703d69366729658d8e76bdbe6bc1ab53e92867339b052.png" src="../../_images/7d171a80ef59bf58a6c703d69366729658d8e76bdbe6bc1ab53e92867339b052.png" />
+</div>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading"></a></h2>
+<p>Using the HMM, we first captured neural states corresponding with the naturalistic segmentation of events. Then, to verify that these states aligned with subjective event perception, we aligned their boundaries with event boundary annotations from an independent group of subjects. Finally, we showed that processes such as free recall, which feature similar transition structures but may be compressed or expanded in time, can be aligned to this perceptual HMM “template”, broadening the scope of future research questions that can be addressed with this technique.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../brsa/brsa_demo.html" class="btn btn-neutral float-left" title="（Group) Bayesian Representational Similarity Analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../fcma/FCMA_demo.html" class="btn btn-neutral float-right" title="Full Correlation Matrix Analysis (FCMA) demo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

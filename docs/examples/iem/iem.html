@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inverted Encoding Model &mdash; brainiak 0.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Inverted encoding model" href="../iem_synthetic_RF/iem_example_synthetic_RF_data.html" />
+    <link rel="prev" title="Hierarchical Topographic Factor Analysis" href="../htfa/htfa.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            brainiak
+          </a>
+              <div class="version">
+                0.12
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../brsa/brsa_demo.html">（Group) Bayesian Representational Similarity Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../eventseg/Event_Segmentation.html">Event segmentation and alignment in fMRI data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fcma/FCMA_demo.html">Full Correlation Matrix Analysis (FCMA) demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fmrisim/fmrisim_multivariate_example.html">fmrisim demo script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html">Hierarchical Topographic Factor Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#annotated-bibliography">Annotated bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#getting-started">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#code">Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#summary">Summary</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Inverted Encoding Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#annotated-bibliography">Annotated Bibliography</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-1-reconstructing-items-from-working-memory">Example 1: Reconstructing items from working memory <a id='ex1'></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-2-reconstructing-2d-spatial-representations-with-attention-and-contrast-changes">Example 2: Reconstructing 2D spatial representations with attention and contrast changes <a id='ex2'></a></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#average-feature-reconstructions-across-trials">Average feature reconstructions across trials</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#example-3-comparing-svm-and-iem-with-simulated-data-and-low-trial-numbers">Example 3: Comparing SVM and IEM with simulated data and low trial numbers <a id='ex3'></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary <a id='summary'></a></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../iem_synthetic_RF/iem_example_synthetic_RF_data.html">Inverted encoding model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../isc/ISC.html">Intersubject correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matnormal/Matrix-normal%20model%20prototyping.html">Rapid prototyping of fMRI models with <code class="docutils literal notranslate"><span class="pre">brainiak.matnormal</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matnormal/Matrix-normal%20model%20prototyping.html#annotated-bibliography">Annotated Bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../real-time/README_INSTRUCTIONS.html">Set Up Instructions for the Real-Time fMRI Cloud-Based Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../real-time/rtcloud_notebook.html">Implementing a Real-Time fMRI Cloud-Based Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../srm/SRM.html">Shared response model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">brainiak</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Inverted Encoding Model</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/iem/iem.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="inverted-encoding-model">
+<h1>Inverted Encoding Model<a class="headerlink" href="#inverted-encoding-model" title="Permalink to this heading"></a></h1>
+<p>Author: Vy Vo (vy.vo&#64;intel.com)</p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>We provide examples of how to use the inverted encoding model (IEM) module in BrainIAK to reconstruct features of stimuli presented to human subjects. First, a forward encoding model is estimated, mapping a set of stimulus features to the accompanying fMRI response in a population of voxels. Then, the model is inverted to allow the user to feed in new fMRI responses and predict the accompanying stimulus features.</p>
+<p>The BrainIAK implementation allows for users to specify and fit an encoding model for stimulus features that are represented in either a 1-dimensional, circular space or a 2-dimensional space. We include examples for each of these from real fMRI studies of working memory and attention.</p>
+<p>While decoding methods such as support vector machines (SVM) can also take fMRI responses and predict stimulus features, they rely on general purpose algorithms to learn how features are represented in the data. When the encoding model is a better description for the data than a generic decoding algorithm, it is a more efficient way to estimate the response –&gt; stimulus mapping. Our last example simulates responses from 1D receptive fields, and uses either SVM or an IEM to predict the stimulus feature. The IEM achieves higher accuracy with less data.</p>
+</div>
+<div class="section" id="annotated-bibliography">
+<h2>Annotated Bibliography<a class="headerlink" href="#annotated-bibliography" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Brouwer, G.J., and Heeger, D.J. (2009). Decoding and reconstructing color from responses in human visual cortex. <em>Journal of Neuroscience</em> 29, 13992–14003. <a class="reference external" href="https://doi.org/10.1523/JNEUROSCI.3577-09.2009"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Uses an inverted encoding model to reconstruct color in a continuous space, demonstrating how color is represented across a hierarchy of visual regions.</em></p></li>
+<li><p>Naselaris, T., Kay, K. N., Nishimoto, S., &amp; Gallant, J. L. (2011). Encoding and decoding in fMRI. <em>NeuroImage</em> 56(2), 400–410. <a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2010.07.073"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>A review article distinguishing between the different uses of encoding and decoding approaches for fMRI.</em></p></li>
+<li><p>Serences, J.T., and Saproo, S. (2012). Computational advances towards linking BOLD and behavior. <em>Neuropsychologia</em> 50, 435–446. <a class="reference external" href="https://doi.org/10.1016/j.neuropsychologia.2011.07.013"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Describes the differences between encoding and decoding approaches and emphasizes how these approaches can test linking hypotheses between fMRI and behavior.</em></p></li>
+<li><p>Sprague, T.C., Adam, K.C.S., Foster, J.J., Rahmati, M., Sutterer, D.W., and Vo, V.A. (2018). Inverted encoding models assay population-level stimulus representations, not single-unit neural tuning. <em>eNeuro</em> 5, 1–5. <a class="reference external" href="https://doi.org/10.1523/ENEURO.0098-18.2018"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Argues that inverted encoding models are most useful when using population-level stimulus representations across experimental manipulations to pointedly test psychological theories.</em></p></li>
+<li><p>Sprague, T.C., Boynton, G.M., and Serences, J.T. (2019). The importance of considering model choices when interpreting results in computational neuroimaging. <em>eNeuro</em> 6, 1–11. <a class="reference external" href="https://doi.org/10.1523/ENEURO.0196-19.2019"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Describes the encoding model approach in the broader scope of computational models and acknowledges some important limitations.</em></p></li>
+</ol>
+</div>
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a href='#ex1'>Example 1: Reconstructing items from working memory</a></p></li>
+<li><p><a href='#ex2'>Example 2: Reconstruct 2D spatial position by contrast and attention</a></p></li>
+<li><p><a href='#ex3'>Example 3: Comparing SVM and IEM with simulated data and low trial numbers</a></p></li>
+<li><p><a href='#summary'>Summary</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">brainiak.reconstruct</span><span class="w"> </span><span class="kn">import</span> <span class="n">iem</span> <span class="k">as</span> <span class="n">IEM</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.io</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The data associated with these examples are originally derived from these OSF repositories, but have been sorted and cleaned for easier use.</p>
+<ul class="simple">
+<li><p>Dataset 1 from Rademaker et al. 2019, Nat. Neurosci. <a class="reference external" href="https://zenodo.org/record/4950267/files/RademakerEtAl2019_WM_S05_avgTime.npz?download=1">Download here</a>.</p></li>
+<li><p>Dataset 2 from Itthipuripat et al. 2019, J. Neurosci. <a class="reference external" href="https://zenodo.org/record/4950267/files/AL61_Bilat-V1_attnContrast.mat?download=1">Download here</a>.</p></li>
+</ul>
+</div>
+<div class="section" id="example-1-reconstructing-items-from-working-memory">
+<h2>Example 1: Reconstructing items from working memory <a id='ex1'></a><a class="headerlink" href="#example-1-reconstructing-items-from-working-memory" title="Permalink to this heading"></a></h2>
+<p>In this study, <a class="reference external" href="https://www.nature.com/articles/s41593-019-0428-x">Rademaker et al.</a> trained the IEM on an independent dataset where the participants viewed orientation gratings.</p>
+<p>In the test data, the participants viewed a target orientation, and held it working memory for 12 seconds. During this delay period, a distractor grating appeared in a portion of the trials. The orientation of the distractor was randomized relative to the remembered orientation.</p>
+<p>Using the fMRI data from the delay period, we will reconstruct both the orientation held in WM and the distractor orientation that was simultaneously being viewed. This sample data is from visual area V1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the fMRI data from the WM experiment</span>
+<span class="n">wm_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;RademakerEtAl2019_WM_S05_avgTime.npz&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">wm_data</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;trn&#39;, &#39;trn_conds&#39;, &#39;tst_m&#39;, &#39;tst_m_conds&#39;, &#39;tst_d&#39;, &#39;tst_d_conds&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up parameters</span>
+<span class="n">n_channels</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">cos_exponent</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">feature_resolution</span> <span class="o">=</span> <span class="mi">180</span>
+<span class="n">iem_obj0</span> <span class="o">=</span> <span class="n">IEM</span><span class="o">.</span><span class="n">InvertedEncoding1D</span><span class="p">(</span><span class="n">n_channels</span><span class="p">,</span> <span class="n">cos_exponent</span><span class="p">,</span> 
+                                  <span class="n">stimulus_mode</span><span class="o">=</span><span class="s1">&#39;halfcircular&#39;</span><span class="p">,</span>
+                                  <span class="n">channel_density</span><span class="o">=</span><span class="n">feature_resolution</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iem_obj0</span> <span class="o">=</span> <span class="n">iem_obj0</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">wm_data</span><span class="p">[</span><span class="s1">&#39;trn&#39;</span><span class="p">],</span> <span class="n">wm_data</span><span class="p">[</span><span class="s1">&#39;trn_conds&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The quality and interpretability of your stimulus reconstructions all depend on how you set up the channels, or basis functions, in the model. In order to ensure that you can accurately reconstruct stimuli at all portions in the area where you have presented stimuli, you will want to evenly space your basis functions in that region so that the sum of all the basis functions is constant across the feature space. You also will likely want to ensure some overlap between the basis functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s visualize the basis functions.</span>
+<span class="n">channels</span> <span class="o">=</span> <span class="n">iem_obj0</span><span class="o">.</span><span class="n">channels_</span>
+<span class="n">feature_axis</span> <span class="o">=</span> <span class="n">iem_obj0</span><span class="o">.</span><span class="n">channel_domain</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">channels</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">channels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">feature_axis</span><span class="p">,</span> <span class="n">channels</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Channels (i.e. basis functions)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">channels</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sum across channels&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(9, 180)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Sum across channels&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/878deaac639797e054e5d69a5680c735b4fa4387b3f2cb59cd59f6c892ca565b.png" src="../../_images/878deaac639797e054e5d69a5680c735b4fa4387b3f2cb59cd59f6c892ca565b.png" />
+</div>
+</div>
+<p>Now that we have trained the IEM, we can test it on our two different conditions: holding an orientation in working memory, or viewing it as a distractor. Let’s first look at the memory condition.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test the model on remembered orientation</span>
+<span class="n">tst_mem_tc</span> <span class="o">=</span> <span class="n">wm_data</span><span class="p">[</span><span class="s1">&#39;tst_m&#39;</span><span class="p">]</span>
+<span class="n">n_tst_mem</span><span class="p">,</span> <span class="n">n_vox</span> <span class="o">=</span> <span class="n">tst_mem_tc</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">mpred_features</span> <span class="o">=</span> <span class="n">iem_obj0</span><span class="o">.</span><span class="n">_predict_feature_responses</span><span class="p">(</span><span class="n">wm_data</span><span class="p">[</span><span class="s1">&#39;tst_m&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In order to collapse across trials from all the different orientations, we recenter all the reconstructions to be centered at the same point. To do this, we circularly shift the reconstruction based on the presented target orientation on that trial. We can then plot the average reconstruction across trials.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mpred_features_centered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">feature_resolution</span><span class="p">,</span> <span class="n">n_tst_mem</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="c1"># Re-center all the reconstructions to a common point</span>
+<span class="n">shift_to</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_tst_mem</span><span class="p">):</span>
+    <span class="n">mpred_features_centered</span><span class="p">[:,</span> <span class="n">trial</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">mpred_features</span><span class="p">[:,</span> <span class="n">trial</span><span class="p">],</span>
+                                                <span class="n">shift_to</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">wm_data</span><span class="p">[</span><span class="s1">&#39;tst_m_conds&#39;</span><span class="p">][</span><span class="n">trial</span><span class="p">]))</span>
+
+<span class="n">avg_feats</span> <span class="o">=</span> <span class="n">mpred_features_centered</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">iem_obj0</span><span class="o">.</span><span class="n">channel_domain</span> <span class="o">-</span> <span class="n">shift_to</span><span class="p">,</span> <span class="n">avg_feats</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;distance from presented orientation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;estimated channel response&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Orientation reconstructed from WM&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Orientation reconstructed from WM&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/7c4ad241835bb5877a2cf1d12ee6f3ea62e61ddd35ddf0f466adf6ad959fbd2d.png" src="../../_images/7c4ad241835bb5877a2cf1d12ee6f3ea62e61ddd35ddf0f466adf6ad959fbd2d.png" />
+</div>
+</div>
+<p>We can see that there is a robust representation of the remembered orientation in the data.</p>
+<p>Next, we look at the reconstruction of the distractor orientation during the working memory delay period. Recall that this is the orientation that is being visually presented to the participant.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test the model on the viewed orientation (WM distractor)</span>
+<span class="n">tst_dist_tc</span> <span class="o">=</span> <span class="n">wm_data</span><span class="p">[</span><span class="s1">&#39;tst_d&#39;</span><span class="p">]</span>
+<span class="n">n_tst_dist</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">tst_dist_tc</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">pred_features</span> <span class="o">=</span> <span class="n">iem_obj0</span><span class="o">.</span><span class="n">_predict_feature_responses</span><span class="p">(</span><span class="n">wm_data</span><span class="p">[</span><span class="s1">&#39;tst_d&#39;</span><span class="p">])</span>
+<span class="c1"># Re-center all the reconstructions to a common point</span>
+<span class="n">pred_features_centered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">feature_resolution</span><span class="p">,</span> <span class="n">n_tst_dist</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_tst_dist</span><span class="p">):</span>
+    <span class="n">pred_features_centered</span><span class="p">[:,</span> <span class="n">trial</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">pred_features</span><span class="p">[:,</span> <span class="n">trial</span><span class="p">],</span>
+                                               <span class="n">shift_to</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">wm_data</span><span class="p">[</span><span class="s1">&#39;tst_d_conds&#39;</span><span class="p">][</span><span class="n">trial</span><span class="p">]))</span>
+
+<span class="n">dist_avg_feats</span> <span class="o">=</span> <span class="n">pred_features_centered</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">iem_obj0</span><span class="o">.</span><span class="n">channel_domain</span> <span class="o">-</span> <span class="n">shift_to</span><span class="p">,</span> <span class="n">avg_feats</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">iem_obj0</span><span class="o">.</span><span class="n">channel_domain</span> <span class="o">-</span> <span class="n">shift_to</span><span class="p">,</span> <span class="n">dist_avg_feats</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;distance from presented orientation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;estimated channel response&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;remembered orientation&#39;</span><span class="p">,</span> <span class="s1">&#39;distractor orientation&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Reconstruction of WM and distractor orientations&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Reconstruction of WM and distractor orientations&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/605cc83d15633e1e68bb274c68cb26d6610e9c746b152347489e2945ac7d9b8c.png" src="../../_images/605cc83d15633e1e68bb274c68cb26d6610e9c746b152347489e2945ac7d9b8c.png" />
+</div>
+</div>
+<p>We see that the distractor orientation is simultaneously represented in the same data!</p>
+<p>Read more about these data in the <a class="reference external" href="https://www.nature.com/articles/s41593-019-0428-x">full paper</a>.</p>
+<p>Rademaker, R., Chunharas, C., Serences, J.T. 2019. Coexisting representations of sensory and mnemonic information in human visual cortex. Nature Neuroscience 22:8.</p>
+</div>
+<div class="section" id="example-2-reconstructing-2d-spatial-representations-with-attention-and-contrast-changes">
+<h2>Example 2: Reconstructing 2D spatial representations with attention and contrast changes <a id='ex2'></a><a class="headerlink" href="#example-2-reconstructing-2d-spatial-representations-with-attention-and-contrast-changes" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://www.jneurosci.org/content/39/31/6162">Itthipuripat et al. 2019</a> collected data from participants as they viewed flickering checkerboard stimuli presented at a range of contrasts (0-70%, logarithmically spaced) on either the left or right of the screen. They either attended to an occasional change in contrast at the stimulus position (“attend stimulus”) or at the central fixation point (“attend fixation”). These contrast change trials are excluded from the data, so the sensory input is equated across conditions.</p>
+<p>The IEM will be trained on an independent dataset, in which participants viewed checkerboards as they appeared at many locations across the screen. Then we will test the IEM, i.e. reconstruct the stimulus, under the different contrast and attention conditions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the fMRI data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="s1">&#39;AL61_Bilat-V1_attnContrast.mat&#39;</span><span class="p">)</span>
+<span class="n">trn_conds</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;trn_conds&#39;</span><span class="p">]</span>  <span class="c1"># position in space for 128 trials</span>
+<span class="c1"># flip to cartesian coordinates to make life easier</span>
+<span class="n">trn_conds</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">trn_conds</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">*-</span><span class="mi">1</span>
+<span class="n">trn</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;trn&#39;</span><span class="p">]</span>  <span class="c1"># matrix of (trials, voxels)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The test data have different conditions than the training data. There are four independent variables in these data based on the values in the following columns:</p>
+<ul class="simple">
+<li><p>In column 1, whether the stimulus was on the left (1) or right (2) side of the screen.</p></li>
+<li><p>In column 2, the logarithmically spaced stimulus contrast from lowest (1) to highest (6).</p></li>
+<li><p>In column 3, the task instruction to attend to fixation (1) or the stimulus (2).</p></li>
+<li><p>In column 4, whether the target was present (1) or not (0).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note there are several different conditions in the test data.</span>
+<span class="n">tst_conds</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;tst_conds&#39;</span><span class="p">]</span>
+<span class="n">tst</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;tst&#39;</span><span class="p">]</span>
+<span class="n">attn_conds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">tst_conds</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">stim_contrasts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">tst_conds</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up parameters</span>
+<span class="n">n_channels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>  <span class="c1"># channels in the x, y directions</span>
+<span class="n">cos_exponent</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">stimx</span><span class="p">,</span> <span class="n">stimy</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">17</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">17</span><span class="o">/</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">stim_res</span> <span class="o">=</span> <span class="p">[</span><span class="mi">171</span><span class="p">,</span> <span class="mi">101</span><span class="p">]</span>
+<span class="n">npixels</span> <span class="o">=</span> <span class="n">stim_res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">stim_res</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">stim_size</span> <span class="o">=</span> <span class="mf">1.449</span>
+<span class="n">chanx</span><span class="p">,</span> <span class="n">chany</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iem_obj</span> <span class="o">=</span> <span class="n">IEM</span><span class="o">.</span><span class="n">InvertedEncoding2D</span><span class="p">(</span><span class="n">stim_xlim</span><span class="o">=</span><span class="n">stimx</span><span class="p">,</span> <span class="n">stim_ylim</span><span class="o">=</span><span class="n">stimy</span><span class="p">,</span>
+                                 <span class="n">stimulus_resolution</span><span class="o">=</span><span class="n">stim_res</span><span class="p">,</span>
+                                 <span class="n">stim_radius</span><span class="o">=</span><span class="n">stim_size</span><span class="p">,</span>
+                                 <span class="n">chan_xlim</span><span class="o">=</span><span class="n">chanx</span><span class="p">,</span> <span class="n">chan_ylim</span><span class="o">=</span><span class="n">chany</span><span class="p">,</span>
+                                 <span class="n">channel_exp</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The quality and interpretability of your stimulus reconstructions all depend on how you set up the channels, or basis functions, in the model. In order to ensure that you can accurately reconstruct stimuli at all portions in the area where you have presented stimuli, you will want to evenly space your basis functions in that region. You also will likely want to ensure some overlap between the basis functions.</p>
+<p>There are two pre-built functions to create a 2D grid of basis functions, to use a rectangular grid or a triangular grid. A triangular grid is more space-efficient, so let’s use that.</p>
+<p>Note you will need to define these basis functions before you can fit the model. Otherwise it will throw an error.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">basis_fcns</span><span class="p">,</span> <span class="n">basis_centers</span> <span class="o">=</span> <span class="n">iem_obj</span><span class="o">.</span><span class="n">define_basis_functions_sqgrid</span><span class="p">(</span><span class="n">n_channels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To visualize these, you will need to reshape the second dimension into the 2D pixel space where the stimuli are represented.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">n_channels</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">n_channels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_channels</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_channels</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">ii</span><span class="p">,</span> <span class="n">jj</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">basis_fcns</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">stim_res</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> 
+                                                   <span class="n">stim_res</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                          <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="n">stimx</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">stimx</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">stimy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">stimy</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Images of each basis function&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/dc40dbaeb309d276f4da91c8a079f5991a36e4ba64a2d13587307feefe45f79a.png" src="../../_images/dc40dbaeb309d276f4da91c8a079f5991a36e4ba64a2d13587307feefe45f79a.png" />
+</div>
+</div>
+<p>To check how well the basis functions cover the stimulus domain, we can sum across all the basis functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sum_fcns</span> <span class="o">=</span> <span class="n">basis_fcns</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">stim_res</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">stim_res</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">sum_fcns</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="n">stimx</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">stimx</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">stimy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">stimy</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Spatial coverage of basis functions&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Spatial coverage of basis functions&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/85d00fbac0a8e668a14b77de854915d6cc18bf3325bfb0650e94253a7e7543b0.png" src="../../_images/85d00fbac0a8e668a14b77de854915d6cc18bf3325bfb0650e94253a7e7543b0.png" />
+</div>
+</div>
+<p>Next, we want to map channel responses for each voxel. To do this, we fit a standard general linear model (GLM), where the design matrix is the channel activations for each trial. Below, you can see the design matrix of these trial activations in the channel domain (x-axis: trials, y-axis: channels, color: activations).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">iem_obj</span><span class="o">.</span><span class="n">_define_trial_activations</span><span class="p">(</span><span class="n">trn_conds</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(128, 45)
+</pre></div>
+</div>
+<img alt="../../_images/5f2332989e816018c49c0c14e9decb6beecc51cedf4370334224e3a730c3e242.png" src="../../_images/5f2332989e816018c49c0c14e9decb6beecc51cedf4370334224e3a730c3e242.png" />
+</div>
+</div>
+<p>Whenever you run the fit() function, the trial-wise channel activations will be created automatically, and the GLM will be fit on the training data and feature labels. Using this, we can then predict the feature responses on a set of test data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iem_obj</span> <span class="o">=</span> <span class="n">iem_obj</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trn</span><span class="p">,</span> <span class="n">trn_conds</span><span class="p">)</span>
+<span class="n">stim_reconstructions</span> <span class="o">=</span> <span class="n">iem_obj</span><span class="o">.</span><span class="n">predict_feature_responses</span><span class="p">(</span><span class="n">tst</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="average-feature-reconstructions-across-trials">
+<h3>Average feature reconstructions across trials<a class="headerlink" href="#average-feature-reconstructions-across-trials" title="Permalink to this heading"></a></h3>
+<p>In this experiment, we are not specifically interested in separating trials by whether stimuli were on the left or the right. Instead, we’re interested in how the activation in the model-based reconstruction varies with the experimental manipulation of contrast and attended location. For the sake of visualization and quantification, we can simply average across the trials of interest. Below we separated the trials by contrast and attention location, but averaged across trials where the stimulus appeared on the left side of the screen and the target was not present (to ensure that overall contrast is identical across averaged trials).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">mean_recons</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">stim_contrasts</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">attn_conds</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">npixels</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">aa</span><span class="p">,</span> <span class="n">attn_cond</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">attn_conds</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">ss</span><span class="p">,</span> <span class="n">contrast</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">stim_contrasts</span><span class="p">):</span>
+        <span class="n">thisidx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">((</span><span class="n">tst_conds</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span>
+                              <span class="p">(</span><span class="n">tst_conds</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">contrast</span><span class="p">)</span> <span class="o">&amp;</span>
+                              <span class="p">(</span><span class="n">tst_conds</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">attn_cond</span><span class="p">)</span> <span class="o">&amp;</span>
+                              <span class="p">(</span><span class="n">tst_conds</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="n">rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">stim_reconstructions</span><span class="p">[:,</span> <span class="n">thisidx</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rs</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">vmin</span><span class="p">:</span>
+            <span class="n">vmin</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">rs</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">vmax</span><span class="p">:</span>
+            <span class="n">vmax</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">mean_recons</span><span class="p">[</span><span class="n">ss</span><span class="p">,</span> <span class="n">aa</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we plot the data as a function of:</p>
+<ol class="arabic simple">
+<li><p>whether subjects were attending to the stimulus or fixation, and</p></li>
+<li><p>the contrast of the stimulus (across six levels).</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">16</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">aa</span><span class="p">,</span> <span class="n">attn_cond</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">attn_conds</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">ss</span><span class="p">,</span> <span class="n">contrast</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">stim_contrasts</span><span class="p">):</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">ss</span><span class="p">,</span> <span class="n">aa</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mean_recons</span><span class="p">[</span><span class="n">ss</span><span class="p">,</span> <span class="n">aa</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span>\
+                          <span class="n">reshape</span><span class="p">(</span><span class="n">stim_res</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">stim_res</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                          <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+                          <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno&#39;</span><span class="p">,</span>
+                          <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="n">stimx</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">stimx</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">stimy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">stimy</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+                          <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">contrast</span> <span class="o">==</span> <span class="n">stim_contrasts</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">attn_cond</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">ax</span><span class="p">[</span><span class="n">ss</span><span class="p">,</span> <span class="n">aa</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Attend fixation&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">attn_cond</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">ax</span><span class="p">[</span><span class="n">ss</span><span class="p">,</span> <span class="n">aa</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Attend stimulus&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">attn_cond</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">ax</span><span class="p">[</span><span class="n">ss</span><span class="p">,</span> <span class="n">aa</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Contrast value </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">contrast</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e743e6b2af5a34c4bf8aeb1aa35580b9a1ad94afdbefc5f7af85b6226ad3d807.png" src="../../_images/e743e6b2af5a34c4bf8aeb1aa35580b9a1ad94afdbefc5f7af85b6226ad3d807.png" />
+</div>
+</div>
+<p>These data suggest that increasing the contrast leads to stronger activation of the stimulus. They also suggest that the effect of attention is greatest at low contrast levels – e.g. at contrast level 3, we see a clear enhancement when the participant is attending to the stimulus compared to when they are attending fixation.</p>
+<p>However, since this is single-participant data, these effects should be quantified across a group of subjects.</p>
+<p>Read the full results in <a class="reference external" href="https://www.jneurosci.org/content/39/31/6162">the paper</a>.</p>
+<p>Itthipuripat, S., Sprague, T.,C., Serences, J.T. 2019. Functional MRI and EEG Index Complementary Attentional Modulations. J. Neurosci. 31:6162-6179.</p>
+</div>
+</div>
+<div class="section" id="example-3-comparing-svm-and-iem-with-simulated-data-and-low-trial-numbers">
+<h2>Example 3: Comparing SVM and IEM with simulated data and low trial numbers <a id='ex3'></a><a class="headerlink" href="#example-3-comparing-svm-and-iem-with-simulated-data-and-low-trial-numbers" title="Permalink to this heading"></a></h2>
+<p>If the assumptions of the forward encoding model are a good match to the data, it can outperform common decoding algorithms such as support vector machine (SVM) classifiers. Here, we simulate fMRI responses from a set of 1D receptive fields with Gaussian-like tuning along an orientation space.</p>
+<p>Then, we train an IEM and SVM on the same data: simulated responses from these voxel receptive fields to 7 orientation stimuli (<code class="docutils literal notranslate"><span class="pre">stim_vals</span></code>). We then score the accuracy of each model by calculating the coefficient of determination, R<sup>2</sup>. Note that although the IEM can provide a continuous stimulus reconstruction, we are simply taking the feature value with the maximal response to be the predicted orientation. The SVM is a 7-way classifier.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">brainiak.utils.fmrisim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fmrisim</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">range_start</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">range_stop</span> <span class="o">=</span> <span class="mi">180</span>
+<span class="n">feature_range</span> <span class="o">=</span> <span class="p">(</span><span class="n">range_start</span><span class="p">,</span> <span class="n">range_stop</span><span class="p">)</span>
+<span class="n">n_stim_classes</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">feature_resolution</span> <span class="o">=</span> <span class="mi">180</span>
+<span class="n">stim_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">feature_resolution</span> <span class="o">-</span> <span class="p">(</span><span class="n">feature_resolution</span><span class="o">/</span><span class="n">n_stim_classes</span><span class="p">),</span> <span class="n">n_stim_classes</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define IEM</span>
+<span class="n">iem_sim</span> <span class="o">=</span> <span class="n">IEM</span><span class="o">.</span><span class="n">InvertedEncoding1D</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">stimulus_mode</span><span class="o">=</span><span class="s1">&#39;halfcircular&#39;</span><span class="p">,</span> 
+                                 <span class="n">range_start</span><span class="o">=</span><span class="n">range_start</span><span class="p">,</span> <span class="n">range_stop</span><span class="o">=</span><span class="n">range_stop</span><span class="p">,</span> 
+                                 <span class="n">channel_density</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>
+
+<span class="c1"># Define SVM</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.svm</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearSVC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="c1"># Create a classifier model for the training set</span>
+<span class="n">svc_model</span> <span class="o">=</span> <span class="n">LinearSVC</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="n">n_stim_classes</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span> <span class="c1">#, dual=True)</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We need to define a function which can calculate R<sup>2</sup> in a circular space. A version of this function is included with the 1D IEM module, but we need it here to score the SVM.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">brainiak.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">circ_dist</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">circ_score</span><span class="p">(</span><span class="n">true_features</span><span class="p">,</span> <span class="n">pred_features</span><span class="p">):</span>
+    <span class="c1"># multiply features by 2 because it&#39;s 180 space. otherwise doesn&#39;t wrap properly</span>
+    <span class="n">pred_features</span> <span class="o">=</span> <span class="n">pred_features</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="n">true_features</span> <span class="o">=</span> <span class="n">true_features</span> <span class="o">*</span> <span class="mi">2</span>
+
+    <span class="n">ssres</span> <span class="o">=</span> <span class="p">(</span><span class="n">circ_dist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">true_features</span><span class="p">),</span>
+                       <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">pred_features</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">sstot</span> <span class="o">=</span> <span class="p">(</span><span class="n">circ_dist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">true_features</span><span class="p">),</span>
+                       <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">true_features</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">*</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">circmean</span><span class="p">(</span>
+                           <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">true_features</span><span class="p">)))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">score_value</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ssres</span> <span class="o">/</span> <span class="n">sstot</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">score_value</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We simulate two sources of uniform noise: consistent noise in the receptive field responses (<code class="docutils literal notranslate"><span class="pre">rf_noise</span></code>) and trial-wise noise. This relies on some simple functions packaged with BrainIAK that can provide the user ways to test how the IEM behaves with known inputs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fit_models</span><span class="p">(</span><span class="n">n_train</span><span class="p">,</span> <span class="n">n_tst</span><span class="p">,</span> <span class="n">iem_sim</span><span class="o">=</span><span class="n">iem_sim</span><span class="p">,</span> <span class="n">svc_model</span><span class="o">=</span><span class="n">svc_model</span><span class="p">,</span> <span class="n">n_voxels</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span>
+               <span class="n">rf_noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">trial_noise</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    <span class="n">trn_stim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">stim_vals</span><span class="p">,</span> <span class="n">n_train</span> <span class="o">/</span> <span class="n">n_stim_classes</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">tst_stim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">stim_vals</span><span class="p">,</span> <span class="n">n_tst</span> <span class="o">/</span> <span class="n">n_stim_classes</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">voxel_RFs</span><span class="p">,</span> <span class="n">voxel_tuning</span> <span class="o">=</span> <span class="n">fmrisim</span><span class="o">.</span><span class="n">generate_1d_gaussian_rfs</span><span class="p">(</span><span class="n">n_voxels</span><span class="p">,</span>
+                                                               <span class="n">feature_resolution</span><span class="p">,</span>
+                                                               <span class="n">feature_range</span><span class="p">,</span>
+                                                               <span class="n">rf_size</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+                                                               <span class="n">random_tuning</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                                                               <span class="n">rf_noise</span><span class="o">=</span><span class="n">rf_noise</span><span class="p">)</span>
+    <span class="n">trnd</span> <span class="o">=</span> <span class="n">fmrisim</span><span class="o">.</span><span class="n">generate_1d_rf_responses</span><span class="p">(</span><span class="n">voxel_RFs</span><span class="p">,</span> <span class="n">trn_stim</span><span class="p">,</span> 
+                                            <span class="n">feature_resolution</span><span class="p">,</span> <span class="n">feature_range</span><span class="p">,</span>
+                                            <span class="n">trial_noise</span><span class="o">=</span><span class="n">trial_noise</span><span class="p">)</span>
+    <span class="n">trn</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">trnd</span><span class="p">)</span>
+    <span class="c1"># IEM</span>
+    <span class="n">iem_sim</span> <span class="o">=</span> <span class="n">iem_sim</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trnd</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">trn_stim</span><span class="p">)</span>
+    <span class="n">tstd</span> <span class="o">=</span> <span class="n">fmrisim</span><span class="o">.</span><span class="n">generate_1d_rf_responses</span><span class="p">(</span><span class="n">voxel_RFs</span><span class="p">,</span> <span class="n">tst_stim</span><span class="p">,</span> 
+                                            <span class="n">feature_resolution</span><span class="p">,</span> <span class="n">feature_range</span><span class="p">,</span>
+                                            <span class="n">trial_noise</span><span class="o">=</span><span class="n">trial_noise</span><span class="p">)</span>
+    <span class="n">tst</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">tstd</span><span class="p">)</span>
+    <span class="n">pred_feature</span> <span class="o">=</span> <span class="n">iem_sim</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">tstd</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">iem_r2</span> <span class="o">=</span> <span class="n">iem_sim</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">tstd</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">tst_stim</span><span class="p">)</span>
+    <span class="c1"># Linear SVM</span>
+    <span class="n">svc_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trn</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">trn_stim</span><span class="p">)</span>
+    <span class="n">svc_pred</span> <span class="o">=</span> <span class="n">svc_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">tst</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">svc_score</span> <span class="o">=</span> <span class="n">circ_score</span><span class="p">(</span><span class="n">tst_stim</span><span class="p">,</span> <span class="n">svc_pred</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">iem_r2</span><span class="p">,</span> <span class="n">svc_score</span><span class="p">,</span> <span class="n">trn</span><span class="p">,</span> <span class="n">tst</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The data simulations are repeated 25 times, and the R<sup>2</sup> values are averaged across these repeats to account for any random variability.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nt_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_stim_classes</span><span class="p">,</span> <span class="n">n_stim_classes</span><span class="o">*</span><span class="mi">15</span><span class="p">,</span> <span class="n">n_stim_classes</span><span class="p">)</span>
+<span class="n">n_repeats</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="n">iem_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_repeats</span><span class="p">,</span> <span class="n">nt_list</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+<span class="n">svm_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_repeats</span><span class="p">,</span> <span class="n">nt_list</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">nt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nt_list</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_repeats</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">iem_score</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">],</span> <span class="n">svm_score</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">],</span> <span class="n">trn</span><span class="p">,</span> <span class="n">tst</span> <span class="o">=</span> <span class="n">fit_models</span><span class="p">(</span><span class="n">nt</span><span class="p">,</span> <span class="n">n_stim_classes</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span>
+                                                                    <span class="n">n_voxels</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                                                                    <span class="n">rf_noise</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+                                                                    <span class="n">trial_noise</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+<span class="c1">#     print(&#39;%i\t%0.2f\t%0.2f&#39; % (nt, iem_score[:, i].mean(), svm_score[:, i].mean()))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nt_list</span><span class="p">,</span> <span class="n">iem_score</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nt_list</span><span class="p">,</span> <span class="n">svm_score</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;trial number&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;R2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;IEM&#39;</span><span class="p">,</span> <span class="s1">&#39;SVM&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f8d58e76c50&gt;
+</pre></div>
+</div>
+<img alt="../../_images/853fa98d5b90d256d305e08f423aeeb863bac380b4d48b0455525c6f45395522.png" src="../../_images/853fa98d5b90d256d305e08f423aeeb863bac380b4d48b0455525c6f45395522.png" />
+</div>
+</div>
+<p>We can see that both models improve with more trials, but the IEM consistently outperforms the SVM in all cases.</p>
+<p>Next, we’ll hold the number of trials constant and vary how much noise is added to the receptive fields.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rfn_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">n_repeats</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="n">iem_score2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_repeats</span><span class="p">,</span> <span class="n">rfn_list</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+<span class="n">svm_score2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_repeats</span><span class="p">,</span> <span class="n">rfn_list</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">rfn</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rfn_list</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_repeats</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">iem_score2</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">],</span> <span class="n">svm_score2</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">],</span> <span class="n">trn</span><span class="p">,</span> <span class="n">tst</span> <span class="o">=</span> <span class="n">fit_models</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="n">n_stim_classes</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span>
+                                                                    <span class="n">n_voxels</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                                                                    <span class="n">rf_noise</span><span class="o">=</span><span class="n">rfn</span><span class="p">,</span>
+                                                                    <span class="n">trial_noise</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+<span class="c1">#     print(&#39;%0.2f\t%0.2f\t%0.2f&#39; % (rfn, iem_score[:, i].mean(), svm_score[:, i].mean()))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rfn_list</span><span class="p">,</span> <span class="n">iem_score2</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rfn_list</span><span class="p">,</span> <span class="n">svm_score2</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;RF noise&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;R2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;IEM&#39;</span><span class="p">,</span> <span class="s1">&#39;SVM&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f8d5e8ad450&gt;
+</pre></div>
+</div>
+<img alt="../../_images/e9c88c8e8f84f94442caaf443de5b6b186ed2f0cd1a2a60472181c7a8fbc07ff.png" src="../../_images/e9c88c8e8f84f94442caaf443de5b6b186ed2f0cd1a2a60472181c7a8fbc07ff.png" />
+</div>
+</div>
+<p>Again, we see that both models perform worse with higher noise, but the IEM consistently outperforms the SVM.</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary <a id='summary'></a><a class="headerlink" href="#summary" title="Permalink to this heading"></a></h2>
+<p>The IEM allows us to build a decoder that relies on a specific hypothesis about how a stimulus is encoded. In cases where this hypothesis is a better characterization of how the stimulus evokes fMRI responses, the IEM can outperform standard decoding approaches like the SVM. In addition, the specific form of the IEM allows for a natural way to visualize a decoded stimulus, i.e. to reconstruct the stimulus that must have been seen on any given trial.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../htfa/htfa.html" class="btn btn-neutral float-left" title="Hierarchical Topographic Factor Analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../iem_synthetic_RF/iem_example_synthetic_RF_data.html" class="btn btn-neutral float-right" title="Inverted encoding model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

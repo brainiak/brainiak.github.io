@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inverted encoding model &mdash; brainiak 0.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Intersubject correlation" href="../isc/ISC.html" />
+    <link rel="prev" title="Inverted Encoding Model" href="../iem/iem.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            brainiak
+          </a>
+              <div class="version">
+                0.12
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../brsa/brsa_demo.html">（Group) Bayesian Representational Similarity Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../eventseg/Event_Segmentation.html">Event segmentation and alignment in fMRI data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fcma/FCMA_demo.html">Full Correlation Matrix Analysis (FCMA) demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fmrisim/fmrisim_multivariate_example.html">fmrisim demo script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html">Hierarchical Topographic Factor Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#annotated-bibliography">Annotated bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#getting-started">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#code">Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#summary">Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iem/iem.html">Inverted Encoding Model</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Inverted encoding model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../isc/ISC.html">Intersubject correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matnormal/Matrix-normal%20model%20prototyping.html">Rapid prototyping of fMRI models with <code class="docutils literal notranslate"><span class="pre">brainiak.matnormal</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matnormal/Matrix-normal%20model%20prototyping.html#annotated-bibliography">Annotated Bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../real-time/README_INSTRUCTIONS.html">Set Up Instructions for the Real-Time fMRI Cloud-Based Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../real-time/rtcloud_notebook.html">Implementing a Real-Time fMRI Cloud-Based Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../srm/SRM.html">Shared response model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">brainiak</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Inverted encoding model</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/iem_synthetic_RF/iem_example_synthetic_RF_data.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="inverted-encoding-model">
+<h1>Inverted encoding model<a class="headerlink" href="#inverted-encoding-model" title="Permalink to this heading"></a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">brainiak.reconstruct</span><span class="w"> </span><span class="kn">import</span> <span class="n">iem</span> <span class="k">as</span> <span class="n">IEM</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy.matlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">matlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.signal</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example, we will assume that the stimuli are patches of different motion directions. These stimuli span a 360-degree, circular feature space. We will build an encoding model that has 6 channels, or basis functions, which also span this feature space.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up parameters</span>
+<span class="n">n_channels</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">cos_exponent</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">range_start</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">range_stop</span> <span class="o">=</span> <span class="mi">360</span>
+<span class="n">feature_resolution</span> <span class="o">=</span> <span class="mi">360</span>
+<span class="n">iem_obj</span> <span class="o">=</span> <span class="n">IEM</span><span class="o">.</span><span class="n">InvertedEncoding1D</span><span class="p">(</span><span class="n">n_channels</span><span class="p">,</span> <span class="n">cos_exponent</span><span class="p">,</span> <span class="n">stimulus_mode</span><span class="o">=</span><span class="s1">&#39;circular&#39;</span><span class="p">,</span> <span class="n">range_start</span><span class="o">=</span><span class="n">range_start</span><span class="p">,</span> 
+                               <span class="n">range_stop</span><span class="o">=</span><span class="n">range_stop</span><span class="p">,</span> <span class="n">channel_density</span><span class="o">=</span><span class="n">feature_resolution</span><span class="p">)</span>
+
+<span class="c1"># You can also try the half-circular space. Here&#39;s the associated code:</span>
+<span class="c1"># range_stop = 180  # since 0 and 360 degrees are the same, we want to stop shy of 360</span>
+<span class="c1"># feature_resolution = 180</span>
+<span class="c1"># iem_obj = IEM.InvertedEncoding1D(n_channels, cos_exponent, stimulus_mode=&#39;halfcircular&#39;, range_start=range_start, </span>
+<span class="c1">#                                range_stop=range_stop, channel_density=feature_resolution, verbose=True)</span>
+
+<span class="n">stim_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">feature_resolution</span> <span class="o">-</span> <span class="p">(</span><span class="n">feature_resolution</span><span class="o">/</span><span class="mi">6</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ll generate synthetic data. Ideally, each voxel that we measure from is roughly tuned to some part of the feature space (see Sprague, Boynton, Serences, 2019). So we will generate data that has a receptive field (RF). We can define the RF along the same feature axis as the channels that we generated above.</p>
+<p>The following two functions will generate the voxel RFs, and then generate several trials of that dataset. There are options to add uniform noise to either the RF or the trials.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate synthetic data s.t. each voxel has a Gaussian tuning function</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_voxel_RFs</span><span class="p">(</span><span class="n">n_voxels</span><span class="p">,</span> <span class="n">feature_resolution</span><span class="p">,</span> <span class="n">random_tuning</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">RF_noise</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">random_tuning</span><span class="p">:</span>
+        <span class="c1"># Voxel selectivity is random</span>
+        <span class="n">voxel_tuning</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_voxels</span><span class="p">)</span> <span class="o">*</span> <span class="n">range_stop</span><span class="p">)</span> <span class="o">+</span> <span class="n">range_start</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Voxel selectivity is evenly spaced along the feature axis</span>
+        <span class="n">voxel_tuning</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">range_start</span><span class="p">,</span> <span class="n">range_stop</span><span class="p">,</span> <span class="n">n_voxels</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">voxel_tuning</span> <span class="o">=</span> <span class="n">voxel_tuning</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">voxel_tuning</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">voxel_tuning</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">gaussian</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">feature_resolution</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+    <span class="n">voxel_RFs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_voxels</span><span class="p">,</span> <span class="n">feature_resolution</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_voxels</span><span class="p">):</span>
+        <span class="n">voxel_RFs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">gaussian</span><span class="p">,</span> <span class="n">voxel_tuning</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="p">((</span><span class="n">feature_resolution</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">voxel_RFs</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_voxels</span><span class="p">,</span> <span class="n">feature_resolution</span><span class="p">)</span><span class="o">*</span><span class="n">RF_noise</span>  <span class="c1"># add noise to voxel RFs</span>
+    <span class="n">voxel_RFs</span> <span class="o">=</span> <span class="n">voxel_RFs</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">voxel_RFs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">voxel_RFs</span><span class="p">,</span> <span class="n">voxel_tuning</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_voxel_data</span><span class="p">(</span><span class="n">voxel_RFs</span><span class="p">,</span> <span class="n">n_voxels</span><span class="p">,</span> <span class="n">trial_list</span><span class="p">,</span> <span class="n">feature_resolution</span><span class="p">,</span> 
+                         <span class="n">trial_noise</span><span class="o">=</span><span class="mf">0.25</span><span class="p">):</span>
+    <span class="n">one_hot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">feature_resolution</span><span class="p">)</span>
+    <span class="c1"># Generate trial-wise responses based on voxel RFs</span>
+    <span class="k">if</span> <span class="n">range_start</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">trial_list</span> <span class="o">=</span> <span class="n">trial_list</span> <span class="o">+</span> <span class="n">range_start</span>
+    <span class="k">elif</span> <span class="n">range_start</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">trial_list</span> <span class="o">=</span> <span class="n">trial_list</span> <span class="o">-</span> <span class="n">range_start</span>
+    <span class="n">stim_X</span> <span class="o">=</span> <span class="n">one_hot</span><span class="p">[:,</span> <span class="n">trial_list</span><span class="p">]</span> <span class="c1">#@ basis_set.transpose()</span>
+    <span class="n">trial_data</span> <span class="o">=</span> <span class="n">voxel_RFs</span> <span class="o">@</span> <span class="n">stim_X</span>
+    <span class="n">trial_data</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_voxels</span><span class="p">,</span> <span class="n">trial_list</span><span class="o">.</span><span class="n">size</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">trial_noise</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">trial_data</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">trial_data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s generate some training data and look at it. This code will create a plot that depicts the response of an example voxel for different trials.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">n_voxels</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">n_train_trials</span> <span class="o">=</span> <span class="mi">120</span>
+<span class="n">training_stim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">stim_vals</span><span class="p">,</span> <span class="n">n_train_trials</span><span class="o">/</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">voxel_RFs</span><span class="p">,</span> <span class="n">voxel_tuning</span> <span class="o">=</span> <span class="n">generate_voxel_RFs</span><span class="p">(</span><span class="n">n_voxels</span><span class="p">,</span> <span class="n">feature_resolution</span><span class="p">,</span> <span class="n">random_tuning</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">RF_noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">generate_voxel_data</span><span class="p">(</span><span class="n">voxel_RFs</span><span class="p">,</span> <span class="n">n_voxels</span><span class="p">,</span> <span class="n">training_stim</span><span class="p">,</span> <span class="n">feature_resolution</span><span class="p">,</span> <span class="n">trial_noise</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">train_data</span><span class="p">))</span>
+<span class="c1"># print(&quot;Voxels are tuned to: &quot;, voxel_tuning)</span>
+
+<span class="c1"># Generate plots to look at the RF of an example voxel.</span>
+<span class="n">voxi</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">train_data</span><span class="p">[</span><span class="n">voxi</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;trial&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;activation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Activation over trials&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">voxel_RFs</span><span class="p">[</span><span class="n">voxi</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;degrees (motion direction)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">voxel_tuning</span><span class="p">[</span><span class="n">voxi</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Receptive field at </span><span class="si">{}</span><span class="s2"> deg&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">voxel_tuning</span><span class="p">[</span><span class="n">voxi</span><span class="p">]))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Example voxel&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;voxel&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;trial&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Simulated data from each voxel&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using this synthetic training data, we can fit the IEM.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit an IEM</span>
+<span class="n">iem_obj</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_data</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="n">training_stim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calling the IEM fit method defines the channels, or the basis set, which span the feature domain. We can examine the channels and plot them to check that they look appropriate.</p>
+<p>Remember that the plot below is in circular space. Hence, the channels wrap around the x-axis. For example, the channel depicted in blue is centered at 0 degrees (far left of plot), which is the same as 360 degrees (far right of plot).</p>
+<p>We can check whether the channels properly tile the feature space by summing across all of them. This is shown on the right plot. It should be a straight horizontal line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s visualize the basis functions.</span>
+<span class="n">channels</span> <span class="o">=</span> <span class="n">iem_obj</span><span class="o">.</span><span class="n">channels_</span>
+<span class="n">feature_axis</span> <span class="o">=</span> <span class="n">iem_obj</span><span class="o">.</span><span class="n">channel_domain</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">channels</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">channels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">feature_axis</span><span class="p">,</span> <span class="n">channels</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Channels (i.e. basis functions)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">channels</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sum across channels&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can generate test data and see how well we can predict the test stimuli.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate test data</span>
+<span class="n">n_test_trials</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="n">test_stim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">stim_vals</span><span class="p">,</span> <span class="n">n_test_trials</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">stim_vals</span><span class="p">))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">330</span><span class="p">)</span>
+<span class="n">test_data</span> <span class="o">=</span> <span class="n">generate_voxel_data</span><span class="p">(</span><span class="n">voxel_RFs</span><span class="p">,</span> <span class="n">n_voxels</span><span class="p">,</span> <span class="n">test_stim</span><span class="p">,</span> <span class="n">feature_resolution</span><span class="p">,</span> <span class="n">trial_noise</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predict test stim &amp; get R^2 score</span>
+<span class="n">pred_feature</span> <span class="o">=</span> <span class="n">iem_obj</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_data</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span>
+<span class="n">R2</span> <span class="o">=</span> <span class="n">iem_obj</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_data</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="n">test_stim</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Predicted features are: </span><span class="si">{}</span><span class="s2"> degrees.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pred_feature</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Actual features are: </span><span class="si">{}</span><span class="s2"> degrees.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_stim</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test R^2 is </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">R2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In addition to predicting the exact feature, we can examine the model-based reconstructions in the feature domain. That is, instead of getting single predicted values for each feature, we can look at a reconstructed function which peaks at the predicted feature.</p>
+<p>Below we will plot all of the reconstructions. There will be some variability because of the noise added during the synthetic data generation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now get the model-based reconstructions, which are continuous</span>
+<span class="c1"># functions that should peak at each test stimulus feature</span>
+<span class="n">recons</span> <span class="o">=</span> <span class="n">iem_obj</span><span class="o">.</span><span class="n">_predict_feature_responses</span><span class="p">(</span><span class="n">test_data</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_test_trials</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">feature_axis</span><span class="p">,</span> <span class="n">recons</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">stim_vals</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Reconstructions of </span><span class="si">{}</span><span class="s2"> degrees&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">test_stim</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For a sanity check, let’s check how R^2 changes as the number of voxels increases. We can write a quick wrapper function to train and test on a given set of motion directions, as below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iem_obj</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">train_and_test</span><span class="p">(</span><span class="n">nvox</span><span class="p">,</span> <span class="n">ntrn</span><span class="p">,</span> <span class="n">ntst</span><span class="p">,</span> <span class="n">rfn</span><span class="p">,</span> <span class="n">tn</span><span class="p">):</span>
+    <span class="n">vRFs</span><span class="p">,</span> <span class="n">vox_tuning</span> <span class="o">=</span> <span class="n">generate_voxel_RFs</span><span class="p">(</span><span class="n">nvox</span><span class="p">,</span> <span class="n">feature_resolution</span><span class="p">,</span> <span class="n">random_tuning</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">RF_noise</span><span class="o">=</span><span class="n">rfn</span><span class="p">)</span>
+    <span class="n">trn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">stim_vals</span><span class="p">,</span> <span class="n">ntrn</span><span class="o">/</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">trnd</span> <span class="o">=</span> <span class="n">generate_voxel_data</span><span class="p">(</span><span class="n">vRFs</span><span class="p">,</span> <span class="n">nvox</span><span class="p">,</span> <span class="n">trn</span><span class="p">,</span> <span class="n">feature_resolution</span><span class="p">,</span> <span class="n">trial_noise</span><span class="o">=</span><span class="n">tn</span><span class="p">)</span>
+    <span class="n">tst</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">stim_vals</span><span class="p">,</span> <span class="n">ntst</span><span class="o">/</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">tstd</span> <span class="o">=</span> <span class="n">generate_voxel_data</span><span class="p">(</span><span class="n">vRFs</span><span class="p">,</span> <span class="n">nvox</span><span class="p">,</span> <span class="n">tst</span><span class="p">,</span> <span class="n">feature_resolution</span><span class="p">,</span> <span class="n">trial_noise</span><span class="o">=</span><span class="n">tn</span><span class="p">)</span>
+    
+    <span class="n">iem_obj</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">trnd</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="n">trn</span><span class="p">)</span>
+    <span class="n">recons</span> <span class="o">=</span> <span class="n">iem_obj</span><span class="o">.</span><span class="n">_predict_feature_responses</span><span class="p">(</span><span class="n">tstd</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span>
+    <span class="n">pred_ori</span> <span class="o">=</span> <span class="n">iem_obj</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">tstd</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span>
+    <span class="n">R2</span> <span class="o">=</span> <span class="n">iem_obj</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">tstd</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="n">tst</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">recons</span><span class="p">,</span> <span class="n">pred_ori</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">tst</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll iterate through the list and look at the resulting R^2 values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">vox_list</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">R2_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vox_list</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">nvox</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vox_list</span><span class="p">):</span>
+    <span class="n">recs</span><span class="p">,</span> <span class="n">preds</span><span class="p">,</span> <span class="n">R2_list</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">test_features</span> <span class="o">=</span> <span class="n">train_and_test</span><span class="p">(</span><span class="n">nvox</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The R2 values for increasing numbers of voxels: &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">R2_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../iem/iem.html" class="btn btn-neutral float-left" title="Inverted Encoding Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../isc/ISC.html" class="btn btn-neutral float-right" title="Intersubject correlation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

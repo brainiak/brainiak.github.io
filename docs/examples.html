@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Examples &mdash; brainiak 0.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="（Group) Bayesian Representational Similarity Analysis" href="examples/brsa/brsa_demo.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            brainiak
+          </a>
+              <div class="version">
+                0.12
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/brsa/brsa_demo.html">（Group) Bayesian Representational Similarity Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/eventseg/Event_Segmentation.html">Event segmentation and alignment in fMRI data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/fcma/FCMA_demo.html">Full Correlation Matrix Analysis (FCMA) demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html">fmrisim demo script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/htfa/htfa.html">Hierarchical Topographic Factor Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/htfa/htfa.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/htfa/htfa.html#annotated-bibliography">Annotated bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/htfa/htfa.html#getting-started">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/htfa/htfa.html#code">Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/htfa/htfa.html#summary">Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/iem/iem.html">Inverted Encoding Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/iem_synthetic_RF/iem_example_synthetic_RF_data.html">Inverted encoding model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/isc/ISC.html">Intersubject correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/matnormal/Matrix-normal%20model%20prototyping.html">Rapid prototyping of fMRI models with <code class="docutils literal notranslate"><span class="pre">brainiak.matnormal</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/matnormal/Matrix-normal%20model%20prototyping.html#annotated-bibliography">Annotated Bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/real-time/README_INSTRUCTIONS.html">Set Up Instructions for the Real-Time fMRI Cloud-Based Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/real-time/rtcloud_notebook.html">Implementing a Real-Time fMRI Cloud-Based Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/srm/SRM.html">Shared response model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">brainiak</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Examples</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/examples.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/brsa/brsa_demo.html">（Group) Bayesian Representational Similarity Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/brsa/brsa_demo.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/brsa/brsa_demo.html#annotated-bibliography">Annotated Bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/brsa/brsa_demo.html#table-of-contents">Table of contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/brsa/brsa_demo.html#notes-on-data-preparation">Notes on data preparation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/brsa/brsa_demo.html#notes-on-model-assumption">Notes on model assumption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/brsa/brsa_demo.html#load-some-package-which-we-will-use-in-this-demo">Load some package which we will use in this demo.</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/brsa/brsa_demo.html#simulate-data">Simulate data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/brsa/brsa_demo.html#load-an-example-design-matrix">Load an example design matrix.</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="examples/brsa/brsa_demo.html#details-about-design-matrix">details about design matrix</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="examples/brsa/brsa_demo.html#simulate-noise">simulate noise</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/brsa/brsa_demo.html#specify-simulated-similarity-matrix">specify simulated similarity matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/brsa/brsa_demo.html#simulate-task-related-signals">Simulate task-related signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/brsa/brsa_demo.html#synthesize-data-by-adding-signal-with-noise">Synthesize data by adding signal with noise</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/brsa/brsa_demo.html#fit-group-bayesian-rsa-to-simulated-data">Fit Group Bayesian RSA to simulated data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/brsa/brsa_demo.html#prepare-onset-information-for-model-fitting">Prepare onset information for model fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/brsa/brsa_demo.html#instantiate-a-gbrsa-object">Instantiate a GBRSA object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/brsa/brsa_demo.html#fit-model-to-the-data">Fit model to the data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/brsa/brsa_demo.html#evaluation">Evaluation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/brsa/brsa_demo.html#result-of-gbrsa">Result of GBRSA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/brsa/brsa_demo.html#compare-with-result-of-traditional-rsa">Compare with result of traditional RSA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/brsa/brsa_demo.html#evaluating-estimated-pseudo-snr-map-against-the-simulated-snr-map">Evaluating estimated pseudo-SNR map against the simulated SNR map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/brsa/brsa_demo.html#examine-the-recovery-of-activation-pattern">Examine the recovery of activation pattern</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/brsa/brsa_demo.html#other-usage-decoding-task-related-signal-from-new-data">Other usage: “decoding” task-related signal from new data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/brsa/brsa_demo.html#model-selection-by-cross-validation">Model selection by cross-validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/brsa/brsa_demo.html#avoid-false-discovery">Avoid false discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/brsa/brsa_demo.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/eventseg/Event_Segmentation.html">Event segmentation and alignment in fMRI data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/eventseg/Event_Segmentation.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/eventseg/Event_Segmentation.html#annotated-bibliography">Annotated Bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/eventseg/Event_Segmentation.html#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/eventseg/Event_Segmentation.html#loading-data">Loading data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/eventseg/Event_Segmentation.html#finding-event-boundaries-during-perception">Finding event boundaries during perception</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/eventseg/Event_Segmentation.html#warm-up-event-structure-in-activity-patterns">Warm-up: Event structure in activity patterns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/eventseg/Event_Segmentation.html#fitting-the-hmm">Fitting the HMM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/eventseg/Event_Segmentation.html#determining-the-number-of-events-with-the-hmm">Determining the number of events with the HMM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/eventseg/Event_Segmentation.html#optimal-segmentation-with-the-hmm">Optimal segmentation with the HMM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/eventseg/Event_Segmentation.html#comparing-model-and-human-labeled-boundaries">Comparing model and human-labeled boundaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/eventseg/Event_Segmentation.html#aligning-movie-and-recall-data">Aligning movie and recall data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/eventseg/Event_Segmentation.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/fcma/FCMA_demo.html">Full Correlation Matrix Analysis (FCMA) demo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/fcma/FCMA_demo.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/fcma/FCMA_demo.html#table-of-contents">Table of Contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/fcma/FCMA_demo.html#important-details-of-simulated-data">Important details of simulated data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/fcma/FCMA_demo.html#fcma-step-1-feature-voxel-selection">1. FCMA Step 1: Feature (voxel) selection <a id="fcma_voxselect"></a></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/fcma/FCMA_demo.html#the-goal">1.1 The goal <a id="goal"></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/fcma/FCMA_demo.html#data-preprocessing">1.2 Data preprocessing <a id="preprocess"></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/fcma/FCMA_demo.html#understanding-preprocessed-data">1.3 Understanding preprocessed data <a id="understand_preprocess"></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/fcma/FCMA_demo.html#feature-selection-with-simplified-implementation">1.4 Feature selection with simplified implementation <a id="simplified_fs"></a></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="examples/fcma/FCMA_demo.html#steps">Steps:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="examples/fcma/FCMA_demo.html#understanding-the-outputs-of-feature-selection">1.5 Understanding the outputs of feature selection <a id="understand_simplified_fs"></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/fcma/FCMA_demo.html#perform-feature-selection-with-actual-fcma-implementation">1.6 Perform feature selection with actual FCMA implementation <a id="actual_fs"></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/fcma/FCMA_demo.html#select-n-top-performing-features">1.7 Select n top-performing features <a id="select_top_n"></a></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/fcma/FCMA_demo.html#fcma-step-2-classification-using-the-selected-features-voxels">2. FCMA Step 2: Classification using the selected features (voxels) <a id="classification"></a></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/fcma/FCMA_demo.html#id1">2.1 The goal <a id="goal2"></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/fcma/FCMA_demo.html#classification-steps">2.2 Classification steps <a id="clf_steps"></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/fcma/FCMA_demo.html#understanding-the-outputs-of-classification">2.3 Understanding the outputs of classification <a id="understand_clf"></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/fcma/FCMA_demo.html#perform-classification-for-all-outer-loop-folds-using-fcma-script">2.4 Perform classification for all outer loop folds using FCMA script <a id="actual_clf"></a></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/fcma/FCMA_demo.html#results-visualizations">3 Results Visualizations <a id="visualization"></a></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/fcma/FCMA_demo.html#examine-classification-accuracy-for-different-top-n-mask">3.1 Examine classification accuracy for different top-n-mask <a id="line"></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/fcma/FCMA_demo.html#visualize-voxels-in-top-n-masks">3.2 Visualize voxels in top-n-masks <a id="niview"></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/fcma/FCMA_demo.html#visualize-functional-connectivity-pattern-with-circos-plot">3.3 Visualize functional connectivity pattern with circos plot <a id="circos"></a></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/fcma/FCMA_demo.html#summary">4. Summary <a id="sum"></a></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html">fmrisim demo script</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#annotated-bibliography">Annotated bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#table-of-contents">Table of Contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#set-parameters">1. Set parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#import-necessary-python-packages">1.1 Import necessary Python packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#load-participant-data">1.2 Load participant data*<a id="load_ppt"></a></a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#specify-participant-dimensions-and-resolution">1.3 Specify participant dimensions and resolution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#generate-an-activity-template-and-a-mask">1.4 Generate an activity template and a mask</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#determine-noise-parameters">1.5 Determine noise parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#generate-noise"><strong>2. Generate noise</strong><a id="generate_noise"></a></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#create-temporal-noise">2.1 Create temporal noise</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#create-system-noise">2.2 Create system noise</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#combine-noise-and-template">2.3 Combine noise and template</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#fit-the-data-to-the-noise-parameters">2.4 Fit the data to the noise parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#generate-signal"><strong>3. Generate signal</strong><a id="generate_signal"></a></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#specify-which-voxels-in-the-brain-contain-signal">3.1 Specify which voxels in the brain contain signal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#characterize-signal-for-voxels">3.2 Characterize signal for voxels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#generate-event-time-course">3.3 Generate event time course</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#export-stimulus-time-course-for-analysis">3.4 Export stimulus time course for analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#estimate-the-voxel-weight-for-each-event">3.5 Estimate the voxel weight for each event</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#convolve-each-voxel-s-time-course-with-the-hemodynamic-response-function">3.6 Convolve each voxel’s time course with the Hemodynamic Response Function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#establish-signal-magnitude">3.7 Establish signal magnitude</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#multiply-the-convolved-response-with-the-signal-voxels">3.8 Multiply the convolved response with the signal voxels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#combine-signal-and-noise">3.9 Combine signal and noise</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#analyse-data"><strong>4. Analyse data</strong><a id="analyse_data"></a></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#pull-out-data-for-each-trial">4.1 Pull out data for each trial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#represent-the-data">4.2 Represent the data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#test-for-univariate-effect">4.3 Test for univariate effect*<a id="test_univariate"></a></a></li>
+<li class="toctree-l4"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#test-for-a-multivariate-effect">4.4 Test for a multivariate effect</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#summary">Summary<a id="summary"></a></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/fmrisim/fmrisim_multivariate_example.html#references"><strong>References</strong><a id="references"></a></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/htfa/htfa.html">Hierarchical Topographic Factor Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/htfa/htfa.html#overview">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/htfa/htfa.html#annotated-bibliography">Annotated bibliography</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/htfa/htfa.html#table-of-contents">Table of contents:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/htfa/htfa.html#getting-started">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/htfa/htfa.html#code">Code</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/htfa/htfa.html#initialization">Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/htfa/htfa.html#fit-htfa-to-data">Fit HTFA to data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/htfa/htfa.html#plotting-htfa-global-and-local-node-locations">Plotting HTFA global and local node locations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/htfa/htfa.html#compute-dynamic-correlations">Compute dynamic correlations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/htfa/htfa.html#generate-animated-chord-diagrams">Generate animated chord diagrams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/htfa/htfa.html#generate-animated-brain-network-plots">Generate animated brain network plots</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/htfa/htfa.html#summary">Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/iem/iem.html">Inverted Encoding Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/iem/iem.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/iem/iem.html#annotated-bibliography">Annotated Bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/iem/iem.html#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/iem/iem.html#example-1-reconstructing-items-from-working-memory">Example 1: Reconstructing items from working memory <a id='ex1'></a></a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/iem/iem.html#example-2-reconstructing-2d-spatial-representations-with-attention-and-contrast-changes">Example 2: Reconstructing 2D spatial representations with attention and contrast changes <a id='ex2'></a></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/iem/iem.html#average-feature-reconstructions-across-trials">Average feature reconstructions across trials</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/iem/iem.html#example-3-comparing-svm-and-iem-with-simulated-data-and-low-trial-numbers">Example 3: Comparing SVM and IEM with simulated data and low trial numbers <a id='ex3'></a></a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/iem/iem.html#summary">Summary <a id='summary'></a></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/iem_synthetic_RF/iem_example_synthetic_RF_data.html">Inverted encoding model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/isc/ISC.html">Intersubject correlation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/isc/ISC.html#annotated-bibliography">Annotated bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/isc/ISC.html#table-of-contents">Table of contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/isc/ISC.html#example-fmri-data-and-atlas">Example fMRI data and atlas</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/isc/ISC.html#computing-intersubject-correlation-isc">Computing intersubject correlation (ISC)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/isc/ISC.html#temporal-receptive-windows">Temporal receptive windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/isc/ISC.html#intersubject-network-estimation-isfc">Intersubject network estimation (ISFC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/isc/ISC.html#intersubject-pattern-correlation-ispc">Intersubject pattern correlation (ISPC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/isc/ISC.html#summary">Summary</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/isc/ISC.html#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/matnormal/Matrix-normal%20model%20prototyping.html">Rapid prototyping of fMRI models with <code class="docutils literal notranslate"><span class="pre">brainiak.matnormal</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/matnormal/Matrix-normal%20model%20prototyping.html#annotated-bibliography">Annotated Bibliography</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/matnormal/Matrix-normal%20model%20prototyping.html#table-of-contents">Table of contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/matnormal/Matrix-normal%20model%20prototyping.html#overview-understanding-kronecker-separability">Overview: Understanding kronecker-separability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/matnormal/Matrix-normal%20model%20prototyping.html#example-1-matrix-normal-separable-covariance-regression">Example 1: Matrix-normal (separable-covariance) regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/matnormal/Matrix-normal%20model%20prototyping.html#example-2-priors-and-marginalization-with-mn-rsa">Example 2: Priors and marginalization, with MN-RSA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/matnormal/Matrix-normal%20model%20prototyping.html#example-3-latent-design-matrices-with-pca-and-fa">Example 3: latent design matrices with PCA and FA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/matnormal/Matrix-normal%20model%20prototyping.html#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/real-time/README_INSTRUCTIONS.html">Set Up Instructions for the Real-Time fMRI Cloud-Based Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/real-time/README_INSTRUCTIONS.html#things-to-do-once">Things to do once</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/real-time/README_INSTRUCTIONS.html#things-to-do-every-time">Things to do every time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/real-time/README_INSTRUCTIONS.html#common-issues">Common Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/real-time/rtcloud_notebook.html">Implementing a Real-Time fMRI Cloud-Based Framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/real-time/rtcloud_notebook.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/real-time/rtcloud_notebook.html#annotated-bibliography">Annotated Bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/real-time/rtcloud_notebook.html#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/real-time/rtcloud_notebook.html#before-running-this-notebook">Before Running This Notebook <a id='setting_up'></a></a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/real-time/rtcloud_notebook.html#import-necessary-modules-and-declare-important-variables">Import Necessary Modules and Declare Important Variables <a id='import_modules'></a></a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/real-time/rtcloud_notebook.html#step-1-start-the-projectinterface-web-server">Step 1: Start the ProjectInterface Web Server <a id='start_ProjectInterface'></a></a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/real-time/rtcloud_notebook.html#step-2-start-the-synthetic-data-generator">Step 2: Start the Synthetic Data Generator <a id='start_DataGenerator'></a></a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/real-time/rtcloud_notebook.html#step-3-open-the-web-server-on-the-localhost">Step 3: Open the Web Server on the localhost <a id='open_localhost'></a></a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/real-time/rtcloud_notebook.html#alternate-step-3-run-the-classification-script-from-command-line">Alternate Step 3: Run the classification script from command line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/real-time/rtcloud_notebook.html#summary">Summary <a id='summary'></a></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/srm/SRM.html">Shared response model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/srm/SRM.html#annotated-bibliography">Annotated bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/srm/SRM.html#table-of-contents">Table of contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/srm/SRM.html#example-fmri-data-and-atlas">Example fMRI data and atlas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/srm/SRM.html#estimating-the-srm">Estimating the SRM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/srm/SRM.html#between-subject-time-segment-classification">Between-subject time-segment classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/srm/SRM.html#summary">Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/srm/SRM.html#references">References</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examples/brsa/brsa_demo.html" class="btn btn-neutral float-right" title="（Group) Bayesian Representational Similarity Analysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

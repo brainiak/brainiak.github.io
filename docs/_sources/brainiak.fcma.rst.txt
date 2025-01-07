@@ -17,14 +17,6 @@ brainiak.fcma.classifier module
    :undoc-members:
    :show-inheritance:
 
-brainiak.fcma.fcma\_extension module
-------------------------------------
-
-.. automodule:: brainiak.fcma.fcma_extension
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 brainiak.fcma.mvpa\_voxelselector module
 ----------------------------------------
 

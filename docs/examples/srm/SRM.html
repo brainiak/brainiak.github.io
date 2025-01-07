@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shared response model &mdash; brainiak 0.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Release notes" href="../../release_notes.html" />
+    <link rel="prev" title="Implementing a Real-Time fMRI Cloud-Based Framework" href="../real-time/rtcloud_notebook.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            brainiak
+          </a>
+              <div class="version">
+                0.12
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../brsa/brsa_demo.html">（Group) Bayesian Representational Similarity Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../eventseg/Event_Segmentation.html">Event segmentation and alignment in fMRI data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fcma/FCMA_demo.html">Full Correlation Matrix Analysis (FCMA) demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fmrisim/fmrisim_multivariate_example.html">fmrisim demo script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html">Hierarchical Topographic Factor Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#annotated-bibliography">Annotated bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#getting-started">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#code">Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#summary">Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iem/iem.html">Inverted Encoding Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iem_synthetic_RF/iem_example_synthetic_RF_data.html">Inverted encoding model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../isc/ISC.html">Intersubject correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matnormal/Matrix-normal%20model%20prototyping.html">Rapid prototyping of fMRI models with <code class="docutils literal notranslate"><span class="pre">brainiak.matnormal</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matnormal/Matrix-normal%20model%20prototyping.html#annotated-bibliography">Annotated Bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../real-time/README_INSTRUCTIONS.html">Set Up Instructions for the Real-Time fMRI Cloud-Based Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../real-time/rtcloud_notebook.html">Implementing a Real-Time fMRI Cloud-Based Framework</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Shared response model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#annotated-bibliography">Annotated bibliography</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#table-of-contents">Table of contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-fmri-data-and-atlas">Example fMRI data and atlas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#estimating-the-srm">Estimating the SRM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#between-subject-time-segment-classification">Between-subject time-segment classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">brainiak</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Shared response model</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/srm/SRM.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="shared-response-model">
+<h1>Shared response model<a class="headerlink" href="#shared-response-model" title="Permalink to this heading"></a></h1>
+<p>Authors: Javier Turek (<a class="reference external" href="mailto:javier&#46;turek&#37;&#52;&#48;intel&#46;com">javier<span>&#46;</span>turek<span>&#64;</span>intel<span>&#46;</span>com</a>), Samuel A. Nastase (<a class="reference external" href="mailto:sam&#46;nastase&#37;&#52;&#48;gmail&#46;com">sam<span>&#46;</span>nastase<span>&#64;</span>gmail<span>&#46;</span>com</a>), Hugo Richard (<a class="reference external" href="mailto:hugo&#46;richard&#37;&#52;&#48;ens-lyon&#46;fr">hugo<span>&#46;</span>richard<span>&#64;</span>ens-lyon<span>&#46;</span>fr</a>)</p>
+<p>This notebook provides interactive examples of functional alignment using the shared response model (SRM; <a class="reference external" href="https://papers.nips.cc/paper/5855-a-reduced-dimension-fmri-shared-response-model">Chen et al., 2015</a>). BrainIAK includes several variations on the SRM algorithm, but here we focus on the core probabilistic <a class="reference external" href="https://brainiak.org/docs/brainiak.funcalign.html#brainiak.funcalign.srm.SRM"><code class="docutils literal notranslate"><span class="pre">SRM</span></code></a> implementation. The goal of the SRM is to capture shared responses across participants performing the same task in a way that accommodates individual variability in response topographies (<a class="reference external" href="https://doi.org/10.7554/eLife.56601">Haxby et al., 2020</a>). Given data that is synchronized in the temporal dimension across a group of subjects, SRM computes a low dimensional <em>shared</em> feature subspace common to all subjects. The method also constructs orthogonal weights to map between the shared subspace and each subject’s idiosyncratic voxel space. This notebook accompanies the manuscript “BrainIAK: The Brain Imaging Analysis Kit” by Kumar and colleagues (2020).</p>
+<p>The functional alignment (<a class="reference external" href="https://brainiak.org/docs/brainiak.funcalign.html"><code class="docutils literal notranslate"><span class="pre">funcalign</span></code></a>) module includes the following variations of SRM:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://brainiak.org/docs/brainiak.funcalign.html#brainiak.funcalign.srm.SRM"><code class="docutils literal notranslate"><span class="pre">SRM</span></code></a>: A probabilistic version of SRM</p></li>
+<li><p><a class="reference external" href="https://brainiak.org/docs/brainiak.funcalign.html#brainiak.funcalign.srm.DetSRM"><code class="docutils literal notranslate"><span class="pre">DetSRM</span></code></a>: A deterministic version of SRM</p></li>
+<li><p><a class="reference external" href="https://brainiak.org/docs/brainiak.funcalign.html#brainiak.funcalign.rsrm.RSRM"><code class="docutils literal notranslate"><span class="pre">RSRM</span></code></a>: Robust SRM for better filtering idiosyncratic components and outliers in data</p></li>
+<li><p><a class="reference external" href="https://brainiak.org/docs/brainiak.funcalign.html#brainiak.funcalign.sssrm.SSSRM"><code class="docutils literal notranslate"><span class="pre">SSSRM</span></code></a>: Semi-supervised SRM for   labeled data</p></li>
+<li><p><a class="reference external" href="https://brainiak.org/docs/brainiak.funcalign.html#brainiak.funcalign.fastsrm.FastSRM"><code class="docutils literal notranslate"><span class="pre">FastSRM</span></code></a>: A faster version of SRM with reduced memory demands</p></li>
+</ul>
+<div class="section" id="annotated-bibliography">
+<h2>Annotated bibliography<a class="headerlink" href="#annotated-bibliography" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Chen, P. H. C., Chen, J., Yeshurun, Y., Hasson, U., Haxby, J., &amp; Ramadge, P. J. (2015). A reduced-dimension fMRI shared response model. In C. Cortes, N. D. Lawrence, D. D. Lee, M. Sugiyama, R. Garnett (Eds.), <em>Advances in Neural Information Processing Systems, vol. 28</em> (pp. 460-468). <a class="reference external" href="https://papers.nips.cc/paper/5855-a-reduced-dimension-fmri-shared-response-model"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Introduces the SRM method of functional alignment with several performance benchmarks.</em></p></li>
+<li><p>Haxby, J. V., Guntupalli, J. S., Nastase, S. A., &amp; Feilong, M. (2020). Hyperalignment: modeling shared information encoded in idiosyncratic cortical topographies. <em>eLife</em>, <em>9</em>, e56601. <a class="reference external" href="https://doi.org/10.7554/eLife.56601"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Recent review of hyperalignment and related functional alignment methods.</em></p></li>
+<li><p>Chen, J., Leong, Y. C., Honey, C. J., Yong, C. H., Norman, K. A., &amp; Hasson, U. (2017). Shared memories reveal shared structure in neural activity across individuals. <em>Nature Neuroscience</em>, <em>20</em>(1), 115-125. <a class="reference external" href="https://doi.org/10.1038/nn.4450"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>SRM is used to discover the dimensionality of shared representations across subjects.</em></p></li>
+<li><p>Nastase, S. A., Liu, Y. F., Hillman, H., Norman, K. A., &amp; Hasson, U. (2020). Leveraging shared connectivity to aggregate heterogeneous datasets into a common response space. <em>NeuroImage</em>, <em>217</em>, 116865. <a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2020.116865"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>This paper demonstrates that applying SRM to functional connectivity data can yield a shared response space across disjoint datasets with different subjects and stimuli.</em></p></li>
+</ol>
+</div>
+<div class="section" id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#example-fmri-data-and-atlas"><span class="std std-ref">Example fMRI data and atlas</span></a></p></li>
+<li><p><a class="reference internal" href="#estimating-the-srm"><span class="std std-ref">Estimating the SRM</span></a></p></li>
+<li><p><a class="reference internal" href="#between-subject-time-segment-classification"><span class="std std-ref">Between-subject time-segment classification</span></a></p></li>
+<li><p><a class="reference internal" href="#summary"><span class="std std-ref">Summary</span></a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import necessary python modules</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">glob</span><span class="w"> </span><span class="kn">import</span> <span class="n">glob</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nilearn.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_stat_map</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">zscore</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">brainiak.funcalign.srm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">brainiak.fcma.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_correlation</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="example-fmri-data-and-atlas">
+<h2>Example fMRI data and atlas<a class="headerlink" href="#example-fmri-data-and-atlas" title="Permalink to this heading"></a></h2>
+<p>To work through the SRM functionality, we use an fMRI dataset collected while participants listened to a spoken story called “<a class="reference external" href="https://themoth.org/stories/i-knew-you-were-black">I Knew You Were Black</a>” by Carol Daniel. These data are available as part of the publicly available <a class="reference external" href="https://github.com/snastase/narratives">Narratives</a> collection (<a class="reference external" href="https://openneuro.org/datasets/ds002345">Nastase et al., 2019</a>). Here, we download a pre-packaged subset of the data from Zenodo. These data have been preprocessed using fMRIPrep with confound regression in AFNI. We apply the SRM to a region of interest (ROI) comprising the “temporal parietal” network according to a cortical parcellation containing 400 parcels from Schaefer and colleagues (<a class="reference external" href="https://doi.org/10.1093/cercor/bhx179">2018</a>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download and extract example data from Zenodo</span>
+<span class="o">!</span>wget<span class="w"> </span>-nc<span class="w"> </span>https://zenodo.org/record/4300825/files/brainiak-aperture-srm-data.tgz
+<span class="o">!</span>tar<span class="w"> </span>--skip-old-files<span class="w"> </span>-xzf<span class="w"> </span>brainiak-aperture-srm-data.tgz
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2020-12-07 02:06:15--  https://zenodo.org/record/4300825/files/brainiak-aperture-srm-data.tgz
+Resolving zenodo.org (zenodo.org)... 137.138.76.77
+Connecting to zenodo.org (zenodo.org)|137.138.76.77|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 9927319659 (9.2G) [application/octet-stream]
+Saving to: ‘brainiak-aperture-srm-data.tgz’
+
+brainiak-aperture-s 100%[===================&gt;]   9.25G  4.37MB/s    in 13m 37s 
+
+2020-12-07 02:20:30 (11.6 MB/s) - ‘brainiak-aperture-srm-data.tgz’ saved [9927319659/9927319659]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get filenames for example data and atlas</span>
+<span class="n">data_fns</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;brainiak-aperture-srm-data/sub-*_task-black_*bold.nii.gz&#39;</span><span class="p">))</span>
+<span class="n">atlas_fn</span> <span class="o">=</span> <span class="s1">&#39;brainiak-aperture-srm-data/Schaefer2018_400Parcels_17Networks_order_FSLMNI152_2.5mm.nii.gz&#39;</span>
+
+<span class="c1"># Load in the Schaefer 400-parcel atlas</span>
+<span class="n">atlas_nii</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">atlas_fn</span><span class="p">)</span>
+<span class="n">atlas_img</span> <span class="o">=</span> <span class="n">atlas_nii</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
+
+<span class="c1"># Left temporal parietal ROI labels</span>
+<span class="n">parcel_labels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">195</span><span class="p">,</span> <span class="mi">196</span><span class="p">,</span> <span class="mi">197</span><span class="p">,</span> <span class="mi">198</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load in functional data and mask with &quot;temporal parietal&quot; ROI</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">data_fn</span> <span class="ow">in</span> <span class="n">data_fns</span><span class="p">:</span>
+    <span class="n">voxel_data</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">data_fn</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
+    
+    <span class="c1"># Take union of all parcels (brain areas) comprising the full ROI </span>
+    <span class="n">roi_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">voxel_data</span><span class="p">[</span><span class="n">atlas_img</span> <span class="o">==</span> <span class="n">parcel</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">T</span>
+                                <span class="k">for</span> <span class="n">parcel</span> <span class="ow">in</span> <span class="n">parcel_labels</span><span class="p">])</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">roi_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualize the left temporal parietal ROI</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span><span class="s1">&#39;colorblind&#39;</span><span class="p">)</span>
+<span class="n">roi_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">atlas_img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">parcel</span> <span class="ow">in</span> <span class="n">parcel_labels</span><span class="p">:</span>
+    <span class="n">roi_img</span><span class="p">[</span><span class="n">atlas_img</span> <span class="o">==</span> <span class="n">parcel</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Convert to a NIfTI image for visualization with Nilearn</span>
+<span class="n">roi_nii</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">Nifti1Image</span><span class="p">(</span><span class="n">roi_img</span><span class="p">,</span> <span class="n">atlas_nii</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">atlas_nii</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
+
+<span class="c1"># Plot plot left temporal parietal ROI</span>
+<span class="n">plot_stat_map</span><span class="p">(</span><span class="n">roi_nii</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;tab10_r&#39;</span><span class="p">,</span> <span class="n">cut_coords</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">53</span><span class="p">,</span> <span class="o">-</span><span class="mi">46</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+              <span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;left temporal parietal ROI&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Print short &quot;figure caption&quot; describing visualization</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The left &quot;temporal parietal&quot; ROI comprises auditory &#39;</span>
+      <span class="s2">&quot;association</span><span class="se">\n</span><span class="s2">cortex extending from anterior superior &quot;</span>
+      <span class="s2">&quot;temporal cortex to the</span><span class="se">\n</span><span class="s2">temporoparietal junction.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ac719287ce1f72433cbdc268a037ed0498a0fe5a8dbfc757cdecdec52b0da05f.png" src="../../_images/ac719287ce1f72433cbdc268a037ed0498a0fe5a8dbfc757cdecdec52b0da05f.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The left &quot;temporal parietal&quot; ROI comprises auditory association
+cortex extending from anterior superior temporal cortex to the
+temporoparietal junction.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once data is loaded, we divide the data into two halves for a two fold validation.
+We will use one half for training SRM and the other for testing its performance.
+Then, we normalize the data each half.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the number of subjects and TRs</span>
+<span class="n">n_subjects</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">n_trs</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Set a train/test split ratio</span>
+<span class="n">train_test_ratio</span> <span class="o">=</span> <span class="mf">.5</span>
+<span class="n">test_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_trs</span> <span class="o">*</span> <span class="n">train_test_ratio</span><span class="p">)</span>
+
+<span class="c1"># Split/compile data into training and test halves</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">test_data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">subject</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_subjects</span><span class="p">):</span>
+    
+    <span class="c1"># Take the first chunk of TRs as training</span>
+    <span class="n">train_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">zscore</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">subject</span><span class="p">][:</span><span class="o">-</span><span class="n">test_size</span><span class="p">,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    
+    <span class="c1"># Take the second chunk of TRs as testing</span>
+    <span class="n">test_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">zscore</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">subject</span><span class="p">][</span><span class="o">-</span><span class="n">test_size</span><span class="p">:,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="estimating-the-srm">
+<h2>Estimating the SRM<a class="headerlink" href="#estimating-the-srm" title="Permalink to this heading"></a></h2>
+<p>Next, we train the SRM on the training data. We need to specify desired dimension of the shared feature space. Although we simply use 50 features, the optimal number of dimensions can be found using grid search with cross-validation. We also need to specify a number of iterations to ensure the SRM algorithm converges.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the number of features of shared space and number of iterations</span>
+<span class="n">features</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">n_iter</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Create an SRM object</span>
+<span class="n">srm</span> <span class="o">=</span> <span class="n">brainiak</span><span class="o">.</span><span class="n">funcalign</span><span class="o">.</span><span class="n">srm</span><span class="o">.</span><span class="n">SRM</span><span class="p">(</span><span class="n">n_iter</span><span class="o">=</span><span class="n">n_iter</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="n">features</span><span class="p">)</span>
+
+<span class="c1"># Fit the SRM data</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Fitting SRM&#39;</span><span class="p">)</span>
+<span class="n">srm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;SRM has been fit&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Share response shape: </span><span class="si">{</span><span class="n">srm</span><span class="o">.</span><span class="n">s_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> &#39;</span>
+      <span class="sa">f</span><span class="s1">&#39;Features x </span><span class="si">{</span><span class="n">srm</span><span class="o">.</span><span class="n">s_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> Time-points&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting SRM
+SRM has been fit
+Share response shape: 50 Features x 275 Time-points
+</pre></div>
+</div>
+</div>
+</div>
+<p>After training SRM, we obtain a shared response $S$ that contains the values of the features for each TR, and a set of weight matrices $W_i$ that project from the shared subspace to each subject’s idiosyncratic voxel space. Let us check the orthogonal property of the weight matrix $W_i$ for a subject. We visualize $W_i^TW_i$, which should be the identity $I$ matrix with shape equal to the number of features we selected.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the first subject as an example</span>
+<span class="n">subject</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">srm</span><span class="o">.</span><span class="n">w_</span><span class="p">[</span><span class="n">subject</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">srm</span><span class="o">.</span><span class="n">w_</span><span class="p">[</span><span class="n">subject</span><span class="p">]))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Weight matrix orthogonality for subject </span><span class="si">{</span><span class="n">subject</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;SRM features&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;SRM features&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">ticks</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Weight matrix shape: </span><span class="si">{</span><span class="n">srm</span><span class="o">.</span><span class="n">w_</span><span class="p">[</span><span class="n">subject</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> &#39;</span>
+      <span class="sa">f</span><span class="s1">&#39;Voxels x </span><span class="si">{</span><span class="n">srm</span><span class="o">.</span><span class="n">w_</span><span class="p">[</span><span class="n">subject</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> Features</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Check against identity matrix</span>
+<span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">srm</span><span class="o">.</span><span class="n">w_</span><span class="p">[</span><span class="n">subject</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">srm</span><span class="o">.</span><span class="n">w_</span><span class="p">[</span><span class="n">subject</span><span class="p">])):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This test confirms that the weight matrix for &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;subject </span><span class="si">{</span><span class="n">subject</span><span class="si">}</span><span class="s2"> is orthogonal.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Weight matrix is not orthogonal.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/604cd8781ae14f7de33682b2a75750e79a2cc24d6f9cde98cdf31b7557a1db41.png" src="../../_images/604cd8781ae14f7de33682b2a75750e79a2cc24d6f9cde98cdf31b7557a1db41.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Weight matrix shape: 935 Voxels x 50 Features
+
+This test confirms that the weight matrix for subject 0 is orthogonal.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="between-subject-time-segment-classification">
+<h2>Between-subject time-segment classification<a class="headerlink" href="#between-subject-time-segment-classification" title="Permalink to this heading"></a></h2>
+<p>When we trained SRM above, we learned the weight matrices $W_i$ and the shared response $S$ for the training data. The weight matrices further allow us to convert new data to the shared feature space. We call the <code class="docutils literal notranslate"><span class="pre">transform()</span></code> function to transform test data for each subject into the shred space.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Transform subject-space test data into shared space</span>
+<span class="n">test_shared</span> <span class="o">=</span> <span class="n">srm</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+
+<span class="c1"># z-score the transformed test data</span>
+<span class="n">test_shared</span> <span class="o">=</span> <span class="p">[</span><span class="n">zscore</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">test_shared</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We evaluate the performance of the SRM using a between-subject time-segment classification (or “time-segment matching”) analysis with leave-one-subject-out cross-validation (e.g. <a class="reference external" href="https://doi.org/10.1016/j.neuron.2011.08.026">Haxby et al., 2011</a>; <a class="reference external" href="https://papers.nips.cc/paper/5855-a-reduced-dimension-fmri-shared-response-model">Chen et al., 2015</a>. The function receives the data from <code class="docutils literal notranslate"><span class="pre">N</span></code> subjects with a specified window size <code class="docutils literal notranslate"><span class="pre">win_size</span></code> for the time segments. A segment is the concatenation of <code class="docutils literal notranslate"><span class="pre">win_size</span></code> TRs. Then, using the averaged data from <code class="docutils literal notranslate"><span class="pre">N-1</span></code> subjects it tries to match the segments from the left-out subject to the right position. The function returns the average accuracy across segments for each subject.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">time_segment_classification</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">win_size</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span> 
+    <span class="n">n_subjects</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">n_features</span><span class="p">,</span> <span class="n">n_trs</span><span class="p">)</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">n_subjects</span><span class="p">)</span>
+    <span class="n">n_segments</span> <span class="o">=</span> <span class="n">n_trs</span> <span class="o">-</span> <span class="n">win_size</span> <span class="o">+</span> <span class="mi">1</span>
+    
+    <span class="c1"># Set up container for training data</span>
+    <span class="n">train_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_features</span> <span class="o">*</span> <span class="n">win_size</span><span class="p">,</span> <span class="n">n_segments</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Training data (includes test data, but will be removed)</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subjects</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">win_size</span><span class="p">):</span>
+            <span class="n">train_data</span><span class="p">[</span><span class="n">w</span> <span class="o">*</span> <span class="n">n_features</span><span class="p">:(</span><span class="n">w</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">n_features</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+=</span> \
+                <span class="n">data</span><span class="p">[</span><span class="n">m</span><span class="p">][:,</span> <span class="n">w</span><span class="p">:(</span><span class="n">w</span> <span class="o">+</span> <span class="n">n_segments</span><span class="p">)]</span>
+            
+    <span class="c1"># Analyze each subject (leave-one-out)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Between-subject time-segment classification accuracy &quot;</span>
+          <span class="s2">&quot;for each subject:&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">test_subject</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_subjects</span><span class="p">):</span>
+        <span class="n">test_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_features</span> <span class="o">*</span> <span class="n">win_size</span><span class="p">,</span> <span class="n">n_segments</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">win_size</span><span class="p">):</span>
+            <span class="n">test_data</span><span class="p">[</span><span class="n">w</span> <span class="o">*</span> <span class="n">n_features</span><span class="p">:(</span><span class="n">w</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">n_features</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> \
+                <span class="n">data</span><span class="p">[</span><span class="n">test_subject</span><span class="p">][:,</span> <span class="n">w</span><span class="p">:(</span><span class="n">w</span> <span class="o">+</span> <span class="n">n_segments</span><span class="p">)]</span>
+
+        <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">zscore</span><span class="p">((</span><span class="n">train_data</span> <span class="o">-</span> <span class="n">test_data</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">zscore</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+        <span class="c1"># Compute correlation matrix</span>
+        <span class="n">correlations</span> <span class="o">=</span> <span class="n">compute_correlation</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+        <span class="c1"># Correlation-based classification</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_segments</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_segments</span><span class="p">):</span>
+                
+                <span class="c1"># Exclude segments overlapping with the testing segment</span>
+                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">j</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">win_size</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+                    <span class="n">correlations</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+
+        <span class="n">max_idx</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">correlations</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">accuracy</span><span class="p">[</span><span class="n">test_subject</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">max_idx</span> <span class="o">==</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_segments</span><span class="p">))</span> <span class="o">/</span> <span class="n">n_segments</span>
+
+        <span class="c1"># Print accuracy for each subject as we go</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">accuracy</span><span class="p">[</span><span class="n">test_subject</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+              <span class="n">end</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+    <span class="c1"># Get a rough estimate of chance (accounting for excluded segments)</span>
+    <span class="n">chance</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">correlations</span><span class="p">[</span><span class="n">n_trs</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]))</span>
+        
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The average accuracy among all subjects is &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">accuracy</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> +/- </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">accuracy</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">accuracy</span><span class="p">,</span> <span class="n">chance</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s compute time segment matching accuracy for the anatomically-aligned data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Time-segment classification on anatomically-aligned data</span>
+<span class="n">win_size</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">acc_anat_test</span><span class="p">,</span> <span class="n">chance</span> <span class="o">=</span> <span class="n">time_segment_classification</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">win_size</span><span class="o">=</span><span class="n">win_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Between-subject time-segment classification accuracy for each subject: 0.094, 0.173, 0.090, 0.004, 0.158, 0.064, 0.064, 0.075, 0.143, 0.135, 0.132, 0.162, 0.083, 0.098, 0.053, 0.083, 0.169, 0.132, 0.030, 0.188, 0.075, 0.124, 0.083, 0.094, 0.135, 0.180, 0.195, 0.135, 0.102, 0.128, 0.109, 0.120, 0.060, 0.132, 0.041, 0.113, 0.132, 0.135, 0.165, 0.113, 
+The average accuracy among all subjects is 0.113 +/- 0.044
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we compute it after transforming the subjects data with SRM:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Time-segment classification on SRM data</span>
+<span class="n">acc_shared_test</span><span class="p">,</span> <span class="n">chance</span> <span class="o">=</span> <span class="n">time_segment_classification</span><span class="p">(</span><span class="n">test_shared</span><span class="p">,</span> <span class="n">win_size</span><span class="o">=</span><span class="n">win_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Between-subject time-segment classification accuracy for each subject: 0.267, 0.462, 0.331, 0.038, 0.808, 0.188, 0.278, 0.462, 0.654, 0.876, 0.688, 0.553, 0.120, 0.327, 0.282, 0.440, 0.459, 0.312, 0.079, 0.523, 0.109, 0.583, 0.391, 0.436, 0.575, 0.511, 0.665, 0.308, 0.429, 0.320, 0.538, 0.571, 0.481, 0.372, 0.395, 0.229, 0.410, 0.451, 0.613, 0.526, 
+The average accuracy among all subjects is 0.427 +/- 0.186
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lastly, we plot the classification accuracies to compare methods.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Box plot for the classification results</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;anatomical</span><span class="se">\n</span><span class="s1">alignment&#39;</span><span class="p">,</span> <span class="s1">&#39;SRM&#39;</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">([</span><span class="n">acc_anat_test</span><span class="p">,</span> <span class="n">acc_shared_test</span><span class="p">],</span> <span class="n">vert</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">chance</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;.4&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;alignment&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;classification accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Between-subject time-segment classification&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SRM functional alignment provides a marked improvement in &quot;</span>
+      <span class="s2">&quot;between-</span><span class="se">\n</span><span class="s2">subject time-segment classification over &quot;</span>
+      <span class="s2">&quot;anatomical alignment.</span><span class="se">\n</span><span class="s2">The dotted line indicates chance &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;performance (chance = </span><span class="si">{</span><span class="n">chance</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/8f92d353e22056da43cd6e714ab7b7a8c2f5a62df2fa3e93dfb3b55d0d0445c5.png" src="../../_images/8f92d353e22056da43cd6e714ab7b7a8c2f5a62df2fa3e93dfb3b55d0d0445c5.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SRM functional alignment provides a marked improvement in between-
+subject time-segment classification over anatomical alignment.
+The dotted line indicates chance performance (chance = 0.004)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading"></a></h2>
+<p>The SRM allows us to find a reduced-dimension shared response spaces that resolves functional–topographical idiosyncrasies across subjects. We can use the resulting transformation matrices to project test data from any given subject into the shared space. The plot above shows the time segment matching accuracy for the training data, the test data without any transformation, and the test data when SRM is applied. The average performance without SRM is 11%, whereas with SRM is boosted to 40%. Projecting data into the shared space dramatically improves between-subject classification.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Chen, P. H. C., Chen, J., Yeshurun, Y., Hasson, U., Haxby, J., &amp; Ramadge, P. J. (2015). A reduced-dimension fMRI shared response model. In C. Cortes, N.D. Lawrence, D.D. Lee, M. Sugiyama, R. Garnett (Eds.), <em>Advances in Neural Information Processing Systems, vol. 28</em> (pp. 460-468). https://papers.nips.cc/paper/5855-a-reduced-dimension-fmri-shared-response-model</p></li>
+<li><p>Haxby, J. V., Guntupalli, J. S., Connolly, A. C., Halchenko, Y. O., Conroy, B. R., Gobbini, M. I., Hanke, M., &amp; Ramadge, P. J. (2011). A common, high-dimensional model of the representational space in human ventral temporal cortex. <em>Neuron</em>, <em>72</em>(2), 404-416. https://doi.org/10.1016/j.neuron.2011.08.026</p></li>
+<li><p>Haxby, J. V., Guntupalli, J. S., Nastase, S. A., &amp; Feilong, M. (2020). Hyperalignment: Modeling shared information encoded in idiosyncratic cortical topographies. <em>eLife</em>, <em>9</em>, e56601. https://doi.org/10.7554/eLife.56601</p></li>
+<li><p>Nastase, S. A., Liu, Y. F., Hillman, H., Norman, K. A., &amp; Hasson, U. (2020). Leveraging shared connectivity to aggregate heterogeneous datasets into a common response space. <em>NeuroImage</em>, <em>217</em>, 116865. https://doi.org/10.1016/j.neuroimage.2020.116865</p></li>
+<li><p>Anderson, M. J., Capota, M., Turek, J. S., Zhu, X., Willke, T. L., Wang, Y., Chen P.-H., Manning, J. R., Ramadge, P. J., &amp; Norman, K. A. (2016). Enabling factor analysis on thousand-subject neuroimaging datasets.  <em>2016 IEEE International Conference on Big Data, pages 1151–1160</em>. http://ieeexplore.ieee.org/document/7840719/</p></li>
+<li><p>Turek, J. S., Willke, T. L., Chen, P.-H., &amp; Ramadge, P. J. (2017). A semi-supervised method for multi-subject fMRI functional alignment. <em>2017 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), pages 1098–1102</em>. https://ieeexplore.ieee.org/document/7952326</p></li>
+<li><p>Turek, J. S., Ellis, C. T., Skalaban, L. J., Willke, T. L., &amp; Turk-Browne, N. B. (2018). Capturing Shared and Individual Information in fMRI Data, <em>2018 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP 2018), pages 826-830</em>. https://ieeexplore.ieee.org/document/8462175</p></li>
+<li><p>Richard, H., Martin, L., Pinho, A. L., Pillow, J., &amp; Thirion, B. (2019). Fast shared response model for fMRI data. <em>arXiv:1909.12537</em>. https://arxiv.org/abs/1909.12537</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../real-time/rtcloud_notebook.html" class="btn btn-neutral float-left" title="Implementing a Real-Time fMRI Cloud-Based Framework" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../release_notes.html" class="btn btn-neutral float-right" title="Release notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
