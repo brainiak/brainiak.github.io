@@ -1,0 +1,46 @@
+Traceback (most recent call last):
+  File "/home/mihai/.local/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/mihai/.local/lib/python3.8/site-packages/nbclient/client.py", line 1112, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/mihai/.local/lib/python3.8/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/mihai/.local/lib/python3.8/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/usr/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/mihai/.local/lib/python3.8/site-packages/nbclient/client.py", line 553, in async_execute
+    await self.async_execute_cell(
+  File "/home/mihai/.local/lib/python3.8/site-packages/nbclient/client.py", line 857, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/mihai/.local/lib/python3.8/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+movie_HMM = EventSegment(n_events = 29)
+movie_HMM.fit(movie_group);
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mKeyboardInterrupt[0m                         Traceback (most recent call last)
+[0;32m<ipython-input-4-e39d5789b944>[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0mmovie_HMM[0m [0;34m=[0m [0mEventSegment[0m[0;34m([0m[0mn_events[0m [0;34m=[0m [0;36m29[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 2[0;31m [0mmovie_HMM[0m[0;34m.[0m[0mfit[0m[0;34m([0m[0mmovie_group[0m[0;34m)[0m[0;34m;[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;32m~/Sources/brainiak/brainiak/eventseg/event.py[0m in [0;36mfit[0;34m(self, X, y)[0m
+[1;32m    213[0m             [0mself[0m[0;34m.[0m[0mll_[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0mappend[0m[0;34m([0m[0mself[0m[0;34m.[0m[0mll_[0m[0;34m,[0m [0mnp[0m[0;34m.[0m[0mempty[0m[0;34m([0m[0;34m([0m[0;36m1[0m[0;34m,[0m [0mn_train[0m[0;34m)[0m[0;34m)[0m[0;34m,[0m [0maxis[0m[0;34m=[0m[0;36m0[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    214[0m             [0;32mfor[0m [0mi[0m [0;32min[0m [0mrange[0m[0;34m([0m[0mn_train[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 215[0;31m                 [0mlogprob[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_logprob_obs[0m[0;34m([0m[0mX[0m[0;34m[[0m[0mi[0m[0;34m][0m[0;34m,[0m [0mmean_pat[0m[0;34m,[0m [0miteration_var[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    216[0m                 [0mlog_gamma[0m[0;34m[[0m[0mi[0m[0;34m][0m[0;34m,[0m [0mself[0m[0;34m.[0m[0mll_[0m[0;34m[[0m[0;34m-[0m[0;36m1[0m[0;34m,[0m [0mi[0m[0;34m][0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_forward_backward[0m[0;34m([0m[0mlogprob[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    217[0m [0;34m[0m[0m
+
+[0;32m~/Sources/brainiak/brainiak/eventseg/event.py[0m in [0;36m_logprob_obs[0;34m(self, data, mean_pat, var)[0m
+[1;32m    277[0m             logprob[:, k] = -0.5 * n_vox * np.log(
+[1;32m    278[0m                 [0;36m2[0m [0;34m*[0m [0mnp[0m[0;34m.[0m[0mpi[0m [0;34m*[0m [0mvar[0m[0;34m[[0m[0mk[0m[0;34m][0m[0;34m)[0m [0;34m-[0m [0;36m0.5[0m [0;34m*[0m [0mnp[0m[0;34m.[0m[0msum[0m[0;34m([0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 279[0;31m                 (data_z.T - mean_pat_z[:, k]).T ** 2, axis=0) / var[k]
+[0m[1;32m    280[0m [0;34m[0m[0m
+[1;32m    281[0m         [0mlogprob[0m [0;34m/=[0m [0mn_vox[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mKeyboardInterrupt[0m: 
+KeyboardInterrupt: 
+

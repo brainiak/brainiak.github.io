@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intersubject correlation &mdash; brainiak 0.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Rapid prototyping of fMRI models with brainiak.matnormal" href="../matnormal/Matrix-normal%20model%20prototyping.html" />
+    <link rel="prev" title="Inverted encoding model" href="../iem_synthetic_RF/iem_example_synthetic_RF_data.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            brainiak
+          </a>
+              <div class="version">
+                0.12
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../brsa/brsa_demo.html">（Group) Bayesian Representational Similarity Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../eventseg/Event_Segmentation.html">Event segmentation and alignment in fMRI data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fcma/FCMA_demo.html">Full Correlation Matrix Analysis (FCMA) demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fmrisim/fmrisim_multivariate_example.html">fmrisim demo script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html">Hierarchical Topographic Factor Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#annotated-bibliography">Annotated bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#getting-started">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#code">Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#summary">Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iem/iem.html">Inverted Encoding Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iem_synthetic_RF/iem_example_synthetic_RF_data.html">Inverted encoding model</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Intersubject correlation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#annotated-bibliography">Annotated bibliography</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#table-of-contents">Table of contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-fmri-data-and-atlas">Example fMRI data and atlas</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#computing-intersubject-correlation-isc">Computing intersubject correlation (ISC)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#temporal-receptive-windows">Temporal receptive windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#intersubject-network-estimation-isfc">Intersubject network estimation (ISFC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#intersubject-pattern-correlation-ispc">Intersubject pattern correlation (ISPC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../matnormal/Matrix-normal%20model%20prototyping.html">Rapid prototyping of fMRI models with <code class="docutils literal notranslate"><span class="pre">brainiak.matnormal</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matnormal/Matrix-normal%20model%20prototyping.html#annotated-bibliography">Annotated Bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../real-time/README_INSTRUCTIONS.html">Set Up Instructions for the Real-Time fMRI Cloud-Based Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../real-time/rtcloud_notebook.html">Implementing a Real-Time fMRI Cloud-Based Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../srm/SRM.html">Shared response model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">brainiak</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Intersubject correlation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/isc/ISC.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="intersubject-correlation">
+<h1>Intersubject correlation<a class="headerlink" href="#intersubject-correlation" title="Permalink to this heading"></a></h1>
+<p>Author: Samuel A. Nastase (<a class="reference external" href="mailto:sam&#46;nastase&#37;&#52;&#48;gmail&#46;com">sam<span>&#46;</span>nastase<span>&#64;</span>gmail<span>&#46;</span>com</a>)</p>
+<p>This notebook provides interactive examples of intersubject correlation (ISC) analysis using BrainIAK. When participants receive the same stimulus (e.g. an audiovisual movie or spoken story), part of their brain activity is driven by the stimulus and is thus shared across individuals. ISC analysis is a family of simple methods for measuring this shared, stimulus-driven response across subjects (<a class="reference external" href="https://doi.org/10.1126/science.1089506">Hasson et al., 2004</a>; <a class="reference external" href="https://doi.org/10.1093/scan/nsz037">Nastase et al., 2019</a>). In the following, we compute ISC on an example story-listening dataset, then briefly touch on some extensions of ISC analysis. This notebook accompanies the manuscript “BrainIAK: The Brain Imaging Analysis Kit” by Kumar and colleagues (2020).</p>
+<div class="section" id="annotated-bibliography">
+<h2>Annotated bibliography<a class="headerlink" href="#annotated-bibliography" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Hasson, U., Nir, Y., Levy, I., Fuhrmann, G., &amp; Malach, R. (2004). Intersubject synchronization of cortical activity during natural vision. <em>Science</em>, <em>303</em>(5664), 1634-1640. <a class="reference external" href="https://doi.org/10.1126/science.1089506"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Original application of ISC analysis to naturalistic movie-watching fMRI data, demonstrating shared stimulus-evoked responses across subjects.</em></p></li>
+<li><p>Nastase, S. A., Gazzola, V., Hasson, U., &amp; Keysers, C. (2019). Measuring shared responses across subjects using intersubject correlation. <em>Social Cognitive and Affective Neuroscience</em>, <em>14</em>(6), 667-685. <a class="reference external" href="https://doi.org/10.1093/scan/nsz037"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Recent tutorial article that reviews ISC analysis and related methods.</em></p></li>
+<li><p>Hasson, U., Yang, E., Vallines, I., Heeger, D. J., &amp; Rubin, N. (2008). A hierarchy of temporal receptive windows in human cortex. <em>Journal of Neuroscience</em>, <em>28</em>(10), 2539-2550. <a class="reference external" href="https://doi.org/10.1523/JNEUROSCI.5487-07.2008"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>ISC analysis is used to demonstrate that, under naturalistic conditions, high-level brain areas integrate stimulus-related information over long periods of time.</em></p></li>
+<li><p>Chen, G., Shin, Y. W., Taylor, P. A., Glen, D. R., Reynolds, R. C., Israel, R. B., &amp; Cox, R. W. (2016). Untangling the relatedness among correlations, part I: nonparametric approaches to inter-subject correlation analysis at the group level. <em>NeuroImage</em>, <em>142</em>, 248-259. <a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2016.05.023"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>The first in a series of three papers that dissect the statistical assessment of pairwise ISC.</em></p></li>
+</ol>
+</div>
+<div class="section" id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#example-fmri-data-and-atlas"><span class="std std-ref">Example fMRI data and atlas</span></a></p></li>
+<li><p><a class="reference internal" href="#computing-intersubject-correlation-isc"><span class="std std-ref">Computing intersubject correlation (ISC)</span></a></p></li>
+<li><p><a class="reference internal" href="#temporal-receptive-windows"><span class="std std-ref">Temporal receptive windows</span></a></p></li>
+<li><p><a class="reference internal" href="#intersubject-network-estimation-isfc"><span class="std std-ref">Intersubject network estimation (ISFC)</span></a></p></li>
+<li><p><a class="reference internal" href="#intersubject-pattern-correlation-ispc"><span class="std std-ref">Intersubject pattern correlation (ISPC)</span></a></p></li>
+<li><p><a class="reference internal" href="#summary"><span class="std std-ref">Summary</span></a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import necessary python modules</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">glob</span><span class="w"> </span><span class="kn">import</span> <span class="n">glob</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nibabel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nilearn.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">find_xyz_cut_coords</span><span class="p">,</span>
+                              <span class="n">plot_connectome</span><span class="p">,</span>
+                              <span class="n">plot_stat_map</span><span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">pearsonr</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.spatial.distance</span><span class="w"> </span><span class="kn">import</span> <span class="n">squareform</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">brainiak.isc</span><span class="w"> </span><span class="kn">import</span> <span class="n">isc</span><span class="p">,</span> <span class="n">isfc</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="example-fmri-data-and-atlas">
+<h2>Example fMRI data and atlas<a class="headerlink" href="#example-fmri-data-and-atlas" title="Permalink to this heading"></a></h2>
+<p>To explore ISC analysis, we use an fMRI dataset collected while participants listened to two versions of a spoken story called “<a class="reference external" href="https://themoth.org/stories/its-not-the-fall-that-gets-you">It’s Not the Fall that Gets You</a>” by Andy Christie. Participants either listened to the original version of the story (referred to as the <em>intact</em> condition) or a temporally scrambled version of the story (referred to as the <em>shortscram</em> condition). These data are available as part of the <a class="reference external" href="https://github.com/snastase/narratives">Narratives</a> collection (<a class="reference external" href="https://openneuro.org/datasets/ds002345">Nastase et al., 2019</a>) and were recently published in work by Chien and Honey (<a class="reference external" href="https://doi.org/10.1016/j.neuron.2020.02.013">2020</a>). Here, we download a pre-packaged subset of the data from Zenodo. These data have been preprocessed using fMRIPrep and confound regression in AFNI. To reduce computational demands, we compute parcel-wise ISCs using a cortical parcellation containing 400 parcels from Schaefer and colleages (<a class="reference external" href="https://doi.org/10.1093/cercor/bhx179">2018</a>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download and extract example data from Zenodo</span>
+<span class="o">!</span>wget<span class="w"> </span>-nc<span class="w"> </span>https://zenodo.org/record/4300904/files/brainiak-aperture-isc-data.tgz
+<span class="o">!</span>tar<span class="w"> </span>--skip-old-files<span class="w"> </span>-xzf<span class="w"> </span>brainiak-aperture-isc-data.tgz
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File ‘brainiak-aperture-isc-data.tgz’ already there; not retrieving.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get filenames for example data and atlas</span>
+<span class="n">intact_fns</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;brainiak-aperture-isc-data/sub-*_task-notthefallintact_*bold.nii.gz&#39;</span><span class="p">))</span>
+<span class="n">atlas_fn</span> <span class="o">=</span> <span class="s1">&#39;brainiak-aperture-isc-data/Schaefer2018_400Parcels_17Networks_order_FSLMNI152_3mm.nii.gz&#39;</span>
+
+<span class="c1"># Load in the Schaefer 400-parcel atlas</span>
+<span class="n">atlas_nii</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">atlas_fn</span><span class="p">)</span>
+<span class="n">atlas_img</span> <span class="o">=</span> <span class="n">atlas_nii</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
+
+<span class="c1"># Load in intact functional data and compute parcel means</span>
+<span class="n">intact_parcels</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">intact_fn</span> <span class="ow">in</span> <span class="n">intact_fns</span><span class="p">:</span>
+    <span class="n">intact_data</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">intact_fn</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
+    <span class="n">intact_means</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">intact_data</span><span class="p">[</span><span class="n">atlas_img</span> <span class="o">==</span> <span class="n">parcel</span><span class="p">,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">parcel</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">atlas_img</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]]</span>
+    <span class="n">intact_parcels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">(</span><span class="n">intact_means</span><span class="p">))</span>
+<span class="n">intact_parcels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">(</span><span class="n">intact_parcels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="computing-intersubject-correlation-isc">
+<h3>Computing intersubject correlation (ISC)<a class="headerlink" href="#computing-intersubject-correlation-isc" title="Permalink to this heading"></a></h3>
+<p>Next we compute leave-one-out ISCs on data from the <em>intact</em> condition for each parcel using BrainIAK’s <code class="docutils literal notranslate"><span class="pre">isc</span></code> function. We average ISC values across subjects for visualization. This reveals high ISCs in superior temporal auditory cortex, as well as strong ISCs extending into higher level cortical areas, such as the precuneus and other nodes of the default-mode network. Here, we simply want to visualize ISC rather than perform a statistical test, so we threshold the maps at ISC &gt; .10. BrainIAK provides several nonparametric statistical tests (e.g. <code class="docutils literal notranslate"><span class="pre">bootstrap_isc</span></code>, <code class="docutils literal notranslate"><span class="pre">phaseshift_isc</span></code>); for a more thorough statistical treatment, we refer readers to a series of papers by Chen and colleagues (<a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2016.05.023">2016</a>, <a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2016.08.029">2017</a>, <a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2019.116474">2020</a>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute parcel-wise ISC using the leave-one-out approach</span>
+<span class="n">intact_iscs</span> <span class="o">=</span> <span class="n">isc</span><span class="p">(</span><span class="n">intact_parcels</span><span class="p">,</span> <span class="n">pairwise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                  <span class="n">summary_statistic</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Project intact parcel-wise ISC values onto brain</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span><span class="s1">&#39;colorblind&#39;</span><span class="p">)</span>
+<span class="n">vmax</span> <span class="o">=</span> <span class="mf">.6</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mf">.1</span>
+
+<span class="n">intact_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">atlas_img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">parcel</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">atlas_img</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]):</span>
+    <span class="n">intact_img</span><span class="p">[</span><span class="n">atlas_img</span> <span class="o">==</span> <span class="n">parcel</span><span class="p">]</span> <span class="o">=</span> <span class="n">intact_iscs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+<span class="c1"># Convert to NIfTI image for visualization with Nilearn</span>
+<span class="n">intact_nii</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">Nifti1Image</span><span class="p">(</span><span class="n">intact_img</span><span class="p">,</span> <span class="n">atlas_nii</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">atlas_nii</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
+
+<span class="c1"># Plot intact ISCs to visualize superior temporal cortex</span>
+<span class="n">plot_stat_map</span><span class="p">(</span><span class="n">intact_nii</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlBu_r&#39;</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+              <span class="n">title</span><span class="o">=</span><span class="s1">&#39;mean ISC (intact condition)&#39;</span><span class="p">,</span> <span class="n">cut_coords</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">57</span><span class="p">,</span> <span class="o">-</span><span class="mi">24</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+
+<span class="c1"># Plot intact ISCs to visualize posterior medial cortex</span>
+<span class="n">plot_stat_map</span><span class="p">(</span><span class="n">intact_nii</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlBu_r&#39;</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+              <span class="n">cut_coords</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">65</span><span class="p">,</span> <span class="mi">40</span><span class="p">));</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Print short &quot;figure caption&quot; describing result</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;For the intact story stimulus, high parcel-wise ISC extends &quot;</span>
+      <span class="s2">&quot;from low-level</span><span class="se">\n</span><span class="s2">auditory areas into higher-level areas &quot;</span>
+      <span class="s2">&quot;including posterior medial cortex.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d39a47d6561d9291d5e5a82b1e4b3b414d3d010e1493b1f436911b08cd277cc4.png" src="../../_images/d39a47d6561d9291d5e5a82b1e4b3b414d3d010e1493b1f436911b08cd277cc4.png" />
+<img alt="../../_images/f41afee964ebfba4744e094904c7a1c6ecbc33787552f0043d631caf46db2f91.png" src="../../_images/f41afee964ebfba4744e094904c7a1c6ecbc33787552f0043d631caf46db2f91.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For the intact story stimulus, high parcel-wise ISC extends from low-level
+auditory areas into higher-level areas including posterior medial cortex.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="temporal-receptive-windows">
+<h2>Temporal receptive windows<a class="headerlink" href="#temporal-receptive-windows" title="Permalink to this heading"></a></h2>
+<p>Next, we’ll load in fMRI data for a temporally scrambled version of the same stimulus. We compute parcel-wise leave-one-out ISC in the same manner as for the <em>intact</em> stimulus. Temporally scrambling the stimulus retains many low-level perceptual qualities of the stimulus, but abolishes the higher-level semantic meaning and narrative arc. Correspondingly, we see high ISC in early auditory cortex (similar to the <em>intact</em> condition), but markedly lower ISC in high-level cortices than observed with the <em>intact</em> stimulus.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load in scrambled functional data and compute parcel means</span>
+<span class="n">scram_fns</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;brainiak-aperture-isc-data/sub-*_task-notthefallshortscram_*bold.nii.gz&#39;</span><span class="p">))</span>
+<span class="n">scram_parcels</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">scram_fn</span> <span class="ow">in</span> <span class="n">scram_fns</span><span class="p">:</span>
+    <span class="n">scram_data</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">scram_fn</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
+    <span class="n">scram_means</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scram_data</span><span class="p">[</span><span class="n">atlas_img</span> <span class="o">==</span> <span class="n">parcel</span><span class="p">,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                   <span class="k">for</span> <span class="n">parcel</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">atlas_img</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]]</span>
+    <span class="n">scram_parcels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">(</span><span class="n">scram_means</span><span class="p">))</span>
+<span class="n">scram_parcels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">(</span><span class="n">scram_parcels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute parcel-wise ISC using the leave-one-out approach</span>
+<span class="n">scram_iscs</span> <span class="o">=</span> <span class="n">isc</span><span class="p">(</span><span class="n">scram_parcels</span><span class="p">,</span> <span class="n">pairwise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">summary_statistic</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Project parcel-wise ISC values onto brain</span>
+<span class="n">vmax</span> <span class="o">=</span> <span class="mf">.6</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mf">.1</span>
+
+<span class="n">scram_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">atlas_img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">parcel</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">atlas_img</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]):</span>
+    <span class="n">scram_img</span><span class="p">[</span><span class="n">atlas_img</span> <span class="o">==</span> <span class="n">parcel</span><span class="p">]</span> <span class="o">=</span> <span class="n">scram_iscs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+<span class="c1"># Convert to a NIfTI image for visualization with Nilearn</span>
+<span class="n">scram_nii</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">Nifti1Image</span><span class="p">(</span><span class="n">scram_img</span><span class="p">,</span> <span class="n">atlas_nii</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span> <span class="n">atlas_nii</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
+
+<span class="c1"># Plot scrambled ISCs to visualize superior temporal cortex</span>
+<span class="n">plot_stat_map</span><span class="p">(</span><span class="n">scram_nii</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlBu_r&#39;</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+              <span class="n">title</span><span class="o">=</span><span class="s1">&#39;mean ISC (scrambled condition)&#39;</span><span class="p">,</span>
+              <span class="n">cut_coords</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">57</span><span class="p">,</span> <span class="o">-</span><span class="mi">24</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+
+<span class="c1"># Plot scrambled ISCs to visualize posterior medial cortex</span>
+<span class="n">plot_stat_map</span><span class="p">(</span><span class="n">scram_nii</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlBu_r&#39;</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+              <span class="n">cut_coords</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">65</span><span class="p">,</span> <span class="mi">40</span><span class="p">));</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Print short &quot;figure caption&quot; describing result</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;For the scrambled story stimulus, we observe high ISC &quot;</span>
+      <span class="s2">&quot;in early auditory</span><span class="se">\n</span><span class="s2">areas, but reduced ISC in higher-level &quot;</span>
+      <span class="s2">&quot;areas like posterior medial cortex.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5988b191a0372c84e60100b176263d1701a8562625d0f73e378816c9b7d686c1.png" src="../../_images/5988b191a0372c84e60100b176263d1701a8562625d0f73e378816c9b7d686c1.png" />
+<img alt="../../_images/fc57aef9b2bedbcca90c7c9e0fd738cde8336f6a4e9ea7903cd4ae6622d2774c.png" src="../../_images/fc57aef9b2bedbcca90c7c9e0fd738cde8336f6a4e9ea7903cd4ae6622d2774c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For the scrambled story stimulus, we observe high ISC in early auditory
+areas, but reduced ISC in higher-level areas like posterior medial cortex.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="intersubject-network-estimation-isfc">
+<h2>Intersubject network estimation (ISFC)<a class="headerlink" href="#intersubject-network-estimation-isfc" title="Permalink to this heading"></a></h2>
+<p>Instead of only computing ISC between homologous brain areas, we can also compute ISC across brain areas using intersubject functional correlation (ISFC) analysis (<a class="reference external" href="https://doi.org/10.1038/ncomms12141">Simony et al., 2016</a>). Traditional functional connectivity (FC) analyses measure within-subject FC (WSFC), typically during resting-state paradigms.  ISFC analysis, on the other hand measures shared stimulus-evoked functional connectivity. Traditional FC analyses are highly sensitive to artefacts such as head motion or physiological. Unlike within-subject FC, ISFC analysis filters out artefacts that are not synchronized across subjects.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute ISFC on intact data</span>
+<span class="n">intact_isfcs</span> <span class="o">=</span> <span class="n">isfc</span><span class="p">(</span><span class="n">intact_parcels</span><span class="p">,</span> <span class="n">pairwise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">vectorize_isfcs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">summary_statistic</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+
+<span class="c1"># Compute ISFC on scrambled data</span>
+<span class="n">scram_isfcs</span> <span class="o">=</span> <span class="n">isfc</span><span class="p">(</span><span class="n">scram_parcels</span><span class="p">,</span> <span class="n">pairwise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                   <span class="n">vectorize_isfcs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                   <span class="n">summary_statistic</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute mean with Fisher z-transformation</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fisher_mean</span><span class="p">(</span><span class="n">correlation</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctanh</span><span class="p">(</span><span class="n">correlation</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">))</span>
+
+<span class="c1"># Compute within-subject functional connectivity for intact data</span>
+<span class="n">intact_fcs</span> <span class="o">=</span> <span class="n">fisher_mean</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">intact_parcels</span><span class="o">.</span><span class="n">T</span><span class="p">],</span>
+                         <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Compute within-subject functional connectivity for scrambled data</span>
+<span class="n">scram_fcs</span> <span class="o">=</span> <span class="n">fisher_mean</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">scram_parcels</span><span class="o">.</span><span class="n">T</span><span class="p">],</span>
+                        <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/snastase/miniconda3/envs/brainiak/lib/python3.7/site-packages/ipykernel_launcher.py:3: RuntimeWarning: divide by zero encountered in arctanh
+  This is separate from the ipykernel package so we can avoid doing imports until
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load in network labels</span>
+<span class="n">label_fn</span> <span class="o">=</span> <span class="s1">&#39;brainiak-aperture-isc-data/Schaefer2018_400Parcels_17Networks_order.txt&#39;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">label_fn</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">networks</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">label</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]))</span>
+                <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+    
+<span class="c1"># Get sorted unique network labels</span>
+<span class="n">idxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">networks</span><span class="p">,</span> <span class="n">return_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">network_labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">networks</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">idxs</span><span class="p">)]</span>
+
+<span class="c1"># Get middle index for each network for plotting</span>
+<span class="n">network_idxs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">networks</span><span class="p">)</span>
+                                <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="n">network</span><span class="p">]))</span>
+                <span class="k">for</span> <span class="n">network</span> <span class="ow">in</span> <span class="n">network_labels</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualize ISFC/FC matrices for intact and scrambled conditions</span>
+<span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">.5</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">18</span><span class="p">))</span>
+<span class="n">fc_mats</span> <span class="o">=</span> <span class="p">[</span><span class="n">intact_isfcs</span><span class="p">,</span> <span class="n">scram_isfcs</span><span class="p">,</span> <span class="n">intact_fcs</span><span class="p">,</span> <span class="n">scram_fcs</span><span class="p">]</span>
+<span class="n">fc_titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ISFC (intact)&#39;</span><span class="p">,</span> <span class="s1">&#39;ISFC (scrambled)&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;WSFC (intact)&#39;</span><span class="p">,</span> <span class="s1">&#39;WSFC (scrambled)&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">fc</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axs</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">fc_mats</span><span class="p">,</span> <span class="n">fc_titles</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">fc</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlBu_r&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_label_position</span><span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">network_idxs</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">network_labels</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># High correlation between intact and scrambled</span>
+<span class="c1"># for within-subject functional connectivity</span>
+<span class="n">fc_r</span> <span class="o">=</span> <span class="n">pearsonr</span><span class="p">(</span><span class="n">squareform</span><span class="p">(</span><span class="n">intact_fcs</span><span class="p">,</span> <span class="n">checks</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+                <span class="n">squareform</span><span class="p">(</span><span class="n">scram_fcs</span><span class="p">,</span> <span class="n">checks</span><span class="o">=</span><span class="kc">False</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># ISFC is more distinct for intact and scrambed conditions</span>
+<span class="n">isfc_r</span> <span class="o">=</span> <span class="n">pearsonr</span><span class="p">(</span><span class="n">squareform</span><span class="p">(</span><span class="n">intact_isfcs</span><span class="p">,</span> <span class="n">checks</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+                  <span class="n">squareform</span><span class="p">(</span><span class="n">scram_isfcs</span><span class="p">,</span> <span class="n">checks</span><span class="o">=</span><span class="kc">False</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ISFC networks have generally lower correlations than &quot;</span>
+      <span class="s2">&quot;within-subject functional connectivity, but better</span><span class="se">\n</span><span class="s2">&quot;</span>
+      <span class="s2">&quot;differentiate intact and scrambled stories.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Correlation between intact and scrambled ISFC networks: </span><span class="si">{</span><span class="n">isfc_r</span><span class="si">:</span><span class="s2">.3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Correlation between intact and scrambled WSFC networks: </span><span class="si">{</span><span class="n">fc_r</span><span class="si">:</span><span class="s2">.3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b08a7191e7949a1441b5639a76a28709ac273ab94b301d4fbbe2905353c72eca.png" src="../../_images/b08a7191e7949a1441b5639a76a28709ac273ab94b301d4fbbe2905353c72eca.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ISFC networks have generally lower correlations than within-subject functional connectivity, but better
+differentiate intact and scrambled stories.
+
+Correlation between intact and scrambled ISFC networks: 0.602
+Correlation between intact and scrambled WSFC networks: 0.941
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find center-of-mass for each parcel in MNI space for visualization</span>
+<span class="n">node_coords</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">parcel</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">atlas_img</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]:</span>
+    <span class="n">parcel_img</span> <span class="o">=</span> <span class="n">atlas_img</span> <span class="o">==</span> <span class="n">parcel</span>
+    <span class="n">parcel_nii</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">Nifti1Image</span><span class="p">(</span><span class="n">parcel_img</span><span class="p">,</span> <span class="n">atlas_nii</span><span class="o">.</span><span class="n">affine</span><span class="p">,</span>
+                                 <span class="n">atlas_nii</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
+    <span class="n">node_coords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">find_xyz_cut_coords</span><span class="p">(</span><span class="n">parcel_nii</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualize WSFC and ISFC connectome on glass brain (takes a minute to render)</span>
+<span class="n">display_mode</span> <span class="o">=</span> <span class="s1">&#39;ortho&#39;</span>
+<span class="n">edge_threshold</span> <span class="o">=</span> <span class="mf">.2</span>
+<span class="n">edge_vmin</span><span class="p">,</span> <span class="n">edge_vmax</span> <span class="o">=</span> <span class="o">-</span><span class="mf">.65</span><span class="p">,</span> <span class="mf">.65</span>
+<span class="n">edge_cmap</span><span class="o">=</span><span class="s1">&#39;RdYlBu_r&#39;</span>
+
+<span class="n">fc_mats</span> <span class="o">=</span> <span class="p">[</span><span class="n">intact_isfcs</span><span class="p">,</span> <span class="n">scram_isfcs</span><span class="p">,</span> <span class="n">intact_fcs</span><span class="p">,</span> <span class="n">scram_fcs</span><span class="p">]</span>
+<span class="n">fc_titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ISFC (intact)&#39;</span><span class="p">,</span> <span class="s1">&#39;ISFC (scrambled)&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;WSFC (intact)&#39;</span><span class="p">,</span> <span class="s1">&#39;WSFC (scrambled)&#39;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">fc</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axs</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">fc_mats</span><span class="p">,</span> <span class="n">fc_titles</span><span class="p">):</span>
+    <span class="n">plot_connectome</span><span class="p">(</span><span class="n">fc</span><span class="p">,</span> <span class="n">node_coords</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">edge_threshold</span><span class="o">=</span><span class="n">edge_threshold</span><span class="p">,</span> 
+                    <span class="n">edge_vmin</span><span class="o">=</span><span class="n">edge_vmin</span><span class="p">,</span> <span class="n">edge_vmax</span><span class="o">=</span><span class="n">edge_vmax</span><span class="p">,</span>
+                    <span class="n">edge_cmap</span><span class="o">=</span><span class="n">edge_cmap</span><span class="p">,</span> 
+                    <span class="n">display_mode</span><span class="o">=</span><span class="n">display_mode</span><span class="p">,</span> 
+                    <span class="n">title</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The ISFC connectome better differentiates &quot;</span>
+      <span class="s2">&quot;intact and scrambled stories.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c365f5ecb85f8dc2cbf1897a12f09c8aef7e864f4eab561582f2e1ce53aa5ab7.png" src="../../_images/c365f5ecb85f8dc2cbf1897a12f09c8aef7e864f4eab561582f2e1ce53aa5ab7.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The ISFC connectome better differentiates intact and scrambled stories.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="intersubject-pattern-correlation-ispc">
+<h2>Intersubject pattern correlation (ISPC)<a class="headerlink" href="#intersubject-pattern-correlation-ispc" title="Permalink to this heading"></a></h2>
+<p>Rather than computing parcel-wise ISC across time, we can compute the spatial ISC of distributed response patterns in a parcel (e.g. <a class="reference external" href="https://doi.org/10.1038/nn.4450">Chen et al., 2017</a>, <a class="reference external" href="https://doi.org/10.1093/cercor/bhx202">Zadbood et al., 2017</a>). Computing intersubject pattern correlation across all time points can allow us to discover whether similar response patterns recur at different points in the stimulus (<a class="reference external" href="https://doi.org/10.1016/j.neuron.2017.06.041">Baldassano et al., 2017</a>). Here, we compute ISPC for the left default-mode network (DMN) A network.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get labels for parcels in left DMN A network</span>
+<span class="n">dmn_a</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">networks</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;L DefaultA&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="c1"># Re-load in intact functional data and extract DMN A</span>
+<span class="n">intact_dmns</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">intact_fn</span> <span class="ow">in</span> <span class="n">intact_fns</span><span class="p">:</span>
+    <span class="n">intact_data</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">intact_fn</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
+    <span class="n">intact_dmns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">intact_data</span><span class="p">[</span><span class="n">atlas_img</span> <span class="o">==</span> <span class="n">parcel</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">T</span>
+                                        <span class="k">for</span> <span class="n">parcel</span> <span class="ow">in</span> <span class="n">dmn_a</span><span class="p">]))</span>
+<span class="n">intact_dmns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">(</span><span class="n">intact_dmns</span><span class="p">)</span>
+
+<span class="c1"># Load in scrambled functional data and extract DMN A</span>
+<span class="n">scram_dmns</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">scram_fn</span> <span class="ow">in</span> <span class="n">scram_fns</span><span class="p">:</span>
+    <span class="n">scram_data</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">scram_fn</span><span class="p">)</span><span class="o">.</span><span class="n">get_fdata</span><span class="p">()</span>
+    <span class="n">scram_dmns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">scram_data</span><span class="p">[</span><span class="n">atlas_img</span> <span class="o">==</span> <span class="n">parcel</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">T</span>
+                                       <span class="k">for</span> <span class="n">parcel</span> <span class="ow">in</span> <span class="n">dmn_a</span><span class="p">]))</span>
+<span class="n">scram_dmns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">(</span><span class="n">scram_dmns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Transpose input data to compute intersubject pattern correlation</span>
+<span class="n">intact_ispcs</span> <span class="o">=</span> <span class="n">isfc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">rollaxis</span><span class="p">(</span><span class="n">intact_dmns</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+                    <span class="n">pairwise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">vectorize_isfcs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">summary_statistic</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+
+<span class="n">scram_ispcs</span> <span class="o">=</span> <span class="n">isfc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">rollaxis</span><span class="p">(</span><span class="n">scram_dmns</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+                   <span class="n">pairwise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">vectorize_isfcs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                   <span class="n">summary_statistic</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot time-point-by-time-point intersubject pattern correlation</span>
+<span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">.15</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">ispcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">intact_ispcs</span><span class="p">,</span> <span class="n">scram_ispcs</span><span class="p">]</span>
+<span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;DMN mean ISPC (intact)&#39;</span><span class="p">,</span> <span class="s1">&#39;DMN mean ISPC (scrambled)&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">ispc</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="n">ispcs</span><span class="p">,</span> <span class="n">titles</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">ispc</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlBu_r&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> 
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Visualizing ISPC across all time points indicates that &quot;</span>
+      <span class="s2">&quot;some</span><span class="se">\n</span><span class="s2">response patterns persist over time (diagonal blocks) &quot;</span>
+      <span class="s2">&quot;while</span><span class="se">\n</span><span class="s2">some patterns recur at later times (off-diagonal blocks)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ce9ae1a848ffdd5e306c9a593cbfb75d4a30b3ec715b7059a2db0af4dd69028c.png" src="../../_images/ce9ae1a848ffdd5e306c9a593cbfb75d4a30b3ec715b7059a2db0af4dd69028c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Visualizing ISPC across all time points indicates that some
+response patterns persist over time (diagonal blocks) while
+some patterns recur at later times (off-diagonal blocks)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading"></a></h2>
+<p>Using ISC analysis, we are able to measure shared responses to a complex story stimulus. By comparing ISC for brain responses to the intact and temporally-scrambled story stimulus, we can identify areas of the brain sensitive to temporally-evolving features of the stimulus (e.g. narrative context). ISFC analysis allows us examine functional network organization in a way that is more sensitive to the stimulus than traditional within-subject functional connectivity analysis. Finally, we can apply the logic of ISC analysis to distributed responses patterns to visualizing recurring response patterns over time.</p>
+<div class="section" id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Baldassano, C., Chen, J., Zadbood, A., Pillow, J. W., Hasson, U., &amp; Norman, K. A. (2017). Discovering event structure in continuous narrative perception and memory. <em>Neuron</em>, *95(3), 709-721. https://doi.org/10.1016/j.neuron.2017.06.041</p></li>
+<li><p>Chen, G., Shin, Y. W., Taylor, P. A., Glen, D. R., Reynolds, R. C., Israel, R. B., &amp; Cox, R. W. (2016). Untangling the relatedness among correlations, part I: nonparametric approaches to inter-subject correlation analysis at the group level. <em>NeuroImage</em>, <em>142</em>, 248-259. https://doi.org/10.1016/j.neuroimage.2016.05.023</p></li>
+<li><p>Chen, G., Taylor, P. A., Shin, Y. W., Reynolds, R. C., &amp; Cox, R. W. (2017). Untangling the relatedness among correlations, part II: inter-subject correlation group analysis through linear mixed-effects modeling. <em>NeuroImage</em>, <em>147</em>, 825-840. https://doi.org/10.1016/j.neuroimage.2016.08.029</p></li>
+<li><p>Chen, G., Taylor, P. A., Qu, X., Molfese, P. J., Bandettini, P. A., Cox, R. W., &amp; Finn, E. S. (2020). Untangling the relatedness among correlations, part III: inter-subject correlation analysis through Bayesian multilevel modeling for naturalistic scanning. <em>NeuroImage</em>, <em>216</em>, 116474. https://doi.org/10.1016/j.neuroimage.2019.116474</p></li>
+<li><p>Chen, J., Leong, Y. C., Honey, C. J., Yong, C. H., Norman, K. A., &amp; Hasson, U. (2017). Shared memories reveal shared structure in neural activity across individuals. <em>Nature Neuroscience</em>, <em>20</em>(1), 115-125. https://doi.org/10.1038/nn.4450</p></li>
+<li><p>Chien, H. Y. S., &amp; Honey, C. J. (2020). Constructing and forgetting temporal context in the human cerebral cortex. <em>Neuron</em>, <em>106</em>(4), 675-686. https://doi.org/10.1016/j.neuron.2020.02.013</p></li>
+<li><p>Hasson, U., Nir, Y., Levy, I., Fuhrmann, G., &amp; Malach, R. (2004). Intersubject synchronization of cortical activity during natural vision. <em>Science</em>, <em>303</em>(5664), 1634–1640. https://doi.org/10.1126/science.1089506</p></li>
+<li><p>Nastase, S. A., Gazzola, V., Hasson, U., &amp; Keysers, C. (2019). Measuring shared responses across subjects using intersubject correlation. <em>Social Cognitive and Affective Neuroscience</em>, <em>14</em>(6), 667–685. https://doi.org/10.1093/scan/nsz037</p></li>
+<li><p>Nastase, S. A., Liu, Y.-F., Hillman, H., Zadbood, A., Hasenfratz, L., Keshavarzian, N., Chen, J., Honey, C. J., Yeshurun, Y., Regev, M., Nguyen, M., Chang, C. H. C., Baldassano, C., Lositsky, O., Simony, E., Chow, M. A., Leong, Y. C., Brooks, P. P., Micciche, E., Choe, G., Goldstein, A., Halchenko, Y. O., Norman, K. A., &amp; Hasson, U. (2019). Narratives: fMRI data for evaluating models of naturalistic language comprehension. <em>OpenNeuro</em>, ds002345. https://doi.org/10.18112/openneuro.ds002345.v1.1.2</p></li>
+<li><p>Schaefer, A., Kong, R., Gordon, E. M., Laumann, T. O., Zuo, X. N., Holmes, A. J., Eickhoff, S. B., &amp; Yeo, B. T. T. (2018). Local-global parcellation of the human cerebral cortex from intrinsic functional connectivity MRI. <em>Cerebral Cortex</em>, <em>28</em>(9), 3095-3114. https://doi.org/10.1093/cercor/bhx179</p></li>
+<li><p>Simony, E., Honey, C. J., Chen, J., Lositsky, O., Yeshurun, Y., Wiesel, A., &amp; Hasson, U. (2016). Dynamic reconfiguration of the default mode network during narrative comprehension. <em>Nature Communications</em>, <em>7</em>, 12141. https://doi.org/10.1038/ncomms12141</p></li>
+<li><p>Zadbood, A., Chen, J., Leong, Y. C., Norman, K. A., &amp; Hasson, U. (2017). How we transmit memories to other brains: constructing shared neural representations via communication. <em>Cerebral Cortex</em>, <em>27</em>(10), 4988-5000. https://doi.org/10.1093/cercor/bhx202</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../iem_synthetic_RF/iem_example_synthetic_RF_data.html" class="btn btn-neutral float-left" title="Inverted encoding model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../matnormal/Matrix-normal%20model%20prototyping.html" class="btn btn-neutral float-right" title="Rapid prototyping of fMRI models with brainiak.matnormal" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

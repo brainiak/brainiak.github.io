@@ -13,25 +13,24 @@
       </div>
       <div class="col-md-5 ml-auto order-2 order-md-2">
          <pre class="app-code">
-<code class="bash"><span class="hljs-built_in">Method 1: Conda (Mac, Linux) (recommended)</span>
-# 1. Install Miniconda (<a href="https://conda.io/docs/user-guide/install/macos.html">Mac</a>, <a href="https://conda.io/docs/user-guide/install/linux.html">Linux</a>)
-# 2. Create a Conda environment (<a href="https://conda.io/docs/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands">link</a>)
-<span class="unselectable">> </span>conda create -n venv
-# 3. Activate the Conda environment (<a href="https://conda.io/docs/user-guide/tasks/manage-environments.html#activating-an-environment">link</a>) 
-<span class="unselectable">> </span>source activate venv
-# 4 Install Brainiak
-<span class="unselectable">> </span>conda install -c brainiak -c defaults -c conda-forge brainiak
-</code>
-<code class="bash"><span class="hljs-built_in">Method 2: Docker (Mac, Linux, Win)</span>
-# 1. Install Docker (<a href="https://store.docker.com/editions/community/docker-ce-desktop-mac">Mac</a>, <a href="https://store.docker.com/editions/community/docker-ce-desktop-windows">Win</a>, <a href="https://store.docker.com/editions/community/docker-ce-server-ubuntu">Linux</a>)
-# 2. Run the following commands:
-<span class="unselectable">> </span>docker pull brainiak/brainiak
-<span class="unselectable">> </span>docker run -it -p 8899:8899 --name demo brainiak/brainiak
-# 3. Copy token from command output. Try an example in your browser (paste token when prompted): <a href="http://127.0.0.1:8899/notebooks/examples/funcalign/rsrm_synthetic_reconstruction.ipynb">http://127.0.0.1:8899/notebooks/examples/funcalign/rsrm_synthetic_reconstruction.ipynb</a></code>
-<code class="bash"><span class="hljs-built_in">Method 3: pip (Mac, Linux)</span>
-# 1. Install BrainIAK <a href="/docs/#requirements">requirements</a>
+<code class="bash"><span class="hljs-built_in">Method 1: pip (Linux, macOS, Windows)</span>
 # 2. Run the following command:
-<span class="unselectable">> </span>python3 -m pip install -U brainiak</code></pre>
+<span class="unselectable">> </span>python3 -m pip install brainiak</code></pre>
+<code class="bash"><span class="hljs-built_in">Method 2: Conda (Linux, macOS)</span>
+# 1. Install <a href="https://conda-forge.org/download">Miniforge</a>
+# 2. <a href="https://conda.io/docs/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands">Create</a> a Conda environment
+<span class="unselectable">> </span>conda create -n venv
+# 3. <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands">Activate</a> the Conda environment
+<span class="unselectable">> </span>source activate venv
+# 4 Install BrainIAK
+<span class="unselectable">> </span>conda install -c brainiak -c conda-forge brainiak
+</code>
+<code class="bash"><span class="hljs-built_in">Method 3: Docker (Linux, macOS, Windows)</span>
+# 1. Install <a href="https://docs.docker.com/engine/install/">Docker</a>
+# 2. <a href="https://docs.docker.com/engine/containers/run/">Run</a> the following commands:
+<span class="unselectable">> </span>docker pull brainiak/brainiak
+<span class="unselectable">> </span>docker run -it -p 8899:8899 brainiak/brainiak
+# 3. Copy token from command output. Try an example in your browser (paste token when prompted): <a href="http://127.0.0.1:8899/notebooks/examples/funcalign/rsrm_synthetic_reconstruction.ipynb">http://127.0.0.1:8899/notebooks/examples/funcalign/rsrm_synthetic_reconstruction.ipynb</a></code>
       </div>
     </div>
   </div>

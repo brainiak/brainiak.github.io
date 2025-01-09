@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rapid prototyping of fMRI models with brainiak.matnormal &mdash; brainiak 0.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Set Up Instructions for the Real-Time fMRI Cloud-Based Framework" href="../real-time/README_INSTRUCTIONS.html" />
+    <link rel="prev" title="Intersubject correlation" href="../isc/ISC.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            brainiak
+          </a>
+              <div class="version">
+                0.12
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../brsa/brsa_demo.html">（Group) Bayesian Representational Similarity Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../eventseg/Event_Segmentation.html">Event segmentation and alignment in fMRI data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fcma/FCMA_demo.html">Full Correlation Matrix Analysis (FCMA) demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fmrisim/fmrisim_multivariate_example.html">fmrisim demo script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html">Hierarchical Topographic Factor Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#annotated-bibliography">Annotated bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#getting-started">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#code">Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#summary">Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iem/iem.html">Inverted Encoding Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iem_synthetic_RF/iem_example_synthetic_RF_data.html">Inverted encoding model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../isc/ISC.html">Intersubject correlation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Rapid prototyping of fMRI models with <code class="docutils literal notranslate"><span class="pre">brainiak.matnormal</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#annotated-bibliography">Annotated Bibliography</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#table-of-contents">Table of contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#overview-understanding-kronecker-separability">Overview: Understanding kronecker-separability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-1-matrix-normal-separable-covariance-regression">Example 1: Matrix-normal (separable-covariance) regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-2-priors-and-marginalization-with-mn-rsa">Example 2: Priors and marginalization, with MN-RSA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-3-latent-design-matrices-with-pca-and-fa">Example 3: latent design matrices with PCA and FA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../real-time/README_INSTRUCTIONS.html">Set Up Instructions for the Real-Time fMRI Cloud-Based Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../real-time/rtcloud_notebook.html">Implementing a Real-Time fMRI Cloud-Based Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../srm/SRM.html">Shared response model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">brainiak</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Rapid prototyping of fMRI models with <code class="docutils literal notranslate"><span class="pre">brainiak.matnormal</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/matnormal/Matrix-normal model prototyping.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="rapid-prototyping-of-fmri-models-with-brainiak-matnormal">
+<h1>Rapid prototyping of fMRI models with <code class="docutils literal notranslate"><span class="pre">brainiak.matnormal</span></code><a class="headerlink" href="#rapid-prototyping-of-fmri-models-with-brainiak-matnormal" title="Permalink to this heading"></a></h1>
+<p>Michael Shvartsman <a class="reference external" href="mailto://m&#46;shvartsman&#46;work&#37;&#52;&#48;gmail&#46;com">m<span>&#46;</span>shvartsman<span>&#46;</span>work<span>&#64;</span>gmail<span>&#46;</span>com</a></p>
+</div>
+<div class="section" id="annotated-bibliography">
+<h1>Annotated Bibliography<a class="headerlink" href="#annotated-bibliography" title="Permalink to this heading"></a></h1>
+<p>Shvartsman, M., Sundaram, N., Aoi, M., Charles, A., Willke, T. L., &amp; Cohen, J. D. (2018). Matrix-normal models for fMRI analysis. <em>International Conference on Artificial Intelligence and Statistics, AISTATS 2018</em>, 1914–1923. Extended version available at <a class="reference external" href="https://arxiv.org/abs/1711.03058"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Describes how to formulate a number of common fMRI analysis methods available in <code class="docutils literal notranslate"><span class="pre">BrainIAK</span></code> as matrix-normal models, and shows some benefits of this formulation.</em></p>
+<p>Cai, M. B., Shvartsman, M., Wu, A., Zhang, H., &amp; Zhu, X. (2020). Incorporating structured assumptions with probabilistic graphical models in fMRI data analysis. <em>Neuropsychologia</em>, 144, 1–23. <a class="reference external" href="https://doi.org/10.1016/j.neuropsychologia.2020.107500"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Provides an alternate framing of the matrix normal model focusing on the modeling of structured residuals.</em></p>
+<p>Magnus, J. R., &amp; Neudecker, H. (1988). Matrix differential calculus with applications in statistics and econometrics. <em>This is the standard reference for matrix calculus. A summary of some important identities may also be found on Wikipedia at <a class="reference external" href="https://en.wikipedia.org/wiki/Matrix_calculus#Identities_in_differential_form"><code class="docutils literal notranslate"><span class="pre">link</span></code></a>.</em></p>
+<p>Katanoda, K., Matsuda, Y., &amp; Sugishita, M. (2002). A spatio-temporal regression model for the analysis of functional MRI data. <em>NeuroImage</em>, 17(3), 1415–1428. <a class="reference external" href="https://doi.org/10.1006/nimg.2002.1209"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Example of a regression model for fMRI with separable residuals.</em></p>
+<p>Hartvig, N. V. (2002). A stochastic geometry model for functional magnetic resonance images. <em>Scandinavian Journal of Statistics</em>, 29(3), 333–353. <a class="reference external" href="https://doi.org/10.1111/1467-9469.00294"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Example of a separable residual covariance to a spatial activation model for fMRI data.</em></p>
+<p>Kia, S. M., Beckmann, C. F., &amp; Marquand, A. F. (2018). Scalable multi-task gaussian process tensor regression for normative modeling of structured variation in neuroimaging data. Retrieved from <a class="reference external" href="http://arxiv.org/abs/1808.00036"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Example of using tensor regression models for analyzing fMRI data.</em></p>
+<div class="section" id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview-understanding-kronecker-separability"><span class="std std-ref">Overview: Understanding kronecker-separability</span></a></p></li>
+<li><p><a class="reference internal" href="#example-1-matrix-normal-separable-covariance-regression"><span class="std std-ref">Example 1: Matrix-normal (separable-covariance) regression</span></a></p></li>
+<li><p><a class="reference internal" href="#example-2-priors-and-marginalization-with-mn-rsa"><span class="std std-ref">Example 2: Priors and marginalization, with MN-RSA</span></a></p></li>
+<li><p><a class="reference internal" href="#example-3-latent-design-matrices-with-pca-and-fa"><span class="std std-ref">Example 3: latent design matrices with PCA and FA</span></a></p></li>
+<li><p><a class="reference internal" href="#summary"><span class="std std-ref">Summary</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="overview-understanding-kronecker-separability">
+<h2>Overview: Understanding kronecker-separability<a class="headerlink" href="#overview-understanding-kronecker-separability" title="Permalink to this heading"></a></h2>
+<p>Unlike many of the other tools in <code class="docutils literal notranslate"><span class="pre">brainiak</span></code>, the <code class="docutils literal notranslate"><span class="pre">brainiak.matnormal</span></code> package is only a little bit about specific methods and a lot about letting you try new ideas and method variants quickly. If the variants are useful, they can be sped up and made neater for broader consumption. To understand the idea behind matrix-normal or kronecker-separable models, consider the following figure:</p>
+<img src="schematic_kron.png" width=1200 height=525 />
+<p><strong>Matrix normal models simultaneously model spatial and temporal residuals.</strong> [A]: a schematic view of a vectorized data matrix, where each voxel’s time series is vertically concatenated (in orange), and the covariance of every voxel at every timepoint with every other voxel at every other timepoint is modeled. Modeling all of these elements independently is intractable, and some structure needs to be imposed – in this case, kronecker-separable structure. [B]: the un-vectorized data matrix (orange rectangle), and its spatial and temporal covariances on the right and bottom. [C]: A matrix-normal distribution with the mean M and row/column covariances R, C is equivalent to the large structure in [A], but can be much more tractable to estimate. Figure and caption reused under CC-BY-NC-ND from doi:<a class="reference external" href="https://doi.org/10.1016/j.neuropsychologia.2020.107500">10.1016/j.neuropsychologia.2020.107500</a>.</p>
+</div>
+<div class="section" id="example-1-matrix-normal-separable-covariance-regression">
+<h2>Example 1: Matrix-normal (separable-covariance) regression<a class="headerlink" href="#example-1-matrix-normal-separable-covariance-regression" title="Permalink to this heading"></a></h2>
+<p>To understand how simple it is to prototype new matrix-normal models, consider first simple linear regression:</p>
+<p>$$
+Y \sim \mathcal{MN}(XB, I, I),
+$$</p>
+<p>where $Y$ is a centered TRs by voxels matrix of brain data, $X$ is a TRs by conditions design matrix, and $B$ is a conditions by voxels coefficients matrix. Notated this way, the model is the conventional massively-univariate GLM: the activation at every voxel and every timepoint is a linear combination (aka weighted sum) of the condition coding, weighted by the coefficients – or equivalently a weighted sum of the coefficients, with the condition codes as weights. We can generate a simple dataset and show how simple it is to fit such a model by maximum likelihood using automatically computed gradients.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># General imports and setup</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.linalg</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">cholesky</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">expit</span> <span class="k">as</span> <span class="n">inv_logit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">pearsonr</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_friedman1</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+
+<span class="c1"># brainiak.matnormal.covs provides implementations of various</span>
+<span class="c1"># structured covariances. We will discuss this shortly.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">brainiak.matnormal.covs</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">CovAR1</span><span class="p">,</span>
+    <span class="n">CovDiagonal</span><span class="p">,</span>
+    <span class="n">CovDiagonalGammaPrior</span><span class="p">,</span>
+    <span class="n">CovIdentity</span><span class="p">,</span>
+    <span class="n">CovUnconstrainedCholesky</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># brainiak.matnormal.matnormal_likelihoods provides efficient implementations</span>
+<span class="c1"># of matrix-normal likelihoods, including marginals and conditionals</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">brainiak.matnormal.matnormal_likelihoods</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">matnorm_logp</span><span class="p">,</span>
+    <span class="n">matnorm_logp_marginal_row</span><span class="p">,</span>
+    <span class="n">matnorm_logp_marginal_col</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># brainiak.matnormal provides implementations of MN variants of some existing analyses</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">brainiak.matnormal.mnrsa</span><span class="w"> </span><span class="kn">import</span> <span class="n">MNRSA</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">brainiak.matnormal.regression</span><span class="w"> </span><span class="kn">import</span> <span class="n">MatnormalRegression</span>
+
+<span class="c1"># brainiak.matnormal.utils provides helpers that (mostly) make it easy</span>
+<span class="c1"># to interface between tensorflow and scipy optimizers</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">brainiak.matnormal.utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">make_val_and_grad</span><span class="p">,</span>
+    <span class="n">pack_trainable_vars</span><span class="p">,</span>
+    <span class="n">rmn</span><span class="p">,</span>
+    <span class="n">unpack_trainable_vars</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># this is used in the MNRSA example</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">brainiak.utils.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">cov2corr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate data</span>
+<span class="n">conditions</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">voxels</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">TRs</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">make_friedman1</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="n">TRs</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="n">conditions</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span> <span class="n">voxels</span><span class="p">))</span>  <span class="c1"># pretty generous SNR of 2</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">X</span> <span class="o">@</span> <span class="n">B</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">TRs</span><span class="p">,</span> <span class="n">voxels</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now we create the tensorflow objects we need. The covariances are independent</span>
+<span class="c1"># since this is the univariate GLM.</span>
+<span class="n">space_cov</span> <span class="o">=</span> <span class="n">CovIdentity</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">voxels</span><span class="p">)</span>
+<span class="n">time_cov</span> <span class="o">=</span> <span class="n">CovIdentity</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TRs</span><span class="p">)</span>
+
+<span class="c1"># this is our estimate of B, and the wrappers for X and Y.</span>
+<span class="n">B_hat</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span> <span class="n">voxels</span><span class="p">)),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;beta&quot;</span><span class="p">)</span>
+<span class="n">Y_tf</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="n">X_tf</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="c1"># construct loss (negative log likelihood)</span>
+<span class="c1"># note that params are ignored by this function but implicitly</span>
+<span class="c1"># tracked by tensorflow to compute gradients</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">loss</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">matnorm_logp</span><span class="p">(</span><span class="n">Y_tf</span> <span class="o">-</span> <span class="n">X_tf</span> <span class="o">@</span> <span class="n">B_hat</span><span class="p">,</span> <span class="n">time_cov</span><span class="p">,</span> <span class="n">space_cov</span><span class="p">)</span>
+
+
+<span class="n">val_and_grad</span> <span class="o">=</span> <span class="n">make_val_and_grad</span><span class="p">(</span><span class="n">lossfn</span><span class="o">=</span><span class="n">loss</span><span class="p">,</span> <span class="n">train_vars</span><span class="o">=</span><span class="p">[</span><span class="n">B_hat</span><span class="p">])</span>
+<span class="n">initial_guess</span> <span class="o">=</span> <span class="n">pack_trainable_vars</span><span class="p">([</span><span class="n">B_hat</span><span class="p">])</span>
+<span class="n">opt_results</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">fun</span><span class="o">=</span><span class="n">val_and_grad</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">initial_guess</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;L-BFGS-B&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">opt_results</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>  <span class="c1"># check that we converged</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">B_hat</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">unpack_trainable_vars</span><span class="p">(</span><span class="n">opt_results</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">trainable_vars</span><span class="o">=</span><span class="p">[</span><span class="n">B_hat</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">B_hat</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;True B&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Estimated B&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;True vs estimated B&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;True and estimated B correlation: </span><span class="si">{</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">B_hat</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span><span class="w"> </span><span class="n">B</span><span class="o">.</span><span class="n">flatten</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH&#39;
+True and estimated B correlation: 0.78999786325132
+</pre></div>
+</div>
+<img alt="../../_images/3c4935b028f638da4330fe102193ae94260fbcae52c6a58abfe17748163ffa0d.png" src="../../_images/3c4935b028f638da4330fe102193ae94260fbcae52c6a58abfe17748163ffa0d.png" />
+</div>
+</div>
+<p>In practice, a simple model like this could just as easily be fit using more standard tools. More interesting is if we (reasonably) assume that the noise in our data is structured, and we want to model that structure rather than try to prewhiten it, for example:</p>
+<p>$$
+\sigma_v^{-1} \sim \mathcal{InvGamma}(\alpha, \beta)\
+Y \sim \mathcal{MN}(XB, \Sigma_{AR1},\mathrm{diag}(\sigma_v)),
+$$</p>
+<p>where $\Sigma_{AR1}$ is a structured covariance matrix with AR(1) structure, and the spatial covariance is diagonal (independent) but with varying scales for each voxel and we use an inverse-gamma prior to regularize them. Estimating this model is very similar:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate AR(1) temporal noise that is independent in space</span>
+<span class="n">true_time_cov</span> <span class="o">=</span> <span class="n">CovAR1</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TRs</span><span class="p">)</span>
+<span class="n">true_space_cov</span> <span class="o">=</span> <span class="n">CovDiagonalGammaPrior</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">voxels</span><span class="p">)</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">rmn</span><span class="p">(</span><span class="n">rowcov</span><span class="o">=</span><span class="n">true_time_cov</span><span class="o">.</span><span class="n">_cov</span><span class="p">,</span> <span class="n">colcov</span><span class="o">=</span><span class="n">true_space_cov</span><span class="o">.</span><span class="n">_cov</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">X</span> <span class="o">@</span> <span class="n">B</span> <span class="o">+</span> <span class="n">noise</span>
+
+<span class="c1"># This time space_cov is AR(1)</span>
+<span class="n">space_cov</span> <span class="o">=</span> <span class="n">CovDiagonalGammaPrior</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">voxels</span><span class="p">)</span>
+<span class="n">time_cov</span> <span class="o">=</span> <span class="n">CovAR1</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TRs</span><span class="p">)</span>
+
+<span class="c1"># Reset B_hat</span>
+<span class="n">B_hat</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span> <span class="n">voxels</span><span class="p">)),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;beta&quot;</span><span class="p">)</span>
+
+<span class="c1"># Now we estimate B_hat, but also the AR parameters and the</span>
+<span class="c1"># voxelwise residual variances (which the relevant</span>
+<span class="c1"># cov objects know about and expose to us)</span>
+<span class="n">train_vars</span> <span class="o">=</span> <span class="p">[</span><span class="n">B_hat</span><span class="p">]</span> <span class="o">+</span> <span class="n">time_cov</span><span class="o">.</span><span class="n">get_optimize_vars</span><span class="p">()</span> <span class="o">+</span> <span class="n">space_cov</span><span class="o">.</span><span class="n">get_optimize_vars</span><span class="p">()</span>
+
+<span class="c1"># now this loss incorporates the log-likelihood of our covariance parameters</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">loss</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="o">-</span><span class="n">matnorm_logp</span><span class="p">(</span><span class="n">Y_tf</span> <span class="o">-</span> <span class="n">X_tf</span> <span class="o">@</span> <span class="n">B_hat</span><span class="p">,</span> <span class="n">time_cov</span><span class="p">,</span> <span class="n">space_cov</span><span class="p">)</span>
+        <span class="o">-</span> <span class="n">space_cov</span><span class="o">.</span><span class="n">logp</span>
+        <span class="o">-</span> <span class="n">time_cov</span><span class="o">.</span><span class="n">logp</span>
+    <span class="p">)</span>
+
+
+<span class="n">val_and_grad</span> <span class="o">=</span> <span class="n">make_val_and_grad</span><span class="p">(</span><span class="n">lossfn</span><span class="o">=</span><span class="n">loss</span><span class="p">,</span> <span class="n">train_vars</span><span class="o">=</span><span class="n">train_vars</span><span class="p">)</span>
+<span class="n">initial_guess</span> <span class="o">=</span> <span class="n">pack_trainable_vars</span><span class="p">(</span><span class="n">train_vars</span><span class="p">)</span>
+<span class="n">opt_results</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">fun</span><span class="o">=</span><span class="n">val_and_grad</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">initial_guess</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;L-BFGS-B&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">opt_results</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>  <span class="c1"># check that we converged</span>
+
+<span class="c1"># assign the AR parameters as well as B</span>
+<span class="n">unpacked_theta</span> <span class="o">=</span> <span class="n">unpack_trainable_vars</span><span class="p">(</span><span class="n">opt_results</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">trainable_vars</span><span class="o">=</span><span class="n">train_vars</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">var</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">train_vars</span><span class="p">,</span> <span class="n">unpacked_theta</span><span class="p">):</span>
+    <span class="n">var</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">B_hat</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;True B&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Estimated B&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;True vs estimated B&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;True and estimated B correlation: </span><span class="si">{</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">B_hat</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span><span class="w"> </span><span class="n">B</span><span class="o">.</span><span class="n">flatten</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH&#39;
+True and estimated B correlation: 0.7891954003335606
+</pre></div>
+</div>
+<img alt="../../_images/eb4f5b47b146faa734aef977529cf560d8f966d23eb4eb12f4b281e0439363fa.png" src="../../_images/eb4f5b47b146faa734aef977529cf560d8f966d23eb4eb12f4b281e0439363fa.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">brainiak.matnormal</span></code> provides a convenience wrapper for such regression models (as <code class="docutils literal notranslate"><span class="pre">MatnormalRegression</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">MatnormalRegression</span><span class="p">(</span><span class="n">time_cov</span><span class="o">=</span><span class="n">time_cov</span><span class="p">,</span> <span class="n">space_cov</span><span class="o">=</span><span class="n">space_cov</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">naive_init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">model</span><span class="o">.</span><span class="n">beta_</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="s2">&quot;bo&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;True B&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Estimated B&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;True vs estimated B&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;True an estimated B correlation (MN): </span><span class="si">{</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">beta_</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span><span class="w"> </span><span class="n">B</span><span class="o">.</span><span class="n">flatten</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True an estimated B correlation (MN): 0.6194865860962584
+</pre></div>
+</div>
+<img alt="../../_images/823d320e75cfc8675c2b287a8e3f8a8aaf5e911a3ebcbdad18b6d95e6d6c5fc9.png" src="../../_images/823d320e75cfc8675c2b287a8e3f8a8aaf5e911a3ebcbdad18b6d95e6d6c5fc9.png" />
+</div>
+</div>
+<p>The covariance-modeling approach should work better than either ignoring covariance structure in the data, or pre-whitening by dividing out the correlations. So we now compare to both of those approaches on the same synthetic dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">glm_ignore_cov</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">glm_ignore_cov</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+
+<span class="c1"># prewhiten</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
+<span class="n">Y_whitened</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="n">X_whitened</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+<span class="n">coef_whitened</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">X_whitened</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X_whitened</span><span class="p">,</span> <span class="n">X_whitened</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Y_whitened</span><span class="p">)</span>
+<span class="n">glm_whitened</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">glm_whitened</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_whitened</span><span class="p">,</span> <span class="n">Y_whitened</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">model</span><span class="o">.</span><span class="n">beta_</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="s2">&quot;bo&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;MN&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;True vs estimated B (MN)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">B</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+    <span class="n">glm_ignore_cov</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+    <span class="s2">&quot;go&quot;</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;GLM (ignore cov)&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;True vs estimated B (GLM, ignore cov)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">B</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+    <span class="n">glm_whitened</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+    <span class="s2">&quot;ro&quot;</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;GLM (pre-whiten)&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;True vs estimated B (GLM, prewhiten cov)&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span> 
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;True B&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Estimated B&quot;</span><span class="p">)</span>    
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;True and estimated B correlation (MN): </span><span class="si">{</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span><span class="w"> </span><span class="n">model</span><span class="o">.</span><span class="n">beta_</span><span class="o">.</span><span class="n">flatten</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;True and estimated B correlation (GLM, ignore cov): </span><span class="si">{</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span><span class="n">glm_ignore_cov</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">flatten</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;True and estimated B correlation (GLM, prewhiten cov): </span><span class="si">{</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span><span class="w"> </span><span class="n">glm_whitened</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">flatten</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True and estimated B correlation (MN): 0.6194865860962584
+True and estimated B correlation (GLM, ignore cov): 0.38985685962097216
+True and estimated B correlation (GLM, prewhiten cov): 0.5315137290009893
+</pre></div>
+</div>
+<img alt="../../_images/6db4b022ec3ec12cd9a1029d60055ba0536602959ec8fe5d24cd30d6d27b809e.png" src="../../_images/6db4b022ec3ec12cd9a1029d60055ba0536602959ec8fe5d24cd30d6d27b809e.png" />
+</div>
+</div>
+</div>
+<div class="section" id="example-2-priors-and-marginalization-with-mn-rsa">
+<h2>Example 2: Priors and marginalization, with MN-RSA<a class="headerlink" href="#example-2-priors-and-marginalization-with-mn-rsa" title="Permalink to this heading"></a></h2>
+<p>We have already introduced the idea of priors in the previous example, though in that case we were using them purely as regularization. But we can sometimes set priors in a way that lets us integrate over some nuisance parameter entirely. This marginalization is used, for example, in deriving BRSA from beta-series RSA (also available in <code class="docutils literal notranslate"><span class="pre">brainiak</span></code>). We notate the same marginalization in the matrix-normal setting next. If:</p>
+<p>$$
+B \sim \mathcal{MN}(0, U, I)\
+Y \mid B \sim \mathcal{MN}(XB, \Sigma_{AR1},I),
+$$
+then:
+$$
+Y \sim \mathcal{MN}(0, XUX^{T} + \Sigma_{AR1},I),
+$$</p>
+<p>and the RSA correlation is given by dividing the RSA covariance $U$ by the featurewise variances. BRSA relies on a number of linear algebra tricks to speed up estimation, and similar tricks for the matrix-normal setting are availble in generalized form to enable MN-RSA. A more extended example is available at the <a class="reference external" href="https://github.com/brainiak/brainiak/blob/master/examples/reprsimil/bayesian_rsa_example.ipynb">MN-RSA example notebook</a> shipped with <code class="docutils literal notranslate"><span class="pre">brainiak</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a fake RSA matrix</span>
+<span class="n">conditions</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">groundtruth_U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">conditions</span><span class="p">,</span> <span class="n">conditions</span><span class="p">])</span>
+<span class="n">groundtruth_U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">conditions</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.6</span>
+<span class="n">groundtruth_U</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">:</span><span class="mi">12</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="k">for</span> <span class="n">cond</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">):</span>
+    <span class="n">groundtruth_U</span><span class="p">[</span><span class="n">cond</span><span class="p">,</span> <span class="n">cond</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">groundtruth_C</span> <span class="o">=</span> <span class="n">cov2corr</span><span class="p">(</span><span class="n">groundtruth_U</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">groundtruth_C</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Ground truth RSA Matrix&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+
+<span class="c1"># synthetic data</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">rmn</span><span class="p">(</span><span class="n">groundtruth_U</span><span class="p">,</span> <span class="n">space_cov</span><span class="o">.</span><span class="n">_cov</span><span class="p">)</span> <span class="c1"># now B is RSA-structured, rest is as above</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">make_friedman1</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="n">TRs</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="n">conditions</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">rmn</span><span class="p">(</span><span class="n">rowcov</span><span class="o">=</span><span class="n">true_time_cov</span><span class="o">.</span><span class="n">_cov</span><span class="p">,</span>  <span class="n">colcov</span><span class="o">=</span><span class="n">true_space_cov</span><span class="o">.</span><span class="n">_cov</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">X</span> <span class="o">@</span> <span class="n">B</span> <span class="o">+</span> <span class="n">noise</span>
+
+<span class="n">rsa_cov</span> <span class="o">=</span> <span class="n">CovUnconstrainedCholesky</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">conditions</span><span class="p">)</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">rsa_cov</span><span class="o">.</span><span class="n">get_optimize_vars</span><span class="p">()</span>
+    <span class="o">+</span> <span class="n">time_cov</span><span class="o">.</span><span class="n">get_optimize_vars</span><span class="p">()</span>
+    <span class="o">+</span> <span class="n">space_cov</span><span class="o">.</span><span class="n">get_optimize_vars</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="c1"># note the loss now includes a marginal logp term, plus the likelihoods of the various covariances in question</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">loss</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="p">(</span>
+        <span class="n">time_cov</span><span class="o">.</span><span class="n">logp</span>
+        <span class="o">+</span> <span class="n">space_cov</span><span class="o">.</span><span class="n">logp</span>
+        <span class="o">+</span> <span class="n">rsa_cov</span><span class="o">.</span><span class="n">logp</span>
+        <span class="o">+</span> <span class="n">matnorm_logp_marginal_row</span><span class="p">(</span>
+            <span class="n">Y</span><span class="p">,</span> <span class="n">row_cov</span><span class="o">=</span><span class="n">time_cov</span><span class="p">,</span> <span class="n">col_cov</span><span class="o">=</span><span class="n">space_cov</span><span class="p">,</span> <span class="n">marg</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">marg_cov</span><span class="o">=</span><span class="n">rsa_cov</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="n">val_and_grad</span> <span class="o">=</span> <span class="n">make_val_and_grad</span><span class="p">(</span><span class="n">lossfn</span><span class="o">=</span><span class="n">loss</span><span class="p">,</span> <span class="n">train_vars</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+
+<span class="n">x0</span> <span class="o">=</span> <span class="n">pack_trainable_vars</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+<span class="n">opt_results</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">fun</span><span class="o">=</span><span class="n">val_and_grad</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;L-BFGS-B&quot;</span><span class="p">)</span>
+
+<span class="n">fit_params</span> <span class="o">=</span> <span class="n">unpack_trainable_vars</span><span class="p">(</span><span class="n">opt_results</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">var</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">fit_params</span><span class="p">):</span>
+    <span class="n">var</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+
+<span class="n">U</span> <span class="o">=</span> <span class="n">rsa_cov</span><span class="o">.</span><span class="n">_cov</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">cov2corr</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Estimated RSA Matrix&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x7f503c4c8c18&gt;
+</pre></div>
+</div>
+<img alt="../../_images/1f837ec253c811609564c085c1735a0e3453383c1710b7973dc3c5b5efbabe2f.png" src="../../_images/1f837ec253c811609564c085c1735a0e3453383c1710b7973dc3c5b5efbabe2f.png" />
+<img alt="../../_images/2a554d505c70dcec6ff24f5118aeb91e7df9edce202d58545f55300062e552a8.png" src="../../_images/2a554d505c70dcec6ff24f5118aeb91e7df9edce202d58545f55300062e552a8.png" />
+</div>
+</div>
+<p>As before, this model is available in <code class="docutils literal notranslate"><span class="pre">brainiak</span></code> directly as <code class="docutils literal notranslate"><span class="pre">MNRSA</span></code>, where it incorporates nuisance regressors as well:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_matnorm</span> <span class="o">=</span> <span class="n">MNRSA</span><span class="p">(</span><span class="n">time_cov</span><span class="o">=</span><span class="n">time_cov</span><span class="p">,</span> <span class="n">space_cov</span><span class="o">=</span><span class="n">space_cov</span><span class="p">,</span> <span class="n">n_nureg</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">model_matnorm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">model_matnorm</span><span class="o">.</span><span class="n">C_</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Estimated RSA Matrix&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.colorbar.Colorbar at 0x7f503c360828&gt;
+</pre></div>
+</div>
+<img alt="../../_images/49a60f2a04ace4250074dc5f1c87a69e9787f2e3ceb64aae8483aebc059e38f5.png" src="../../_images/49a60f2a04ace4250074dc5f1c87a69e9787f2e3ceb64aae8483aebc059e38f5.png" />
+</div>
+</div>
+</div>
+<div class="section" id="example-3-latent-design-matrices-with-pca-and-fa">
+<h2>Example 3: latent design matrices with PCA and FA<a class="headerlink" href="#example-3-latent-design-matrices-with-pca-and-fa" title="Permalink to this heading"></a></h2>
+<p>The true benefit of a shared framework comes when starting to see the commonalities among methods. For example, consider what happens if the known design matrix $X$ is replaced with an unknown latent time series $S$, yielding the following model:</p>
+<p>$$
+Y \sim \mathcal{MN}(SB, I, I).
+$$</p>
+<p>In this model, we no longer know the design matrix, and the brain volume is now a weighted sum of unknown time series, with unknown weights. It turns out that this is precisely the model for probabilistic PCA, and there is nothing stopping us from implementing it in our framework. However, note that PCA has uniquely many solutions, so while doing naive gradient descent on this problem might work in toy examples, it isn’t a particularly realistic example. To find a unique solution, we can integrate over either $S$ or $B$ using a matrix-normal prior. We choose to integrate over $S$, since it is a larger matrix in this case and this lets us estimate fewer parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate data</span>
+<span class="n">components</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">voxels</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">TRs</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">TRs</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">components</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">components</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>  <span class="c1"># random sinewaves with noise</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Simulated latent response&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;TRs&quot;</span><span class="p">)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">components</span><span class="p">,</span> <span class="n">voxels</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">S</span> <span class="o">@</span> <span class="n">B</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">TRs</span><span class="p">,</span> <span class="n">voxels</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Y</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;TRs&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Simulated voxel time series (first 10 voxels)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/aef7ce54c54f552b283daa09e45ee5715502a2993af977bc3ec1c0ea4002cfc4.png" src="../../_images/aef7ce54c54f552b283daa09e45ee5715502a2993af977bc3ec1c0ea4002cfc4.png" />
+<img alt="../../_images/4bfaf1ea54e95854baba7ed8abf203c92af3f661dea2a9e71b4dfd8ad60619b6.png" src="../../_images/4bfaf1ea54e95854baba7ed8abf203c92af3f661dea2a9e71b4dfd8ad60619b6.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate AR(1) temporal noise that is independent in space</span>
+<span class="n">true_time_cov</span> <span class="o">=</span> <span class="n">CovIdentity</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TRs</span><span class="p">)</span>
+<span class="n">true_space_cov</span> <span class="o">=</span> <span class="n">CovIdentity</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">voxels</span><span class="p">)</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">rmn</span><span class="p">(</span><span class="n">rowcov</span><span class="o">=</span><span class="n">true_time_cov</span><span class="o">.</span><span class="n">_cov</span><span class="p">,</span> <span class="n">colcov</span><span class="o">=</span><span class="n">true_space_cov</span><span class="o">.</span><span class="n">_cov</span><span class="p">)</span>
+<span class="n">Y_tf</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">S</span> <span class="o">@</span> <span class="n">B</span> <span class="o">+</span> <span class="n">noise</span><span class="p">)</span>
+
+<span class="c1"># This time space_cov is AR(1)</span>
+<span class="n">space_cov</span> <span class="o">=</span> <span class="n">CovDiagonalGammaPrior</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">voxels</span><span class="p">)</span>
+<span class="n">time_cov</span> <span class="o">=</span> <span class="n">CovAR1</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">TRs</span><span class="p">)</span>
+<span class="n">marg_cov</span> <span class="o">=</span> <span class="n">CovIdentity</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">components</span><span class="p">)</span>
+
+<span class="c1"># B_hat</span>
+<span class="n">B_hat</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">components</span><span class="p">,</span> <span class="n">voxels</span><span class="p">)),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;beta&quot;</span><span class="p">)</span>
+
+<span class="n">train_vars</span> <span class="o">=</span> <span class="p">[</span><span class="n">B_hat</span><span class="p">]</span> <span class="o">+</span> <span class="n">time_cov</span><span class="o">.</span><span class="n">get_optimize_vars</span><span class="p">()</span> <span class="o">+</span> <span class="n">space_cov</span><span class="o">.</span><span class="n">get_optimize_vars</span><span class="p">()</span>
+
+<span class="c1"># now this loss incorporates the log-likelihood of our covariance parameters</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">loss</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="o">-</span><span class="n">matnorm_logp_marginal_col</span><span class="p">(</span><span class="n">Y_tf</span><span class="p">,</span> <span class="n">time_cov</span><span class="p">,</span> <span class="n">space_cov</span><span class="p">,</span> <span class="n">B_hat</span><span class="p">,</span> <span class="n">marg_cov</span><span class="p">)</span>
+        <span class="o">-</span> <span class="n">space_cov</span><span class="o">.</span><span class="n">logp</span>
+        <span class="o">-</span> <span class="n">time_cov</span><span class="o">.</span><span class="n">logp</span>
+    <span class="p">)</span>
+
+
+<span class="n">val_and_grad</span> <span class="o">=</span> <span class="n">make_val_and_grad</span><span class="p">(</span><span class="n">lossfn</span><span class="o">=</span><span class="n">loss</span><span class="p">,</span> <span class="n">train_vars</span><span class="o">=</span><span class="n">train_vars</span><span class="p">)</span>
+<span class="n">initial_guess</span> <span class="o">=</span> <span class="n">pack_trainable_vars</span><span class="p">(</span><span class="n">train_vars</span><span class="p">)</span>
+<span class="n">opt_results</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">fun</span><span class="o">=</span><span class="n">val_and_grad</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">initial_guess</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;L-BFGS-B&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">opt_results</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>  <span class="c1"># check that we converged</span>
+
+<span class="c1"># assign the parameters</span>
+<span class="n">unpacked_theta</span> <span class="o">=</span> <span class="n">unpack_trainable_vars</span><span class="p">(</span><span class="n">opt_results</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">trainable_vars</span><span class="o">=</span><span class="n">train_vars</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">var</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">train_vars</span><span class="p">,</span> <span class="n">unpacked_theta</span><span class="p">):</span>
+    <span class="n">var</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+
+<span class="c1"># now that we have B, solving for the MLE of S is just closed-form</span>
+<span class="c1"># linear regression</span>
+<span class="n">Sigma_s_btrp</span> <span class="o">=</span> <span class="n">space_cov</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">B_hat</span><span class="p">))</span>
+<span class="c1"># Y Sigma_s^{-1} B&#39;</span>
+<span class="n">Y_Sigma_Btrp</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">Y_tf</span><span class="p">,</span> <span class="n">Sigma_s_btrp</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="c1"># (B Sigma_s^{-1} B&#39;)^{-1}</span>
+<span class="n">B_Sigma_Btrp</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">B_hat</span><span class="p">,</span> <span class="n">Sigma_s_btrp</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">S_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">B_Sigma_Btrp</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">Y_Sigma_Btrp</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c1"># Since the PCA solution is not unique, we show reconstruction</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">S</span> <span class="o">@</span> <span class="n">B</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="p">(</span><span class="n">S_hat</span> <span class="o">@</span> <span class="n">B_hat</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="s2">&quot;bo&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;True (noiseless) voxel time series&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Reconstructed noiseless voxel time series&quot;</span><span class="p">)</span>
+<span class="c1"># Also show the inner products of S and B -- these won&#39;t be uniquely scaled </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">S</span> <span class="o">@</span> <span class="n">S</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+    <span class="p">(</span><span class="n">S_hat</span> <span class="o">@</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">S_hat</span><span class="p">))</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+    <span class="s2">&quot;bo&quot;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;True latent response inner product&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Estimated latent response inner product&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">B</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+    <span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">B_hat</span><span class="p">)</span> <span class="o">@</span> <span class="n">B_hat</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+    <span class="s2">&quot;bo&quot;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;True weight matrix inner product&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Estimated weight matrix inner product&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;CONVERGENCE: REL_REDUCTION_OF_F_&lt;=_FACTR*EPSMCH&#39;
+</pre></div>
+</div>
+<img alt="../../_images/47cbae88f20022a9f53087389015ac2e1661b3d9be606c45a1289e19a2708689.png" src="../../_images/47cbae88f20022a9f53087389015ac2e1661b3d9be606c45a1289e19a2708689.png" />
+<img alt="../../_images/570cdba338a3e5551a892b9636b06970dd6a3a306f314bb2eb953adda731450b.png" src="../../_images/570cdba338a3e5551a892b9636b06970dd6a3a306f314bb2eb953adda731450b.png" />
+<img alt="../../_images/f8b994829ff7c4e93cee17c7c1b4d68555d116ff8d7a62661a8054a0bdea8069.png" src="../../_images/f8b994829ff7c4e93cee17c7c1b4d68555d116ff8d7a62661a8054a0bdea8069.png" />
+</div>
+</div>
+<p>If the code above looked very similar to the code earlier in the notebook, that’s because it was: this is exactly as MN-RSA except for replacing the known design matrix $X$ with an estimated one $S$ and integrating in the other direction. If we replaced the <code class="docutils literal notranslate"><span class="pre">CovIdentity</span></code> with a <code class="docutils literal notranslate"><span class="pre">CovDiagonal</span></code> this model would be factor analysis, and other residual covariances may map to other models. <code class="docutils literal notranslate"><span class="pre">brainiak.matnormal</span></code> does not include a <code class="docutils literal notranslate"><span class="pre">MatnormalFactorAnalysis</span></code>, but we can easily sketch one here:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MNFactorAnalysis</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Linear gaussian LVM with with structured residuals. </span>
+<span class="sd">    If time_cov=space_cov=CovIdentity (the default), this is PCA</span>
+<span class="sd">    If time_cov=CovIdentity and space_cov=CovDiagonal (or vice versa)</span>
+<span class="sd">    this is factor analysis. </span>
+<span class="sd">    ..math::</span>
+<span class="sd">        Y \\sim \\mathcal{MN}(S\beta, time_cov, space_cov)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    time_cov : subclass of CovBase</span>
+<span class="sd">        TR noise covariance class following CovBase interface.</span>
+<span class="sd">    space_cov : subclass of CovBase</span>
+<span class="sd">        Voxel noise covariance class following CovBase interface.</span>
+<span class="sd">    n_features : int</span>
+<span class="sd">        Number of latent dimensions</span>
+<span class="sd">    dual : bool</span>
+<span class="sd">        If false, use algorithm from &quot;regular&quot; probabilistic PCA (integrate over S),</span>
+<span class="sd">        otherwise use &quot;dual&quot; probabilistic PCA algorithm (integrate over B)</span>
+<span class="sd">    optimizer : string, default=&quot;L-BFGS-B&quot;</span>
+<span class="sd">        Scipy optimizer to use. For other options, see &quot;method&quot; argument</span>
+<span class="sd">        of scipy.optimize.minimize</span>
+<span class="sd">    optCtrl: dict, default=None</span>
+<span class="sd">        Additional arguments to pass to scipy.optimize.minimize.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">time_cov</span><span class="p">,</span>
+        <span class="n">space_cov</span><span class="p">,</span>
+        <span class="n">n_features</span><span class="p">,</span>
+        <span class="n">dual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;L-BFGS-B&quot;</span><span class="p">,</span>
+        <span class="n">optCtrl</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">optMethod</span> <span class="o">=</span> <span class="n">optimizer</span>
+        <span class="k">if</span> <span class="n">optCtrl</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">optCtrl</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_cov</span> <span class="o">=</span> <span class="n">time_cov</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">space_cov</span> <span class="o">=</span> <span class="n">space_cov</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_features</span> <span class="o">=</span> <span class="n">n_features</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dual</span> <span class="o">=</span> <span class="n">dual</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_t</span> <span class="o">=</span> <span class="n">time_cov</span><span class="o">.</span><span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_v</span> <span class="o">=</span> <span class="n">space_cov</span><span class="o">.</span><span class="n">size</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">logp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Log likelihood of model (internal)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span><span class="p">:</span>
+            <span class="n">data_logp</span> <span class="o">=</span> <span class="n">matnorm_logp_marginal_row</span><span class="p">(</span>
+                <span class="n">Y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_cov</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">space_cov</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">marg</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">data_logp</span> <span class="o">=</span> <span class="n">matnorm_logp_marginal_col</span><span class="p">(</span>
+                <span class="n">Y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_cov</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">space_cov</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">marg</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">time_cov</span><span class="o">.</span><span class="n">logp</span> <span class="o">+</span> <span class="n">space_cov</span><span class="o">.</span><span class="n">logp</span> <span class="o">+</span> <span class="n">data_logp</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">naive_init</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Compute the regression fit.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : np.array, TRs by voxels.</span>
+<span class="sd">            Brain data (note that this is Y in the math but we </span>
+<span class="sd">            call it X in the interface to maintain scikit-learn </span>
+<span class="sd">            API compatibility)</span>
+<span class="sd">        y : None</span>
+<span class="sd">            unused, here to maintain scikit-learn API compatibility</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">naive_init</span><span class="p">:</span>
+            <span class="c1"># initialize to SVD (conventional PCA)</span>
+            <span class="n">u</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+            <span class="n">s_init</span><span class="p">,</span> <span class="n">b_init</span> <span class="o">=</span> <span class="n">u</span><span class="p">[:,</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_features</span><span class="p">],</span> <span class="n">v</span><span class="p">[:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_features</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">b_init</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_features</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_v</span><span class="p">)</span>
+            <span class="n">s_init</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_features</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">b_init</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">S</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">s_init</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;S&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_variables</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span> <span class="k">else</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_variables</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time_cov</span><span class="o">.</span><span class="n">get_optimize_vars</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_variables</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">space_cov</span><span class="o">.</span><span class="n">get_optimize_vars</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marg</span> <span class="o">=</span> <span class="n">CovIdentity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_features</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">lossfn</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+            <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">logp</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+        <span class="n">val_and_grad</span> <span class="o">=</span> <span class="n">make_val_and_grad</span><span class="p">(</span><span class="n">lossfn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_variables</span><span class="p">)</span>
+        <span class="n">x0</span> <span class="o">=</span> <span class="n">pack_trainable_vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">train_variables</span><span class="p">)</span>
+
+        <span class="n">opt_results</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span>
+            <span class="n">fun</span><span class="o">=</span><span class="n">val_and_grad</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">optMethod</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">optCtrl</span>
+        <span class="p">)</span>
+
+        <span class="n">unpacked_theta</span> <span class="o">=</span> <span class="n">unpack_trainable_vars</span><span class="p">(</span><span class="n">opt_results</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_variables</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">var</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">train_variables</span><span class="p">,</span> <span class="n">unpacked_theta</span><span class="p">):</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dual</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;S&quot;</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">B_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">S_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;S&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Transform input X using the fit model, returning </span>
+<span class="sd">        the projected time series (if direction=&quot;S&quot;)</span>
+<span class="sd">        or inferred projection (if direction=&quot;B&quot;). </span>
+<span class="sd">        </span>
+<span class="sd">        Either simply requires solving a regression problem, </span>
+<span class="sd">        which can be done in closed form. </span>
+<span class="sd">        </span>
+<span class="sd">        Again, this is Y in the math but X in the code becasue</span>
+<span class="sd">        of scikit-learn</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;S&quot;</span><span class="p">:</span>
+            <span class="c1"># Sigma_s^{-1} B&#39;</span>
+            <span class="n">Sigma_s_btrp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">space_cov</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">))</span>
+            <span class="c1"># Y Sigma_s^{-1} B&#39;</span>
+            <span class="n">Y_Sigma_Btrp</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Sigma_s_btrp</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+            <span class="c1"># (B Sigma_s^{-1} B&#39;)^{-1}</span>
+            <span class="n">B_Sigma_Btrp</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">,</span> <span class="n">Sigma_s_btrp</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+            <span class="n">S_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">B_Sigma_Btrp</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">Y_Sigma_Btrp</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+            <span class="k">return</span> <span class="n">S_test</span>
+
+        <span class="k">elif</span> <span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span>
+            <span class="c1"># S&#39; Sigma_t^{-1} S</span>
+            <span class="n">Strp_Sig_S</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">)</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_cov</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">)</span>
+            <span class="c1"># S&#39; Sigma_t^{-1} X</span>
+            <span class="n">Strp_Sig_X</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">)</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_cov</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+            <span class="n">B_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Strp_Sig_S</span><span class="p">,</span> <span class="n">Strp_Sig_X</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">B_test</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># regular</span>
+<span class="n">mn_fa</span> <span class="o">=</span> <span class="n">MNFactorAnalysis</span><span class="p">(</span><span class="n">time_cov</span><span class="o">=</span><span class="n">time_cov</span><span class="p">,</span> <span class="n">space_cov</span><span class="o">=</span><span class="n">space_cov</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="n">components</span><span class="p">,</span> <span class="n">dual</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">mn_fa</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Y_tf</span><span class="p">,</span> <span class="n">naive_init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">S</span> <span class="o">@</span> <span class="n">B</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),(</span><span class="n">mn_fa</span><span class="o">.</span><span class="n">S_</span> <span class="o">@</span> <span class="n">mn_fa</span><span class="o">.</span><span class="n">B_</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>  <span class="s1">&#39;bo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;True (noiseless) voxel time series&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Reconstructed noiseless voxel time series&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="p">(</span><span class="n">S</span> <span class="o">@</span> <span class="n">S</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),(</span><span class="n">mn_fa</span><span class="o">.</span><span class="n">S_</span> <span class="o">@</span> <span class="n">mn_fa</span><span class="o">.</span><span class="n">S_</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="s1">&#39;bo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;True latent response inner product&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Estimated latent response inner product&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">B</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="p">(</span><span class="n">mn_fa</span><span class="o">.</span><span class="n">B_</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">mn_fa</span><span class="o">.</span><span class="n">B_</span> <span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span><span class="s1">&#39;bo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;True weight matrix inner product&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Estimated weight matrix inner product&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Estimated weight matrix inner product&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/1554ad8ebc05d49292a04d80d52fcd96d5348693c56866a1f35ed45e21cd1d12.png" src="../../_images/1554ad8ebc05d49292a04d80d52fcd96d5348693c56866a1f35ed45e21cd1d12.png" />
+<img alt="../../_images/432f37ea4d7e478a9988a99df6b55e2058877bd47d482bf6d4b0da414d8b0073.png" src="../../_images/432f37ea4d7e478a9988a99df6b55e2058877bd47d482bf6d4b0da414d8b0073.png" />
+<img alt="../../_images/bdd28a64e9a0d3f241a61d0ecb559f2e7f9c961999edc290406b995238a50fa5.png" src="../../_images/bdd28a64e9a0d3f241a61d0ecb559f2e7f9c961999edc290406b995238a50fa5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dual, integrating the other way</span>
+<span class="n">mn_fa</span> <span class="o">=</span> <span class="n">MNFactorAnalysis</span><span class="p">(</span><span class="n">time_cov</span><span class="o">=</span><span class="n">time_cov</span><span class="p">,</span> <span class="n">space_cov</span><span class="o">=</span><span class="n">space_cov</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="n">components</span><span class="p">,</span> <span class="n">dual</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">mn_fa</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Y_tf</span><span class="p">,</span> <span class="n">naive_init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">S</span> <span class="o">@</span> <span class="n">B</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),(</span><span class="n">mn_fa</span><span class="o">.</span><span class="n">S_</span> <span class="o">@</span> <span class="n">mn_fa</span><span class="o">.</span><span class="n">B_</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>  <span class="s1">&#39;bo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;True (noiseless) voxel time series&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Reconstructed noiseless voxel time series&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="p">(</span><span class="n">S</span> <span class="o">@</span> <span class="n">S</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),(</span><span class="n">mn_fa</span><span class="o">.</span><span class="n">S_</span> <span class="o">@</span> <span class="n">mn_fa</span><span class="o">.</span><span class="n">S_</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="s1">&#39;bo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;True latent response inner product&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Estimated latent response inner product&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">B</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="p">(</span><span class="n">mn_fa</span><span class="o">.</span><span class="n">B_</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">mn_fa</span><span class="o">.</span><span class="n">B_</span> <span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span><span class="s1">&#39;bo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;True weight matrix inner product&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Estimated weight matrix inner product&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Estimated weight matrix inner product&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/e064b9551e3425ba0c568d1cf1bbb8ee09f458d00fe2e9335105248db3e323c9.png" src="../../_images/e064b9551e3425ba0c568d1cf1bbb8ee09f458d00fe2e9335105248db3e323c9.png" />
+<img alt="../../_images/e15e0712bf04ab3e461e375940b5533d43a87df1b1a3b09745d753b37f3d8af7.png" src="../../_images/e15e0712bf04ab3e461e375940b5533d43a87df1b1a3b09745d753b37f3d8af7.png" />
+<img alt="../../_images/a431a9421ced214da02704575465349f70326db2736b091ec017e55bdde16b96.png" src="../../_images/a431a9421ced214da02704575465349f70326db2736b091ec017e55bdde16b96.png" />
+</div>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading"></a></h2>
+<p>This demonstrates how <code class="docutils literal notranslate"><span class="pre">brainiak.matnormal</span></code> supports prototyping of models with kronecker-separable residuals. Again we highlight that while the specific model variants here can be implemented more efficiently, the shared and consistent framing provided by the matrix-normal framework can allow us to showcase the similarity across methods, as well as introduce a consistent idea (e.g. a particular residual structure) to different models in a consistent way.</p>
+<p>We invite further contributions and suggestions in helping us use <code class="docutils literal notranslate"><span class="pre">brainiak.matnormal</span></code> to blur the lines between methods-developer and methods-user.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../isc/ISC.html" class="btn btn-neutral float-left" title="Intersubject correlation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../real-time/README_INSTRUCTIONS.html" class="btn btn-neutral float-right" title="Set Up Instructions for the Real-Time fMRI Cloud-Based Framework" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

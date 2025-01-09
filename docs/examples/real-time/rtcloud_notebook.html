@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Implementing a Real-Time fMRI Cloud-Based Framework &mdash; brainiak 0.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Shared response model" href="../srm/SRM.html" />
+    <link rel="prev" title="Set Up Instructions for the Real-Time fMRI Cloud-Based Framework" href="README_INSTRUCTIONS.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            brainiak
+          </a>
+              <div class="version">
+                0.12
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../brsa/brsa_demo.html">（Group) Bayesian Representational Similarity Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../eventseg/Event_Segmentation.html">Event segmentation and alignment in fMRI data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fcma/FCMA_demo.html">Full Correlation Matrix Analysis (FCMA) demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fmrisim/fmrisim_multivariate_example.html">fmrisim demo script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html">Hierarchical Topographic Factor Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#annotated-bibliography">Annotated bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#getting-started">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#code">Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../htfa/htfa.html#summary">Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iem/iem.html">Inverted Encoding Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iem_synthetic_RF/iem_example_synthetic_RF_data.html">Inverted encoding model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../isc/ISC.html">Intersubject correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matnormal/Matrix-normal%20model%20prototyping.html">Rapid prototyping of fMRI models with <code class="docutils literal notranslate"><span class="pre">brainiak.matnormal</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matnormal/Matrix-normal%20model%20prototyping.html#annotated-bibliography">Annotated Bibliography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README_INSTRUCTIONS.html">Set Up Instructions for the Real-Time fMRI Cloud-Based Framework</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Implementing a Real-Time fMRI Cloud-Based Framework</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#annotated-bibliography">Annotated Bibliography</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#before-running-this-notebook">Before Running This Notebook <a id='setting_up'></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#import-necessary-modules-and-declare-important-variables">Import Necessary Modules and Declare Important Variables <a id='import_modules'></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-start-the-projectinterface-web-server">Step 1: Start the ProjectInterface Web Server <a id='start_ProjectInterface'></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-start-the-synthetic-data-generator">Step 2: Start the Synthetic Data Generator <a id='start_DataGenerator'></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-open-the-web-server-on-the-localhost">Step 3: Open the Web Server on the localhost <a id='open_localhost'></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#alternate-step-3-run-the-classification-script-from-command-line">Alternate Step 3: Run the classification script from command line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary <a id='summary'></a></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../srm/SRM.html">Shared response model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">brainiak</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Implementing a Real-Time fMRI Cloud-Based Framework</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/real-time/rtcloud_notebook.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="implementing-a-real-time-fmri-cloud-based-framework">
+<h1>Implementing a Real-Time fMRI Cloud-Based Framework<a class="headerlink" href="#implementing-a-real-time-fmri-cloud-based-framework" title="Permalink to this heading"></a></h1>
+<p>Authors: Grant Wallace (<a class="reference external" href="mailto:gwallace&#37;&#52;&#48;princeton&#46;edu">gwallace<span>&#64;</span>princeton<span>&#46;</span>edu</a>) and Paula P. Brooks (<a class="reference external" href="mailto:paulapbrooks&#37;&#52;&#48;gmail&#46;com">paulapbrooks<span>&#64;</span>gmail<span>&#46;</span>com</a>)</p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>This notebook walks through an example using our cloud-based software framework for real-time fMRI studies, henceforth referred to as <strong>rtcloud framework</strong>. We have created a sample script (sample.py) in this notebook directory which builds a two-class classifier on a region of interest (ROI). This notebook will generate synthetic data for training and classification using the BrainIAK fmrisim_real_time_generator function. <strong>Readers who are interested in running full-scale real-time fMRI studies using this framework should refer to the main <a class="reference external" href="https://github.com/brainiak/rt-cloud">RT-Cloud Repo</a></strong>.</p>
+<p>We will begin wrapping the sample.py script within the rtcloud projectInterface. In a normal deployment the projectInterface (and sample.py) would then run in the cloud and the scanner images would be sent to the cloud where our sample.py script would build the classifier model and do classification. The projectInterface handles remote file communication for reading the scanner images and providing the classification results. It also has a web-based user interface for viewing and controlling the experiment and changing settings. In this notebook the different process all run on the the computer that jupyter is running on.</p>
+<p>In the steps below, we will first start the projectInterface which will watch for dicom files to process. We will then start the synthetic data generator which will generate a new dicom image every 2 seconds. And finally we will start a web browser within this notebook for controlling the experiment. Once you start the web interface you can click the ‘Run’ button to start the sample.py script watching for and processing images via the projectInterface. (You can also open the web interface on a different tab in your browser, http://localhost:8889.)</p>
+</div>
+<div class="section" id="annotated-bibliography">
+<h2>Annotated Bibliography<a class="headerlink" href="#annotated-bibliography" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Mennen, A.C., Turk-Browne, N.B., Wallace, G., Seok, D., Jaganjac, A., Stock, J., deBettencourt, M.T., Cohen, J.D., Norman, K.A. &amp; Sheline, Y.I. (2020). Cloud-based fMRI neurofeedback to reduce the negative attentional bias in depression: a proof-of-concept study. <em>Biological Psychiatry: Cognitive Neuroscience and Neuroimaging.</em> <a class="reference external" href="https://doi.org/10.1016/j.bpsc.2020.10.006"><code class="docutils literal notranslate"><span class="pre">link</span></code></a>
+<em>Describes the first implementation of the  rt-cloud software framework in a closed-loop fMRI study that provided continuous neurofeedback to participants based on a multivariate pattern classifier.</em></p></li>
+</ol>
+</div>
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#before-running-this-notebook"><span class="std std-ref">Before Running This Notebook </span></a></p></li>
+<li><p><a class="reference internal" href="#import-necessary-modules-and-declare-important-variables"><span class="std std-ref">Import Necessary Modules and Declare Important Variables </span></a></p></li>
+<li><p><a class="reference internal" href="#step-1-start-the-projectinterface-web-server"><span class="std std-ref">Step 1: Start the ProjectInterface Web Server </span></a></p></li>
+<li><p><a class="reference internal" href="#step-2-start-the-synthetic-data-generator"><span class="std std-ref">Step 2: Start the Synthetic Data Generator </span></a></p></li>
+<li><p><a class="reference internal" href="#step-3-open-the-web-server-on-the-localhost"><span class="std std-ref">Step 3: Open the Web Server on the localhost </span></a></p></li>
+<li><p><a class="reference internal" href="#summary"><span class="std std-ref">Summary </span></a></p></li>
+</ul>
+</div>
+<div class="section" id="before-running-this-notebook">
+<h2>Before Running This Notebook <a id='setting_up'></a><a class="headerlink" href="#before-running-this-notebook" title="Permalink to this heading"></a></h2>
+<p>Before you are able to run this notebook, you have to complete the installation instructions found in the accompanying <a class="reference external" href="https://github.com/brainiak/brainiak-aperture/blob/master/notebooks/real-time/README_INSTRUCTIONS.md">instructions README</a>. <strong>Also, remember that you have to complete the following steps every time before you are able to run this notebook:</strong></p>
+<ol class="arabic simple">
+<li><p>Activate the conda environment for the rtcloud framework:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">rtcloud</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>On the command line, create a global variable to the full path for the rtcloud framework repo. You must do this in order to use the functions we have created for the framework. And don’t forget the forward slash “/” at the end.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">RTCLOUD_PATH</span><span class="o">=/</span><span class="n">PATH_TO_RTCLOUD</span><span class="o">/</span><span class="n">rt</span><span class="o">-</span><span class="n">cloud</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>Double check that you did this correctly by typing the following command.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ECHO $RTCLOUD_PATH
+</pre></div>
+</div>
+<p>This should print the <em>full</em> path to the rtcloud framework folder.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># If rt-cloud repo is present in local directory and RTCLOUD_PATH is not already set, </span>
+<span class="c1"># then set RTCLOUD_PATH to the local repo.</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="k">if</span> <span class="s1">&#39;RTCLOUD_PATH&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;rt-cloud&#39;</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;RTCLOUD_PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;rt-cloud&#39;</span><span class="p">)</span>
+
+<span class="o">!</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$RTCLOUD_PATH</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="import-necessary-modules-and-declare-important-variables">
+<h2>Import Necessary Modules and Declare Important Variables <a id='import_modules'></a><a class="headerlink" href="#import-necessary-modules-and-declare-important-variables" title="Permalink to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span><span class="p">;</span> <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="c1">#---- Import the necessary python modules</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">toml</span>
+
+<span class="c1">#---- Load important brainiak modules</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">brainiak.utils.fmrisim_real_time_generator</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sim</span>
+
+<span class="c1">#---- Load important rtcloud modules</span>
+<span class="c1"># add the path to the rtcloud repo to PYTHONPATH to access rtCommon functions</span>
+<span class="n">path_to_rtcloud</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;RTCLOUD_PATH&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">path_to_rtcloud</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please set RTCLOUD_PATH, see instructions&quot;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path_to_rtcloud</span><span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rtCommon.projectServer</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProjectServer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rtCommon.structDict</span><span class="w"> </span><span class="kn">import</span> <span class="n">StructDict</span>
+
+<span class="c1">#---- Declare and append important paths </span>
+<span class="c1"># declare the path to this jupyter notebook</span>
+<span class="n">path_to_notebook</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>  <span class="c1"># check and change notebook path as needed</span>
+
+<span class="c1"># declare the scripts that will be wrapped by the projectInterface and </span>
+<span class="c1">#   accessed through the webServer</span>
+<span class="n">scriptToRun</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_notebook</span><span class="p">,</span> <span class="s1">&#39;sample.py&#39;</span><span class="p">)</span>
+<span class="n">initScript</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_notebook</span><span class="p">,</span> <span class="s1">&#39;initialize.py&#39;</span><span class="p">)</span>
+<span class="n">finalizeScript</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_notebook</span><span class="p">,</span> <span class="s1">&#39;finalize.py&#39;</span><span class="p">)</span>
+<span class="n">configFile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_notebook</span><span class="p">,</span> <span class="s1">&#39;sample-config.toml&#39;</span><span class="p">)</span> 
+
+<span class="c1">#---- Declare the total number of TRs (timepoints) you want to generate, and how many should be training</span>
+<span class="n">num_TRs</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">num_training</span> <span class="o">=</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="step-1-start-the-projectinterface-web-server">
+<h2>Step 1: Start the ProjectInterface Web Server <a id='start_ProjectInterface'></a><a class="headerlink" href="#step-1-start-the-projectinterface-web-server" title="Permalink to this heading"></a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#---- Set up the config and parameters for this rtcloud tutorial</span>
+
+<span class="c1"># NOTE: you can also change these parameters in the Settings tab on the web server</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">StructDict</span><span class="p">({</span>
+    <span class="s1">&#39;title&#39;</span> <span class="p">:</span> <span class="s1">&#39;rtCloud Tutorial&#39;</span><span class="p">,</span> <span class="c1"># study name</span>
+    <span class="s1">&#39;sessionId&#39;</span> <span class="p">:</span> <span class="s1">&#39;20200101T120000&#39;</span><span class="p">,</span> <span class="c1"># session ID on the scanner</span>
+    <span class="s1">&#39;subjectName&#39;</span> <span class="p">:</span> <span class="s1">&#39;001_synthetic&#39;</span><span class="p">,</span> <span class="c1"># subject ID on the scanner</span>
+    <span class="s1">&#39;datestr&#39;</span> <span class="p">:</span> <span class="s1">&#39;20200101&#39;</span><span class="p">,</span> <span class="c1"># session date</span>
+    
+    <span class="s1">&#39;isSynthetic&#39;</span> <span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="c1"># are we using synthetic data?</span>
+    <span class="s1">&#39;numSynthetic&#39;</span> <span class="p">:</span> <span class="n">num_TRs</span><span class="p">,</span> <span class="c1"># total number of synthetic TRs</span>
+    <span class="s1">&#39;numTrainingTRs&#39;</span> <span class="p">:</span> <span class="n">num_training</span><span class="p">,</span> <span class="c1"># number of TRs used for training the classifier</span>
+    <span class="s1">&#39;imgDir&#39;</span> <span class="p">:</span> <span class="s1">&#39;/tmp/notebook-simdata&#39;</span><span class="p">,</span> <span class="c1"># location of synthetic TRs</span>
+    
+    <span class="s1">&#39;subjectNum&#39;</span> <span class="p">:</span> <span class="mi">101</span><span class="p">,</span> <span class="c1"># subject number</span>
+    <span class="s1">&#39;subjectDay&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># study day (relevant if multi-day study)</span>
+    <span class="s1">&#39;sessionNum&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># session number</span>
+    <span class="s1">&#39;runNum&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="c1"># list of scanning runs that were done during the session</span>
+    <span class="s1">&#39;scanNum&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="mi">14</span><span class="p">],</span> <span class="c1"># list of corresponding scan numbers for the runs</span>
+
+    <span class="c1"># Plotting settings</span>
+    <span class="s1">&#39;plotTitle&#39;</span> <span class="p">:</span> <span class="s1">&#39;Realtime Plot&#39;</span><span class="p">,</span> <span class="c1"># plot title</span>
+    <span class="s1">&#39;plotXLabel&#39;</span> <span class="p">:</span> <span class="s1">&#39;TR #&#39;</span><span class="p">,</span> <span class="c1"># plot x-axis label</span>
+    <span class="s1">&#39;plotYLabel&#39;</span> <span class="p">:</span> <span class="s1">&#39;Classifier Prediction&#39;</span><span class="p">,</span> <span class="c1"># plot y-axis label</span>
+    <span class="s1">&#39;plotXRangeLow&#39;</span> <span class="p">:</span> <span class="n">num_training</span><span class="p">,</span> <span class="c1"># plot x-axis minimum limit</span>
+    <span class="s1">&#39;plotXRangeHigh&#39;</span> <span class="p">:</span> <span class="n">num_TRs</span><span class="p">,</span> <span class="c1"># plot x-axis maximum limit</span>
+    <span class="s1">&#39;plotYRangeLow&#39;</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="c1"># plot y-axis minimum limit</span>
+    <span class="s1">&#39;plotYRangeHigh&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="c1"># plot y-axis maximum limit</span>
+    <span class="s1">&#39;plotAutoRangeX&#39;</span> <span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="c1"># do we want the x-axis limit to automatically fit the range?</span>
+    <span class="s1">&#39;plotAutoRangeY&#39;</span> <span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="c1"># do we want the x-axis limit to automatically fit the range?</span>
+
+    <span class="c1"># important variables about the dicom files</span>
+    <span class="s1">&#39;dicomNamePattern&#39;</span> <span class="p">:</span> <span class="s2">&quot;rt_</span><span class="si">{TR:03d}</span><span class="s2">.dcm&quot;</span><span class="p">,</span> <span class="c1"># naming pattern for the dicom files</span>
+    <span class="s1">&#39;minExpectedDicomSize&#39;</span> <span class="p">:</span> <span class="mi">200000</span><span class="p">,</span> <span class="c1"># expected size for the dicom data</span>
+<span class="p">})</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">configFile</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">toml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">fp</span><span class="p">)</span>
+
+<span class="n">args</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">()</span>
+<span class="n">args</span><span class="o">.</span><span class="n">projectName</span> <span class="o">=</span> <span class="s1">&#39;sample&#39;</span>
+<span class="n">args</span><span class="o">.</span><span class="n">projectDir</span> <span class="o">=</span> <span class="n">path_to_notebook</span>
+<span class="n">args</span><span class="o">.</span><span class="n">mainScript</span> <span class="o">=</span> <span class="n">scriptToRun</span>
+<span class="n">args</span><span class="o">.</span><span class="n">initScript</span> <span class="o">=</span> <span class="n">initScript</span>
+<span class="n">args</span><span class="o">.</span><span class="n">finalizeScript</span> <span class="o">=</span> <span class="n">finalizeScript</span>
+<span class="n">args</span><span class="o">.</span><span class="n">dataRemote</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">args</span><span class="o">.</span><span class="n">subjectRemote</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">args</span><span class="o">.</span><span class="n">test</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">args</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
+<span class="n">args</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="mi">8889</span>
+
+
+<span class="c1">#---- Start the project server</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">runProjectServer</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">projectServer</span> <span class="o">=</span> <span class="n">ProjectServer</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">projectServer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">project_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;projectServer&#39;</span><span class="p">,</span> 
+                                      <span class="n">target</span><span class="o">=</span><span class="n">runProjectServer</span><span class="p">,</span>
+                                      <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">args</span><span class="p">,))</span>
+    <span class="n">project_thread</span><span class="o">.</span><span class="n">setDaemon</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">project_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="c1"># ignore event loop already running error</span>
+    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;This event loop is already running&#39;</span><span class="p">:</span>
+        <span class="k">raise</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p><strong>IMPORTANT:</strong></p>
+<p>You can only run this cell to start the projectInterface web server only once or else you will get the following runtime error:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Web</span> <span class="n">Server</span> <span class="n">already</span> <span class="n">running</span>
+</pre></div>
+</div>
+<p>If you want to re-start the web server, you have to first SHUT DOWN the kernel. Instructions for doing this can be found <a class="reference external" href="https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/execute.html#close-a-notebook-kernel-shut-down">here</a>.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="step-2-start-the-synthetic-data-generator">
+<h2>Step 2: Start the Synthetic Data Generator <a id='start_DataGenerator'></a><a class="headerlink" href="#step-2-start-the-synthetic-data-generator" title="Permalink to this heading"></a></h2>
+<p>We will be using a BrainIAK function to create synthetic fMRI data. After you run the following cell, you can execute <code class="docutils literal notranslate"><span class="pre">sim_settings</span></code> in a separate cell to take a look at the different parameter settings. For instance, you will find that the synthetic data is being produced at a rate of 2 seconds per TRs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#---- Set up the parameters for the synthetic data generator</span>
+
+<span class="n">sim_settings</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">default_settings</span>
+<span class="n">sim_settings</span><span class="p">[</span><span class="s1">&#39;save_dicom&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">sim_settings</span><span class="p">[</span><span class="s1">&#39;save_realtime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">sim_settings</span><span class="p">[</span><span class="s1">&#39;numTRs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">num_TRs</span>
+<span class="n">sim_settings</span><span class="p">[</span><span class="s1">&#39;different_ROIs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">sim_settings</span><span class="p">[</span><span class="s1">&#39;scale_percentage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">outdir</span> <span class="o">=</span> <span class="s1">&#39;/tmp/notebook-simdata&#39;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">outdir</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
+
+<span class="c1">#---- Run sim.generate_data(outdir, sim_settings) as a thread</span>
+
+<span class="n">syndata_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;syndata&#39;</span><span class="p">,</span> 
+                                  <span class="n">target</span><span class="o">=</span><span class="n">sim</span><span class="o">.</span><span class="n">generate_data</span><span class="p">,</span> 
+                                  <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">sim_settings</span><span class="p">))</span>
+<span class="n">syndata_thread</span><span class="o">.</span><span class="n">setDaemon</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">syndata_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p><strong>IMPORTANT:</strong></p>
+<p>You can only run this cell to generate the synthetic data in “real-time” once unless you delete the data that you have already created. Otherwise, all the data (which is found in the <code class="docutils literal notranslate"><span class="pre">/tmp/notebook-simdata</span></code> folder) will be automatically available when you open the web server, instead of having the File Watcher wait for incoming data one TR at a time.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="step-3-open-the-web-server-on-the-localhost">
+<h2>Step 3: Open the Web Server on the localhost <a id='open_localhost'></a><a class="headerlink" href="#step-3-open-the-web-server-on-the-localhost" title="Permalink to this heading"></a></h2>
+<p>Here you will open the web-based user interface to view and control the real-time experiment, where a classification analysis will be performed. If you are interested in learning more about the details of a classifier analysis in real-time, take a look at the <a class="reference external" href="https://brainiak.org/tutorials/13-real-time/">real-time tutorial</a> on the BrainIAK website. You will also be able to change the settings in the “Settings” tab.</p>
+<p>The first time you open the web server, either in the cell below or in a separate browser tab, you will be prompted to enter a username and password. In this demonstration, you will use “test” for both. Once you have logged in you will be on the Run tab. You can start the sample.py script running and waiting for dicom data to process by clicking the ‘run’ button within the webpage ‘Run’ tab. Then you will see the output as the script progresses within the view pane of the Run tab.</p>
+<p>If you want to re-run the sample.py script after making changes, you will most likely get the following error message: <code class="docutils literal notranslate"><span class="pre">Error:</span> <span class="pre">Client</span> <span class="pre">thread</span> <span class="pre">already</span> <span class="pre">runnning,</span> <span class="pre">skipping</span> <span class="pre">new</span> <span class="pre">request</span></code>. You will have to restart the kernel like in step 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%html</span>
+<span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;http://localhost:8889&quot;</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;800&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;600&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="alternate-step-3-run-the-classification-script-from-command-line">
+<h2>Alternate Step 3: Run the classification script from command line<a class="headerlink" href="#alternate-step-3-run-the-classification-script-from-command-line" title="Permalink to this heading"></a></h2>
+<p>Instead of running the classification script from the web browser (as above), it can be run directly by running the scripts main function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run the classification script directly by importing the scripts main function.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sample</span><span class="w"> </span><span class="kn">import</span> <span class="n">main</span>
+<span class="n">main</span><span class="p">([</span><span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="n">configFile</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>Summary <a id='summary'></a><a class="headerlink" href="#summary" title="Permalink to this heading"></a></h2>
+<p>You have now completed running a real-time experiment using a distributed computing pipeline (managed by the projectInterface). The synthetic data was sent to the sample.py script in real-time as it was generated, and the script started by building a classifier and then performing classification.</p>
+<p>As a next step you can try modifying or using your own script in place of sample.py, and you can also try running the projectInterface on a cloud VM which eliminates the need for expensive computer hardware within the control room.</p>
+<p>We’re excited to see what interesting real-time experiments you will create!</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="README_INSTRUCTIONS.html" class="btn btn-neutral float-left" title="Set Up Instructions for the Real-Time fMRI Cloud-Based Framework" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../srm/SRM.html" class="btn btn-neutral float-right" title="Shared response model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

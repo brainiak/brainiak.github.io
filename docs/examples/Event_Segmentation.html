@@ -1,0 +1,2496 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Event segmentation and alignment in fMRI data &mdash; brainiak 0.12.dev9+g6d44f1d documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/togglebutton.js"></script>
+        <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Release notes" href="../release_notes.html" />
+    <link rel="prev" title="Examples" href="../examples.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> brainiak
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.12.dev9+g6d44f1d
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Event segmentation and alignment in fMRI data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#annotated-bibliography">Annotated Bibliography</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-data-a-id-data-a">Loading data<a id='data'></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#finding-event-boundaries-during-perception-a-id-perception-a">Finding event boundaries during perception<a id='perception'></a></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#warm-up-event-structure-in-activity-patterns">Warm-up: Event structure in activity patterns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fitting-the-hmm">Fitting the HMM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#determining-the-number-of-events-with-the-hmm">Determining the number of events with the HMM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#optimal-segmentation-with-the-hmm">Optimal segmentation with the HMM</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#comparing-model-and-human-labeled-boundaries-a-id-comparing-a">Comparing model and human-labeled boundaries<a id='comparing'></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aligning-movie-and-recall-data-a-id-aligning-a">Aligning movie and recall data<a id='aligning'></a></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary-a-id-summary-a">Summary<a id='summary'></a></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">brainiak</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../examples.html">Examples</a> &raquo;</li>
+        
+      <li>Event segmentation and alignment in fMRI data</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/examples/Event_Segmentation.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="event-segmentation-and-alignment-in-fmri-data">
+<h1>Event segmentation and alignment in fMRI data<a class="headerlink" href="#event-segmentation-and-alignment-in-fmri-data" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Humans tend to segment continuous perceptual experiences into discrete events. We have devised this notebook to capture the neural representations of this “chunking” process using a Hidden Markov Models (HMM). The notebook uses real data from naturalistic movie viewing and recall, suggesting ways to align derived neural event states with subjective annotations of event boundaries and with the recall time series.</p>
+</div>
+<div class="section" id="annotated-bibliography">
+<h2>Annotated Bibliography<a class="headerlink" href="#annotated-bibliography" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Baldassano, C., Chen, J., Zadbood, A., Pillow, J. W., Hasson, U., &amp; Norman, K. A. (2017). Discovering event structure in continuous narrative perception and memory. <em>Neuron</em>, 95(3), 709–721.e5. <a class="reference external" href="https://doi.org/10.1016/j.neuron.2017.06.041"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Describes and validates the event segmentation method, and applies it to perception and recall data from multiple experiments.</em></p></li>
+<li><p>Baldassano, C., Hasson, U., &amp; Norman, K. A. (2018). Representation of real-world event schemas during narrative perception. <em>Journal of Neuroscience</em>, 38(45), 9689–9699. <a class="reference external" href="https://doi.org/10.1523/JNEUROSCI.0251-18.2018"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Uses the event segmentation model to find common event structure among narratives with a shared schematic script.</em></p></li>
+<li><p>Ben-Yakov, A., &amp; Henson, R. N. (2018). The hippocampal film editor: sensitivity and specificity to event boundaries in continuous experience. <em>Journal of Neuroscience</em>, 38(47), 10057–10068. <a class="reference external" href="https://doi.org/10.1523/JNEUROSCI.0524-18.2018"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Further studies the relationship between the event boundaries produced by the event segmentation model, human-annotated boundaries, and hippocampal responses.</em></p></li>
+<li><p>Silva, M., Baldassano, C., &amp; Fuentemilla, L. (2019). Rapid memory reactivation at movie event boundaries promotes episodic encoding. <em>Journal of Neuroscience</em>, 39(43), 8538–8548. <a class="reference external" href="https://doi.org/10.1523/JNEUROSCI.0360-19.2019"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Applies the event segmentation model to EEG signals collected while subjects were watching a movie.</em></p></li>
+<li><p>Antony, J. W., Hartshorne, T. H., Pomeroy, K., Gureckis, T. M., Hasson, U., McDougle, S. D., &amp; Norman, K. A. (2020). Behavioral, physiological, and neural signatures of surprise during naturalistic sports viewing. <em>Neuron</em>. <a class="reference external" href="https://doi.org/10.1016/j.neuron.2020.10.029"><code class="docutils literal notranslate"><span class="pre">link</span></code></a> <em>Uses the event segmentation model to relate the number and timing of event boundaries in neural signals  to the degree of surprise elicited in basketball games.</em></p></li>
+</ol>
+</div>
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="#data">Loading data</a></p></li>
+<li><p><a class="reference external" href="#perception">Finding event boundaries during perception</a></p></li>
+<li><p><a class="reference external" href="#comparing">Comparing model and human-labeled boundaries</a></p></li>
+<li><p><a class="reference external" href="#aligning">Aligning movie and recall data</a></p></li>
+<li><p><a class="reference external" href="#summary">Summary</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">sys</span> 
+<span class="kn">import</span> <span class="nn">os</span>    
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">brainiak.eventseg.event</span> <span class="kn">import</span> <span class="n">EventSegment</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">patches</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">smallsize</span><span class="o">=</span><span class="mi">14</span><span class="p">;</span> <span class="n">mediumsize</span><span class="o">=</span><span class="mi">16</span><span class="p">;</span> <span class="n">largesize</span><span class="o">=</span><span class="mi">18</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;xtick&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">smallsize</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;ytick&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">smallsize</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;legend&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">mediumsize</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">titlesize</span><span class="o">=</span><span class="n">largesize</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">mediumsize</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span> <span class="n">titlesize</span><span class="o">=</span><span class="n">mediumsize</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="loading-data-a-id-data-a">
+<h2>Loading data<a id='data'></a><a class="headerlink" href="#loading-data-a-id-data-a" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial will use data from the first run of the Sherlock dataset <a class="reference external" href="https://doi.org/10.1038/nn.4450">(Chen et al. 2017)</a>, masked to only include the Angular Gyrus.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;Sherlock_AG_movie.npy&#39;</span><span class="p">):</span>
+    <span class="o">!</span>wget https://ndownloader.figshare.com/files/22927253 -O Sherlock_AG_movie.npy
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;Sherlock_AG_recall.npy&#39;</span><span class="p">):</span>
+    <span class="o">!</span>wget https://ndownloader.figshare.com/files/22927256 -O Sherlock_AG_recall.npy
+
+<span class="n">movie</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;Sherlock_AG_movie.npy&#39;</span><span class="p">)</span>
+<span class="n">recall</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;Sherlock_AG_recall.npy&#39;</span><span class="p">)</span>
+<span class="n">movie_group</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">movie</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2021-05-26 22:20:16--  https://ndownloader.figshare.com/files/22927253
+Resolving proxy.jf.intel.com (proxy.jf.intel.com)... 10.7.211.16
+Connecting to proxy.jf.intel.com (proxy.jf.intel.com)|10.7.211.16|:912... connected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proxy request sent, awaiting response... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>302 Found
+Location: https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/22927253/Sherlock_AG_movie.npy [following]
+--2021-05-26 22:20:17--  https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/22927253/Sherlock_AG_movie.npy
+Connecting to proxy.jf.intel.com (proxy.jf.intel.com)|10.7.211.16|:912... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>connected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proxy request sent, awaiting response... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>200 OK
+Length: 256101248 (244M) [application/octet-stream]
+Saving to: ‘Sherlock_AG_movie.npy’
+
+
+Sherlock_AG_movie.n   0%[                    ]       0  --.-KB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   0%[                    ] 109,44K   516KB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   0%[                    ] 262,44K   634KB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   0%[                    ] 483,44K   777KB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   0%[                    ] 755,44K   911KB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   0%[                    ]   1,07M  1,03MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   0%[                    ]   1,38M  1,12MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   0%[                    ]   1,72M  1,19MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   0%[                    ]   2,10M  1,27MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   1%[                    ]   2,51M  1,36MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   1%[                    ]   2,93M  1,42MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   1%[                    ]   3,36M  1,48MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   1%[                    ]   3,78M  1,53MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   1%[                    ]   4,18M  1,56MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   1%[                    ]   4,59M  1,59MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   2%[                    ]   5,00M  1,62MB/s    eta 2m 28s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   2%[                    ]   5,40M  1,70MB/s    eta 2m 28s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   2%[                    ]   5,83M  1,77MB/s    eta 2m 28s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   2%[                    ]   6,25M  1,88MB/s    eta 2m 28s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   2%[                    ]   6,64M  1,90MB/s    eta 2m 28s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   2%[                    ]   7,04M  1,94MB/s    eta 2m 18s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   3%[                    ]   7,43M  1,94MB/s    eta 2m 18s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   3%[                    ]   7,84M  2,00MB/s    eta 2m 18s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   3%[                    ]   8,25M  2,01MB/s    eta 2m 18s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   3%[                    ]   8,65M  2,01MB/s    eta 2m 18s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   3%[                    ]   9,06M  2,00MB/s    eta 2m 13s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   3%[                    ]   9,47M  2,00MB/s    eta 2m 13s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   4%[                    ]   9,86M  1,99MB/s    eta 2m 13s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   4%[                    ]  10,12M  1,95MB/s    eta 2m 13s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   4%[                    ]  10,53M  1,95MB/s    eta 2m 13s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   4%[                    ]  10,93M  1,95MB/s    eta 2m 11s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   4%[                    ]  11,29M  1,94MB/s    eta 2m 11s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   4%[                    ]  11,34M  1,75MB/s    eta 2m 11s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   5%[&gt;                   ]  12,23M  1,90MB/s    eta 2m 11s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   5%[&gt;                   ]  12,59M  1,89MB/s    eta 2m 11s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   5%[&gt;                   ]  12,97M  1,87MB/s    eta 2m 10s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   5%[&gt;                   ]  13,37M  1,87MB/s    eta 2m 10s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   5%[&gt;                   ]  13,81M  1,89MB/s    eta 2m 10s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   5%[&gt;                   ]  14,23M  1,90MB/s    eta 2m 10s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   6%[&gt;                   ]  14,67M  1,90MB/s    eta 2m 10s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   6%[&gt;                   ]  15,08M  1,90MB/s    eta 2m 6s  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   6%[&gt;                   ]  15,50M  1,91MB/s    eta 2m 6s  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   6%[&gt;                   ]  15,90M  1,91MB/s    eta 2m 6s  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   6%[&gt;                   ]  16,33M  1,92MB/s    eta 2m 6s  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   6%[&gt;                   ]  16,75M  1,96MB/s    eta 2m 6s  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   7%[&gt;                   ]  17,17M  1,96MB/s    eta 2m 3s  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   7%[&gt;                   ]  17,58M  1,96MB/s    eta 2m 3s  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   7%[&gt;                   ]  17,92M  1,95MB/s    eta 2m 3s  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   7%[&gt;                   ]  18,31M  1,97MB/s    eta 2m 3s  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   7%[&gt;                   ]  18,73M  1,99MB/s    eta 2m 3s  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   7%[&gt;                   ]  19,15M  2,00MB/s    eta 2m 2s  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   8%[&gt;                   ]  19,58M  2,01MB/s    eta 2m 2s  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   8%[&gt;                   ]  20,00M  2,01MB/s    eta 2m 2s  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   8%[&gt;                   ]  20,40M  2,00MB/s    eta 2m 2s  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   8%[&gt;                   ]  20,81M  2,00MB/s    eta 2m 2s  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   8%[&gt;                   ]  21,23M  2,00MB/s    eta 1m 59s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   8%[&gt;                   ]  21,67M  2,00MB/s    eta 1m 59s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   9%[&gt;                   ]  22,11M  2,01MB/s    eta 1m 59s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   9%[&gt;                   ]  22,53M  2,01MB/s    eta 1m 59s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   9%[&gt;                   ]  22,93M  2,01MB/s    eta 1m 59s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   9%[&gt;                   ]  23,36M  2,01MB/s    eta 1m 57s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   9%[&gt;                   ]  23,78M  2,01MB/s    eta 1m 57s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n   9%[&gt;                   ]  24,20M  2,02MB/s    eta 1m 57s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  10%[=&gt;                  ]  24,62M  2,07MB/s    eta 1m 57s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  10%[=&gt;                  ]  25,04M  2,06MB/s    eta 1m 57s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  10%[=&gt;                  ]  25,45M  2,06MB/s    eta 1m 55s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  10%[=&gt;                  ]  25,87M  2,06MB/s    eta 1m 55s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  10%[=&gt;                  ]  26,28M  2,05MB/s    eta 1m 55s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  10%[=&gt;                  ]  26,70M  2,06MB/s    eta 1m 55s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  11%[=&gt;                  ]  27,11M  2,05MB/s    eta 1m 55s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  11%[=&gt;                  ]  27,53M  2,06MB/s    eta 1m 54s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  11%[=&gt;                  ]  27,75M  1,99MB/s    eta 1m 54s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  11%[=&gt;                  ]  28,17M  1,98MB/s    eta 1m 54s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  11%[=&gt;                  ]  28,61M  1,99MB/s    eta 1m 54s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  11%[=&gt;                  ]  29,03M  1,99MB/s    eta 1m 54s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  12%[=&gt;                  ]  29,43M  1,99MB/s    eta 1m 53s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  12%[=&gt;                  ]  29,87M  1,99MB/s    eta 1m 53s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  12%[=&gt;                  ]  30,31M  2,00MB/s    eta 1m 53s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  12%[=&gt;                  ]  30,76M  2,00MB/s    eta 1m 53s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  12%[=&gt;                  ]  31,18M  2,01MB/s    eta 1m 53s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  12%[=&gt;                  ]  31,61M  2,01MB/s    eta 1m 51s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  13%[=&gt;                  ]  32,00M  2,01MB/s    eta 1m 51s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  13%[=&gt;                  ]  32,42M  2,01MB/s    eta 1m 51s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  13%[=&gt;                  ]  32,84M  2,01MB/s    eta 1m 51s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  13%[=&gt;                  ]  33,26M  2,02MB/s    eta 1m 51s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  13%[=&gt;                  ]  33,70M  2,02MB/s    eta 1m 49s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  13%[=&gt;                  ]  34,12M  2,03MB/s    eta 1m 49s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  14%[=&gt;                  ]  34,53M  2,08MB/s    eta 1m 49s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  14%[=&gt;                  ]  34,93M  2,08MB/s    eta 1m 49s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  14%[=&gt;                  ]  35,33M  2,07MB/s    eta 1m 49s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  14%[=&gt;                  ]  35,75M  2,07MB/s    eta 1m 48s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  14%[=&gt;                  ]  36,15M  2,06MB/s    eta 1m 48s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  14%[=&gt;                  ]  36,54M  2,03MB/s    eta 1m 48s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  15%[==&gt;                 ]  36,83M  1,99MB/s    eta 1m 48s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  15%[==&gt;                 ]  37,25M  1,98MB/s    eta 1m 48s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  15%[==&gt;                 ]  37,68M  1,98MB/s    eta 1m 47s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  15%[==&gt;                 ]  38,12M  1,99MB/s    eta 1m 47s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  15%[==&gt;                 ]  38,54M  1,99MB/s    eta 1m 47s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  15%[==&gt;                 ]  38,97M  1,99MB/s    eta 1m 47s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  16%[==&gt;                 ]  39,36M  1,98MB/s    eta 1m 47s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  16%[==&gt;                 ]  39,76M  1,97MB/s    eta 1m 46s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  16%[==&gt;                 ]  40,18M  1,97MB/s    eta 1m 46s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  16%[==&gt;                 ]  40,61M  1,97MB/s    eta 1m 46s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  16%[==&gt;                 ]  41,04M  1,98MB/s    eta 1m 46s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  16%[==&gt;                 ]  41,48M  2,00MB/s    eta 1m 46s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  17%[==&gt;                 ]  41,90M  2,01MB/s    eta 1m 44s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  17%[==&gt;                 ]  42,33M  2,01MB/s    eta 1m 44s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  17%[==&gt;                 ]  42,76M  2,02MB/s    eta 1m 44s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  17%[==&gt;                 ]  43,18M  2,08MB/s    eta 1m 44s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  17%[==&gt;                 ]  43,62M  2,09MB/s    eta 1m 44s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  18%[==&gt;                 ]  44,06M  2,09MB/s    eta 1m 43s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  18%[==&gt;                 ]  44,50M  2,09MB/s    eta 1m 43s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  18%[==&gt;                 ]  44,92M  2,09MB/s    eta 1m 43s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  18%[==&gt;                 ]  45,36M  2,10MB/s    eta 1m 43s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  18%[==&gt;                 ]  45,64M  2,04MB/s    eta 1m 43s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  18%[==&gt;                 ]  46,03M  2,04MB/s    eta 1m 42s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  19%[==&gt;                 ]  46,45M  2,04MB/s    eta 1m 42s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  19%[==&gt;                 ]  46,87M  2,04MB/s    eta 1m 42s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  19%[==&gt;                 ]  47,29M  2,04MB/s    eta 1m 42s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  19%[==&gt;                 ]  47,72M  2,03MB/s    eta 1m 42s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  19%[==&gt;                 ]  47,84M  1,80MB/s    eta 1m 42s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  19%[==&gt;                 ]  48,43M  1,85MB/s    eta 1m 42s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  20%[===&gt;                ]  49,25M  1,97MB/s    eta 1m 42s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  20%[===&gt;                ]  49,73M  1,98MB/s    eta 1m 42s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  20%[===&gt;                ]  50,17M  1,99MB/s    eta 1m 42s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  20%[===&gt;                ]  50,56M  1,97MB/s    eta 99s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  20%[===&gt;                ]  50,98M  1,97MB/s    eta 99s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  21%[===&gt;                ]  51,40M  1,97MB/s    eta 99s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  21%[===&gt;                ]  51,81M  1,96MB/s    eta 99s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  21%[===&gt;                ]  52,23M  1,95MB/s    eta 99s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  21%[===&gt;                ]  52,65M  1,96MB/s    eta 98s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  21%[===&gt;                ]  53,04M  2,01MB/s    eta 98s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  21%[===&gt;                ]  53,40M  1,99MB/s    eta 98s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  22%[===&gt;                ]  53,79M  1,98MB/s    eta 98s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  22%[===&gt;                ]  54,17M  1,97MB/s    eta 98s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  22%[===&gt;                ]  54,34M  1,90MB/s    eta 98s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  22%[===&gt;                ]  54,75M  2,12MB/s    eta 98s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  22%[===&gt;                ]  55,15M  2,08MB/s    eta 98s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  22%[===&gt;                ]  55,56M  1,92MB/s    eta 98s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  22%[===&gt;                ]  55,98M  1,91MB/s    eta 98s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  23%[===&gt;                ]  56,40M  1,92MB/s    eta 96s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  23%[===&gt;                ]  56,83M  1,92MB/s    eta 96s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  23%[===&gt;                ]  57,25M  1,92MB/s    eta 96s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  23%[===&gt;                ]  57,65M  1,92MB/s    eta 96s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  23%[===&gt;                ]  58,06M  1,92MB/s    eta 96s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  23%[===&gt;                ]  58,48M  1,92MB/s    eta 95s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  24%[===&gt;                ]  58,89M  1,91MB/s    eta 95s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  24%[===&gt;                ]  59,29M  1,92MB/s    eta 95s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  24%[===&gt;                ]  59,70M  1,93MB/s    eta 95s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  24%[===&gt;                ]  60,12M  1,94MB/s    eta 95s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  24%[===&gt;                ]  60,53M  2,01MB/s    eta 94s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  24%[===&gt;                ]  60,93M  2,02MB/s    eta 94s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  25%[====&gt;               ]  61,31M  2,01MB/s    eta 94s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  25%[====&gt;               ]  61,72M  2,01MB/s    eta 94s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  25%[====&gt;               ]  62,11M  2,00MB/s    eta 94s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  25%[====&gt;               ]  62,51M  2,00MB/s    eta 93s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  25%[====&gt;               ]  62,92M  1,99MB/s    eta 93s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  25%[====&gt;               ]  63,14M  1,93MB/s    eta 93s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  26%[====&gt;               ]  63,54M  1,92MB/s    eta 93s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  26%[====&gt;               ]  63,97M  1,92MB/s    eta 93s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  26%[====&gt;               ]  64,37M  1,93MB/s    eta 92s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  26%[====&gt;               ]  64,68M  1,90MB/s    eta 92s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  26%[====&gt;               ]  65,03M  1,88MB/s    eta 92s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  26%[====&gt;               ]  65,46M  1,89MB/s    eta 92s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  26%[====&gt;               ]  65,89M  1,89MB/s    eta 92s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  27%[====&gt;               ]  66,28M  1,88MB/s    eta 91s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  27%[====&gt;               ]  66,72M  1,89MB/s    eta 91s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  27%[====&gt;               ]  67,15M  1,90MB/s    eta 91s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  27%[====&gt;               ]  67,22M  1,72MB/s    eta 91s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  27%[====&gt;               ]  68,37M  1,96MB/s    eta 91s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  28%[====&gt;               ]  68,78M  1,96MB/s    eta 90s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  28%[====&gt;               ]  69,20M  1,96MB/s    eta 90s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  28%[====&gt;               ]  69,59M  1,98MB/s    eta 90s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  28%[====&gt;               ]  70,00M  2,01MB/s    eta 90s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  28%[====&gt;               ]  70,40M  2,01MB/s    eta 90s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  28%[====&gt;               ]  70,83M  2,01MB/s    eta 89s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  29%[====&gt;               ]  71,04M  1,95MB/s    eta 89s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  29%[====&gt;               ]  71,47M  2,00MB/s    eta 89s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  29%[====&gt;               ]  71,89M  2,00MB/s    eta 89s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  29%[====&gt;               ]  72,33M  2,00MB/s    eta 89s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  29%[====&gt;               ]  72,75M  2,00MB/s    eta 88s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  29%[====&gt;               ]  73,18M  2,02MB/s    eta 88s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  30%[=====&gt;              ]  73,62M  2,02MB/s    eta 88s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  30%[=====&gt;              ]  74,08M  2,03MB/s    eta 88s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  30%[=====&gt;              ]  74,50M  1,99MB/s    eta 88s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  30%[=====&gt;              ]  74,92M  2,00MB/s    eta 87s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  30%[=====&gt;              ]  75,36M  2,01MB/s    eta 87s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  31%[=====&gt;              ]  75,78M  2,01MB/s    eta 87s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  31%[=====&gt;              ]  76,22M  2,02MB/s    eta 87s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  31%[=====&gt;              ]  76,67M  2,03MB/s    eta 87s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  31%[=====&gt;              ]  77,12M  2,05MB/s    eta 85s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  31%[=====&gt;              ]  77,53M  2,10MB/s    eta 85s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  31%[=====&gt;              ]  77,95M  2,11MB/s    eta 85s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  32%[=====&gt;              ]  78,36M  2,11MB/s    eta 85s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  32%[=====&gt;              ]  78,78M  2,10MB/s    eta 85s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  32%[=====&gt;              ]  79,20M  2,10MB/s    eta 84s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  32%[=====&gt;              ]  79,64M  2,10MB/s    eta 84s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  32%[=====&gt;              ]  80,06M  2,09MB/s    eta 84s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  32%[=====&gt;              ]  80,26M  2,01MB/s    eta 84s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  33%[=====&gt;              ]  80,68M  2,00MB/s    eta 84s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  33%[=====&gt;              ]  81,09M  2,00MB/s    eta 83s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  33%[=====&gt;              ]  81,50M  2,00MB/s    eta 83s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  33%[=====&gt;              ]  81,93M  1,99MB/s    eta 83s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  33%[=====&gt;              ]  82,36M  1,99MB/s    eta 83s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  33%[=====&gt;              ]  82,79M  2,00MB/s    eta 83s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  34%[=====&gt;              ]  83,22M  1,98MB/s    eta 82s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  34%[=====&gt;              ]  83,64M  1,98MB/s    eta 82s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  34%[=====&gt;              ]  84,06M  1,99MB/s    eta 82s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  34%[=====&gt;              ]  84,50M  2,00MB/s    eta 82s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  34%[=====&gt;              ]  84,95M  2,01MB/s    eta 82s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  34%[=====&gt;              ]  85,37M  2,01MB/s    eta 81s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  35%[======&gt;             ]  85,79M  2,00MB/s    eta 81s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  35%[======&gt;             ]  86,22M  2,01MB/s    eta 81s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  35%[======&gt;             ]  86,64M  2,02MB/s    eta 81s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  35%[======&gt;             ]  87,06M  2,08MB/s    eta 81s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  35%[======&gt;             ]  87,48M  2,08MB/s    eta 80s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  35%[======&gt;             ]  87,62M  1,80MB/s    eta 80s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  36%[======&gt;             ]  88,20M  1,86MB/s    eta 80s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  36%[======&gt;             ]  88,56M  1,84MB/s    eta 80s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  36%[======&gt;             ]  88,95M  1,83MB/s    eta 80s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  36%[======&gt;             ]  89,86M  1,97MB/s    eta 80s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  36%[======&gt;             ]  90,28M  1,96MB/s    eta 80s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  37%[======&gt;             ]  90,70M  1,96MB/s    eta 80s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  37%[======&gt;             ]  91,15M  1,96MB/s    eta 80s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  37%[======&gt;             ]  91,58M  1,96MB/s    eta 78s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  37%[======&gt;             ]  92,01M  1,97MB/s    eta 78s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  37%[======&gt;             ]  92,45M  1,97MB/s    eta 78s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  38%[======&gt;             ]  92,89M  1,96MB/s    eta 78s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  38%[======&gt;             ]  93,34M  1,97MB/s    eta 78s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  38%[======&gt;             ]  93,79M  1,98MB/s    eta 76s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  38%[======&gt;             ]  94,23M  1,98MB/s    eta 76s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  38%[======&gt;             ]  94,67M  1,99MB/s    eta 76s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  38%[======&gt;             ]  95,12M  2,29MB/s    eta 76s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  39%[======&gt;             ]  95,56M  2,27MB/s    eta 76s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  39%[======&gt;             ]  95,98M  2,28MB/s    eta 75s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  39%[======&gt;             ]  96,43M  2,15MB/s    eta 75s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  39%[======&gt;             ]  96,68M  2,09MB/s    eta 75s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  39%[======&gt;             ]  97,04M  2,07MB/s    eta 75s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  39%[======&gt;             ]  97,48M  2,07MB/s    eta 75s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  40%[=======&gt;            ]  97,92M  2,08MB/s    eta 74s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  40%[=======&gt;            ]  98,34M  2,07MB/s    eta 74s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  40%[=======&gt;            ]  98,78M  2,07MB/s    eta 74s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  40%[=======&gt;            ]  99,22M  2,07MB/s    eta 74s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  40%[=======&gt;            ]  99,65M  2,07MB/s    eta 74s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  40%[=======&gt;            ] 100,11M  2,08MB/s    eta 73s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  41%[=======&gt;            ] 100,54M  2,07MB/s    eta 73s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  41%[=======&gt;            ] 100,97M  2,07MB/s    eta 73s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  41%[=======&gt;            ] 101,42M  2,07MB/s    eta 73s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  41%[=======&gt;            ] 101,86M  2,06MB/s    eta 73s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  41%[=======&gt;            ] 102,29M  2,06MB/s    eta 72s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  42%[=======&gt;            ] 102,73M  2,07MB/s    eta 72s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  42%[=======&gt;            ] 103,15M  2,09MB/s    eta 72s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  42%[=======&gt;            ] 103,59M  2,14MB/s    eta 72s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  42%[=======&gt;            ] 104,03M  2,14MB/s    eta 72s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  42%[=======&gt;            ] 104,43M  2,12MB/s    eta 71s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  42%[=======&gt;            ] 104,75M  2,09MB/s    eta 71s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  43%[=======&gt;            ] 105,11M  2,06MB/s    eta 71s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  43%[=======&gt;            ] 105,50M  2,05MB/s    eta 71s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  43%[=======&gt;            ] 105,92M  2,04MB/s    eta 71s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  43%[=======&gt;            ] 106,34M  2,04MB/s    eta 70s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  43%[=======&gt;            ] 106,75M  2,02MB/s    eta 70s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  43%[=======&gt;            ] 107,15M  2,02MB/s    eta 70s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  44%[=======&gt;            ] 107,58M  2,02MB/s    eta 70s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  44%[=======&gt;            ] 108,00M  2,01MB/s    eta 70s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  44%[=======&gt;            ] 108,39M  2,00MB/s    eta 69s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  44%[=======&gt;            ] 108,81M  2,00MB/s    eta 69s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  44%[=======&gt;            ] 109,14M  1,96MB/s    eta 69s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  44%[=======&gt;            ] 109,52M  1,95MB/s    eta 69s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  44%[=======&gt;            ] 109,86M  1,92MB/s    eta 69s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  45%[========&gt;           ] 110,22M  1,90MB/s    eta 68s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  45%[========&gt;           ] 110,58M  1,88MB/s    eta 68s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  45%[========&gt;           ] 110,92M  1,90MB/s    eta 68s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  45%[========&gt;           ] 111,23M  1,88MB/s    eta 68s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  45%[========&gt;           ] 111,58M  1,85MB/s    eta 68s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  45%[========&gt;           ] 111,95M  1,85MB/s    eta 67s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  45%[========&gt;           ] 112,33M  1,83MB/s    eta 67s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  46%[========&gt;           ] 112,67M  1,81MB/s    eta 67s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  46%[========&gt;           ] 112,89M  1,75MB/s    eta 67s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  46%[========&gt;           ] 113,25M  1,73MB/s    eta 67s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  46%[========&gt;           ] 113,64M  1,73MB/s    eta 66s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  46%[========&gt;           ] 113,98M  1,70MB/s    eta 66s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  46%[========&gt;           ] 114,34M  1,69MB/s    eta 66s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  46%[========&gt;           ] 114,68M  1,70MB/s    eta 66s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  47%[========&gt;           ] 114,97M  1,67MB/s    eta 66s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  47%[========&gt;           ] 115,40M  1,72MB/s    eta 66s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  47%[========&gt;           ] 115,67M  1,67MB/s    eta 66s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  47%[========&gt;           ] 116,03M  1,68MB/s    eta 66s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  47%[========&gt;           ] 116,45M  1,69MB/s    eta 66s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  47%[========&gt;           ] 116,86M  1,73MB/s    eta 66s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  47%[========&gt;           ] 117,23M  1,75MB/s    eta 65s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  48%[========&gt;           ] 117,62M  1,73MB/s    eta 65s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  48%[========&gt;           ] 118,04M  1,76MB/s    eta 65s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  48%[========&gt;           ] 118,45M  1,78MB/s    eta 65s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  48%[========&gt;           ] 118,86M  1,83MB/s    eta 65s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  48%[========&gt;           ] 119,28M  1,85MB/s    eta 64s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  49%[========&gt;           ] 119,72M  1,87MB/s    eta 64s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  49%[========&gt;           ] 120,14M  1,89MB/s    eta 64s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  49%[========&gt;           ] 120,54M  1,89MB/s    eta 64s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  49%[========&gt;           ] 120,86M  1,89MB/s    eta 64s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  49%[========&gt;           ] 121,29M  1,93MB/s    eta 63s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  49%[========&gt;           ] 121,72M  1,92MB/s    eta 63s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  50%[=========&gt;          ] 122,14M  1,99MB/s    eta 63s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  50%[=========&gt;          ] 122,56M  1,99MB/s    eta 63s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  50%[=========&gt;          ] 122,97M  1,99MB/s    eta 63s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  50%[=========&gt;          ] 123,37M  2,00MB/s    eta 62s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  50%[=========&gt;          ] 123,81M  2,01MB/s    eta 62s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  50%[=========&gt;          ] 124,26M  2,02MB/s    eta 62s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  51%[=========&gt;          ] 124,70M  2,03MB/s    eta 62s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  51%[=========&gt;          ] 125,14M  2,04MB/s    eta 62s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  51%[=========&gt;          ] 125,58M  2,04MB/s    eta 60s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  51%[=========&gt;          ] 126,00M  2,04MB/s    eta 60s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  51%[=========&gt;          ] 126,39M  2,03MB/s    eta 60s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  51%[=========&gt;          ] 126,76M  2,01MB/s    eta 60s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  52%[=========&gt;          ] 127,04M  1,57MB/s    eta 61s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  52%[=========&gt;          ] 127,61M  1,61MB/s    eta 61s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  52%[=========&gt;          ] 128,70M  1,77MB/s    eta 61s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  53%[=========&gt;          ] 129,64M  1,90MB/s    eta 61s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  53%[=========&gt;          ] 130,04M  1,90MB/s    eta 61s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  53%[=========&gt;          ] 130,11M  1,73MB/s    eta 59s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  53%[=========&gt;          ] 130,64M  1,76MB/s    eta 59s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  53%[=========&gt;          ] 131,01M  1,76MB/s    eta 59s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  53%[=========&gt;          ] 131,83M  1,69MB/s    eta 58s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  54%[=========&gt;          ] 132,42M  1,72MB/s    eta 58s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  54%[=========&gt;          ] 133,29M  1,81MB/s    eta 58s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  54%[=========&gt;          ] 133,72M  1,82MB/s    eta 58s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  54%[=========&gt;          ] 134,12M  1,81MB/s    eta 58s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  55%[==========&gt;         ] 134,54M  1,80MB/s    eta 56s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  55%[==========&gt;         ] 134,98M  1,81MB/s    eta 56s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  55%[==========&gt;         ] 135,40M  1,82MB/s    eta 56s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  55%[==========&gt;         ] 135,83M  1,82MB/s    eta 56s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  55%[==========&gt;         ] 136,25M  2,24MB/s    eta 56s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  55%[==========&gt;         ] 136,67M  2,06MB/s    eta 55s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  56%[==========&gt;         ] 137,09M  1,92MB/s    eta 55s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  56%[==========&gt;         ] 137,51M  1,93MB/s    eta 55s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  56%[==========&gt;         ] 137,97M  2,11MB/s    eta 55s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  56%[==========&gt;         ] 138,37M  2,12MB/s    eta 55s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  56%[==========&gt;         ] 138,79M  2,13MB/s    eta 54s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  56%[==========&gt;         ] 139,11M  2,22MB/s    eta 54s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  57%[==========&gt;         ] 139,53M  2,02MB/s    eta 54s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  57%[==========&gt;         ] 139,97M  2,03MB/s    eta 54s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  57%[==========&gt;         ] 140,37M  2,04MB/s    eta 54s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  57%[==========&gt;         ] 140,81M  2,03MB/s    eta 53s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  57%[==========&gt;         ] 141,25M  2,04MB/s    eta 53s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  58%[==========&gt;         ] 141,68M  2,04MB/s    eta 53s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  58%[==========&gt;         ] 142,09M  2,04MB/s    eta 53s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  58%[==========&gt;         ] 142,51M  2,04MB/s    eta 53s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  58%[==========&gt;         ] 142,93M  2,04MB/s    eta 52s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  58%[==========&gt;         ] 143,36M  2,05MB/s    eta 52s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  58%[==========&gt;         ] 143,78M  2,04MB/s    eta 52s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  59%[==========&gt;         ] 144,20M  2,04MB/s    eta 52s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  59%[==========&gt;         ] 144,64M  2,04MB/s    eta 52s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  59%[==========&gt;         ] 145,06M  2,04MB/s    eta 51s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  59%[==========&gt;         ] 145,47M  2,03MB/s    eta 51s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  59%[==========&gt;         ] 145,90M  2,08MB/s    eta 51s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  59%[==========&gt;         ] 146,31M  2,07MB/s    eta 51s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  60%[===========&gt;        ] 146,72M  2,06MB/s    eta 51s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  60%[===========&gt;        ] 147,12M  2,06MB/s    eta 50s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  60%[===========&gt;        ] 147,50M  2,04MB/s    eta 50s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  60%[===========&gt;        ] 147,81M  2,00MB/s    eta 50s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  60%[===========&gt;        ] 148,22M  2,00MB/s    eta 50s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  60%[===========&gt;        ] 148,64M  2,00MB/s    eta 50s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  61%[===========&gt;        ] 149,08M  2,00MB/s    eta 49s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  61%[===========&gt;        ] 149,51M  2,00MB/s    eta 49s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  61%[===========&gt;        ] 149,93M  2,01MB/s    eta 49s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  61%[===========&gt;        ] 150,37M  2,01MB/s    eta 49s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  61%[===========&gt;        ] 150,81M  2,01MB/s    eta 49s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  61%[===========&gt;        ] 151,20M  2,00MB/s    eta 47s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  62%[===========&gt;        ] 151,59M  2,00MB/s    eta 47s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  62%[===========&gt;        ] 151,98M  1,98MB/s    eta 47s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  62%[===========&gt;        ] 152,37M  1,98MB/s    eta 47s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  62%[===========&gt;        ] 152,79M  1,98MB/s    eta 47s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  62%[===========&gt;        ] 153,22M  1,98MB/s    eta 46s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  62%[===========&gt;        ] 153,64M  1,99MB/s    eta 46s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  63%[===========&gt;        ] 153,95M  1,99MB/s    eta 46s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  63%[===========&gt;        ] 154,28M  1,97MB/s    eta 46s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  63%[===========&gt;        ] 154,70M  1,97MB/s    eta 46s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  63%[===========&gt;        ] 155,09M  1,96MB/s    eta 46s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  63%[===========&gt;        ] 155,51M  1,95MB/s    eta 46s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  63%[===========&gt;        ] 155,90M  1,94MB/s    eta 46s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  63%[===========&gt;        ] 156,29M  1,94MB/s    eta 46s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  64%[===========&gt;        ] 156,70M  1,92MB/s    eta 46s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  64%[===========&gt;        ] 157,11M  1,92MB/s    eta 44s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  64%[===========&gt;        ] 157,53M  1,93MB/s    eta 44s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  64%[===========&gt;        ] 157,93M  1,94MB/s    eta 44s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  64%[===========&gt;        ] 158,31M  1,93MB/s    eta 44s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  64%[===========&gt;        ] 158,73M  1,93MB/s    eta 44s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  65%[============&gt;       ] 159,14M  1,93MB/s    eta 43s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  65%[============&gt;       ] 159,54M  1,93MB/s    eta 43s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  65%[============&gt;       ] 159,95M  1,93MB/s    eta 43s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  65%[============&gt;       ] 160,36M  1,99MB/s    eta 43s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  65%[============&gt;       ] 160,76M  1,99MB/s    eta 43s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  65%[============&gt;       ] 161,18M  1,99MB/s    eta 42s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  66%[============&gt;       ] 161,60M  2,00MB/s    eta 42s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  66%[============&gt;       ] 162,00M  2,00MB/s    eta 42s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  66%[============&gt;       ] 162,40M  2,00MB/s    eta 42s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  66%[============&gt;       ] 162,79M  2,00MB/s    eta 42s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  66%[============&gt;       ] 163,04M  1,94MB/s    eta 41s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  66%[============&gt;       ] 163,39M  1,92MB/s    eta 41s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  67%[============&gt;       ] 163,79M  1,92MB/s    eta 41s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  67%[============&gt;       ] 164,22M  1,93MB/s    eta 41s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  67%[============&gt;       ] 164,62M  1,94MB/s    eta 41s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  67%[============&gt;       ] 165,03M  1,94MB/s    eta 40s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  67%[============&gt;       ] 165,45M  1,94MB/s    eta 40s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  67%[============&gt;       ] 165,87M  1,94MB/s    eta 40s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  68%[============&gt;       ] 166,31M  1,95MB/s    eta 40s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  68%[============&gt;       ] 166,75M  1,96MB/s    eta 40s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  68%[============&gt;       ] 167,15M  1,96MB/s    eta 39s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  68%[============&gt;       ] 167,58M  1,96MB/s    eta 39s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  68%[============&gt;       ] 168,00M  1,96MB/s    eta 39s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  68%[============&gt;       ] 168,40M  1,96MB/s    eta 39s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  69%[============&gt;       ] 168,83M  1,96MB/s    eta 39s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  69%[============&gt;       ] 169,23M  2,02MB/s    eta 38s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  69%[============&gt;       ] 169,65M  2,05MB/s    eta 38s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  69%[============&gt;       ] 170,06M  2,05MB/s    eta 38s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  69%[============&gt;       ] 170,47M  2,05MB/s    eta 38s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  69%[============&gt;       ] 170,89M  2,05MB/s    eta 38s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  70%[=============&gt;      ] 171,29M  2,05MB/s    eta 37s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  70%[=============&gt;      ] 171,53M  2,00MB/s    eta 37s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  70%[=============&gt;      ] 171,97M  2,00MB/s    eta 37s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  70%[=============&gt;      ] 172,40M  2,01MB/s    eta 37s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  70%[=============&gt;      ] 172,83M  1,99MB/s    eta 37s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  70%[=============&gt;      ] 173,25M  2,00MB/s    eta 36s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  71%[=============&gt;      ] 173,62M  1,78MB/s    eta 36s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  71%[=============&gt;      ] 174,20M  1,83MB/s    eta 36s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  71%[=============&gt;      ] 174,56M  1,81MB/s    eta 36s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  71%[=============&gt;      ] 174,89M  1,79MB/s    eta 35s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  71%[=============&gt;      ] 174,92M  1,37MB/s    eta 36s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  72%[=============&gt;      ] 177,51M  1,86MB/s    eta 36s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  72%[=============&gt;      ] 177,53M  1,74MB/s    eta 36s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  72%[=============&gt;      ] 177,95M  1,75MB/s    eta 36s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  73%[=============&gt;      ] 178,84M  1,85MB/s    eta 36s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  73%[=============&gt;      ] 179,26M  1,85MB/s    eta 33s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  73%[=============&gt;      ] 179,53M  1,82MB/s    eta 33s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  73%[=============&gt;      ] 179,97M  1,82MB/s    eta 33s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  73%[=============&gt;      ] 180,40M  1,87MB/s    eta 33s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  74%[=============&gt;      ] 180,84M  1,85MB/s    eta 33s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  74%[=============&gt;      ] 181,28M  1,86MB/s    eta 32s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  74%[=============&gt;      ] 181,70M  1,86MB/s    eta 32s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  74%[=============&gt;      ] 182,12M  1,86MB/s    eta 32s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  74%[=============&gt;      ] 182,54M  2,02MB/s    eta 32s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  74%[=============&gt;      ] 182,98M  1,99MB/s    eta 32s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  75%[==============&gt;     ] 183,40M  2,02MB/s    eta 31s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  75%[==============&gt;     ] 183,81M  2,64MB/s    eta 31s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  75%[==============&gt;     ] 184,25M  2,01MB/s    eta 31s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  75%[==============&gt;     ] 184,65M  2,19MB/s    eta 31s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  75%[==============&gt;     ] 185,06M  2,19MB/s    eta 31s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  75%[==============&gt;     ] 185,50M  2,04MB/s    eta 30s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  76%[==============&gt;     ] 185,90M  2,09MB/s    eta 30s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  76%[==============&gt;     ] 186,31M  2,08MB/s    eta 30s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  76%[==============&gt;     ] 186,70M  2,07MB/s    eta 30s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  76%[==============&gt;     ] 187,12M  2,06MB/s    eta 30s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  76%[==============&gt;     ] 187,51M  2,05MB/s    eta 29s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  76%[==============&gt;     ] 187,92M  2,05MB/s    eta 29s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  77%[==============&gt;     ] 188,31M  2,04MB/s    eta 29s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  77%[==============&gt;     ] 188,59M  1,99MB/s    eta 29s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  77%[==============&gt;     ] 188,84M  1,92MB/s    eta 29s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  77%[==============&gt;     ] 189,21M  1,89MB/s    eta 28s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  77%[==============&gt;     ] 189,62M  1,90MB/s    eta 28s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  77%[==============&gt;     ] 190,01M  1,89MB/s    eta 28s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  77%[==============&gt;     ] 190,45M  1,89MB/s    eta 28s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  78%[==============&gt;     ] 190,87M  1,89MB/s    eta 28s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  78%[==============&gt;     ] 191,29M  1,90MB/s    eta 27s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  78%[==============&gt;     ] 191,72M  1,90MB/s    eta 27s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  78%[==============&gt;     ] 192,12M  1,90MB/s    eta 27s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  78%[==============&gt;     ] 192,54M  1,90MB/s    eta 27s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  79%[==============&gt;     ] 192,97M  1,91MB/s    eta 27s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  79%[==============&gt;     ] 193,40M  1,91MB/s    eta 26s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  79%[==============&gt;     ] 193,84M  1,93MB/s    eta 26s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  79%[==============&gt;     ] 194,26M  1,93MB/s    eta 26s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  79%[==============&gt;     ] 194,70M  1,96MB/s    eta 26s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  79%[==============&gt;     ] 195,08M  2,00MB/s    eta 26s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  80%[===============&gt;    ] 195,51M  2,06MB/s    eta 25s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  80%[===============&gt;    ] 195,92M  2,06MB/s    eta 25s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  80%[===============&gt;    ] 196,36M  2,07MB/s    eta 25s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  80%[===============&gt;    ] 196,61M  2,01MB/s    eta 25s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  80%[===============&gt;    ] 197,01M  2,01MB/s    eta 25s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  80%[===============&gt;    ] 197,45M  2,01MB/s    eta 24s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  81%[===============&gt;    ] 197,86M  2,00MB/s    eta 24s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  81%[===============&gt;    ] 198,26M  2,00MB/s    eta 24s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  81%[===============&gt;    ] 198,65M  1,99MB/s    eta 24s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  81%[===============&gt;    ] 199,03M  1,98MB/s    eta 24s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  81%[===============&gt;    ] 199,43M  1,97MB/s    eta 23s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  81%[===============&gt;    ] 199,86M  1,97MB/s    eta 23s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  81%[===============&gt;    ] 200,25M  1,96MB/s    eta 23s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  82%[===============&gt;    ] 200,67M  1,95MB/s    eta 23s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  82%[===============&gt;    ] 201,08M  1,95MB/s    eta 23s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  82%[===============&gt;    ] 201,51M  1,97MB/s    eta 22s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  82%[===============&gt;    ] 201,93M  1,97MB/s    eta 22s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  82%[===============&gt;    ] 202,36M  1,97MB/s    eta 22s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  83%[===============&gt;    ] 202,79M  1,98MB/s    eta 22s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  83%[===============&gt;    ] 203,23M  2,04MB/s    eta 22s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  83%[===============&gt;    ] 203,65M  2,04MB/s    eta 21s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  83%[===============&gt;    ] 204,08M  2,04MB/s    eta 21s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  83%[===============&gt;    ] 204,37M  2,01MB/s    eta 21s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  83%[===============&gt;    ] 204,83M  2,03MB/s    eta 21s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  84%[===============&gt;    ] 205,25M  2,04MB/s    eta 21s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  84%[===============&gt;    ] 205,68M  2,05MB/s    eta 20s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  84%[===============&gt;    ] 206,09M  2,05MB/s    eta 20s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  84%[===============&gt;    ] 206,52M  2,06MB/s    eta 20s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  84%[===============&gt;    ] 206,95M  2,07MB/s    eta 20s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  84%[===============&gt;    ] 207,36M  2,07MB/s    eta 20s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  85%[================&gt;   ] 207,78M  2,06MB/s    eta 19s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  85%[================&gt;   ] 208,20M  2,06MB/s    eta 19s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  85%[================&gt;   ] 208,62M  2,06MB/s    eta 19s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  85%[================&gt;   ] 209,06M  2,06MB/s    eta 19s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  85%[================&gt;   ] 209,48M  2,06MB/s    eta 19s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  85%[================&gt;   ] 209,92M  2,06MB/s    eta 17s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  86%[================&gt;   ] 210,33M  2,05MB/s    eta 17s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  86%[================&gt;   ] 210,73M  2,05MB/s    eta 17s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  86%[================&gt;   ] 211,15M  2,08MB/s    eta 17s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  86%[================&gt;   ] 211,56M  2,08MB/s    eta 17s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  86%[================&gt;   ] 211,97M  2,07MB/s    eta 16s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  86%[================&gt;   ] 212,40M  2,07MB/s    eta 16s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  87%[================&gt;   ] 212,84M  2,08MB/s    eta 16s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  87%[================&gt;   ] 213,26M  2,07MB/s    eta 16s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  87%[================&gt;   ] 213,68M  2,07MB/s    eta 16s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  87%[================&gt;   ] 213,95M  2,03MB/s    eta 15s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  87%[================&gt;   ] 214,23M  1,98MB/s    eta 15s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  87%[================&gt;   ] 214,64M  1,98MB/s    eta 15s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  88%[================&gt;   ] 215,06M  1,97MB/s    eta 15s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  88%[================&gt;   ] 215,47M  1,97MB/s    eta 15s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  88%[================&gt;   ] 215,87M  1,96MB/s    eta 14s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  88%[================&gt;   ] 216,29M  1,95MB/s    eta 14s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  88%[================&gt;   ] 216,72M  1,97MB/s    eta 14s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  88%[================&gt;   ] 217,12M  1,96MB/s    eta 14s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  89%[================&gt;   ] 217,54M  1,96MB/s    eta 14s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  89%[================&gt;   ] 217,95M  1,96MB/s    eta 13s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  89%[================&gt;   ] 218,37M  1,96MB/s    eta 13s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  89%[================&gt;   ] 218,79M  1,95MB/s    eta 13s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  89%[================&gt;   ] 219,23M  1,96MB/s    eta 13s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  89%[================&gt;   ] 219,65M  1,95MB/s    eta 13s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  90%[=================&gt;  ] 220,08M  2,00MB/s    eta 12s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  90%[=================&gt;  ] 220,51M  2,02MB/s    eta 12s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  90%[=================&gt;  ] 220,83M  1,54MB/s    eta 12s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  90%[=================&gt;  ] 221,68M  1,65MB/s    eta 12s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  91%[=================&gt;  ] 223,26M  1,94MB/s    eta 12s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  91%[=================&gt;  ] 223,65M  1,94MB/s    eta 12s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  91%[=================&gt;  ] 224,06M  1,93MB/s    eta 12s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  91%[=================&gt;  ] 224,45M  1,93MB/s    eta 10s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  92%[=================&gt;  ] 224,87M  1,93MB/s    eta 10s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  92%[=================&gt;  ] 225,28M  1,92MB/s    eta 10s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  92%[=================&gt;  ] 225,68M  1,92MB/s    eta 10s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  92%[=================&gt;  ] 226,09M  1,92MB/s    eta 10s    
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  92%[=================&gt;  ] 226,51M  1,93MB/s    eta 9s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  92%[=================&gt;  ] 226,95M  1,93MB/s    eta 9s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  93%[=================&gt;  ] 227,37M  1,92MB/s    eta 9s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  93%[=================&gt;  ] 227,78M  1,92MB/s    eta 9s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  93%[=================&gt;  ] 228,20M  1,92MB/s    eta 9s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  93%[=================&gt;  ] 228,61M  2,53MB/s    eta 8s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  93%[=================&gt;  ] 229,04M  2,50MB/s    eta 8s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  93%[=================&gt;  ] 229,47M  2,20MB/s    eta 8s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  94%[=================&gt;  ] 229,89M  2,03MB/s    eta 8s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  94%[=================&gt;  ] 230,31M  2,04MB/s    eta 8s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  94%[=================&gt;  ] 230,73M  2,05MB/s    eta 7s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  94%[=================&gt;  ] 231,14M  2,04MB/s    eta 7s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  94%[=================&gt;  ] 231,45M  2,01MB/s    eta 7s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  94%[=================&gt;  ] 231,86M  2,00MB/s    eta 7s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  95%[==================&gt; ] 232,28M  2,01MB/s    eta 7s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  95%[==================&gt; ] 232,68M  2,00MB/s    eta 6s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  95%[==================&gt; ] 233,09M  2,00MB/s    eta 6s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  95%[==================&gt; ] 233,53M  2,00MB/s    eta 6s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  95%[==================&gt; ] 233,93M  1,99MB/s    eta 6s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  95%[==================&gt; ] 234,36M  2,00MB/s    eta 6s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  96%[==================&gt; ] 234,73M  1,98MB/s    eta 5s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  96%[==================&gt; ] 235,08M  1,96MB/s    eta 5s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  96%[==================&gt; ] 235,50M  1,96MB/s    eta 5s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  96%[==================&gt; ] 235,78M  1,51MB/s    eta 4s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  96%[==================&gt; ] 236,48M  1,59MB/s    eta 4s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  97%[==================&gt; ] 238,27M  1,94MB/s    eta 4s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  97%[==================&gt; ] 238,68M  1,94MB/s    eta 4s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  97%[==================&gt; ] 238,78M  1,65MB/s    eta 3s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  98%[==================&gt; ] 240,43M  1,95MB/s    eta 3s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  98%[==================&gt; ] 240,86M  1,95MB/s    eta 3s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  98%[==================&gt; ] 241,29M  1,96MB/s    eta 3s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  98%[==================&gt; ] 241,73M  1,96MB/s    eta 3s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  99%[==================&gt; ] 242,15M  1,97MB/s    eta 1s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  99%[==================&gt; ] 242,59M  1,97MB/s    eta 1s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  99%[==================&gt; ] 243,03M  1,98MB/s    eta 1s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  99%[==================&gt; ] 243,47M  1,98MB/s    eta 1s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n  99%[==================&gt; ] 243,89M  1,99MB/s    eta 1s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_movie.n 100%[===================&gt;] 244,24M  2,00MB/s    in 2m 4s   
+
+2021-05-26 22:22:22 (1,96 MB/s) - ‘Sherlock_AG_movie.npy’ saved [256101248/256101248]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2021-05-26 22:22:23--  https://ndownloader.figshare.com/files/22927256
+Resolving proxy.jf.intel.com (proxy.jf.intel.com)... 10.7.211.16
+Connecting to proxy.jf.intel.com (proxy.jf.intel.com)|10.7.211.16|:912... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>connected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proxy request sent, awaiting response... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>302 Found
+Location: https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/22927256/Sherlock_AG_recall.npy [following]
+--2021-05-26 22:22:23--  https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/22927256/Sherlock_AG_recall.npy
+Connecting to proxy.jf.intel.com (proxy.jf.intel.com)|10.7.211.16|:912... connected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Proxy request sent, awaiting response... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>200 OK
+Length: 8240168 (7,9M) [application/octet-stream]
+Saving to: ‘Sherlock_AG_recall.npy’
+
+
+Sherlock_AG_recall.   0%[                    ]       0  --.-KB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall.   0%[                    ]  49,23K   241KB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall.   2%[                    ] 236,23K   501KB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall.   7%[&gt;                   ] 610,23K   907KB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall.  13%[=&gt;                  ]   1,04M  1,20MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall.  18%[==&gt;                 ]   1,48M  1,38MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall.  24%[===&gt;                ]   1,94M  1,51MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall.  30%[=====&gt;              ]   2,41M  1,62MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall.  36%[======&gt;             ]   2,85M  1,68MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall.  41%[=======&gt;            ]   3,29M  1,73MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall.  47%[========&gt;           ]   3,73M  1,77MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall.  52%[=========&gt;          ]   4,15M  1,80MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall.  58%[==========&gt;         ]   4,58M  1,83MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall.  63%[===========&gt;        ]   5,02M  1,85MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall.  69%[============&gt;       ]   5,46M  1,86MB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall.  75%[==============&gt;     ]   5,90M  1,88MB/s    eta 1s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall.  80%[===============&gt;    ]   6,33M  2,00MB/s    eta 1s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall.  85%[================&gt;   ]   6,74M  2,06MB/s    eta 1s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall.  90%[=================&gt;  ]   7,15M  2,13MB/s    eta 1s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall.  96%[==================&gt; ]   7,57M  2,13MB/s    eta 1s     
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sherlock_AG_recall. 100%[===================&gt;]   7,86M  2,12MB/s    in 4,1s    
+
+2021-05-26 22:22:29 (1,92 MB/s) - ‘Sherlock_AG_recall.npy’ saved [8240168/8240168]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="finding-event-boundaries-during-perception-a-id-perception-a">
+<h2>Finding event boundaries during perception<a id='perception'></a><a class="headerlink" href="#finding-event-boundaries-during-perception-a-id-perception-a" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="warm-up-event-structure-in-activity-patterns">
+<h3>Warm-up: Event structure in activity patterns<a class="headerlink" href="#warm-up-event-structure-in-activity-patterns" title="Permalink to this headline">¶</a></h3>
+<p>Before applying any model, a good first step is to plot the correlation between activity patterns for each pair of timepoints during the movie. In this dataset, this shows blocks along the diagonal, which indicates that activity patterns are remaining stable for periods of tens of timepoints. This is the kind of structure that the HMM will be looking for.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">movie_group</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Timepoint&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Timepoint&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Spatial pattern correlation&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Event_Segmentation_6_0.png" src="../_images/Event_Segmentation_6_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="fitting-the-hmm">
+<h3>Fitting the HMM<a class="headerlink" href="#fitting-the-hmm" title="Permalink to this headline">¶</a></h3>
+<p>To use an HMM to find both the event timings and the patterns corresponding to each event, we can use the EventSegment class from the brainiak toolbox. We need to specify the number of events, which here we set to 29 (corresponding to the number of boundaries typically annotated by human subjects).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">movie_HMM</span> <span class="o">=</span> <span class="n">EventSegment</span><span class="p">(</span><span class="n">n_events</span> <span class="o">=</span> <span class="mi">29</span><span class="p">)</span>
+<span class="n">movie_HMM</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">movie_group</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This fit produces:</p>
+<ul class="simple">
+<li><p>The log-likelihood (measuring overall model fit) over training. (Note that the log-likelihood on held-out test data is often a better measure of model quality - see below).</p></li>
+<li><p>The mean voxel pattern for each event. Here we show only 1% of the voxels since the ROI is large.</p></li>
+<li><p>A matrix showing the probability of being in each event at each timepoint. We can use this to derive the most likely timepoints where boundaries occur, and plot these on top of the timepoint similarity matrix for comparison.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting the log-likelihood (measuring overall model fit)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">movie_HMM</span><span class="o">.</span><span class="n">ll_</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Log likelihood during training&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Model fitting steps&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Model fitting steps&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Event_Segmentation_10_1.png" src="../_images/Event_Segmentation_10_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting mean activity in each event for some example voxels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">example_vox</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">movie_HMM</span><span class="o">.</span><span class="n">event_pat_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">movie_HMM</span><span class="o">.</span><span class="n">event_pat_</span><span class="p">[</span><span class="n">example_vox</span><span class="p">,:],</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Event number&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Voxels&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Voxels&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Event_Segmentation_11_1.png" src="../_images/Event_Segmentation_11_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot probability of being in each event at each timepoint</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">movie_HMM</span><span class="o">.</span><span class="n">segments_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">tick_bottom</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Event probability&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Event probability&#39;)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 864x432 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../_images/Event_Segmentation_12_2.png" src="../_images/Event_Segmentation_12_2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Identify event boundaries as timepoints when max probability switches events</span>
+<span class="n">event_bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">movie_HMM</span><span class="o">.</span><span class="n">segments_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">nTRs</span> <span class="o">=</span> <span class="n">movie_group</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="c1"># Plot boundaries as boxes on top of timepoint correlation matrix</span>
+<span class="k">def</span> <span class="nf">plot_tt_similarity_matrix</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">data_matrix</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">n_TRs</span><span class="p">,</span> <span class="n">title_text</span><span class="p">):</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">data_matrix</span><span class="p">),</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title_text</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;TR&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;TR&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># plot the boundaries </span>
+    <span class="n">bounds_aug</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="mi">0</span><span class="p">],</span> <span class="n">bounds</span><span class="p">,</span> <span class="p">[</span><span class="n">n_TRs</span><span class="p">]))</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bounds_aug</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">rect</span> <span class="o">=</span> <span class="n">patches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">bounds_aug</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">bounds_aug</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
+            <span class="n">bounds_aug</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">bounds_aug</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+            <span class="n">bounds_aug</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">bounds_aug</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+            <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span><span class="n">facecolor</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span>
+        <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+
+
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">title_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">Overlay the HMM-predicted event boundaries</span>
+<span class="s1">on top of the TR-TR correlation matrix</span>
+<span class="s1">&#39;&#39;&#39;</span>
+<span class="n">plot_tt_similarity_matrix</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">movie_group</span><span class="p">,</span> <span class="n">event_bounds</span><span class="p">,</span> <span class="n">nTRs</span><span class="p">,</span> <span class="n">title_text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Event_Segmentation_13_0.png" src="../_images/Event_Segmentation_13_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="determining-the-number-of-events-with-the-hmm">
+<h3>Determining the number of events with the HMM<a class="headerlink" href="#determining-the-number-of-events-with-the-hmm" title="Permalink to this headline">¶</a></h3>
+<p>What if we don’t want to prespecify the number of events, but instead want to determine the number of events from the data? One way to determine the best number of events is to fit the model on a training set and then test the model fit on independent subjects.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">test_ll</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">k_array</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">k_array</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Trying </span><span class="si">%d</span><span class="s1"> events&#39;</span> <span class="o">%</span> <span class="n">k</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   Fitting model on training subjects...&#39;</span><span class="p">)</span>
+    <span class="n">movie_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">movie</span><span class="p">[:</span><span class="mi">8</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">movie_HMM</span> <span class="o">=</span> <span class="n">EventSegment</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">movie_HMM</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">movie_train</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   Testing model fit on held-out subjects...&#39;</span><span class="p">)</span>
+    <span class="n">movie_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">movie</span><span class="p">[</span><span class="mi">8</span><span class="p">:],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">test_ll</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">movie_HMM</span><span class="o">.</span><span class="n">find_events</span><span class="p">(</span><span class="n">movie_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying 20 events
+   Fitting model on training subjects...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Testing model fit on held-out subjects...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying 30 events
+   Fitting model on training subjects...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Testing model fit on held-out subjects...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying 40 events
+   Fitting model on training subjects...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Testing model fit on held-out subjects...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying 50 events
+   Fitting model on training subjects...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Testing model fit on held-out subjects...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trying 60 events
+   Fitting model on training subjects...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Testing model fit on held-out subjects...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_array</span><span class="p">,</span> <span class="n">test_ll</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of events&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Log-likelihood&#39;</span><span class="p">)</span>
+
+<span class="n">movie_dur</span> <span class="o">=</span> <span class="n">nTRs</span> <span class="o">*</span> <span class="mf">1.5</span>  <span class="c1"># Data acquired every 1.5 seconds</span>
+<span class="n">secax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">secondary_xaxis</span><span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">,</span>
+                                  <span class="n">functions</span><span class="o">=</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">movie_dur</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">float_info</span><span class="o">.</span><span class="n">epsilon</span><span class="p">),</span>
+                                             <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">movie_dur</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">float_info</span><span class="o">.</span><span class="n">epsilon</span><span class="p">)))</span>
+<span class="n">secax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Average event length (sec)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Average event length (sec)&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Event_Segmentation_16_1.png" src="../_images/Event_Segmentation_16_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="optimal-segmentation-with-the-hmm">
+<h3>Optimal segmentation with the HMM<a class="headerlink" href="#optimal-segmentation-with-the-hmm" title="Permalink to this headline">¶</a></h3>
+<p>Since 40 events maximized the test log-likelihood, we’ll generate two versions of HMM boundaries using 40 events. In addition to the “vanilla” HMM, we’ll run an HMM with more flexibility during fitting (allowing for split-merge operations). This is slower (and so should usually only be used for generating a final segmentation), but can produce better fits if events are very uneven in duration. We will use these segmentations below for comparison with human labeled event boundaries.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Fitting HMM with 40 events...&#39;</span><span class="p">)</span>
+<span class="n">HMM40</span> <span class="o">=</span> <span class="n">EventSegment</span><span class="p">(</span><span class="n">n_events</span> <span class="o">=</span> <span class="mi">40</span><span class="p">)</span>
+<span class="n">HMM40</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">movie_group</span><span class="p">)</span>
+<span class="n">HMM40_bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">HMM40</span><span class="o">.</span><span class="n">segments_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)))[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Fitting split-merge HMM with 40 events...&#39;</span><span class="p">)</span>
+<span class="n">HMM40_SM</span> <span class="o">=</span> <span class="n">EventSegment</span><span class="p">(</span><span class="n">n_events</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> <span class="n">split_merge</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">HMM40_SM</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">movie_group</span><span class="p">)</span>
+<span class="n">HMM40_SM_bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">HMM40_SM</span><span class="o">.</span><span class="n">segments_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)))[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting HMM with 40 events...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting split-merge HMM with 40 events...
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="comparing-model-and-human-labeled-boundaries-a-id-comparing-a">
+<h2>Comparing model and human-labeled boundaries<a id='comparing'></a><a class="headerlink" href="#comparing-model-and-human-labeled-boundaries-a-id-comparing-a" title="Permalink to this headline">¶</a></h2>
+<p>We can also quantitatively compare the event boundaries between different models, or between a model and human-labeled event boundaries. Because there is some ambiguity in both the stimulus and the model about exactly which timepoint the transition occurs at, we will count two boundaries as being a “match” if they are within 3 TRs (4.5 seconds) of each other.</p>
+<p>To determine whether the match is statistically significant, we generate permuted versions of the boundaries as a null model for comparison.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Timepoints of event boundaries annotated by human raters</span>
+<span class="n">human_bounds</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">26</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">86</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">131</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">157</span><span class="p">,</span> <span class="mi">173</span><span class="p">,</span> <span class="mi">192</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> 
+    <span class="mi">226</span><span class="p">,</span> <span class="mi">313</span><span class="p">,</span> <span class="mi">362</span><span class="p">,</span> <span class="mi">398</span><span class="p">,</span> <span class="mi">505</span><span class="p">,</span> <span class="mi">526</span><span class="p">,</span> <span class="mi">533</span><span class="p">,</span> <span class="mi">568</span><span class="p">,</span> <span class="mi">616</span><span class="p">,</span> <span class="mi">634</span><span class="p">,</span> <span class="mi">678</span><span class="p">,</span>
+    <span class="mi">696</span><span class="p">,</span> <span class="mi">747</span><span class="p">,</span> <span class="mi">780</span><span class="p">,</span> <span class="mi">870</span><span class="p">,</span> <span class="mi">890</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Computes fraction of ground truth bounds that are covered by a set of proposed bounds</span>
+<span class="c1"># Returns z score relative to a null distribution via permutation</span>
+<span class="k">def</span> <span class="nf">match_z</span><span class="p">(</span><span class="n">proposed_bounds</span><span class="p">,</span> <span class="n">gt_bounds</span><span class="p">,</span> <span class="n">num_TRs</span><span class="p">):</span>
+    <span class="n">nPerm</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">threshold</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">gt_lengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="mi">0</span><span class="p">],</span><span class="n">gt_bounds</span><span class="p">,[</span><span class="n">num_TRs</span><span class="p">])))</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nPerm</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nPerm</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">gt_bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">gt_lengths</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">gt_bounds</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">proposed_bounds</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">threshold</span><span class="p">):</span>
+                <span class="n">match</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">match</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gt_bounds</span><span class="p">)</span>
+        <span class="n">gt_lengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">gt_lengths</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">match</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">match</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">match</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="n">match_z</span><span class="p">(</span><span class="n">HMM40_bounds</span><span class="p">,</span> <span class="n">human_bounds</span><span class="p">,</span> <span class="n">nTRs</span><span class="p">),</span>
+     <span class="n">match_z</span><span class="p">(</span><span class="n">HMM40_SM_bounds</span><span class="p">,</span> <span class="n">human_bounds</span><span class="p">,</span> <span class="n">nTRs</span><span class="p">)]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;HMM40:    z = </span><span class="si">%f</span><span class="s1">, p = </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">norm</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;HMM_SM40: z = </span><span class="si">%f</span><span class="s1">, p = </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">norm</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HMM40:    z = 2.989227, p = 0.001398
+HMM_SM40: z = 3.454808, p = 0.000275
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="aligning-movie-and-recall-data-a-id-aligning-a">
+<h2>Aligning movie and recall data<a id='aligning'></a><a class="headerlink" href="#aligning-movie-and-recall-data-a-id-aligning-a" title="Permalink to this headline">¶</a></h2>
+<p>A simple model of free recall is that a subject will revisit the same sequence of events experienced during perception, but the lengths of the events will not be identical between perception and recall. We use the same fit function as for a single dataset, but now we pass in both the movie and recall datasets in a list. We assume the two datasets have shared event transitions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">movie_recall_HMM</span> <span class="o">=</span> <span class="n">EventSegment</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">movie_recall_HMM</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="n">movie_group</span><span class="p">,</span> <span class="n">recall</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">movie_recall_HMM</span><span class="o">.</span><span class="n">segments_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">@</span> <span class="n">movie_recall_HMM</span><span class="o">.</span><span class="n">segments_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Timepoints during recall&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Timepoints during movie&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Prob of being in the same event&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Event_Segmentation_24_0.png" src="../_images/Event_Segmentation_24_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="summary-a-id-summary-a">
+<h2>Summary<a id='summary'></a><a class="headerlink" href="#summary-a-id-summary-a" title="Permalink to this headline">¶</a></h2>
+<p>Using the HMM, we first captured neural states corresponding with the naturalistic segmentation of events. Then, to verify that these states aligned with subjective event perception, we aligned their boundaries with event boundary annotations from an independent group of subjects. Finally, we showed that processes such as free recall, which feature similar transition structures but may be compressed or expanded in time, can be aligned to this perceptual HMM “template”, broadening the scope of future research questions that can be addressed with this technique.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../release_notes.html" class="btn btn-neutral float-right" title="Release notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../examples.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

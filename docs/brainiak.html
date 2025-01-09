@@ -1,204 +1,295 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en">
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>brainiak package &mdash; brainiak 0.11 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-
-  
-  
-  
-  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>brainiak package &mdash; brainiak 0.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
 
   
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="brainiak.eventseg package" href="brainiak.eventseg.html" />
     <link rel="prev" title="API" href="api.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> brainiak
           
-
-          
+          <a href="index.html" class="icon icon-home">
+            brainiak
           </a>
-
-          
-            
-            
               <div class="version">
-                0.11
+                0.12
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release_notes.html">Release notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">brainiak</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="api.html">API</a> &raquo;</li>
-        
-      <li>brainiak package</li>
-    
-    
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API</a></li>
+      <li class="breadcrumb-item active">brainiak package</li>
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="_sources/brainiak.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="module-brainiak">
-<span id="brainiak-package"></span><h1>brainiak package<a class="headerlink" href="#module-brainiak" title="Permalink to this headline">¶</a></h1>
+<span id="brainiak-package"></span><h1>brainiak package<a class="headerlink" href="#module-brainiak" title="Permalink to this heading"></a></h1>
 <p>Brain Imaging Analysis Kit.</p>
 <div class="section" id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="brainiak.eventseg.html">brainiak.eventseg package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="brainiak.eventseg.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.eventseg.html#module-brainiak.eventseg.event">brainiak.eventseg.event module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.eventseg.html#module-brainiak.eventseg.event">brainiak.eventseg.event module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.eventseg.html#brainiak.eventseg.event.EventSegment"><code class="docutils literal notranslate"><span class="pre">EventSegment</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.eventseg.html#brainiak.eventseg.event.EventSegment.P"><code class="docutils literal notranslate"><span class="pre">EventSegment.P</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.eventseg.html#brainiak.eventseg.event.EventSegment.ll_"><code class="docutils literal notranslate"><span class="pre">EventSegment.ll_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.eventseg.html#brainiak.eventseg.event.EventSegment.segments_"><code class="docutils literal notranslate"><span class="pre">EventSegment.segments_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.eventseg.html#brainiak.eventseg.event.EventSegment.event_var_"><code class="docutils literal notranslate"><span class="pre">EventSegment.event_var_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.eventseg.html#brainiak.eventseg.event.EventSegment.event_pat_"><code class="docutils literal notranslate"><span class="pre">EventSegment.event_pat_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.eventseg.html#brainiak.eventseg.event.EventSegment.calc_weighted_event_var"><code class="docutils literal notranslate"><span class="pre">EventSegment.calc_weighted_event_var()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.eventseg.html#brainiak.eventseg.event.EventSegment.find_events"><code class="docutils literal notranslate"><span class="pre">EventSegment.find_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.eventseg.html#brainiak.eventseg.event.EventSegment.fit"><code class="docutils literal notranslate"><span class="pre">EventSegment.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.eventseg.html#brainiak.eventseg.event.EventSegment.model_prior"><code class="docutils literal notranslate"><span class="pre">EventSegment.model_prior()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.eventseg.html#brainiak.eventseg.event.EventSegment.predict"><code class="docutils literal notranslate"><span class="pre">EventSegment.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.eventseg.html#brainiak.eventseg.event.EventSegment.set_event_patterns"><code class="docutils literal notranslate"><span class="pre">EventSegment.set_event_patterns()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="brainiak.factoranalysis.html">brainiak.factoranalysis package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="brainiak.factoranalysis.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.factoranalysis.html#module-brainiak.factoranalysis.htfa">brainiak.factoranalysis.htfa module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.factoranalysis.html#module-brainiak.factoranalysis.tfa">brainiak.factoranalysis.tfa module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.factoranalysis.html#module-brainiak.factoranalysis.tfa_extension">brainiak.factoranalysis.tfa_extension module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.factoranalysis.html#module-brainiak.factoranalysis.htfa">brainiak.factoranalysis.htfa module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.htfa.HTFA"><code class="docutils literal notranslate"><span class="pre">HTFA</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.htfa.HTFA.global_prior_"><code class="docutils literal notranslate"><span class="pre">HTFA.global_prior_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.htfa.HTFA.global_posterior_"><code class="docutils literal notranslate"><span class="pre">HTFA.global_posterior_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.htfa.HTFA.local_posterior_"><code class="docutils literal notranslate"><span class="pre">HTFA.local_posterior_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.htfa.HTFA.local_weights_"><code class="docutils literal notranslate"><span class="pre">HTFA.local_weights_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.htfa.HTFA.fit"><code class="docutils literal notranslate"><span class="pre">HTFA.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.htfa.HTFA.set_fit_request"><code class="docutils literal notranslate"><span class="pre">HTFA.set_fit_request()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.factoranalysis.html#module-brainiak.factoranalysis.tfa">brainiak.factoranalysis.tfa module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA"><code class="docutils literal notranslate"><span class="pre">TFA</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.local_posterior_"><code class="docutils literal notranslate"><span class="pre">TFA.local_posterior_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.F_"><code class="docutils literal notranslate"><span class="pre">TFA.F_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.W_"><code class="docutils literal notranslate"><span class="pre">TFA.W_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.fit"><code class="docutils literal notranslate"><span class="pre">TFA.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.get_bounds"><code class="docutils literal notranslate"><span class="pre">TFA.get_bounds()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.get_centers"><code class="docutils literal notranslate"><span class="pre">TFA.get_centers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.get_centers_mean_cov"><code class="docutils literal notranslate"><span class="pre">TFA.get_centers_mean_cov()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.get_factors"><code class="docutils literal notranslate"><span class="pre">TFA.get_factors()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.get_map_offset"><code class="docutils literal notranslate"><span class="pre">TFA.get_map_offset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.get_template"><code class="docutils literal notranslate"><span class="pre">TFA.get_template()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.get_unique_R"><code class="docutils literal notranslate"><span class="pre">TFA.get_unique_R()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.get_weights"><code class="docutils literal notranslate"><span class="pre">TFA.get_weights()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.get_widths"><code class="docutils literal notranslate"><span class="pre">TFA.get_widths()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.get_widths_mean_var"><code class="docutils literal notranslate"><span class="pre">TFA.get_widths_mean_var()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.init_centers_widths"><code class="docutils literal notranslate"><span class="pre">TFA.init_centers_widths()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.init_prior"><code class="docutils literal notranslate"><span class="pre">TFA.init_prior()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.set_K"><code class="docutils literal notranslate"><span class="pre">TFA.set_K()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.set_centers"><code class="docutils literal notranslate"><span class="pre">TFA.set_centers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.set_centers_mean_cov"><code class="docutils literal notranslate"><span class="pre">TFA.set_centers_mean_cov()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.set_fit_request"><code class="docutils literal notranslate"><span class="pre">TFA.set_fit_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.set_prior"><code class="docutils literal notranslate"><span class="pre">TFA.set_prior()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.set_seed"><code class="docutils literal notranslate"><span class="pre">TFA.set_seed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.set_widths"><code class="docutils literal notranslate"><span class="pre">TFA.set_widths()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.factoranalysis.html#brainiak.factoranalysis.tfa.TFA.set_widths_mean_var"><code class="docutils literal notranslate"><span class="pre">TFA.set_widths_mean_var()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="brainiak.fcma.html">brainiak.fcma package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="brainiak.fcma.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.fcma.html#module-brainiak.fcma.classifier">brainiak.fcma.classifier module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.fcma.html#module-brainiak.fcma.fcma_extension">brainiak.fcma.fcma_extension module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.fcma.html#module-brainiak.fcma.mvpa_voxelselector">brainiak.fcma.mvpa_voxelselector module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.fcma.html#module-brainiak.fcma.preprocessing">brainiak.fcma.preprocessing module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.fcma.html#module-brainiak.fcma.util">brainiak.fcma.util module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.fcma.html#module-brainiak.fcma.voxelselector">brainiak.fcma.voxelselector module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.fcma.html#module-brainiak.fcma.classifier">brainiak.fcma.classifier module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.classifier.Classifier"><code class="docutils literal notranslate"><span class="pre">Classifier</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.classifier.Classifier.training_data_"><code class="docutils literal notranslate"><span class="pre">Classifier.training_data_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.classifier.Classifier.test_raw_data_"><code class="docutils literal notranslate"><span class="pre">Classifier.test_raw_data_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.classifier.Classifier.test_data_"><code class="docutils literal notranslate"><span class="pre">Classifier.test_data_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.classifier.Classifier.num_voxels_"><code class="docutils literal notranslate"><span class="pre">Classifier.num_voxels_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.classifier.Classifier.num_features_"><code class="docutils literal notranslate"><span class="pre">Classifier.num_features_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.classifier.Classifier.num_samples_"><code class="docutils literal notranslate"><span class="pre">Classifier.num_samples_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.classifier.Classifier.num_digits_"><code class="docutils literal notranslate"><span class="pre">Classifier.num_digits_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.classifier.Classifier.decision_function"><code class="docutils literal notranslate"><span class="pre">Classifier.decision_function()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.classifier.Classifier.fit"><code class="docutils literal notranslate"><span class="pre">Classifier.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.classifier.Classifier.predict"><code class="docutils literal notranslate"><span class="pre">Classifier.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.classifier.Classifier.score"><code class="docutils literal notranslate"><span class="pre">Classifier.score()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.classifier.Classifier.set_fit_request"><code class="docutils literal notranslate"><span class="pre">Classifier.set_fit_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.classifier.Classifier.set_score_request"><code class="docutils literal notranslate"><span class="pre">Classifier.set_score_request()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.fcma.html#module-brainiak.fcma.mvpa_voxelselector">brainiak.fcma.mvpa_voxelselector module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.mvpa_voxelselector.MVPAVoxelSelector"><code class="docutils literal notranslate"><span class="pre">MVPAVoxelSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.mvpa_voxelselector.MVPAVoxelSelector.run"><code class="docutils literal notranslate"><span class="pre">MVPAVoxelSelector.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.fcma.html#module-brainiak.fcma.preprocessing">brainiak.fcma.preprocessing module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.preprocessing.RandomType"><code class="docutils literal notranslate"><span class="pre">RandomType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.preprocessing.RandomType.NORANDOM"><code class="docutils literal notranslate"><span class="pre">RandomType.NORANDOM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.preprocessing.RandomType.REPRODUCIBLE"><code class="docutils literal notranslate"><span class="pre">RandomType.REPRODUCIBLE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.preprocessing.RandomType.UNREPRODUCIBLE"><code class="docutils literal notranslate"><span class="pre">RandomType.UNREPRODUCIBLE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.preprocessing.generate_epochs_info"><code class="docutils literal notranslate"><span class="pre">generate_epochs_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.preprocessing.prepare_fcma_data"><code class="docutils literal notranslate"><span class="pre">prepare_fcma_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.preprocessing.prepare_mvpa_data"><code class="docutils literal notranslate"><span class="pre">prepare_mvpa_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.preprocessing.prepare_searchlight_mvpa_data"><code class="docutils literal notranslate"><span class="pre">prepare_searchlight_mvpa_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.fcma.html#module-brainiak.fcma.util">brainiak.fcma.util module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.util.compute_correlation"><code class="docutils literal notranslate"><span class="pre">compute_correlation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.fcma.html#module-brainiak.fcma.voxelselector">brainiak.fcma.voxelselector module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.voxelselector.VoxelSelector"><code class="docutils literal notranslate"><span class="pre">VoxelSelector</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.fcma.html#brainiak.fcma.voxelselector.VoxelSelector.run"><code class="docutils literal notranslate"><span class="pre">VoxelSelector.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="brainiak.funcalign.html">brainiak.funcalign package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="brainiak.funcalign.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.funcalign.html#module-brainiak.funcalign.fastsrm">brainiak.funcalign.fastsrm module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.funcalign.html#module-brainiak.funcalign.rsrm">brainiak.funcalign.rsrm module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.funcalign.html#module-brainiak.funcalign.srm">brainiak.funcalign.srm module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.funcalign.html#module-brainiak.funcalign.sssrm">brainiak.funcalign.sssrm module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.funcalign.html#module-brainiak.funcalign.fastsrm">brainiak.funcalign.fastsrm module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.fastsrm.FastSRM"><code class="docutils literal notranslate"><span class="pre">FastSRM</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.fastsrm.FastSRM.add_subjects"><code class="docutils literal notranslate"><span class="pre">FastSRM.add_subjects()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.fastsrm.FastSRM.clean"><code class="docutils literal notranslate"><span class="pre">FastSRM.clean()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.fastsrm.FastSRM.fit"><code class="docutils literal notranslate"><span class="pre">FastSRM.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.fastsrm.FastSRM.fit_transform"><code class="docutils literal notranslate"><span class="pre">FastSRM.fit_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.fastsrm.FastSRM.inverse_transform"><code class="docutils literal notranslate"><span class="pre">FastSRM.inverse_transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.fastsrm.FastSRM.set_fit_request"><code class="docutils literal notranslate"><span class="pre">FastSRM.set_fit_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.fastsrm.FastSRM.set_inverse_transform_request"><code class="docutils literal notranslate"><span class="pre">FastSRM.set_inverse_transform_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.fastsrm.FastSRM.set_transform_request"><code class="docutils literal notranslate"><span class="pre">FastSRM.set_transform_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.fastsrm.FastSRM.transform"><code class="docutils literal notranslate"><span class="pre">FastSRM.transform()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.funcalign.html#module-brainiak.funcalign.rsrm">brainiak.funcalign.rsrm module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.rsrm.RSRM"><code class="docutils literal notranslate"><span class="pre">RSRM</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.rsrm.RSRM.w_"><code class="docutils literal notranslate"><span class="pre">RSRM.w_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.rsrm.RSRM.r_"><code class="docutils literal notranslate"><span class="pre">RSRM.r_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.rsrm.RSRM.s_"><code class="docutils literal notranslate"><span class="pre">RSRM.s_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.rsrm.RSRM.random_state_"><code class="docutils literal notranslate"><span class="pre">RSRM.random_state_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.rsrm.RSRM.fit"><code class="docutils literal notranslate"><span class="pre">RSRM.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.rsrm.RSRM.transform"><code class="docutils literal notranslate"><span class="pre">RSRM.transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.rsrm.RSRM.transform_subject"><code class="docutils literal notranslate"><span class="pre">RSRM.transform_subject()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.funcalign.html#module-brainiak.funcalign.srm">brainiak.funcalign.srm module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.srm.DetSRM"><code class="docutils literal notranslate"><span class="pre">DetSRM</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.srm.DetSRM.w_"><code class="docutils literal notranslate"><span class="pre">DetSRM.w_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.srm.DetSRM.s_"><code class="docutils literal notranslate"><span class="pre">DetSRM.s_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.srm.DetSRM.random_state_"><code class="docutils literal notranslate"><span class="pre">DetSRM.random_state_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.srm.DetSRM.fit"><code class="docutils literal notranslate"><span class="pre">DetSRM.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.srm.DetSRM.transform"><code class="docutils literal notranslate"><span class="pre">DetSRM.transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.srm.DetSRM.transform_subject"><code class="docutils literal notranslate"><span class="pre">DetSRM.transform_subject()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.srm.SRM"><code class="docutils literal notranslate"><span class="pre">SRM</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.srm.SRM.w_"><code class="docutils literal notranslate"><span class="pre">SRM.w_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.srm.SRM.s_"><code class="docutils literal notranslate"><span class="pre">SRM.s_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.srm.SRM.sigma_s_"><code class="docutils literal notranslate"><span class="pre">SRM.sigma_s_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.srm.SRM.mu_"><code class="docutils literal notranslate"><span class="pre">SRM.mu_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.srm.SRM.rho2_"><code class="docutils literal notranslate"><span class="pre">SRM.rho2_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.srm.SRM.comm"><code class="docutils literal notranslate"><span class="pre">SRM.comm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.srm.SRM.random_state_"><code class="docutils literal notranslate"><span class="pre">SRM.random_state_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.srm.SRM.fit"><code class="docutils literal notranslate"><span class="pre">SRM.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.srm.SRM.save"><code class="docutils literal notranslate"><span class="pre">SRM.save()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.srm.SRM.transform"><code class="docutils literal notranslate"><span class="pre">SRM.transform()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.srm.SRM.transform_subject"><code class="docutils literal notranslate"><span class="pre">SRM.transform_subject()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.funcalign.html#module-brainiak.funcalign.sssrm">brainiak.funcalign.sssrm module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.sssrm.SSSRM"><code class="docutils literal notranslate"><span class="pre">SSSRM</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.sssrm.SSSRM.w_"><code class="docutils literal notranslate"><span class="pre">SSSRM.w_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.sssrm.SSSRM.s_"><code class="docutils literal notranslate"><span class="pre">SSSRM.s_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.sssrm.SSSRM.theta_"><code class="docutils literal notranslate"><span class="pre">SSSRM.theta_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.sssrm.SSSRM.bias_"><code class="docutils literal notranslate"><span class="pre">SSSRM.bias_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.sssrm.SSSRM.classes_"><code class="docutils literal notranslate"><span class="pre">SSSRM.classes_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.sssrm.SSSRM.random_state_"><code class="docutils literal notranslate"><span class="pre">SSSRM.random_state_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.sssrm.SSSRM.fit"><code class="docutils literal notranslate"><span class="pre">SSSRM.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.sssrm.SSSRM.predict"><code class="docutils literal notranslate"><span class="pre">SSSRM.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.sssrm.SSSRM.set_fit_request"><code class="docutils literal notranslate"><span class="pre">SSSRM.set_fit_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.sssrm.SSSRM.set_score_request"><code class="docutils literal notranslate"><span class="pre">SSSRM.set_score_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.funcalign.html#brainiak.funcalign.sssrm.SSSRM.transform"><code class="docutils literal notranslate"><span class="pre">SSSRM.transform()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="brainiak.hyperparamopt.html">brainiak.hyperparamopt package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="brainiak.hyperparamopt.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.hyperparamopt.html#module-brainiak.hyperparamopt.hpo">brainiak.hyperparamopt.hpo module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.hyperparamopt.html#module-brainiak.hyperparamopt.hpo">brainiak.hyperparamopt.hpo module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.hyperparamopt.html#brainiak.hyperparamopt.hpo.fmin"><code class="docutils literal notranslate"><span class="pre">fmin()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="brainiak.matnormal.html">brainiak.matnormal package</a><ul>
@@ -206,61 +297,297 @@
 <li class="toctree-l2"><a class="reference internal" href="brainiak.matnormal.html#matrix-normal-marginals">Matrix normal marginals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="brainiak.matnormal.html#partitioned-matrix-normal-conditionals">Partitioned matrix normal conditionals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="brainiak.matnormal.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.matnormal.html#module-brainiak.matnormal.covs">brainiak.matnormal.covs module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.matnormal.html#module-brainiak.matnormal.matnormal_likelihoods">brainiak.matnormal.matnormal_likelihoods module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.matnormal.html#module-brainiak.matnormal.mnrsa">brainiak.matnormal.mnrsa module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.matnormal.html#module-brainiak.matnormal.regression">brainiak.matnormal.regression module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.matnormal.html#module-brainiak.matnormal.utils">brainiak.matnormal.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.matnormal.html#module-brainiak.matnormal.covs">brainiak.matnormal.covs module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovAR1"><code class="docutils literal notranslate"><span class="pre">CovAR1</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovAR1.get_optimize_vars"><code class="docutils literal notranslate"><span class="pre">CovAR1.get_optimize_vars()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovAR1.logdet"><code class="docutils literal notranslate"><span class="pre">CovAR1.logdet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovAR1.solve"><code class="docutils literal notranslate"><span class="pre">CovAR1.solve()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovBase"><code class="docutils literal notranslate"><span class="pre">CovBase</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovBase.get_optimize_vars"><code class="docutils literal notranslate"><span class="pre">CovBase.get_optimize_vars()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovBase.logdet"><code class="docutils literal notranslate"><span class="pre">CovBase.logdet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovBase.solve"><code class="docutils literal notranslate"><span class="pre">CovBase.solve()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovDiagonal"><code class="docutils literal notranslate"><span class="pre">CovDiagonal</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovDiagonal.get_optimize_vars"><code class="docutils literal notranslate"><span class="pre">CovDiagonal.get_optimize_vars()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovDiagonal.logdet"><code class="docutils literal notranslate"><span class="pre">CovDiagonal.logdet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovDiagonal.solve"><code class="docutils literal notranslate"><span class="pre">CovDiagonal.solve()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovDiagonalGammaPrior"><code class="docutils literal notranslate"><span class="pre">CovDiagonalGammaPrior</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovIdentity"><code class="docutils literal notranslate"><span class="pre">CovIdentity</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovIdentity.get_optimize_vars"><code class="docutils literal notranslate"><span class="pre">CovIdentity.get_optimize_vars()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovIdentity.logdet"><code class="docutils literal notranslate"><span class="pre">CovIdentity.logdet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovIdentity.solve"><code class="docutils literal notranslate"><span class="pre">CovIdentity.solve()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovIsotropic"><code class="docutils literal notranslate"><span class="pre">CovIsotropic</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovIsotropic.get_optimize_vars"><code class="docutils literal notranslate"><span class="pre">CovIsotropic.get_optimize_vars()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovIsotropic.logdet"><code class="docutils literal notranslate"><span class="pre">CovIsotropic.logdet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovIsotropic.solve"><code class="docutils literal notranslate"><span class="pre">CovIsotropic.solve()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovKroneckerFactored"><code class="docutils literal notranslate"><span class="pre">CovKroneckerFactored</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovKroneckerFactored.L"><code class="docutils literal notranslate"><span class="pre">CovKroneckerFactored.L</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovKroneckerFactored.get_optimize_vars"><code class="docutils literal notranslate"><span class="pre">CovKroneckerFactored.get_optimize_vars()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovKroneckerFactored.logdet"><code class="docutils literal notranslate"><span class="pre">CovKroneckerFactored.logdet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovKroneckerFactored.solve"><code class="docutils literal notranslate"><span class="pre">CovKroneckerFactored.solve()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovUnconstrainedCholesky"><code class="docutils literal notranslate"><span class="pre">CovUnconstrainedCholesky</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovUnconstrainedCholesky.L"><code class="docutils literal notranslate"><span class="pre">CovUnconstrainedCholesky.L</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovUnconstrainedCholesky.get_optimize_vars"><code class="docutils literal notranslate"><span class="pre">CovUnconstrainedCholesky.get_optimize_vars()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovUnconstrainedCholesky.logdet"><code class="docutils literal notranslate"><span class="pre">CovUnconstrainedCholesky.logdet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovUnconstrainedCholesky.solve"><code class="docutils literal notranslate"><span class="pre">CovUnconstrainedCholesky.solve()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovUnconstrainedCholeskyWishartReg"><code class="docutils literal notranslate"><span class="pre">CovUnconstrainedCholeskyWishartReg</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovUnconstrainedInvCholesky"><code class="docutils literal notranslate"><span class="pre">CovUnconstrainedInvCholesky</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovUnconstrainedInvCholesky.Linv"><code class="docutils literal notranslate"><span class="pre">CovUnconstrainedInvCholesky.Linv</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovUnconstrainedInvCholesky.get_optimize_vars"><code class="docutils literal notranslate"><span class="pre">CovUnconstrainedInvCholesky.get_optimize_vars()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovUnconstrainedInvCholesky.logdet"><code class="docutils literal notranslate"><span class="pre">CovUnconstrainedInvCholesky.logdet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.covs.CovUnconstrainedInvCholesky.solve"><code class="docutils literal notranslate"><span class="pre">CovUnconstrainedInvCholesky.solve()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.matnormal.html#module-brainiak.matnormal.matnormal_likelihoods">brainiak.matnormal.matnormal_likelihoods module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.matnormal_likelihoods.matnorm_logp"><code class="docutils literal notranslate"><span class="pre">matnorm_logp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.matnormal_likelihoods.matnorm_logp_conditional_col"><code class="docutils literal notranslate"><span class="pre">matnorm_logp_conditional_col()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.matnormal_likelihoods.matnorm_logp_conditional_row"><code class="docutils literal notranslate"><span class="pre">matnorm_logp_conditional_row()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.matnormal_likelihoods.matnorm_logp_marginal_col"><code class="docutils literal notranslate"><span class="pre">matnorm_logp_marginal_col()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.matnormal_likelihoods.matnorm_logp_marginal_row"><code class="docutils literal notranslate"><span class="pre">matnorm_logp_marginal_row()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.matnormal_likelihoods.solve_det_conditional"><code class="docutils literal notranslate"><span class="pre">solve_det_conditional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.matnormal_likelihoods.solve_det_marginal"><code class="docutils literal notranslate"><span class="pre">solve_det_marginal()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.matnormal.html#module-brainiak.matnormal.mnrsa">brainiak.matnormal.mnrsa module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.mnrsa.MNRSA"><code class="docutils literal notranslate"><span class="pre">MNRSA</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.mnrsa.MNRSA.L"><code class="docutils literal notranslate"><span class="pre">MNRSA.L</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.mnrsa.MNRSA.fit"><code class="docutils literal notranslate"><span class="pre">MNRSA.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.mnrsa.MNRSA.logp"><code class="docutils literal notranslate"><span class="pre">MNRSA.logp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.mnrsa.MNRSA.set_fit_request"><code class="docutils literal notranslate"><span class="pre">MNRSA.set_fit_request()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.matnormal.html#module-brainiak.matnormal.regression">brainiak.matnormal.regression module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.regression.MatnormalRegression"><code class="docutils literal notranslate"><span class="pre">MatnormalRegression</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.regression.MatnormalRegression.calibrate"><code class="docutils literal notranslate"><span class="pre">MatnormalRegression.calibrate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.regression.MatnormalRegression.fit"><code class="docutils literal notranslate"><span class="pre">MatnormalRegression.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.regression.MatnormalRegression.logp"><code class="docutils literal notranslate"><span class="pre">MatnormalRegression.logp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.regression.MatnormalRegression.predict"><code class="docutils literal notranslate"><span class="pre">MatnormalRegression.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.regression.MatnormalRegression.set_fit_request"><code class="docutils literal notranslate"><span class="pre">MatnormalRegression.set_fit_request()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.matnormal.html#module-brainiak.matnormal.utils">brainiak.matnormal.utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.utils.flatten_cholesky_unique"><code class="docutils literal notranslate"><span class="pre">flatten_cholesky_unique()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.utils.make_val_and_grad"><code class="docutils literal notranslate"><span class="pre">make_val_and_grad()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.utils.pack_trainable_vars"><code class="docutils literal notranslate"><span class="pre">pack_trainable_vars()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.utils.rmn"><code class="docutils literal notranslate"><span class="pre">rmn()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.utils.scaled_I"><code class="docutils literal notranslate"><span class="pre">scaled_I()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.utils.unflatten_cholesky_unique"><code class="docutils literal notranslate"><span class="pre">unflatten_cholesky_unique()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.utils.unpack_trainable_vars"><code class="docutils literal notranslate"><span class="pre">unpack_trainable_vars()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.utils.x_tx"><code class="docutils literal notranslate"><span class="pre">x_tx()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.matnormal.html#brainiak.matnormal.utils.xx_t"><code class="docutils literal notranslate"><span class="pre">xx_t()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="brainiak.reconstruct.html">brainiak.reconstruct package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="brainiak.reconstruct.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.reconstruct.html#module-brainiak.reconstruct.iem">brainiak.reconstruct.iem module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.reconstruct.html#module-brainiak.reconstruct.iem">brainiak.reconstruct.iem module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding1D"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding1D</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding1D.channels_"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding1D.channels_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding1D.W_"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding1D.W_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding1D.fit"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding1D.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding1D.get_params"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding1D.get_params()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding1D.predict"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding1D.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding1D.score"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding1D.score()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding1D.set_params"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding1D.set_params()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding2D"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding2D</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding2D.channels"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding2D.channels</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding2D.W_"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding2D.W_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding2D.define_basis_functions_sqgrid"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding2D.define_basis_functions_sqgrid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding2D.define_basis_functions_trigrid"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding2D.define_basis_functions_trigrid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding2D.fit"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding2D.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding2D.get_params"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding2D.get_params()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding2D.predict"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding2D.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding2D.predict_feature_responses"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding2D.predict_feature_responses()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding2D.score"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding2D.score()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding2D.score_against_reconstructed"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding2D.score_against_reconstructed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding2D.set_fit_request"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding2D.set_fit_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reconstruct.html#brainiak.reconstruct.iem.InvertedEncoding2D.set_params"><code class="docutils literal notranslate"><span class="pre">InvertedEncoding2D.set_params()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="brainiak.reprsimil.html">brainiak.reprsimil package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="brainiak.reprsimil.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.reprsimil.html#module-brainiak.reprsimil.brsa">brainiak.reprsimil.brsa module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.reprsimil.html#module-brainiak.reprsimil.brsa">brainiak.reprsimil.brsa module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA"><code class="docutils literal notranslate"><span class="pre">BRSA</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.U_"><code class="docutils literal notranslate"><span class="pre">BRSA.U_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.L_"><code class="docutils literal notranslate"><span class="pre">BRSA.L_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.C_"><code class="docutils literal notranslate"><span class="pre">BRSA.C_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.nSNR_"><code class="docutils literal notranslate"><span class="pre">BRSA.nSNR_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.sigma_"><code class="docutils literal notranslate"><span class="pre">BRSA.sigma_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.rho_"><code class="docutils literal notranslate"><span class="pre">BRSA.rho_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.bGP_"><code class="docutils literal notranslate"><span class="pre">BRSA.bGP_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.lGPspace_"><code class="docutils literal notranslate"><span class="pre">BRSA.lGPspace_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.lGPinten_"><code class="docutils literal notranslate"><span class="pre">BRSA.lGPinten_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.beta_"><code class="docutils literal notranslate"><span class="pre">BRSA.beta_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.beta0_"><code class="docutils literal notranslate"><span class="pre">BRSA.beta0_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.X0_"><code class="docutils literal notranslate"><span class="pre">BRSA.X0_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.beta0_null_"><code class="docutils literal notranslate"><span class="pre">BRSA.beta0_null_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.X0_null_"><code class="docutils literal notranslate"><span class="pre">BRSA.X0_null_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.n_nureg_"><code class="docutils literal notranslate"><span class="pre">BRSA.n_nureg_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.random_state_"><code class="docutils literal notranslate"><span class="pre">BRSA.random_state_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.fit"><code class="docutils literal notranslate"><span class="pre">BRSA.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.score"><code class="docutils literal notranslate"><span class="pre">BRSA.score()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.set_fit_request"><code class="docutils literal notranslate"><span class="pre">BRSA.set_fit_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.set_score_request"><code class="docutils literal notranslate"><span class="pre">BRSA.set_score_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.set_transform_request"><code class="docutils literal notranslate"><span class="pre">BRSA.set_transform_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.BRSA.transform"><code class="docutils literal notranslate"><span class="pre">BRSA.transform()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA"><code class="docutils literal notranslate"><span class="pre">GBRSA</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA.U_"><code class="docutils literal notranslate"><span class="pre">GBRSA.U_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA.L_"><code class="docutils literal notranslate"><span class="pre">GBRSA.L_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA.C_"><code class="docutils literal notranslate"><span class="pre">GBRSA.C_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA.nSNR_"><code class="docutils literal notranslate"><span class="pre">GBRSA.nSNR_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA.sigma_"><code class="docutils literal notranslate"><span class="pre">GBRSA.sigma_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA.rho_"><code class="docutils literal notranslate"><span class="pre">GBRSA.rho_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA.beta_"><code class="docutils literal notranslate"><span class="pre">GBRSA.beta_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA.beta0_"><code class="docutils literal notranslate"><span class="pre">GBRSA.beta0_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA.X0_"><code class="docutils literal notranslate"><span class="pre">GBRSA.X0_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA.beta0_null_"><code class="docutils literal notranslate"><span class="pre">GBRSA.beta0_null_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA.X0_null_"><code class="docutils literal notranslate"><span class="pre">GBRSA.X0_null_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA.n_nureg_"><code class="docutils literal notranslate"><span class="pre">GBRSA.n_nureg_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA.random_state_"><code class="docutils literal notranslate"><span class="pre">GBRSA.random_state_</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA.fit"><code class="docutils literal notranslate"><span class="pre">GBRSA.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA.score"><code class="docutils literal notranslate"><span class="pre">GBRSA.score()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA.set_fit_request"><code class="docutils literal notranslate"><span class="pre">GBRSA.set_fit_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA.set_score_request"><code class="docutils literal notranslate"><span class="pre">GBRSA.set_score_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA.set_transform_request"><code class="docutils literal notranslate"><span class="pre">GBRSA.set_transform_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.GBRSA.transform"><code class="docutils literal notranslate"><span class="pre">GBRSA.transform()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.Ncomp_SVHT_MG_DLD_approx"><code class="docutils literal notranslate"><span class="pre">Ncomp_SVHT_MG_DLD_approx()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.prior_GP_var_half_cauchy"><code class="docutils literal notranslate"><span class="pre">prior_GP_var_half_cauchy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.reprsimil.html#brainiak.reprsimil.brsa.prior_GP_var_inv_gamma"><code class="docutils literal notranslate"><span class="pre">prior_GP_var_inv_gamma()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="brainiak.searchlight.html">brainiak.searchlight package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="brainiak.searchlight.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.searchlight.html#module-brainiak.searchlight.searchlight">brainiak.searchlight.searchlight module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.searchlight.html#module-brainiak.searchlight.searchlight">brainiak.searchlight.searchlight module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.searchlight.html#brainiak.searchlight.searchlight.Ball"><code class="docutils literal notranslate"><span class="pre">Ball</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.searchlight.html#brainiak.searchlight.searchlight.Cube"><code class="docutils literal notranslate"><span class="pre">Cube</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.searchlight.html#brainiak.searchlight.searchlight.Diamond"><code class="docutils literal notranslate"><span class="pre">Diamond</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.searchlight.html#brainiak.searchlight.searchlight.Searchlight"><code class="docutils literal notranslate"><span class="pre">Searchlight</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.searchlight.html#brainiak.searchlight.searchlight.Searchlight.broadcast"><code class="docutils literal notranslate"><span class="pre">Searchlight.broadcast()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.searchlight.html#brainiak.searchlight.searchlight.Searchlight.distribute"><code class="docutils literal notranslate"><span class="pre">Searchlight.distribute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.searchlight.html#brainiak.searchlight.searchlight.Searchlight.run_block_function"><code class="docutils literal notranslate"><span class="pre">Searchlight.run_block_function()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.searchlight.html#brainiak.searchlight.searchlight.Searchlight.run_searchlight"><code class="docutils literal notranslate"><span class="pre">Searchlight.run_searchlight()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.searchlight.html#brainiak.searchlight.searchlight.Shape"><code class="docutils literal notranslate"><span class="pre">Shape</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.searchlight.html#brainiak.searchlight.searchlight.Shape.mask_"><code class="docutils literal notranslate"><span class="pre">Shape.mask_</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="brainiak.utils.html">brainiak.utils package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="brainiak.utils.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.utils.html#module-brainiak.utils.fmrisim">brainiak.utils.fmrisim module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.utils.html#module-brainiak.utils.fmrisim_real_time_generator">brainiak.utils.fmrisim_real_time_generator module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.utils.html#module-brainiak.utils.kronecker_solvers">brainiak.utils.kronecker_solvers module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="brainiak.utils.html#module-brainiak.utils.utils">brainiak.utils.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.utils.html#module-brainiak.utils.fmrisim">brainiak.utils.fmrisim module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.fmrisim.apply_signal"><code class="docutils literal notranslate"><span class="pre">apply_signal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.fmrisim.calc_noise"><code class="docutils literal notranslate"><span class="pre">calc_noise()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.fmrisim.compute_signal_change"><code class="docutils literal notranslate"><span class="pre">compute_signal_change()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.fmrisim.convolve_hrf"><code class="docutils literal notranslate"><span class="pre">convolve_hrf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.fmrisim.export_3_column"><code class="docutils literal notranslate"><span class="pre">export_3_column()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.fmrisim.export_epoch_file"><code class="docutils literal notranslate"><span class="pre">export_epoch_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.fmrisim.generate_1d_gaussian_rfs"><code class="docutils literal notranslate"><span class="pre">generate_1d_gaussian_rfs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.fmrisim.generate_1d_rf_responses"><code class="docutils literal notranslate"><span class="pre">generate_1d_rf_responses()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.fmrisim.generate_noise"><code class="docutils literal notranslate"><span class="pre">generate_noise()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.fmrisim.generate_signal"><code class="docutils literal notranslate"><span class="pre">generate_signal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.fmrisim.generate_stimfunction"><code class="docutils literal notranslate"><span class="pre">generate_stimfunction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.fmrisim.mask_brain"><code class="docutils literal notranslate"><span class="pre">mask_brain()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.utils.html#module-brainiak.utils.fmrisim_real_time_generator">brainiak.utils.fmrisim_real_time_generator module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.fmrisim_real_time_generator.generate_data"><code class="docutils literal notranslate"><span class="pre">generate_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.utils.html#module-brainiak.utils.kronecker_solvers">brainiak.utils.kronecker_solvers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.kronecker_solvers.tf_kron_mult"><code class="docutils literal notranslate"><span class="pre">tf_kron_mult()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.kronecker_solvers.tf_masked_triangular_solve"><code class="docutils literal notranslate"><span class="pre">tf_masked_triangular_solve()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="brainiak.utils.html#module-brainiak.utils.utils">brainiak.utils.utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.ReadDesign"><code class="docutils literal notranslate"><span class="pre">ReadDesign</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.ReadDesign.design"><code class="docutils literal notranslate"><span class="pre">ReadDesign.design</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.ReadDesign.design_task"><code class="docutils literal notranslate"><span class="pre">ReadDesign.design_task</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.ReadDesign.n_col"><code class="docutils literal notranslate"><span class="pre">ReadDesign.n_col</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.ReadDesign.column_types"><code class="docutils literal notranslate"><span class="pre">ReadDesign.column_types</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.ReadDesign.n_basis"><code class="docutils literal notranslate"><span class="pre">ReadDesign.n_basis</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.ReadDesign.n_stim"><code class="docutils literal notranslate"><span class="pre">ReadDesign.n_stim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.ReadDesign.n_orth"><code class="docutils literal notranslate"><span class="pre">ReadDesign.n_orth</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.ReadDesign.StimLabels"><code class="docutils literal notranslate"><span class="pre">ReadDesign.StimLabels</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.ReadDesign.read_afni"><code class="docutils literal notranslate"><span class="pre">ReadDesign.read_afni()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.array_correlation"><code class="docutils literal notranslate"><span class="pre">array_correlation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.center_mass_exp"><code class="docutils literal notranslate"><span class="pre">center_mass_exp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.circ_dist"><code class="docutils literal notranslate"><span class="pre">circ_dist()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.concatenate_not_none"><code class="docutils literal notranslate"><span class="pre">concatenate_not_none()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.cov2corr"><code class="docutils literal notranslate"><span class="pre">cov2corr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.from_sym_2_tri"><code class="docutils literal notranslate"><span class="pre">from_sym_2_tri()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.from_tri_2_sym"><code class="docutils literal notranslate"><span class="pre">from_tri_2_sym()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.gen_design"><code class="docutils literal notranslate"><span class="pre">gen_design()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.p_from_null"><code class="docutils literal notranslate"><span class="pre">p_from_null()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.phase_randomize"><code class="docutils literal notranslate"><span class="pre">phase_randomize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.sumexp_stable"><code class="docutils literal notranslate"><span class="pre">sumexp_stable()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="brainiak.utils.html#brainiak.utils.utils.usable_cpu_count"><code class="docutils literal notranslate"><span class="pre">usable_cpu_count()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 <div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
 </div>
 <div class="section" id="module-brainiak.image">
-<span id="brainiak-image-module"></span><h2>brainiak.image module<a class="headerlink" href="#module-brainiak.image" title="Permalink to this headline">¶</a></h2>
+<span id="brainiak-image-module"></span><h2>brainiak.image module<a class="headerlink" href="#module-brainiak.image" title="Permalink to this heading"></a></h2>
 <p>Generic image functionality.</p>
 <dl class="py class">
-<dt id="brainiak.image.ConditionSpec">
-<em class="property">class </em><code class="sig-prename descclassname">brainiak.image.</code><code class="sig-name descname">ConditionSpec</code><a class="headerlink" href="#brainiak.image.ConditionSpec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+<dt class="sig sig-object py" id="brainiak.image.ConditionSpec">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">brainiak.image.</span></span><span class="sig-name descname"><span class="pre">ConditionSpec</span></span><a class="headerlink" href="#brainiak.image.ConditionSpec" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
 <p>One-hot representation of conditions across epochs and TRs.</p>
 <p>The shape is (n_conditions, n_epochs, n_trs).</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="brainiak.image.MaskedMultiSubjectData">
-<em class="property">class </em><code class="sig-prename descclassname">brainiak.image.</code><code class="sig-name descname">MaskedMultiSubjectData</code><a class="headerlink" href="#brainiak.image.MaskedMultiSubjectData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
+<dt class="sig sig-object py" id="brainiak.image.MaskedMultiSubjectData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">brainiak.image.</span></span><span class="sig-name descname"><span class="pre">MaskedMultiSubjectData</span></span><a class="headerlink" href="#brainiak.image.MaskedMultiSubjectData" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
 <p>Array with shape n_TRs, n_voxels, n_subjects.</p>
 <dl class="py method">
-<dt id="brainiak.image.MaskedMultiSubjectData.from_masked_images">
-<em class="property">classmethod </em><code class="sig-name descname">from_masked_images</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">masked_images</span><span class="p">:</span> <span class="n">Iterable<span class="p">[</span>numpy.ndarray<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">n_subjects</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; T<a class="headerlink" href="#brainiak.image.MaskedMultiSubjectData.from_masked_images" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="brainiak.image.MaskedMultiSubjectData.from_masked_images">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_masked_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">masked_images</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_subjects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">T</span></span></span><a class="headerlink" href="#brainiak.image.MaskedMultiSubjectData.from_masked_images" title="Permalink to this definition"></a></dt>
 <dd><p>Create a new instance of MaskedMultiSubjecData from masked images.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -286,13 +613,13 @@
 </dd></dl>
 
 <dl class="py class">
-<dt id="brainiak.image.SingleConditionSpec">
-<em class="property">class </em><code class="sig-prename descclassname">brainiak.image.</code><code class="sig-name descname">SingleConditionSpec</code><a class="headerlink" href="#brainiak.image.SingleConditionSpec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#brainiak.image.ConditionSpec" title="brainiak.image.ConditionSpec"><code class="xref py py-class docutils literal notranslate"><span class="pre">brainiak.image.ConditionSpec</span></code></a></p>
+<dt class="sig sig-object py" id="brainiak.image.SingleConditionSpec">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">brainiak.image.</span></span><span class="sig-name descname"><span class="pre">SingleConditionSpec</span></span><a class="headerlink" href="#brainiak.image.SingleConditionSpec" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#brainiak.image.ConditionSpec" title="brainiak.image.ConditionSpec"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConditionSpec</span></code></a></p>
 <p>ConditionSpec with a single condition applicable to an epoch.</p>
 <dl class="py method">
-<dt id="brainiak.image.SingleConditionSpec.extract_labels">
-<code class="sig-name descname">extract_labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#brainiak.image.SingleConditionSpec.extract_labels" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="brainiak.image.SingleConditionSpec.extract_labels">
+<span class="sig-name descname"><span class="pre">extract_labels</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#brainiak.image.SingleConditionSpec.extract_labels" title="Permalink to this definition"></a></dt>
 <dd><p>Extract condition labels.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -307,8 +634,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="brainiak.image.mask_image">
-<code class="sig-prename descclassname">brainiak.image.</code><code class="sig-name descname">mask_image</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span><span class="p">:</span> <span class="n">nibabel.spatialimages.SpatialImage</span></em>, <em class="sig-param"><span class="n">mask</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">data_type</span><span class="p">:</span> <span class="n">type</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#brainiak.image.mask_image" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="brainiak.image.mask_image">
+<span class="sig-prename descclassname"><span class="pre">brainiak.image.</span></span><span class="sig-name descname"><span class="pre">mask_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SpatialImage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#brainiak.image.mask_image" title="Permalink to this definition"></a></dt>
 <dd><p>Mask image after optionally casting its type.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -331,8 +658,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="brainiak.image.mask_images">
-<code class="sig-prename descclassname">brainiak.image.</code><code class="sig-name descname">mask_images</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">images</span><span class="p">:</span> <span class="n">Iterable<span class="p">[</span>nibabel.spatialimages.SpatialImage<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">mask</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">image_type</span><span class="p">:</span> <span class="n">type</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Iterable<span class="p">[</span>numpy.ndarray<span class="p">]</span><a class="headerlink" href="#brainiak.image.mask_images" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="brainiak.image.mask_images">
+<span class="sig-prename descclassname"><span class="pre">brainiak.image.</span></span><span class="sig-name descname"><span class="pre">mask_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">SpatialImage</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#brainiak.image.mask_images" title="Permalink to this definition"></a></dt>
 <dd><p>Mask images.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -349,8 +676,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="brainiak.image.multimask_images">
-<code class="sig-prename descclassname">brainiak.image.</code><code class="sig-name descname">multimask_images</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">images</span><span class="p">:</span> <span class="n">Iterable<span class="p">[</span>nibabel.spatialimages.SpatialImage<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">masks</span><span class="p">:</span> <span class="n">Sequence<span class="p">[</span>numpy.ndarray<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">image_type</span><span class="p">:</span> <span class="n">type</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Iterable<span class="p">[</span>Sequence<span class="p">[</span>numpy.ndarray<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#brainiak.image.multimask_images" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="brainiak.image.multimask_images">
+<span class="sig-prename descclassname"><span class="pre">brainiak.image.</span></span><span class="sig-name descname"><span class="pre">multimask_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">images</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">SpatialImage</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">masks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">type</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#brainiak.image.multimask_images" title="Permalink to this definition"></a></dt>
 <dd><p>Mask images with multiple masks.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -368,11 +695,11 @@
 
 </div>
 <div class="section" id="module-brainiak.io">
-<span id="brainiak-io-module"></span><h2>brainiak.io module<a class="headerlink" href="#module-brainiak.io" title="Permalink to this headline">¶</a></h2>
+<span id="brainiak-io-module"></span><h2>brainiak.io module<a class="headerlink" href="#module-brainiak.io" title="Permalink to this heading"></a></h2>
 <p>I/O functionality.</p>
 <dl class="py function">
-<dt id="brainiak.io.load_boolean_mask">
-<code class="sig-prename descclassname">brainiak.io.</code><code class="sig-name descname">load_boolean_mask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">predicate</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span>numpy.ndarray<span class="p">, </span>numpy.ndarray<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#brainiak.io.load_boolean_mask" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="brainiak.io.load_boolean_mask">
+<span class="sig-prename descclassname"><span class="pre">brainiak.io.</span></span><span class="sig-name descname"><span class="pre">load_boolean_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Path</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predicate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#brainiak.io.load_boolean_mask" title="Permalink to this definition"></a></dt>
 <dd><p>Load boolean nibabel.SpatialImage mask.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -392,8 +719,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="brainiak.io.load_images">
-<code class="sig-prename descclassname">brainiak.io.</code><code class="sig-name descname">load_images</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image_paths</span><span class="p">:</span> <span class="n">Iterable<span class="p">[</span>Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; Iterable<span class="p">[</span>nibabel.spatialimages.SpatialImage<span class="p">]</span><a class="headerlink" href="#brainiak.io.load_images" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="brainiak.io.load_images">
+<span class="sig-prename descclassname"><span class="pre">brainiak.io.</span></span><span class="sig-name descname"><span class="pre">load_images</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Path</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">SpatialImage</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#brainiak.io.load_images" title="Permalink to this definition"></a></dt>
 <dd><p>Load images from paths.</p>
 <p>For efficiency, returns an iterator, not a sequence, so the results cannot
 be accessed by indexing.</p>
@@ -410,8 +737,8 @@ again.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="brainiak.io.load_images_from_dir">
-<code class="sig-prename descclassname">brainiak.io.</code><code class="sig-name descname">load_images_from_dir</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">in_dir</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">suffix</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'nii.gz'</span></em><span class="sig-paren">)</span> &#x2192; Iterable<span class="p">[</span>nibabel.spatialimages.SpatialImage<span class="p">]</span><a class="headerlink" href="#brainiak.io.load_images_from_dir" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="brainiak.io.load_images_from_dir">
+<span class="sig-prename descclassname"><span class="pre">brainiak.io.</span></span><span class="sig-name descname"><span class="pre">load_images_from_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Path</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'nii.gz'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">SpatialImage</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#brainiak.io.load_images_from_dir" title="Permalink to this definition"></a></dt>
 <dd><p>Load images from directory.</p>
 <p>For efficiency, returns an iterator, not a sequence, so the results cannot
 be accessed by indexing.</p>
@@ -435,8 +762,8 @@ called again.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="brainiak.io.load_labels">
-<code class="sig-prename descclassname">brainiak.io.</code><code class="sig-name descname">load_labels</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#brainiak.image.SingleConditionSpec" title="brainiak.image.SingleConditionSpec">brainiak.image.SingleConditionSpec</a><span class="p">]</span><a class="headerlink" href="#brainiak.io.load_labels" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="brainiak.io.load_labels">
+<span class="sig-prename descclassname"><span class="pre">brainiak.io.</span></span><span class="sig-name descname"><span class="pre">load_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Path</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#brainiak.image.SingleConditionSpec" title="brainiak.image.SingleConditionSpec"><span class="pre">SingleConditionSpec</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#brainiak.io.load_labels" title="Permalink to this definition"></a></dt>
 <dd><p>Load labels files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -452,8 +779,8 @@ called again.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="brainiak.io.save_as_nifti_file">
-<code class="sig-prename descclassname">brainiak.io.</code><code class="sig-name descname">save_as_nifti_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">affine</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>str<span class="p">, </span>pathlib.Path<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#brainiak.io.save_as_nifti_file" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="brainiak.io.save_as_nifti_file">
+<span class="sig-prename descclassname"><span class="pre">brainiak.io.</span></span><span class="sig-name descname"><span class="pre">save_as_nifti_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">affine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Path</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#brainiak.io.save_as_nifti_file" title="Permalink to this definition"></a></dt>
 <dd><p>Create a Nifti file and save it.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -468,7 +795,7 @@ called again.</p>
 
 </div>
 <div class="section" id="module-brainiak.isc">
-<span id="brainiak-isc-module"></span><h2>brainiak.isc module<a class="headerlink" href="#module-brainiak.isc" title="Permalink to this headline">¶</a></h2>
+<span id="brainiak-isc-module"></span><h2>brainiak.isc module<a class="headerlink" href="#module-brainiak.isc" title="Permalink to this heading"></a></h2>
 <p>Intersubject correlation (ISC) analysis</p>
 <p>Functions for computing intersubject correlation (ISC) and related
 analyses (e.g., intersubject funtional correlations; ISFC), as well
@@ -509,8 +836,8 @@ C. Keysers, 2019, Social Cognitive and Affective Neuroscience, 14,
 </dd>
 </dl>
 <dl class="py function">
-<dt id="brainiak.isc.bootstrap_isc">
-<code class="sig-prename descclassname">brainiak.isc.</code><code class="sig-name descname">bootstrap_isc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iscs</span></em>, <em class="sig-param"><span class="n">pairwise</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">summary_statistic</span><span class="o">=</span><span class="default_value">'median'</span></em>, <em class="sig-param"><span class="n">n_bootstraps</span><span class="o">=</span><span class="default_value">1000</span></em>, <em class="sig-param"><span class="n">ci_percentile</span><span class="o">=</span><span class="default_value">95</span></em>, <em class="sig-param"><span class="n">side</span><span class="o">=</span><span class="default_value">'right'</span></em>, <em class="sig-param"><span class="n">random_state</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.bootstrap_isc" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="brainiak.isc.bootstrap_isc">
+<span class="sig-prename descclassname"><span class="pre">brainiak.isc.</span></span><span class="sig-name descname"><span class="pre">bootstrap_isc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iscs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pairwise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary_statistic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'median'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_bootstraps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ci_percentile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">95</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'right'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.bootstrap_isc" title="Permalink to this definition"></a></dt>
 <dd><p>One-sample group-level bootstrap hypothesis test for ISCs</p>
 <p>For ISCs from one more voxels or ROIs, resample subjects with replacement
 to construct a bootstrap distribution. Input is a list or ndarray of
@@ -548,7 +875,7 @@ P. Hall, S. R., Wilson, 1991, Biometrics, 757-762.
 <li><p><strong>n_bootstraps</strong> (<em>int</em><em>, </em><em>default: 1000</em>) – Number of bootstrap samples (subject-level with replacement)</p></li>
 <li><p><strong>ci_percentile</strong> (<em>int</em><em>, </em><em>default: 95</em>) – Percentile for computing confidence intervals</p></li>
 <li><p><strong>side</strong> (<em>str</em>) – Perform one-sided (‘left’ or ‘right’) or ‘two-sided’ test</p></li>
-<li><p><strong>= int</strong><strong> or </strong><strong>None</strong> (<em>random_state</em>) – Initial random seed</p></li>
+<li><p><strong>None</strong> (<em>random_state = int or</em>) – Initial random seed</p></li>
 <li><p><strong>default</strong> (<em>None</em>) – Initial random seed</p></li>
 </ul>
 </dd>
@@ -565,8 +892,8 @@ P. Hall, S. R., Wilson, 1991, Biometrics, 757-762.
 </dd></dl>
 
 <dl class="py function">
-<dt id="brainiak.isc.compute_summary_statistic">
-<code class="sig-prename descclassname">brainiak.isc.</code><code class="sig-name descname">compute_summary_statistic</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iscs</span></em>, <em class="sig-param"><span class="n">summary_statistic</span><span class="o">=</span><span class="default_value">'mean'</span></em>, <em class="sig-param"><span class="n">axis</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.compute_summary_statistic" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="brainiak.isc.compute_summary_statistic">
+<span class="sig-prename descclassname"><span class="pre">brainiak.isc.</span></span><span class="sig-name descname"><span class="pre">compute_summary_statistic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iscs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary_statistic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.compute_summary_statistic" title="Permalink to this definition"></a></dt>
 <dd><p>Computes summary statistics for ISCs</p>
 <p>Computes either the ‘mean’ or ‘median’ across a set of ISCs. In the
 case of the mean, ISC values are first Fisher Z transformed (arctanh),
@@ -585,7 +912,7 @@ Journal of Applied Psychology, 72, 146-148.
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>iscs</strong> (<em>list</em><em> or </em><em>ndarray</em>) – ISC values</p></li>
 <li><p><strong>summary_statistic</strong> (<em>str</em><em>, </em><em>default: 'mean'</em>) – Summary statistic, ‘mean’ or ‘median’</p></li>
-<li><p><strong>axis</strong> (<em>None</em><em> or </em><em>int</em><em> or </em><em>tuple of ints</em><em>, </em><em>optional</em>) – Axis or axes along which the means are computed. The default is to
+<li><p><strong>axis</strong> (<em>None</em><em> or </em><em>int</em><em> or </em><em>tuple</em><em> of </em><em>ints</em><em>, </em><em>optional</em>) – Axis or axes along which the means are computed. The default is to
 compute the mean of the flattened array.</p></li>
 </ul>
 </dd>
@@ -599,8 +926,8 @@ compute the mean of the flattened array.</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt id="brainiak.isc.isc">
-<code class="sig-prename descclassname">brainiak.isc.</code><code class="sig-name descname">isc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">pairwise</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">summary_statistic</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tolerate_nans</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.isc" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="brainiak.isc.isc">
+<span class="sig-prename descclassname"><span class="pre">brainiak.isc.</span></span><span class="sig-name descname"><span class="pre">isc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pairwise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary_statistic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerate_nans</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.isc" title="Permalink to this definition"></a></dt>
 <dd><p>Intersubject correlation</p>
 <p>For each voxel or ROI, compute the Pearson correlation between each
 subject’s response time series and other subjects’ response time series.
@@ -655,8 +982,8 @@ the output is a ndarray n_voxels long.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="brainiak.isc.isfc">
-<code class="sig-prename descclassname">brainiak.isc.</code><code class="sig-name descname">isfc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">targets</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pairwise</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">summary_statistic</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">vectorize_isfcs</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">tolerate_nans</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.isfc" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="brainiak.isc.isfc">
+<span class="sig-prename descclassname"><span class="pre">brainiak.isc.</span></span><span class="sig-name descname"><span class="pre">isfc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pairwise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary_statistic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vectorize_isfcs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerate_nans</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.isfc" title="Permalink to this definition"></a></dt>
 <dd><p>Intersubject functional correlation (ISFC)</p>
 <p>For each input voxel or ROI, compute the Pearson correlation between each
 subject’s response time series and all input voxels or ROIs in other
@@ -724,8 +1051,8 @@ ISFCs (False)</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt id="brainiak.isc.permutation_isc">
-<code class="sig-prename descclassname">brainiak.isc.</code><code class="sig-name descname">permutation_isc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iscs</span></em>, <em class="sig-param"><span class="n">group_assignment</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pairwise</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">summary_statistic</span><span class="o">=</span><span class="default_value">'median'</span></em>, <em class="sig-param"><span class="n">n_permutations</span><span class="o">=</span><span class="default_value">1000</span></em>, <em class="sig-param"><span class="n">side</span><span class="o">=</span><span class="default_value">'right'</span></em>, <em class="sig-param"><span class="n">random_state</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.permutation_isc" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="brainiak.isc.permutation_isc">
+<span class="sig-prename descclassname"><span class="pre">brainiak.isc.</span></span><span class="sig-name descname"><span class="pre">permutation_isc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iscs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_assignment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pairwise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary_statistic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'median'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_permutations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'right'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.permutation_isc" title="Permalink to this definition"></a></dt>
 <dd><p>Group-level permutation test for ISCs</p>
 <p>For ISCs from one or more voxels or ROIs, permute group assignments to
 construct a permutation distribution. Input is a list or ndarray of
@@ -760,13 +1087,13 @@ may not strictly control FPRs for one-sample tests.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>iscs</strong> (<em>list</em><em> or </em><em>ndarray</em><em>, </em><em>correlation matrix of ISCs</em>) – ISC values for one or more voxels</p></li>
+<li><p><strong>iscs</strong> (<em>list</em><em> or </em><em>ndarray</em><em>, </em><em>correlation matrix</em><em> of </em><em>ISCs</em>) – ISC values for one or more voxels</p></li>
 <li><p><strong>group_assignment</strong> (<em>list</em><em> or </em><em>ndarray</em><em>, </em><em>group labels</em>) – Group labels matching order of ISC input</p></li>
 <li><p><strong>pairwise</strong> (<em>bool</em><em>, </em><em>default: False</em>) – Indicator of pairwise or leave-one-out, should match ISCs variable</p></li>
 <li><p><strong>summary_statistic</strong> (<em>str</em><em>, </em><em>default: 'median'</em>) – Summary statistic, either ‘median’ (default) or ‘mean’</p></li>
 <li><p><strong>n_permutations</strong> (<em>int</em><em>, </em><em>default: 1000</em>) – Number of permutation iteration (randomizing group assignment)</p></li>
 <li><p><strong>side</strong> (<em>str</em>) – Perform one-sided (‘left’ or ‘right’) or ‘two-sided’ test</p></li>
-<li><p><strong>= int</strong> (<em>random_state</em>) – Initial random seed</p></li>
+<li><p><strong>int</strong> (<em>random_state =</em>) – Initial random seed</p></li>
 <li><p><strong>None</strong> (<em>None</em>) – Initial random seed</p></li>
 <li><p><strong>np.random.RandomState</strong> (<em>or</em>) – Initial random seed</p></li>
 <li><p><strong>default</strong> (<em>None</em>) – Initial random seed</p></li>
@@ -784,8 +1111,8 @@ may not strictly control FPRs for one-sample tests.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="brainiak.isc.phaseshift_isc">
-<code class="sig-prename descclassname">brainiak.isc.</code><code class="sig-name descname">phaseshift_isc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">pairwise</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">summary_statistic</span><span class="o">=</span><span class="default_value">'median'</span></em>, <em class="sig-param"><span class="n">n_shifts</span><span class="o">=</span><span class="default_value">1000</span></em>, <em class="sig-param"><span class="n">side</span><span class="o">=</span><span class="default_value">'right'</span></em>, <em class="sig-param"><span class="n">tolerate_nans</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">random_state</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.phaseshift_isc" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="brainiak.isc.phaseshift_isc">
+<span class="sig-prename descclassname"><span class="pre">brainiak.isc.</span></span><span class="sig-name descname"><span class="pre">phaseshift_isc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pairwise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary_statistic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'median'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_shifts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'right'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerate_nans</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.phaseshift_isc" title="Permalink to this definition"></a></dt>
 <dd><p>Phase randomization for one-sample ISC test</p>
 <p>For each voxel or ROI, compute the actual ISC and p-values
 from a null distribution of ISCs where response time series
@@ -833,7 +1160,7 @@ L. J. Silbert, U. Hasson, 2011, Journal of Neuroscience, 31, 2906-2915.
 <li><p><strong>n_shifts</strong> (<em>int</em><em>, </em><em>default: 1000</em>) – Number of randomly shifted samples</p></li>
 <li><p><strong>side</strong> (<em>str</em>) – Perform one-sided (‘left’ or ‘right’) or ‘two-sided’ test</p></li>
 <li><p><strong>tolerate_nans</strong> (<em>bool</em><em> or </em><em>float</em><em>, </em><em>default: True</em>) – Accommodate NaNs (when averaging in leave-one-out approach)</p></li>
-<li><p><strong>= int</strong> (<em>random_state</em>) – Initial random seed</p></li>
+<li><p><strong>int</strong> (<em>random_state =</em>) – Initial random seed</p></li>
 <li><p><strong>None</strong> (<em>None</em>) – Initial random seed</p></li>
 <li><p><strong>np.random.RandomState</strong> (<em>or</em>) – Initial random seed</p></li>
 <li><p><strong>default</strong> (<em>None</em>) – Initial random seed</p></li>
@@ -851,8 +1178,8 @@ L. J. Silbert, U. Hasson, 2011, Journal of Neuroscience, 31, 2906-2915.
 </dd></dl>
 
 <dl class="py function">
-<dt id="brainiak.isc.squareform_isfc">
-<code class="sig-prename descclassname">brainiak.isc.</code><code class="sig-name descname">squareform_isfc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">isfcs</span></em>, <em class="sig-param"><span class="n">iscs</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.squareform_isfc" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="brainiak.isc.squareform_isfc">
+<span class="sig-prename descclassname"><span class="pre">brainiak.isc.</span></span><span class="sig-name descname"><span class="pre">squareform_isfc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">isfcs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iscs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.squareform_isfc" title="Permalink to this definition"></a></dt>
 <dd><p>Converts square ISFCs to condensed ISFCs (and ISCs), and vice-versa</p>
 <p>If input is a 2- or 3-dimensional array of square ISFC matrices, converts
 this to the condensed off-diagonal ISFC values (i.e., the vectorized
@@ -884,8 +1211,8 @@ diagonal ISFC array and the diagonal ISC values are returned</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="brainiak.isc.timeshift_isc">
-<code class="sig-prename descclassname">brainiak.isc.</code><code class="sig-name descname">timeshift_isc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">pairwise</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">summary_statistic</span><span class="o">=</span><span class="default_value">'median'</span></em>, <em class="sig-param"><span class="n">n_shifts</span><span class="o">=</span><span class="default_value">1000</span></em>, <em class="sig-param"><span class="n">side</span><span class="o">=</span><span class="default_value">'right'</span></em>, <em class="sig-param"><span class="n">tolerate_nans</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">random_state</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.timeshift_isc" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="brainiak.isc.timeshift_isc">
+<span class="sig-prename descclassname"><span class="pre">brainiak.isc.</span></span><span class="sig-name descname"><span class="pre">timeshift_isc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pairwise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary_statistic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'median'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_shifts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'right'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerate_nans</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#brainiak.isc.timeshift_isc" title="Permalink to this definition"></a></dt>
 <dd><p>Circular time-shift randomization for one-sample ISC test</p>
 <p>For each voxel or ROI, compute the actual ISC and p-values
 from a null distribution of ISCs where response time series
@@ -934,7 +1261,7 @@ frequency.”, J. P. Kauppi, I. P. Jääskeläinen, M. Sams, J. Tohka,
 <li><p><strong>n_shifts</strong> (<em>int</em><em>, </em><em>default: 1000</em>) – Number of randomly shifted samples</p></li>
 <li><p><strong>side</strong> (<em>str</em>) – Perform one-sided (‘left’ or ‘right’) or ‘two-sided’ test</p></li>
 <li><p><strong>tolerate_nans</strong> (<em>bool</em><em> or </em><em>float</em><em>, </em><em>default: True</em>) – Accommodate NaNs (when averaging in leave-one-out approach)</p></li>
-<li><p><strong>= int</strong> (<em>random_state</em>) – Initial random seed</p></li>
+<li><p><strong>int</strong> (<em>random_state =</em>) – Initial random seed</p></li>
 <li><p><strong>None</strong> (<em>None</em>) – Initial random seed</p></li>
 <li><p><strong>np.random.RandomState</strong> (<em>or</em>) – Initial random seed</p></li>
 <li><p><strong>default</strong> (<em>None</em>) – Initial random seed</p></li>
@@ -956,58 +1283,33 @@ frequency.”, J. P. Kauppi, I. P. Jääskeläinen, M. Sams, J. Tohka,
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="brainiak.eventseg.html" class="btn btn-neutral float-right" title="brainiak.eventseg package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="api.html" class="btn btn-neutral float-left" title="API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api.html" class="btn btn-neutral float-left" title="API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="brainiak.eventseg.html" class="btn btn-neutral float-right" title="brainiak.eventseg package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        
-        &copy; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation
-
-    </p>
+    <p>&#169; Copyright 2016, Princeton Neuroscience Institute and Intel Corporation.</p>
   </div>
-    
-    
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
-
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
