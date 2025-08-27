@@ -67,7 +67,7 @@
   year: 2021
   pages: 
   links:
-     paper: "https://apertureneuro.org/article/77474-brainiak-the-brain-imaging-analysis-kit"
+     paper: "https://doi.org/10.52294/31bb5b68-2184-411b-8c00-a1dacb61e1da"
 
 - id: Cai2020
   title: "Incorporating structured assumptions with probabilistic graphical models in fMRI data analysis"
