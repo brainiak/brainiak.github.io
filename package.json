@@ -9,7 +9,7 @@
     "start": "./node_modules/.bin/gulp docs"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
+    "@babel/core": "^8.0.1",
     "babel-plugin-transform-es2015-modules-strip": "*",
     "babel-preset-env": "*",
     "gulp": "*",
